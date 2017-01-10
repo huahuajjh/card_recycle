@@ -1,0 +1,114 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.4.3.RELEASE</version>
+    </parent>
+
+    <groupId>com.tqmars</groupId>
+    <artifactId>cardrecycle</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0.0</version>
+    <name>${project.artifactId}</name>
+    <description>card recycle</description>
+    <inceptionYear>2017</inceptionYear>
+
+    <organization>
+        <name>tqmars</name>
+        <url>http://www.tqmars.com</url>
+    </organization>
+
+    <!--customize properties info-->
+    <properties>
+        <!--the encoding when project files copying-->
+        <project.build.sourceEncoding>${file.encoding}</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>${file.encoding}</project.reporting.outputEncoding>
+        <!--the encoding when comipling project-->
+        <maven.compiler.encoding>${file.encoding}</maven.compiler.encoding>
+        <!--JDK version-->
+        <jdk.version>1.8</jdk.version>
+        <!--junit version-->
+        <junit.version>4.12</junit.version>
+        <!--tomcat7 plugin version-->
+        <tomcat7.version>2.1</tomcat7.version>
+        <!--file encoding-->
+        <file.encoding>UTF-8</file.encoding>
+        <!--mybatis version-->
+        <mybatis.version>3.4.1</mybatis.version>
+        <!--spring version-->
+        <spring.version>4.2.3.RELEASE</spring.version>
+        <!--mysql connector version-->
+        <mysql.connector.version>5.1.29</mysql.connector.version>
+        <!--log4j version-->
+        <log4j.version>1.2.17</log4j.version>
+    </properties>
+
+    <!--dependency management-->
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.connector.version}</version>
+        </dependency>
+
+    </dependencies>
+
+    <!--plugins-->
+    <build>
+        <plugins>
+            <!--the compile plugin-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <!--developers-->
+    <developers>
+        <developer>
+            <name>jjh</name>
+            <email>15928981624@163.com</email>
+            <roles>
+                <role>PM developer Architect</role>
+            </roles>
+        </developer>
+    </developers>
+</project>
