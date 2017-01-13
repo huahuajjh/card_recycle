@@ -1,4 +1,4 @@
-package com.tqmars.cardrecycle.testspring;
+package com.tqmars.test.testspring;
 
 
 import org.springframework.stereotype.Component;

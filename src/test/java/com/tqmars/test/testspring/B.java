@@ -1,5 +1,6 @@
-package com.tqmars.cardrecycle.testspring;
+package com.tqmars.test.testspring;
 
+import com.tqmars.cardrecycle.infrastructure.servicelocator.ServiceLocator;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -7,7 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 /**
  * Created by jjh on 1/10/17.
  */
-public class B {
+public class B{
     ApplicationContext context;
 
     public B()
@@ -20,8 +21,8 @@ public class B {
     @Test
     public void testBead()
     {
-        A a = context.getBean("a",A.class);
-        System.out.println(a.hi());
+//        A a = context.getBean("a",A.class);
+        System.out.println(ServiceLocator.getInstance().getService("a",A.class).hi());
 
     }
 }

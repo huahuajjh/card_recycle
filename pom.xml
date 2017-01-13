@@ -10,7 +10,7 @@
 
     <groupId>com.tqmars</groupId>
     <artifactId>cardrecycle</artifactId>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <version>1.0.0</version>
     <name>${project.artifactId}</name>
     <description>card recycle</description>
@@ -44,6 +44,8 @@
         <mysql.connector.version>5.1.29</mysql.connector.version>
         <!--log4j version-->
         <log4j.version>1.2.17</log4j.version>
+        <!--gson version-->
+        <google.gson.version>2.3.1</google.gson.version>
     </properties>
 
     <!--dependency management-->
@@ -83,6 +85,12 @@
             <version>${mysql.connector.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${google.gson.version}</version>
+        </dependency>
+
     </dependencies>
 
     <!--plugins-->
@@ -99,6 +107,18 @@
             </plugin>
 
         </plugins>
+
+        <!--默认情况下,idea不会将java源代码文件夹下面的非java文件编译,因此类似于mybatis的xml映射文件如果放在
+        这些路径下面编译后就不会出现在java的项目中,该节点的配置表示将所有xml的文件编译到一起(实际上是将xml文件复制到bin或者target中)-->
+        <!--<resources>-->
+            <!--<resource>-->
+                <!--<directory>src/main/java</directory>-->
+                <!--<includes>-->
+                    <!--<include>**/*.xml</include>-->
+                <!--</includes>-->
+            <!--</resource>-->
+        <!--</resources>-->
+
     </build>
 
     <!--developers-->

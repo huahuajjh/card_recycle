@@ -1,7 +1,7 @@
-package com.tqmars.cardrecycle.infrastructure.servicelocatortest;
+package com.tqmars.test.infrastructure.servicelocatortest;
 
 import com.tqmars.cardrecycle.infrastructure.servicelocator.ServiceLocator;
-import com.tqmars.cardrecycle.testspring.A;
+import com.tqmars.test.testspring.A;
 import org.junit.Test;
 
 /**

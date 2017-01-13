@@ -1,5 +1,6 @@
-package com.tqmars.cardrecycle.infrastructure.log;
+package com.tqmars.test.infrastructure.log;
 
+import com.tqmars.cardrecycle.infrastructure.log.LoggerFactory;
 import org.junit.Test;
 
 /**
@@ -11,5 +12,6 @@ public class TestLog {
     {
         LoggerFactory.getLogger().info("log done");
     }
+    
 }
 
