@@ -37,6 +37,3 @@ bin
 
 # system ignore
 Thumbs.db
-
-# UIsrc
-/uisource/node_modules
