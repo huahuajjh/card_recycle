@@ -29,4 +29,12 @@ public final class Serialization {
     public static <T> List<T> toList(String jsonString, Type type) {
         return gson.fromJson(jsonString, type);
     }
+
+    public static String toJsonWithFormatter(Object data,String msg,int code){
+        return toJson(Formatter.getInstance(data,msg,code));
+    }
+
+    public static String toJsonWithPageFormatter(Object data,String msg,int code,int count){
+        return toJson(PageFormatter.getInstance(data,msg,code,count));
+    }
 }

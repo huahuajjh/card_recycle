@@ -7,25 +7,15 @@ import com.tqmars.cardrecycle.domain.entities.annotation.Column;
  */
 public abstract class Entity<TPrimaryKey> implements IEntity<TPrimaryKey> {
     @Column(name = "id")
-    protected TPrimaryKey id;
-    protected String tableName;
-
-    public Entity(String _tableName){
-        this.tableName = _tableName;
-    }
-
-    @Override
-    public String getTableName(){
-        return this.tableName;
-    }
+    protected TPrimaryKey pk;
 
     @Override
     public TPrimaryKey getId() {
-        return id;
+        return pk;
     }
 
     @Override
     public void setId(TPrimaryKey id) {
-        this.id = id;
+        this.pk = id;
     }
 }

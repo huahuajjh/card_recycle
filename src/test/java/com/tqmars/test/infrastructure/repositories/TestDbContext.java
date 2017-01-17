@@ -1,18 +1,11 @@
 package com.tqmars.test.infrastructure.repositories;
 
-import com.tqmars.cardrecycle.domain.entities.data.Course;
-import com.tqmars.cardrecycle.domain.entities.annotation.Column;
-import com.tqmars.cardrecycle.domain.entities.annotation.Table;
 import com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext;
-import com.tqmars.cardrecycle.infrastructure.mybatis.util.MapToEntityTool;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by jjh on 1/11/17.
@@ -51,7 +44,7 @@ public class TestDbContext<T> extends HashMap<String, Integer> {
 //        ));
 //        System.out.println(MapToEntityTool.toEntity(Course.class,c).getId());
 
-        String sql = "insert into course(name) values('a3')";
+        String sql = "insert into tb_admin(id,account,pwd) values(0,'a1','a')";
         int id = session.insert("com.tqmars.cardrecycle.domain.entities.data.insertAndGetId",sql);
         session.commit();
         System.out.println(id);

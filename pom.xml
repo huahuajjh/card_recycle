@@ -39,13 +39,19 @@
         <!--mybatis version-->
         <mybatis.version>3.4.1</mybatis.version>
         <!--spring version-->
-        <spring.version>4.2.3.RELEASE</spring.version>
+        <spring.context.version>4.2.3.RELEASE</spring.context.version>
         <!--mysql connector version-->
         <mysql.connector.version>5.1.29</mysql.connector.version>
         <!--log4j version-->
         <log4j.version>1.2.17</log4j.version>
         <!--gson version-->
         <google.gson.version>2.3.1</google.gson.version>
+        <!--apache common codec version-->
+        <common.codec.version>1.10</common.codec.version>
+        <!--httpclient version-->
+        <httpclient.version>4.5</httpclient.version>
+        <!--servlet version-->
+        <servlet.version>3.1.0</servlet.version>
     </properties>
 
     <!--dependency management-->
@@ -59,6 +65,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -91,6 +103,38 @@
             <version>${google.gson.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${common.codec.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${httpclient.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-servlet-api</artifactId>
+            <version>8.0.36</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.oval</groupId>
+            <artifactId>oval</artifactId>
+            <version>1.81</version>
+        </dependency>
+
     </dependencies>
 
     <!--plugins-->
@@ -106,6 +150,22 @@
                 </configuration>
             </plugin>
 
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.1</version>
+                <configuration>
+                    <port>8888</port>
+                    <path>/user</path>
+                    <uriEncoding>UTF-8</uriEncoding>
+                    <server>tomcat7</server>
+                </configuration>
+            </plugin>
         </plugins>
 
         <!--默认情况下,idea不会将java源代码文件夹下面的非java文件编译,因此类似于mybatis的xml映射文件如果放在

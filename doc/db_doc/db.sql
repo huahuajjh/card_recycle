@@ -1,20 +1,27 @@
-CREATE DATABASE IF NOT EXISTS care_recycle DEFAULT CHARACTER SET = utf8;
-USE care_recycle;
+DROP DATABASE IF EXISTS card_recycle;
+
+CREATE DATABASE IF NOT EXISTS card_recycle DEFAULT CHARACTER SET = utf8;
+USE card_recycle;
 
 CREATE TABLE IF NOT EXISTS tb_user(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
     account VARCHAR(30) NOT NULL UNIQUE COMMENT 'account',
     pwd VARCHAR(64) NOT NULL COMMENT 'password',
     tel VARCHAR(11) NOT NULL UNIQUE COMMENT 'telephone',
-    QQ VARCHAR(12) NULL UNIQUE COMMENT 'qq number',
-    business_id VARCHAR(10) NOT NULL UNIQUE COMMENT 'business id',
-    business_pwd VARCHAR(32) NOT NULL COMMENT 'business password'
+    qq VARCHAR(12) NULL UNIQUE COMMENT 'qq number',
+    business_id VARCHAR(64) NOT NULL UNIQUE COMMENT 'business id',
+    business_pwd VARCHAR(64) NOT NULL COMMENT 'business password',
+    token VARCHAR(32) NULL UNIQUE DEFAULT NULL COMMENT 'request token',
+    withdraw_pwd VARCHAR(64) NULL COMMENT 'account withdraw password',
+    id_card_num VARCHAR(20) NULL UNIQUE COMMENT 'id card number',
+    name VARCHAR(10) NULL COMMENT 'bank account name'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='user info';
 
 CREATE TABLE IF NOT EXISTS tb_admin(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
     account VARCHAR(30) NOT NULL UNIQUE COMMENT 'account',
-    pwd VARCHAR(64) NOT NULL DEFAULT 'abcd123' COMMENT 'admin password'
+    pwd VARCHAR(64) NOT NULL DEFAULT 'abcd123' COMMENT 'admin password',
+    token VARCHAR(32) NULL UNIQUE DEFAULT NULL COMMENT 'request token'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='admin account info';
 
 CREATE TABLE IF NOT EXISTS tb_wallet(
@@ -23,26 +30,24 @@ CREATE TABLE IF NOT EXISTS tb_wallet(
     balance DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT 'user wallet balance'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='user wallt info';
 
-CREATE TABLE IF NOT EXISTS tb_back(
+CREATE TABLE IF NOT EXISTS tb_bank(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
-    name VARCHAR(30) NOT NULL UNIQUE COMMENT 'back name'
-)ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='back type info';
+    name VARCHAR(30) NOT NULL UNIQUE COMMENT 'bank name'
+)ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='bank type info';
 
-CREATE TABLE IF NOT EXISTS tb_back_account(
+CREATE TABLE IF NOT EXISTS tb_bank_account(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
-    card_number VARCHAR(30) NOT NULL UNIQUE COMMENT 'back card number',
-    name VARCHAR(10) NOT NULL COMMENT 'back account name',
-    withdraw_pwd VARCHAR(30) NOT NULL COMMENT 'account withdraw password',
+    card_number VARCHAR(30) NULL UNIQUE COMMENT 'bank card number',
     tb_user_id int NOT NULL COMMENT 'card owner id',
-    back_name VARCHAR(30) NOT NULL COMMENT 'back type name',
-    tb_back_id int NOT NULL COMMENT 'back id'
-)ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='back card info';
+    bank_name VARCHAR(30) NULL COMMENT 'bank type name',
+    tb_bank_id int NULL COMMENT 'bank id'
+)ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='bank card info';
 
 CREATE TABLE IF NOT EXISTS tb_withdraw_record(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
     withdraw_time DATETIME NOT NULL COMMENT 'withdraw time',
-    back_name VARCHAR(30) NOT NULL COMMENT 'back name',
-    tb_back_id int NOT NULL COMMENT 'back id',
+    bank_name VARCHAR(30) NOT NULL COMMENT 'bank name',
+    tb_bank_id int NOT NULL COMMENT 'bank id',
     withdraw_amount DECIMAL(10,2) NOT NULL COMMENT 'withdraw amount',
     service_charge DECIMAL(3,2) NOT NULL DEFAULT '0.00' COMMENT 'service charge',
     actual_account_amount DECIMAL(10,2) NOT NULL COMMENT 'actual account amount',
@@ -58,7 +63,7 @@ CREATE TABLE IF NOT EXISTS tb_rechargeable_card_type(
     card_shortcut VARCHAR(10) NOT NULL UNIQUE COMMENT 'card shortcut code'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='rechargeable card type info';
 
-CREATE TABLE IF NOT EXISTS tb_rechargeable_card_type_detail(
+CREATE TABLE IF NOT EXISTS tb_rechargeable_card_type_item(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
     tb_rechargeable_card_type_id INT NOT NULL COMMENT 'car type id',
     support_amount DECIMAL NOT NULL COMMENT 'card support amount',
@@ -68,7 +73,7 @@ CREATE TABLE IF NOT EXISTS tb_rechargeable_card_type_detail(
 CREATE TABLE IF NOT EXISTS tb_rechargeable_card(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
     card_number VARCHAR(30) NOT NULL COMMENT 'card number',
-    card_pwd VARCHAR(30) NOT NULL COMMENT 'card password',
+    card_pwd VARCHAR(64) NOT NULL COMMENT 'card password',
     tb_user_id INT NOT NULL COMMENT 'user id'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='rechargeable card info';
 
@@ -83,6 +88,6 @@ CREATE TABLE IF NOT EXISTS tb_order(
     process_time DATETIME NOT NULL COMMENT 'process order time',
     rechargeable_card_number VARCHAR(30) NOT NULL COMMENT 'rechargeable card number',
     actual_amount DECIMAL(10,2) NOT NULL COMMENT 'sale amount, amount=(card amount)*(sale ratio)',
-    tb_rechargeable_card INT NOT NULL COMMENT 'card id',
+    tb_rechargeable_card_id INT NOT NULL COMMENT 'card id',
     complete_time DATETIME NOT NULL COMMENT 'order completed time'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='order info';

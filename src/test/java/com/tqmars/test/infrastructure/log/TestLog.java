@@ -10,7 +10,7 @@ public class TestLog {
     @Test
     public void testLog()
     {
-        LoggerFactory.getLogger().info("log done");
+        LoggerFactory.getLogger().error("log done");
     }
     
 }
