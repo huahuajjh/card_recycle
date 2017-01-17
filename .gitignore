@@ -37,3 +37,5 @@ bin
 
 # system ignore
 Thumbs.db
+target/
+*.out
