@@ -1,0 +1,86 @@
+<template>
+    <headerTemp showIndex="6">
+        <div class="container-fluid">
+            <div class="view-framework-main">
+                <h3 class="clearfix">
+                    <a class="btn btn-default pull-right ml5" href="#/user/index">返回个人中心</a>
+                    提现记录
+                    <a class="btn btn-primary pull-right ml5" href="#/user/index">查询</a>
+                    <select class="form-control pull-right" style="width: 130px" r-model="query.state">
+                        <option>全部记录</option>
+                        <option>处理中</option>
+                        <option>已划款</option>
+                        <option>已取消</option>
+                    </select>
+                    <span class="pull-right pr5 pl10" style="font-size: 13px; padding-top: 8px">按状态查询：</span>
+                    <dateRange style="width: 200px; float: right;" start={query.startTime} end={query.endTime}></dateRange>
+                    <span class="pull-right pr5" style="font-size: 13px; padding-top: 8px">时间段：</span>
+                </h3>
+                <div class="box">
+                    <div class="nodata"><i class="iconfont fa fa-search"></i><br>抱歉，没有找到任何相关的数据！</div>
+                </div>
+                <table class="table trade-records">
+                    <thead>
+                        <tr>
+                            <th>申请时间</th>
+                            <th>提现银行</th>
+                            <th>账户名</th>
+                            <th>账户号</th>
+                            <th>提现金额</th>
+                            <th>手续费</th>
+                            <th>实际倒账</th>
+                            <th>处理状态</th>
+                            <th>处理时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {#list tableData.datas as d}
+                        <tr>
+                            <td>{d}</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        {/list}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="9">
+                                <div class="pull-right">
+                                    <page totalItems={tableData.count} currentPage={tableData.showIndex}></page>
+                                </div>
+                                <div class="clear"></div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </headerTemp>
+</template>
+<script>
+    export default {
+        data: {
+            query: {
+                startTime: "",
+                endTime: "",
+                state: ""
+            },
+            tableData: {
+                count: 200,
+                showIndex: 1,
+                datas: ["1","2","3"]
+            }
+        },
+        components: {
+            "headerTemp": require("../../component/userTemplate/user.rgl"),
+            "dateRange": require("../../control/date/dateRange.rgl"),
+            "page": require("../../control/page/index.rgl")
+        }
+    }
+</script>

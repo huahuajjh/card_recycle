@@ -1,0 +1,255 @@
+<template>
+  <div class="files-box">
+    <div class="files-wrapper title">
+      <div class="files-caption">文件名</div>
+      <div class="group-info">
+        <div class="action">操作</div>
+      </div>
+    </div>
+    {#list __Files as fileInfo}
+    <div class="files-wrapper {fileInfo.state}">
+      <div class="progress" r-style="width: fileInfo.progress + '%'"></div>
+      <input class="files-caption" r-model="fileInfo.edit.name" />
+      <div class="files-caption"><i class="fa fa-file"></i> {fileInfo.info.name} {#if fileInfo.info.size}({fileInfo.info.size | fileSize}){/if}</div>
+      <div class="group-info">
+        <div class="msg">
+          <span class="error" r-hide="fileInfo.state != 'error'"><i class="fa fa-ban"></i> 文件上传失败请重试</span>
+          <span class="warning"  r-hide="!(fileInfo.state == 'edit' && !fileInfo.edit.name)"><i class="fa fa-warning"></i> 名称不能为空</span>
+        </div>
+        <div class="action">
+          <span>{fileInfo.progress}%</span>
+          <a class="upload-a fa fa-upload" title="上传文件" on-click="{this.__OnUploadFile(fileInfo)}"></a>
+          <a class="refresh-a fa fa-refresh" title="重新上传" on-click="{this.__OnRefreshFile(fileInfo)}"></a>
+          <a class="edit-a fa fa-pencil" title="重命名" on-click="{this.__OnEditFileName(fileInfo, $event)}"></a>
+          <a class="del-a fa fa-remove" title="删除" on-click="{this.__OnDelFile(fileInfo)}"></a>
+          <a class="ok-a fa fa-check" title="确定" on-click="{this.__OnEditFileNameOk(fileInfo)}"></a>
+          <a class="fh-a fa fa-mail-reply" title="返回" on-click="{fileInfo.state = 'success'}"></a>
+        </div>
+      </div>
+    </div>
+    {/list}
+    <div class="files-info">
+      <div class="files-msg">
+        <i class="fa fa-question-circle-o"></i>{#if @(__Accept)}只能上传（{__Accept.extensions}）格式的文件，{/if}文件大小不得超出 {maxSize | fileSize}
+      </div>
+      <div class="files-btns">
+        <span class="files-count">{#if fileCount}还可以上传 {fileCount - __Files.length} 个文件{/if}</span>
+        <label class="select-btn" r-class="disabled: fileCount && __Files && fileCount <= __Files.length" r-hide="fileCount && fileCount <= __Files.length">
+          选择 <div class="upload-file-action" ref="action">上传文件</div>
+        </label>
+        <label class="upload-btn" on-click="{this.__OnUploadFileAll()}">上传</label>
+      </div>
+      <div style="clear: both;"></div>
+    </div>
+  </div>
+</template>
+<script>
+  import "./files.scss";
+
+  import swf from "../../lib/webuploader/Uploader.swf";
+
+  var accepts = {
+    image: {
+      extensions: ["gif", "jpg", "jpeg", "bmp", "png"],
+      mimeTypes: ["image/*"]
+    },
+    excel: {
+      extensions: ["xla", "xlc", "xlm", "xls", "xlt", "xlw"],
+      mimeTypes: ["application/vnd.ms-excel"]
+    }
+  };
+
+  module.exports = {
+    data: {
+      // ----------公开变量
+      url: "",
+      maxSize: 5242880,
+      sendData: {},
+      name: "file",
+      accept: null,
+      fileCount: 10,
+      files: [],
+      // ----------私有变量
+      __Files: [],
+      __Accept: null,
+      __Uploader: null
+    },
+    config(data) {
+      if(data.accept) {
+        var strArr = data.accept.split(",");
+        var extensions = [];
+        var mimeTypes = [];
+        for(var i = 0,v; v = strArr[i++];) {
+          var accept = accepts[v];
+          if(accept) {
+            extensions = accept.extensions.concat(extensions);
+            mimeTypes = accept.mimeTypes.concat(mimeTypes);
+          }
+        }
+        data.__Accept = {
+          title: '选择文件',
+          extensions: extensions.join(","),
+          mimeTypes: mimeTypes.join(",")
+        }
+      }
+      if(data.files && data.files.length) {
+        for(var i = 0,v; v = data.files[i++];) {
+          data.__Files.push({
+            info: v,
+            edit: {
+              name: "",
+              ext: ""
+            },
+            state: "success",
+            progress: 0
+          });
+        }
+      }
+    }, events: {
+      $init() {
+        this.$watch("files", (newVal, oldVal)=>{
+          if(!oldVal) return;
+          var varianceArr = [];
+          for(var ni = 0,n; n = newVal[ni++];) {
+            var state = true;
+            for(var oi = 0,o; o = oldVal[oi++];) {
+              if(n == o) {
+                state = false;
+                break;
+              }
+            }
+            if(state) varianceArr.push(n);
+          }
+          var stateAll = false;
+          for(var i = 0,v;  v = varianceArr[i++];) {
+            var state = true;
+            for(var t = 0,f; f = this.data.__Files[t++];) {
+              if(f.info == v) {
+                state = false;
+                break;
+              }
+            }
+            if(state) {
+              stateAll = true
+              break;
+            }
+          }
+          if(stateAll) {
+            this.data.__Files = [];
+            for(var i = 0,v; v = newVal[i++];) {
+              this.data.__Files.push({
+                info: v,
+                edit: {
+                  name: "",
+                  ext: ""
+                },
+                state: "success",
+                progress: 0
+              });
+            }
+          }
+        });
+        var self = this;
+        require(["../../lib/webuploader/webuploader.withoutimage.js"], (Webuploader)=>{
+          var uploader = self.data.__Uploader = Webuploader.create({
+            swf: swf,
+            server: self.data.url,
+            disableGlobalDnd: true,
+            fileSizeLimit: self.data.maxSize,
+            formData: self.data.sendData,
+            fileVal: self.data.name,
+            pick: self.$refs.action,
+            accept: self.data.__Accept
+          });
+          uploader.on('beforeFileQueued', (file) => {
+            return !self.data.fileCount || self.data.fileCount >= self.data.__Files.length;
+          });
+          uploader.on('fileQueued', (file) => {
+            self.data.__Files.push({
+              info: {
+                name: file.name,
+                size: file.size
+              },
+              edit: {
+                name: "",
+                ext: ""
+              },
+              state: "",
+              progress: 0,
+              file: file
+            });
+            self.$update();
+          });
+          uploader.on('uploadProgress', (file, percentage) => {
+            for(var i = 0,f; f = self.data.__Files[i++];) {
+              if(f.file && f.file == file) {
+                f.state = "upload";
+                f.progress = (percentage * 100).toFixed(0);
+              }
+            }
+            self.$update();
+          });
+          uploader.on('uploadSuccess', (file, response) => {
+            for(var i = 0,f; f = self.data.__Files[i++];) {
+              if(f.file && f.file == file) {
+                f.state = "success";
+                self.$emit("upload", f.info, response);
+                self.data.files.push(f.info);
+              }
+            }
+            self.$update();
+          });
+          uploader.on('uploadError', (file) => {
+            for(var i = 0,f; f = self.data.__Files[i++];) {
+              if(f.file && f.file == file) {
+                f.state = "error";
+              }
+            }
+            self.$update();
+          });
+        });
+      }
+    },
+    __OnUploadFile(fileInfo) {
+      if(fileInfo.file) this.data.__Uploader.upload(fileInfo.file);
+    },
+    __OnUploadFileAll() {
+      this.data.__Uploader.upload();
+    },
+    __OnRefreshFile(fileInfo) {
+      if(fileInfo.file) this.data.__Uploader.retry(fileInfo.file);
+    },
+    __OnDelFile(fileInfo) {
+      if(fileInfo.file) this.data.__Uploader.removeFile(fileInfo.file);
+      var tempFiles = [];
+      for(var i = 0,f; f = this.data.__Files[i++];) {
+        if(fileInfo != f) {
+          tempFiles.push(f);
+        }
+      }
+      this.data.__Files = tempFiles;
+      this.$update();
+    },
+    __OnEditFileName(fileInfo, e) {
+      var fileName = fileInfo.info.name;
+      var dotIndex = fileName.lastIndexOf(".");
+      if(dotIndex < 0) {
+        fileInfo.edit.name = fileName;
+        fileInfo.edit.ext = "";
+      } else {
+        fileInfo.edit.name = fileName.substring(0, dotIndex);
+        fileInfo.edit.ext = fileName.substring(dotIndex);
+      }
+      fileInfo.state = "edit";
+      this.$update();
+      setTimeout(()=>{
+        $(e.target).closest('.files-wrapper').find("> input").focus();
+      },100);
+    },
+    __OnEditFileNameOk(fileInfo) {
+      if(!fileInfo.edit.name) return false;
+      fileInfo.state = "success";
+      fileInfo.info.name = fileInfo.edit.name + fileInfo.edit.ext;
+    }
+  }
+</script>

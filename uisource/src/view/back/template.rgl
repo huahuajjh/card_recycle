@@ -1,0 +1,233 @@
+<template>
+	<div class="wrapper">
+		<div class="nav-box">
+			<div class="nav-header">
+				<img src="../../resource/front/logo_transparent.png" alt="logo" class="logo">
+			</div>
+			<ul class="nav-body">
+                {#list menu as item}
+                    {#if item.child}
+                        <li class="nav-title">{#if item.icon}<i class={item.icon}></i> {/if}{item.title}</li>
+                        {#list item.child as i}
+                            <li r-class="active: selectId == i.id">
+                                <a on-click={selectId = i.id} href={i.url}>{#if i.icon}<i class={i.icon}></i> {/if}{i.title}</a>
+                            </li>
+                        {/list}
+                    {#else}
+                        <li r-class="active: selectId == item.id">
+                            <a on-click={selectId = item.id} href={item.url}>{#if item.icon}<i class={item.icon}></i> {/if}{item.title}</a>
+                        </li>
+                    {/if}
+                {/list}
+			</ul>
+		</div>
+		<div class="navbar-top">
+			<div class="navbar-a-left">
+                <a href="#/supervise/index" on-click={selectId = -1}><i class="fa fa-home"></i> 首页</a>
+                {#list menus as item}
+				<a on-click={menu = item.child}>{#if item.icon}<i class={item.icon}></i> {/if}{item.title}</a>
+                {/list}
+			</div>
+			<div class="navbar-a-right">
+				<a class="user-info">
+					{userName} <i class="fa fa-angle-down"></i>
+					<ul>
+						<li><a on-click={this.showEditModal()}><i class="fa fa-lock"></i>更改密码</a></li>
+						<li class="divider"></li>
+						<li><a on-click={this.outLogin()}><i class="ace-icon fa fa-power-off"></i>安全退出</a></li>
+					</ul>
+				</a>
+			</div>
+		</div>
+		<div class="navbar-body">
+			<div class="navbar-context" ref="view"></div>
+		</div>
+        <modal ref="editPasswordMoadl" title="更改密码">
+            <form class="pt20 pb10" onsubmit="return false;">
+                <div class="form-group">
+                    <div class="col-xs-2 col-xs-offset-2">
+                        <label class="control-label pt5">旧登录密码：</label>
+                    </div>
+                    <div class="col-xs-6">
+                        <input type="password" class="form-control" maxlength="15" r-model="editPassword.oldPassword">
+                    </div>
+                    <div class="col-xs-offset-4 col-xs-6 text-red" r-hide={$validation.oldPassword.isPass}>{$validation.oldPassword.msg}</div>
+                    <div class="clear"></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-2 col-xs-offset-2">
+                        <label class="control-label" for="newpsw">新登录密码：</label>
+                    </div>
+                    <div class="col-xs-6">
+                        <input type="password" class="form-control" maxlength="15" r-model="editPassword.newPassword">
+                    </div>
+                    <div class="col-xs-offset-4 col-xs-6 text-red" r-hide={$validation.newPassword.isPass}>{$validation.newPassword.msg}</div>
+                    <div class="clear"></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-2 col-xs-offset-2">
+                        <label class="control-label" for="newpsw">再次输入：</label>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="mr4">
+                            <input type="password" class="form-control" maxlength="15" r-model="editPassword.newPasswordTwo">
+                        </div>
+                    </div>
+                    <div class="col-xs-offset-4 col-xs-6 text-red" r-hide={$validation.newPasswordTwo.isPass}>{$validation.newPasswordTwo.msg}</div>
+                    <div class="clear"></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-4 col-xs-offset-4">
+                        <input type="submit" class="btn btn-primary btn-block" value="提交" {#if !$validation.$isPass}disabled{/if}>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </form>
+        </modal>
+	</div>
+</template>
+<script>
+	import "./scss/template.scss";
+
+    var menus = [{
+        id: 0,
+        icon: "fa fa-credit-card-alt",
+        title: "充值卡/提现/商户管理",
+        child: [{
+            id: 1,
+            icon: "fa fa-credit-card",
+            title: "充值卡管理",
+            child: [{
+                id: 2,
+                title: "充值卡类型管理",
+                url: "#/supervise/cardType"
+            }, {
+                id: 3,
+                title: "订单管理",
+                url: "#/supervise/order"
+            }]
+        }, {
+            id: 4,
+            icon: "fa fa-users",
+            title: "商户管理",
+            child: [{
+                id: 5,
+                title: "商户管理",
+                url: "#/supervise/user"
+            }]
+        }, {
+            id: 6,
+            icon: "fa fa-credit-card-alt",
+            title: "提现及银行管理",
+            child: [{
+                id: 7,
+                title: "卡行管理",
+                url: "#/supervise/bankCardType"
+            }, {
+                id: 8,
+                title: "提现管理",
+                url: "#/supervise/tx"
+            }]
+        }]
+    }, {
+        id: 9,
+        icon: "fa fa-cogs",
+        title: "网站管理",
+        child: [{
+            id: 10,
+            icon: "fa fa-vcard-o",
+            title: "系统用户管理",
+            child: [{
+                id: 11,
+                title: "系统用户",
+                url: "#/supervise/sUser"
+            }]
+        }, {
+            id: 12,
+            icon: "fa fa-cny",
+            title: "提款设置",
+            child: [{
+                id: 13,
+                title: "手续费设置",
+                url: "#/supervise/fees"
+            }]
+        }, {
+            id: 14,
+            icon: "fa fa-gear",
+            title: "网站信息配置",
+            child: [{
+                id: 15,
+                title: "网站信息",
+                url: "#/supervise/info"
+            }, {
+                id: 16,
+                title: "公司简介",
+                url: "#/supervise/introduction"
+            }, {
+                id: 17,
+                title: "免责声明",
+                url: "#/supervise/disclaimer"
+            }, {
+                id: 18,
+                title: "联系我们",
+                url: "#/supervise/contctus"
+            }, {
+                id: 19,
+                title: "商家合作",
+                url: "#/supervise/cooperation"
+            }, {
+                id: 20,
+                title: "服务条款",
+                url: "#/supervise/agreement"
+            }, {
+                id: 21,
+                title: '常见问题',
+                url: "#/supervise/faq"
+            }]
+        }]
+    }];
+
+	export default {
+		data: {
+            userName: getWebSpUserName(),
+            menus: menus,
+            menu: menus[0].child,
+            selectId: -1,
+            editPassword: {
+                oldPassword: "",
+                newPassword: "",
+                newPasswordTwo: ""
+            }
+        },
+        components: {
+            "modal": require("../../control/modal/index.rgl")
+        },
+        showEditModal() {
+            this.$refs.editPasswordMoadl.show();
+        },
+        outLogin() {
+            removeSpUserNameAndSpUKey();
+            location.href = "#/superviseLogin";
+        },
+        validation: {
+            baseAttrName: "editPassword",
+            model: {
+                oldPassword: {
+                    required: true,
+                    alphaDash: true,
+                    minlength: 7
+                },
+                newPassword: {
+                    required: true,
+                    alphaDash: true,
+                    minlength: 7
+                },
+                newPasswordTwo: {
+                    required: true,
+                    repeat: "editPassword.newPassword",
+                    minlength: 7
+                },
+            }
+        }
+	}
+</script>

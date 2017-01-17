@@ -1,0 +1,97 @@
+<template>
+    <div class="container-fluid">
+        <div class="view-framework-main">
+            <h3 class="clearfix">
+                商户管理
+                <a class="btn btn-primary pull-right ml5" href="#/user/index">查询</a>
+                <input class="form-control pull-right" style="width: 150px;">
+                <span class="pull-right pr5 pl10" style="font-size: 13px; padding-top: 8px">帐号：</span>
+                <dateRange style="width: 180px; float: right;"></dateRange>
+                <span class="pull-right pr5 pl10" style="font-size: 13px; padding-top: 8px">创建时间段：</span>
+            </h3>
+            <div class="box">
+                <div class="nodata"><i class="iconfont fa fa-search"></i><br>抱歉，没有找到任何相关的数据！</div>
+            </div>
+            <table class="table trade-records">
+                <thead>
+                    <tr>
+                        <th>商户id</th>
+                        <th>商户密钥</th>
+                        <th>创建日期</th>
+                        <th>手机</th>
+                        <th>帐号</th>
+                        <th>QQ</th>
+                        <th>账户余额</th>
+                        <th style="width: 120px">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>
+                            <!--<a href="javascript:;" class="btn btn-success-alt btn-xs" r-tooltip="银行卡明细" on-click={editModalShowState = true}><i class="fa fa-credit-card"></i></a>-->
+                            <a href="javascript:;" class="btn btn-info-alt btn-xs ml5" r-tooltip="订单记录明细" on-click={this.showAddModal()}><i class="fa fa-bars"></i></a>
+                            <!--<a href="javascript:;" class="btn btn-primary-alt btn-xs ml5" r-tooltip="提款记录明细" style="padding-left: 4px;padding-right: 4px;"><i class="fa fa-rmb"></i></a>-->
+                            <a href="javascript:;" class="btn btn-default-alt btn-xs ml5" r-tooltip="删除" on-click={this.del()}><i class="fa fa-times-circle"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>
+                            <!--<a href="javascript:;" class="btn btn-success-alt btn-xs" r-tooltip="银行卡明细" on-click={editModalShowState = true}><i class="fa fa-credit-card"></i></a>-->
+                            <a href="javascript:;" class="btn btn-info-alt btn-xs ml5" r-tooltip="订单记录明细" on-click={this.showAddModal()}><i class="fa fa-bars"></i></a>
+                            <!--<a href="javascript:;" class="btn btn-primary-alt btn-xs ml5" r-tooltip="提款记录明细" style="padding-left: 4px;padding-right: 4px;"><i class="fa fa-rmb"></i></a>-->
+                            <a href="javascript:;" class="btn btn-default-alt btn-xs ml5" r-tooltip="删除" on-click={this.del()}><i class="fa fa-times-circle"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="8">
+                            <div class="pull-right">
+                                <page totalItems={200}></page>
+                            </div>
+                            <div class="clear"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <orderModal ref="orderModal"></orderModal>
+    </div>
+</template>
+<script>
+    import confirm from "../../tool/confirm/index.js";
+
+    export default {
+        data: {
+        },
+        components: {
+            page: require("../../control/page/index.rgl"),
+            dateRange: require("../../control/date/dateRange.rgl"),
+            orderModal: require("./modal/user/order.rgl")
+        },
+        showAddModal() {
+            this.$refs.orderModal.show();
+        },
+        del() {
+            confirm.ajax("确定删除？", ()=>{
+                setTimeout(function() {
+                    confirm.alert("删除成功");
+                }, 3000);
+            });
+        }
+    }
+</script>

@@ -1,0 +1,272 @@
+.files-box {
+  position: relative;
+  background-color: #fff;
+  border-radius: 2px;
+  border: 1px solid #e0e0e0;
+
+  .files-info {
+    padding: 10px 20px;
+    background-color: #fafafa;
+    color: #428bca;
+
+    .files-msg {
+      float: left;
+      line-height: 2;
+    }
+
+    .files-btns {
+      float: right;
+
+      .files-count {
+        color: #455a64;
+      }
+
+      .upload-file-action {
+        position: absolute;
+        font-size: 90px;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        filter:alpha(opacity=0); /* IE */
+        -moz-opacity:0; /* Moz + FF */
+        opacity: 0; /* 支持CSS3的浏览器（FF 1.5也支持）*/
+
+        &.hide {
+          top: 200%;
+          height: 200%;
+        }
+      }
+
+      label {
+        padding: 3px 30px;
+        line-height: 1.5;
+        display: inline-block;
+        position: relative;
+        box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.04);
+        margin-bottom: 0;
+        font-weight: 400;
+        text-align: center;
+        touch-action: manipulation;
+        cursor: pointer;
+        background-image: none;
+        border: 1px solid transparent;
+        white-space: nowrap;
+        font-size: 13px;
+        border-radius: 2px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      label.select-btn {
+        color: #455a64;
+        background-color: #fafafa;
+        border-color: #e0e0e0;
+
+        &:hover {
+          color: #455a64;
+          background-color: #ededed;
+          border-color: #cccccc;
+        }
+
+        &:focus, &:active {
+          color: #455a64;
+          background-color: #e6e6e6;
+          border-color: #c7c7c7;
+        }
+
+        &.disabled, &[disabled] {
+          background-color: #fafafa;
+          border-color: #e0e0e0;
+        }
+      }
+
+      label.upload-btn {
+        color: #ffffff;
+        background-color: #8bc34a;
+        border-color: #7cb342;
+
+        &:hover {
+          color: #ffffff;
+          background-color: #7eb73d;
+          border-color: #679537;
+        }
+
+        &:focus, &:active {
+          color: #ffffff;
+          background-color: #76ab39;
+          border-color: #628e34;
+        }
+
+        &.disabled {
+          background-color: #8bc34a;
+          border-color: #7cb342;
+        }
+      }
+    }
+  }
+
+  .files-wrapper {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+    border-bottom: 1px solid #ccc;
+
+    .progress {
+      position: absolute;
+      display: none;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background-color: #66ccff;
+    }
+
+    .files-caption {
+      position: relative;
+      height: 34px;
+      display: table-cell;
+      width: 100%;
+      padding: 0 12px;
+      font-size: 13px;
+      line-height: 2.4;
+      color: #555;
+      cursor: default;
+    }
+
+    input.files-caption {
+      border: 0;
+      background: none;
+      cursor: initial;
+      display: none;
+    }
+
+    .group-info {
+      display: table-cell;
+      width: 1%;
+      vertical-align: middle;
+      position: relative;
+      font-size: 0;
+      white-space: nowrap;
+
+      .action {
+        width: 100px;
+        text-align: center;
+        font-size: 14px;
+        display: inline-block;
+
+        a {
+          color: #5bc0de;
+          padding: 0 5px;
+          cursor: pointer;
+        }
+
+        .fh-a, .ok-a, .edit-a, .refresh-a, .del-a, span {
+          display: none;
+        }
+      }
+      .msg {
+        font-size: 14px;
+        display: inline-block;
+
+        .error {
+          color: red;
+        }
+        .warning {
+          color: #f0ad4e;
+        }
+      }
+    }
+
+    &.title {
+      background-color: #d8dce3;
+
+      .files-caption, .group-info {
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 30px;
+        color: #607d8b;
+        font-family: 'Open Sans', 'Droid Sans', Tahoma, Arial, sans-serif;
+      }
+    }
+
+    &.success {
+      background-color: #E5FFCC;
+
+      .group-info {
+        .msg {
+          display: none;
+        }
+        .action {
+          .upload-a {
+            display: none;
+          }
+          .edit-a, .del-a {
+            display: inline-block;
+          }
+        }
+      }
+    }
+
+    &.error {
+      background-color: #F8D0D8;
+
+      .group-info {
+        .action {
+          .upload-a {
+            display: none;
+          }
+          .refresh-a, .del-a {
+            display: inline-block;
+          }
+        }
+      }
+    }
+
+    &.edit {
+      background-color: #FFFAF0;
+
+      .files-caption {
+        display: none;
+      }
+      input.files-caption {
+        display: table-cell;
+      }
+
+      .group-info {
+        .action {
+          .upload-a {
+            display: none;
+          }
+          .ok-a, .fh-a {
+            display: inline-block;
+          }
+        }
+      }
+    }
+
+    &.upload {
+      .progress {
+        display: block;
+      }
+
+      .group-info {
+
+        .msg {
+          display: none;
+        }
+
+        .action {
+          a {
+            display:  none;
+          }
+          span {
+            display: inline;
+          }
+        }
+      }
+    }
+  }
+}

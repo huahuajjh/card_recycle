@@ -1,0 +1,82 @@
+<template>
+    <div class="container-fluid">
+        <div class="view-framework-main">
+            <h3 class="clearfix">
+                手续费设置
+            </h3>
+            <div class="box">
+                <div class="py50">
+                    <form>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label class="pull-left control-label text-right pt5" style="width: 132px;">手续费设置（<i class="fa fa-rmb"></i>）：</label>
+                                <a class="btn btn-primary mb10">添加</a>
+                                <div class="clear mb10"></div>
+                                <div class="pull-left text-right pt5" style="width: 132px;">金额：</div>
+                                <div class="pull-left" style="width: 300px">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control">
+                                        <div class="input-group-addon" style="background: none; border: 0;"> - </div>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="clear mt5"></div>
+                                <div class="pull-left text-right pt5" style="width: 132px;">手续费：</div>
+                                <div class="pull-left" style="width: 300px">
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="pull-left mt5" style="width: 48px">
+                                    <a class="btn btn-link">删除</a>
+                                </div>
+                                <div class="clear pt10 pb10"></div>
+                                <div class="pull-left text-right pt5" style="width: 132px;">金额：</div>
+                                <div class="pull-left" style="width: 300px">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control">
+                                        <div class="input-group-addon" style="background: none; border: 0;"> - </div>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="clear mt5"></div>
+                                <div class="pull-left text-right pt5" style="width: 132px;">手续费：</div>
+                                <div class="pull-left" style="width: 300px">
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="pull-left mt5" style="width: 48px">
+                                    <a class="btn btn-link">删除</a>
+                                </div>
+                                <div class="clear pt10 pb10"></div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <div class="pull-left text-right" style="width: 132px;">
+                                <label class="control-label pt5 " for="newpsw">单笔最低金额：</label>
+                            </div>
+                            <div class="col-xs-3">
+                                <input type="text" class="form-control" maxlength="20" style="width: 300px;">
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="pull-left text-right" style="width: 132px;">
+                                <label class="control-label pt5 " for="newpsw">单笔最高金额：</label>
+                            </div>
+                            <div class="col-xs-3">
+                                <input type="text" class="form-control" maxlength="20" style="width: 300px;">
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <input type="submit" class="btn btn-primary btn-block" name="newpass" value="提交" style="width: 300px; margin-left: 132px;">
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

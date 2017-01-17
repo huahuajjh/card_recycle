@@ -1,0 +1,78 @@
+<template>
+    <modal title="编辑充值卡类型" ref="modal">
+        <form class="pt20 pb10">
+            <div class="form-group">
+                <div class="col-xs-3 text-right">
+                    <label class="control-label pt5 pr10">充值卡类型名称：</label>
+                </div>
+                <div class="col-xs-5">
+                    <div class="mr4">
+                        <input type="text" class="form-control" maxlength="20">
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-3 text-right">
+                    <label class="control-label pt5 pr10" >充值卡类型代码：</label>
+                </div>
+                <div class="col-xs-5">
+                    <div class="mr4">
+                        <input type="text" class="form-control" maxlength="20">
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-3 text-right">
+                    <label class="control-label pt5 pr10">支持面值：</label>
+                </div>
+                <div class="col-xs-5">
+                    <div class="mr4">
+                        <input type="text" class="form-control" maxlength="20">
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="pt5 pl10 text-muted">金额用空格隔开，如：10 20</div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="form-group">
+            <div class="col-xs-3 text-right">
+                    <label class="control-label pt5 pr10">寄售比例：</label>
+                </div>
+                <div class="col-xs-5">
+                    <div class="mr4">
+                        <input type="text" class="form-control" maxlength="20">
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="pt5 pl10 text-muted">不需要写“%”符号</div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-5 col-xs-offset-3">
+                    <input type="submit" class="btn btn-primary btn-block" value="提交">
+                </div>
+                <div class="clear"></div>
+            </div>
+        </form>
+    </modal>
+</template>
+<script>
+    export default {
+        data: {
+            visible: false
+        },
+        components: {
+            modal: require("../../../../control/modal/index.rgl")
+        },
+        show(){
+            this.$refs.modal.show();
+        },
+        hidden() {
+            this.$refs.modal.hidden();
+        }
+    }
+</script>

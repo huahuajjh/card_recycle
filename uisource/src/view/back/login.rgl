@@ -1,0 +1,67 @@
+<template>
+  <div class="login-box">
+    <div class="login-bg"></div>
+    <div class="login-margin-top">
+      <img src="../../resource/front/logo_transparent.png" class="mt50">
+      <div class="login-body" ref="body">
+        <div class="login-body-bg"></div>
+        <div class="login-form">
+          <h4 class="login-title">登录：</h4>
+          <p class="login-text">欢迎登录，{name}</p>
+          <div class="input-icon left">
+            <i class="fa fa-fw fa-user tooltips"></i>
+            <input type="text" class="form-control" placeholder="请输入用户名" maxlength="15" r-model="user.userName">
+          </div>
+          <div class="text-red" r-hide={$validation.userName.isPass}>{$validation.userName.msg}</div>
+          <div class="input-icon left mt15">
+            <i class="fa fa-fw fa-unlock-alt tooltips"></i>
+            <input type="password" class="form-control" placeholder="请输入密码" maxlength="15" r-model="user.password">
+          </div>
+          <div class="text-red" r-hide={$validation.password.isPass}>{$validation.password.msg}</div>
+          <button type="button" class="btn btn-success btn-block mt25" {#if !$validation.$isPass}disabled{/if} on-click={this.login()}>登录</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+  import "./scss/login.scss";
+
+  export default {
+    init() {
+      if(isSpLogin()) {
+        location.href = "#/supervise/index";
+      }
+    },
+    data: {
+      name: webInfo.name,
+      user: {
+        userName: "",
+        password: ""
+      }
+    },
+    login(){
+      setWebSpUserName(this.data.user.userName);
+      setWebSpUKey(this.data.user.userName);
+      location.href = "#/supervise/index"
+    },
+    validation: {
+        baseAttrName: "user",
+        model: {
+            account: {
+                required: true
+            },
+            userName: {
+                required: true,
+                alphaDash: true,
+                minlength: 6
+            },
+            password: {
+                required: true,
+                alphaDash: true,
+                minlength: 7
+            },
+        }
+    }
+  }
+</script>

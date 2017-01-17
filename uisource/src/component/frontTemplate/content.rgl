@@ -1,0 +1,44 @@
+<template>
+    <div>
+        <div class="box help-aside">
+            <dl class="help-links">
+                <dt>关于我们</dt>
+                <dd r-class="current: showIndex == '0'">
+                    <a href="#/aboutus">{showArr[0]}</a>
+                </dd>
+                <dd r-class="current: showIndex == '1'">
+                    <a href="#/disclaimer">{showArr[1]}</a>
+                </dd>
+                <dd r-class="current: showIndex == '2'">
+                    <a href="#/contctus">{showArr[2]}</a>
+                </dd>
+            </dl>
+            <dl class="help-links">
+                <dt>帮助中心</dt>
+                <dd r-class="current: showIndex == '3'">
+                    <a href="#/cooperation">{showArr[3]}</a>
+                </dd>
+                <dd r-class="current: showIndex == '4'">
+                    <a href="#/agreement">{showArr[4]}</a>
+                </dd>
+                <dd r-class="current: showIndex == '5'">
+                    <a href="#/faq">{showArr[5]}</a>
+                </dd>
+            </dl>
+        </div>
+        <div class="help-main">
+            <h2>{showArr[showIndex]}</h2>
+            <div class="help-cont">
+                {#include this.$body}
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</template>
+<script>
+    export default {
+        data: {
+            showArr: ["公司简介", "免责声明", "联系我们", "商家合作", "服务条款", "常见问题"]
+        }
+    }
+</script>

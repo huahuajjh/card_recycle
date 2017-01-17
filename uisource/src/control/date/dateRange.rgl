@@ -1,0 +1,403 @@
+<template>
+  <div class="date-range-body" r-style="'z-index': zIndex" style={style} r-class={class}>
+    <div class="date-range-title" r-class="open:__IsOpen" on-click='{__IsOpen = !__IsOpen}'>
+			<span class="placeholder" r-hide="start && end">{placeholder}</span>
+			<span class="title" r-hide="!(start && end)">{start} 到 {end}</span>
+		</div>
+    <div class="date-range-wrapper" r-hide="!__IsOpen">
+      <div class="date-range-top-bar">
+        <div class="normal-top" r-hide="!(start && end)">
+          <span>已选择: </span>
+          <b>{start}</b>
+          <span>到</span>
+          <b>{end}</b>
+          <i>({__Difference} 天)</i>
+        </div>
+        <div r-hide="start && end">请选择一个日期范围</div>
+        <input type="button" class="apply-btn" value="清除选择" on-click="{this.__ClearSelect()}">
+      </div>
+      <div class="month-wrapper">
+        <table cellspacing="0" border="0" cellpadding="0">
+          <thead>
+            <tr class="caption">
+              <th class="btn-size">
+                <span class="prev" r-hide="!__StartDate.showLeftBtn" on-click="{this.__RegulateMonth('start', 'up')}">&lt;</span>
+              </th>
+              <th colspan="5" class="month-name">{__StartDate.showVal}</th>
+              <th class="btn-size">
+                <span class="next" r-hide="!__StartDate.showRightBtn" on-click="{this.__RegulateMonth('start', 'down')}">&gt;</span>
+              </th>
+            </tr>
+            <tr class="week-name">
+              <th>日</th>
+              <th>一</th>
+              <th>二</th>
+              <th>三</th>
+              <th>四</th>
+              <th>五</th>
+              <th>六</th>
+            </tr>
+          </thead>
+          <tbody>
+            {#list __StartDate.days as week}
+            <tr>
+              {#list week as day}
+                <td>
+                  <div class="day" r-class="valid: day.isNow, nothis: !day.isNow, checked:day.checked, 'date-selected': day.selected, void: day.disable" on-click="{this.__SetDay('start', day)}">
+                    {day.day}
+                  </div>
+                </td>
+              {/list}
+            </tr>
+            {/list}
+          </tbody>
+        </table>
+        <table cellspacing="0" border="0" cellpadding="0">
+          <thead>
+            <tr class="caption">
+              <th class="btn-size">
+                <span class="prev" r-hide="!__EndDate.showLeftBtn" on-click="{this.__RegulateMonth('end', 'up')}">&lt;</span>
+              </th>
+              <th colspan="5" class="month-name">{__EndDate.showVal}</th>
+              <th class="btn-size">
+                <span class="next" r-hide="!__EndDate.showRightBtn" on-click="{this.__RegulateMonth('end', 'down')}">&gt;</span>
+              </th>
+            </tr>
+            <tr class="week-name">
+              <th>日</th>
+              <th>一</th>
+              <th>二</th>
+              <th>三</th>
+              <th>四</th>
+              <th>五</th>
+              <th>六</th>
+            </tr>
+          </thead>
+          <tbody>
+            {#list __EndDate.days as week}
+            <tr>
+              {#list week as day}
+                <td>
+                  <div class="day" r-class="valid: day.isNow, nothis: !day.isNow, checked:day.checked, 'date-selected': day.selected, void: day.disable" on-click="{this.__SetDay('end', day)}">
+                    {day.day}
+                  </div>
+                </td>
+              {/list}
+            </tr>
+            {/list}
+          </tbody>
+        </table>
+        <div style="clear:both"></div>
+      </div>
+      <div class="date-range-footer">
+        <b>快捷选择:</b>
+        <span>过去
+          <a on-click="{this.__SetDayNum('end', 7)}">7天</a>
+          <a on-click="{this.__SetDayNum('end', 30)}">30天</a>
+          <a on-click="{this.__SetDayNum('end', 90)}">90天</a>
+          <a on-click="{this.__SetDayNum('end', 180)}">180天</a>
+        </span>
+        <span>
+          将来
+          <a on-click="{this.__SetDayNum('start', 7)}">7天</a>
+          <a on-click="{this.__SetDayNum('start', 30)}">30天</a>
+          <a on-click="{this.__SetDayNum('start', 90)}">90天</a>
+          <a on-click="{this.__SetDayNum('start', 180)}">180天</a>
+        </span>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+  import "./dateRange.scss";
+
+  var formatDat = (data, fmt) => {
+    var o = {
+      "M+": data.getMonth() + 1, //月份
+      "d+": data.getDate(), //日
+      "h+": data.getHours(), //小时
+      "m+": data.getMinutes(), //分
+      "s+": data.getSeconds(), //秒
+      "q+": Math.floor((data.getMonth() + 3) / 3), //季度
+      "S": data.getMilliseconds() //毫秒
+    };
+    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (data.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
+  }
+
+  var toDate = (val) => {
+    return new Date(Date.parse(val.replace(/-/g, "/")));
+  }
+
+  var initDay = (showDatetime) => {
+    var showMonth = showDatetime.getMonth();
+    var showYear = showDatetime.getFullYear();
+    var months = [31, null , 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    var newDatetimeDay = (() => {
+      var newDatetime = new Date();
+      newDatetime.setFullYear(showDatetime.getFullYear(), showDatetime.getMonth(), 1);
+      return newDatetime.getDay();
+    })();
+    months[1] = (0 === showYear % 4 && 0 !== showYear % 100 || 0 === showYear % 400) ? 29 : 28;
+    var f = {
+      ymd: [showDatetime.getFullYear(), showDatetime.getMonth(), showDatetime.getDate()],
+      FDay: newDatetimeDay,
+      PDay: months[0 === showMonth ? 11 : showMonth - 1] - newDatetimeDay + 1,
+      NDay: 1
+    };
+    var index = 0;
+    var mouthArr = [];
+    for(var i = 0;i < 6; i++) {
+      var weekArr = [];
+      for(var t = 0; t < 7; t++) {
+        var otherYear = f.ymd[0], otherMonth = f.ymd[1] + 1, otherDay;
+        if(index < f.FDay) {
+          otherDay = index + f.PDay;
+          if(1 === otherMonth) otherYear -= 1;
+          otherMonth = 1 === otherMonth ? 12 : otherMonth - 1;
+          weekArr.push(new Date(otherYear, otherMonth - 1, otherDay));
+        } else if(index >= f.FDay && index < f.FDay + months[f.ymd[1]]) {
+          otherDay = index - f.FDay + 1;
+          weekArr.push(new Date(showYear, showMonth, otherDay));
+        } else {
+          if(12 === otherMonth) otherYear += 1;
+          otherMonth = 12 === otherMonth ? 1 : otherMonth + 1
+          otherDay = f.NDay++;
+          weekArr.push(new Date(otherYear, otherMonth - 1, otherDay));
+        }
+        index++;
+      }
+      mouthArr.push(weekArr);
+    }
+    return mouthArr;
+  }
+
+  module.exports = {
+    data: {
+      // ----------公开变量
+      zIndex: 1,
+      placeholder: "请选择时间范围",
+      minDate: "1900-1-1",
+      maxDate: "2099-12-31",
+      start: "",
+      end: "",
+      // ----------私有变量
+      __IsOpen: false,
+      __Difference: 10,
+      __StartDate: {
+        date: new Date(),
+        showVal: "",
+        selectDate: null,
+        showLeftBtn: true,
+        showRightBtn: true,
+        days: []
+      },
+      __EndDate: {
+        date: new Date(),
+        showVal: "",
+        selectDate: null,
+        showLeftBtn: true,
+        showRightBtn: true,
+        days: []
+      }
+    },
+    config(data) {
+      if(data.start) {
+        data.__StartDate.date = data.__StartDate.selectDate = toDate(data.start);
+      }
+      if(data.end) {
+        data.__EndDate.date = data.__EndDate.selectDate = toDate(data.end);
+      }
+      data.__StartDate.showVal = formatDat(data.__StartDate.date, "yyyy年MM月");
+      data.__EndDate.showVal = formatDat(data.__EndDate.date, "yyyy年MM月");
+    },
+    events: {
+      $init() {
+        this.__InitDate(false);
+        this.__InitDate(true);
+        this.$watch("__StartDate.date", (newVal)=>{
+          this.data.__StartDate.showVal = formatDat(newVal, "yyyy年MM月");
+        });
+        this.$watch("__EndDate.date", (newVal)=>{
+          this.data.__EndDate.showVal = formatDat(newVal, "yyyy年MM月");
+        });
+        this.$watch("start", (newVal)=>{
+          var selectDate = this.data.__StartDate.selectDate;
+          var newDate = toDate(newVal);
+          if(newVal && (!selectDate || formatDat(newDate, "yyyy-MM-dd") != formatDat(selectDate, "yyyy-MM-dd"))) {
+            this.data.__StartDate.selectDate = this.data.__StartDate.date = newDate;
+            this.__InitDate(false);
+            this.__InitDate(true);
+          }
+          if(!this.data.__EndDate.selectDate && newVal) {
+            this.$update({start: ""})
+          }
+        });
+        this.$watch("end", (newVal)=>{
+          var selectDate = this.data.__EndDate.selectDate;
+          var newDate = toDate(newVal);
+          if(newVal && (!selectDate || formatDat(newDate, "yyyy-MM-dd") != formatDat(selectDate, "yyyy-MM-dd"))) {
+            this.data.__EndDate.selectDate = this.data.__EndDate.date = newDate;
+            this.__InitDate(false);
+            this.__InitDate(true);
+          }
+          if(!this.data.__StartDate.selectDate && newVal) {
+            this.$update({end: ""})
+          }
+        });
+        this.$watch("__StartDate.selectDate", (newVal)=>{
+          if(this.data.__EndDate.selectDate) {
+            this.data.end = formatDat(this.data.__EndDate.selectDate, "yyyy-MM-dd");
+          }
+          if(newVal) {
+            this.data.start = formatDat(newVal, "yyyy-MM-dd");
+          } else this.data.start = "";
+          this.data.__Difference = Math.ceil(Math.abs(newVal - this.data.__EndDate.selectDate) / 86400000);
+        });
+        this.$watch("__EndDate.selectDate", (newVal)=>{
+          if(this.data.__StartDate.selectDate) {
+            this.data.start = formatDat(this.data.__StartDate.selectDate, "yyyy-MM-dd");
+          }
+          if(newVal) {
+            this.data.end = formatDat(newVal, "yyyy-MM-dd");
+          } else this.data.end = "";
+          this.data.__Difference = Math.ceil(Math.abs(this.data.__StartDate.selectDate - newVal) / 86400000);
+        });
+      }
+    },
+    __ClearSelect() {
+      this.data.__StartDate.selectDate = null;
+      this.data.__EndDate.selectDate = null;
+      this.__InitDate(false);
+      this.__InitDate(true);
+    },
+    __SetDayNum(state, day) {
+      if(state == "start") {
+        if(!this.data.__StartDate.selectDate) this.data.__StartDate.selectDate = this.data.__StartDate.date = new Date();
+        var date = new Date(
+          this.data.__StartDate.selectDate.getFullYear(),
+          this.data.__StartDate.selectDate.getMonth(),
+          this.data.__StartDate.selectDate.getDate());
+        date.setDate(date.getDate() + day);
+        this.data.__EndDate.selectDate = this.data.__EndDate.date = date;
+      } else if(state == "end") {
+        if(!this.data.__EndDate.selectDate) this.data.__EndDate.selectDate = this.data.__EndDate.date = new Date();
+        var date = new Date(
+          this.data.__EndDate.selectDate.getFullYear(),
+          this.data.__EndDate.selectDate.getMonth(),
+          this.data.__EndDate.selectDate.getDate());
+        date.setDate(date.getDate() - day);
+        this.data.__StartDate.selectDate = this.data.__StartDate.date = date;
+      }
+      this.__InitDate(false);
+      this.__InitDate(true);
+    },
+    __SetDay(state, day) {
+      if(day.disable) return;
+      if(state == "start") {
+        this.data.__StartDate.selectDate = this.data.__StartDate.date = day.date;
+      } else if(state == "end") {
+        this.data.__EndDate.selectDate = this.data.__EndDate.date = day.date;
+      }
+      this.__InitDate(true);
+      this.__InitDate(false);
+    },
+    __RegulateMonth(state, action) {
+      if(state == "start") {
+        var date = new Date(
+          this.data.__StartDate.date.getFullYear(),
+          this.data.__StartDate.date.getMonth(),
+          this.data.__StartDate.date.getDate());
+        if(action == "up") {
+          date.setMonth(date.getMonth() - 1);
+        } else if(action == "down") {
+           date.setMonth(date.getMonth() + 1);
+        }
+        this.data.__StartDate.date = date;
+        this.__InitDate(false);
+      } else if(state == "end") {
+        var date = new Date(
+          this.data.__EndDate.date.getFullYear(),
+          this.data.__EndDate.date.getMonth(),
+          this.data.__EndDate.date.getDate());
+        if(action == "up") {
+          date.setMonth(date.getMonth() - 1);
+        } else if(action == "down") {
+           date.setMonth(date.getMonth() + 1);
+        }
+        this.data.__EndDate.date = date;
+        this.__InitDate(true);
+      }
+    },
+    __InitDate(isEndDate) {
+      var minDatetime = toDate(this.data.minDate);
+      var maxDatetime = toDate(this.data.maxDate);
+      var startDate = this.data.__StartDate.selectDate;
+      var endDate = this.data.__EndDate.selectDate;
+      var date = isEndDate ? this.data.__EndDate.date : this.data.__StartDate.date;
+      var months = initDay(date);
+      var days = [];
+      for(var i = 0, week; week = months[i++];) {
+        var weekDays = [];
+        for(var t = 0, year; year = week[t++];) {
+          var dayInfo = {};
+          weekDays.push(dayInfo);
+          dayInfo.date = year;
+          dayInfo.day = year.getDate();
+          dayInfo.disable = false;
+          dayInfo.isNow = false;
+          dayInfo.selected = false;
+          dayInfo.checked = false;
+          if(date.getMonth() == year.getMonth() && date.getFullYear() == year.getFullYear()) {
+            dayInfo.isNow = true;
+          }
+          if((endDate && year.getMonth() == endDate.getMonth() && year.getFullYear() == endDate.getFullYear() && year.getDate() == endDate.getDate()) || (startDate && year.getMonth() == startDate.getMonth() && year.getFullYear() == startDate.getFullYear() && year.getDate() == startDate.getDate())) {
+            dayInfo.selected = true;
+          }
+          if(endDate && startDate && !dayInfo.selected && (year / 1000) > (startDate / 1000) && (year / 1000) < (endDate / 1000)) {
+            dayInfo.checked = true;
+          }
+          if(!isEndDate && endDate && (year / 1000) > (endDate / 1000)) {
+            dayInfo.disable = true;
+          }
+          if(isEndDate && startDate && (year / 1000) < (startDate / 1000)) {
+            dayInfo.disable = true;
+          }
+          if((year / 1000) < (minDatetime / 1000)) {
+            dayInfo.disable = true;
+          }
+          if((year / 1000) > (maxDatetime / 1000)) {
+            dayInfo.disable = true;
+          }
+        }
+        days.push(weekDays);
+      }
+      if(!isEndDate && (this.data.__StartDate.date.getFullYear() * 100 + this.data.__StartDate.date.getMonth()) <= (minDatetime.getFullYear() * 100 + minDatetime.getMonth())) {
+        this.data.__StartDate.showLeftBtn = false;
+      } else if(!isEndDate) {
+        this.data.__StartDate.showLeftBtn = true;
+      }
+      if(!isEndDate && ((this.data.__StartDate.date.getFullYear() * 100 + this.data.__StartDate.date.getMonth()) >= (maxDatetime.getFullYear() * 100 + maxDatetime.getMonth()) ||
+        (endDate && (this.data.__StartDate.date.getFullYear() * 100 + this.data.__StartDate.date.getMonth()) >= (endDate.getFullYear() * 100 + endDate.getMonth())))) {
+        this.data.__StartDate.showRightBtn = false;
+      } else if(!isEndDate) {
+        this.data.__StartDate.showRightBtn = true;
+      }
+      if(isEndDate && ((this.data.__EndDate.date.getFullYear() * 100 + this.data.__EndDate.date.getMonth()) <= (minDatetime.getFullYear() * 100 + minDatetime.getMonth()) ||
+        (startDate && (this.data.__EndDate.date.getFullYear() * 100 + this.data.__EndDate.date.getMonth()) <= (startDate.getFullYear() * 100 + startDate.getMonth())))) {
+        this.data.__EndDate.showLeftBtn = false;
+      } else if(isEndDate) {
+        this.data.__EndDate.showLeftBtn = true;
+      }
+      if(isEndDate && (this.data.__EndDate.date.getFullYear() * 100 + this.data.__EndDate.date.getMonth()) >= (maxDatetime.getFullYear() * 100 + maxDatetime.getMonth())) {
+        this.data.__EndDate.showRightBtn = false;
+      } else if(isEndDate) {
+        this.data.__EndDate.showRightBtn = true;
+      }
+      (isEndDate ?  this.data.__EndDate : this.data.__StartDate).days = days;
+      this.$update();
+    }
+  }
+</script>

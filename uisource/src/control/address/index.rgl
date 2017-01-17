@@ -1,0 +1,141 @@
+<template>
+	<div class="city-picker" r-style="'z-index': zIndex">
+		<div class="city-picker-span" r-class="open:__IsOpen" on-click='{__IsOpen = !__IsOpen}'>
+			<span class="placeholder" r-hide="selectDatas.length > 0">{placeholder}</span>
+			<div class="title" r-hide="selectDatas.length <= 0">
+                {#list selectDatas as d}
+                    <span>{d.name}</span>
+                {/list}
+			</div>
+			<div class="arrow"></div>
+		</div>
+        <div class="city-picker-dropdown" r-hide="!__IsOpen">
+            <div class="city-picker-dropdown-area">
+                <div class="city-select-tab">
+                    {#list __Datas as d}
+                        <a r-class="active:d.isShow" on-click={this.__OnTabClick(d)}>{d.selectName}</a>
+                    {/list}
+                </div>
+                <div class="city-select-content">
+                    <div class="city-msg" r-hide="!__IsShowMsg">{__Msg}</div>
+                    {#list __Datas as d}
+                        <div class="city-select" r-style="display: (d.isShow?'block':'none')">
+                            {#list d.datas as vals}
+                                <dl>
+                                    <dt>{vals_key}</dt>
+                                    <dd>
+                                        {#list vals as m}
+                                            <a r-class="active: m.id == d.selectId" on-click={this.__OnItemClick(d_index, m, d)}>{m.name}</a>
+                                        {/list}
+                                    </dd>
+                                </dl>
+                            {/list}
+                        </div>
+                    {/list}
+                </div>
+            </div>
+        </div>
+	</div>
+</template>
+<script>
+    import "./style.scss";
+    import ajax from "ajax";
+    import pingYin from "pingYin";
+
+    // ajax请求
+    var createNewTab = (pId, url, successCallback, errorCallback) => {
+        setTimeout(function () {
+            var arr = [{
+            id: 1,
+            name: "成都"
+            }, {
+                id: 2,
+                name: "广东"
+            }, {
+                id: 3,
+                name: "四川"
+            }];
+            var datas = {};
+            for (var i = 0, d; d = arr[i++];) {
+            var py = pingYin(d.name)[0];
+            if (Object.prototype.toString.call(datas[py]) != '[object Array]') {
+                datas[py] = [];
+            }
+            datas[py].push(d);
+            }
+            successCallback(datas);
+        }, 500);
+    }
+
+    module.exports = {
+        events: {
+            $init() {
+                this.reset()
+            }
+        },
+        data: {
+            // 公开数据
+            ajaxUrl: "",
+            ajaxDefaultVal: "",
+            placeholder: "请选择地区",
+            // 选中的数据
+            selectDatas: [],
+            zIndex: 1,
+            // 非公开
+            __IsOpen: false,
+            __IsShowMsg: false,
+            __Msg: "",
+            // 渲染的数据
+            __Datas: []
+        },
+        // ----------公开方法
+        reset: function () {
+            this.__CreateNewTab(this.$get("ajaxDefaultVal"));
+        },
+        // ----------私有方法
+        __CreateNewTab: function (id) {
+            var self = this;
+            self.$update({
+                __IsShowMsg: true,
+                __Msg: "正在获取数据..."
+            });
+            createNewTab(id, self.data.ajaxUrl, function (datas) {
+                self.data.__IsShowMsg = false;
+                self.data.__Datas.push({
+                    selectName: "请选择",
+                    isShow: true,
+                    selectId: -1,
+                    datas: datas
+                });
+                self.$update();
+            }, function () {
+                self.$update({
+                    __IsShowMsg: true,
+                    __Msg: "获取数据失败"
+                });
+            });
+        },
+        // Tab 点击切换标签
+        __OnTabClick: function (data) {
+            this.data.__IsShowMsg = false;
+            for (var i = 0, d; d = this.data.__Datas[i++];) {
+                if (d == data)
+                d.isShow = true;
+                else
+                d.isShow = false;
+            }
+            this.$update();
+        },
+        // 子项点击时候触发
+        __OnItemClick: function (index, selectData, data) {
+            data.isShow = false;
+            data.selectId = selectData.id;
+            data.selectName = selectData.name;
+            this.data.__Datas = this.data.__Datas.slice(0, index + 1);
+            this.data.selectDatas = this.data.selectDatas.slice(0, index);
+            this.data.selectDatas.push(selectData);
+            this.__CreateNewTab(data.selectId);
+            this.$update();
+        }
+    }
+</script>

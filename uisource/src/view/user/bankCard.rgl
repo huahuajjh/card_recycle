@@ -1,0 +1,121 @@
+<template>
+    <headerTemp showIndex="5">
+        <div class="container-fluid">
+            <div class="view-framework-main">
+                <h3>
+                    收款账号
+                    <a class="btn btn-default pull-right ml5" href="#/user/bankCardAdd">新增收款账号</a>
+                </h3>
+                <div class="box">
+                    <div class="nodata"><i class="iconfont fa fa-search"></i><br>抱歉，没有找到任何相关的数据！</div>
+                </div>
+                <table class="table trade-records">
+                    <thead>
+                        <tr>
+                            <th>银行</th>
+                            <th>账号</th>
+                            <th>账户名</th>
+                            <th style="width: 100px">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {#list cards as card}
+                        <tr>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>
+                                <a class="btn btn-info-alt btn-xs" r-tooltip="编辑" on-click={this.showModal()}><i class="fa fa-pencil"></i></a>
+                                <a class="btn btn-default-alt btn-xs ml10" r-tooltip="删除" on-click={this.del()}><i class="fa fa-times-circle"></i></a>
+                            </td>
+                        </tr>
+                        {/list}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <modal ref="editModal" title="编辑收款账号">
+            <form class="pt20 pb10" onsubmit="return false;">
+                <div class="form-group">
+                    <div class="col-xs-2 col-xs-offset-2">
+                        <label class="control-label">收款姓名：</label>
+                    </div>
+                    <div class="col-xs-6">
+                        Bless
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-2 col-xs-offset-2">
+                        <label class="control-label pt5">收款银行：</label>
+                    </div>
+                    <div class="col-xs-6">
+                        <select class="form-control" r-model="editModel.state">
+                            <option value="">请选择收款银行</option>
+                            <option value="95255255565522">96525266****565445</option>
+                        </select>
+                    </div>
+                    <div r-hide={$validation.state.isPass} class="col-xs-offset-4 col-xs-6 text-red pt5">{$validation.state.msg}</div>
+                    <div class="clear"></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-2 col-xs-offset-2">
+                        <label class="control-label pt5">收款账号：</label>
+                    </div>
+                    <div class="col-xs-6">
+                        <input type="text" class="form-control" maxlength="20"  r-model="editModel.access">
+                    </div>
+                    <div r-hide={$validation.access.isPass} class="col-xs-offset-4 col-xs-6 text-red pt5">{$validation.access.msg}</div>
+                    <div class="clear"></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-4 col-xs-offset-4">
+                        <input type="submit" class="btn btn-primary btn-block" value="提交">
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </form>
+        </modal>
+    </headerTemp>
+</template>
+<script>
+
+    import confirm from "../../tool/confirm/index.js";
+
+    export default {
+        data: {
+            cards: ["1", "2", "3"],
+            editModel: {
+                state: "",
+                access: ""
+            }
+        },
+        components: {
+            "headerTemp": require("../../component/userTemplate/user.rgl"),
+            "modal": require("../../control/modal/index.rgl")
+        },
+        showModal() {
+            this.$refs.editModal.show();
+        },
+        del() {
+            confirm.ajax("是否删除该条数据？",()=> {
+                setTimeout(function() {
+                    confirm.alert("删除成功");
+                }, 3000);
+            });
+        },
+        validation: {
+            baseAttrName: "editModel",
+            model: {
+                state: {
+                    required: true,
+                },
+                access: {
+                    required: true,
+                    alphaDash: true,
+                    minlength: 7
+                }
+            }
+        }
+    }
+</script>

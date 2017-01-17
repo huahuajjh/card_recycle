@@ -1,0 +1,50 @@
+<template>
+    <frontTemp showIndex="3">
+        <div class="content bgwhite">
+            <div class="content-caption">
+                <div class="container">
+                    <h2 class="text-red">常见问题</h2>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="bgwhite pt50 pb30">
+            <div class="container">
+                <context showIndex="5">
+                    {#list faqs as faq}
+                        <div class="faq-item">
+                            <h6 class="faq-tite">
+                                <a class="text-danger" r-class="open: faq_index == showIndex" on-click={showIndex = faq_index}>
+                                    <strong>{faq_index + 1}、</strong>{faq.title}<i class="iconimg"></i>
+                                </a>
+                            </h6>
+                            <div class="faq-cont" r-hide={faq_index != showIndex} r-html={faq.context}></div>
+                        </div>
+                    {/list}
+                </context>
+            </div>
+        </div>
+    </frontTemp>
+</template>
+<script>
+    import webInfoService from "../../service/webInfoService.js";
+
+    export default {
+        data: {
+            showIndex: -1,
+            faqs: []
+        },
+        init() {
+            var self = this;
+            webInfoService.getFaq((data)=>{
+                self.$update({
+                    faqs: data
+                });
+            });
+        },
+        components: {
+            "frontTemp": require("../../component/frontTemplate/front.rgl"),
+            "context": require("../../component/frontTemplate/content.rgl")
+        }
+    }
+</script>

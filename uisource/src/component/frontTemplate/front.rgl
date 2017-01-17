@@ -1,0 +1,117 @@
+<template>
+    <div>
+        <div class="header">
+            <div class="navbar navbar-blue">
+                <div class="container">
+                    <h1 class="navbar-brand">
+                        <a href="#/index">
+                            <img class="png" src="../../resource/front/logo_transparent.png">
+                        </a>
+                    </h1>
+                    <ul class="navbar-nav">
+                        <li class="navbar-item" r-class="'current': showIndex == '0'">
+                            <a class="navbar-link" href="#/index">首页</a>
+                        </li>
+                        <li class="navbar-item" r-class="'current': showIndex == '1'">
+                            <a class="navbar-link" href="#/exchange">兑换比例</a>
+                        </li>
+                        <li class="navbar-item" r-class="'current': showIndex == '2'">
+                            <a class="navbar-link" href="#/state">查询卡状态</a>
+                        </li>
+                        <li class="navbar-item" r-class="'current': showIndex == '3'">
+                            <a class="navbar-link" href="#/faq">常见问题<i class="iconimg iconimg-new"></i></a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-links">
+                        <li class="navbar-item" r-hide={!isLogin}>
+                            <a class="iconlink iconlink-account" data-hover="dropdown" href="#/user/index"><i class="fa fa-user-circle-o"></i> 个人中心</a>
+                        </li>
+                        <li class="navbar-item pr10">
+                            <span class="userlink userstate1" r-hide={isLogin}>
+                                <a href="#/signin">登录</a>
+                                <span class="sep">|</span>
+                                <a href="#/signup">注册</a>
+                            </span>
+                            <span class="userlink userstate2 hide p20" r-hide={!isLogin}>
+                                <a on-click={this.outLogin()}>退出</a>
+                            </span>
+                        </li>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+        {#include this.$body}
+        <div class="footer">
+            <div class="footer-links">
+                <div class="container">
+                    <div class="col-links">
+                        <h2>联系客服</h2>
+                        <div class="hot-line-content hot-line">
+                            <img src="../../resource/front/hot-tel.png" class="hot-tel">
+                            <span class="time-val">{info.shangBan}</span>
+                            <span class="tel-val">{info.tel}</span>
+                        </div>
+                    </div>
+                    <div class="col-links">
+                        <a href="http://wpa.qq.com/msgrd?v=3&uin={info.qq}&site=qq&menu=yes" target="_blank" class="foot-kf-btn"><i class="fa fa-qq"></i> 在线客服</a>
+                    </div>
+                    <div class="col-links col-links-sm">
+                        <h2>服务与支持</h2>
+                        <p><a rel="nofollow" href="#/exchange">兑换比例</a></p>
+                        <p><a rel="nofollow" href="#/state">查询卡状态</a></p>
+                    </div>
+                    <div class="col-links col-links-sm">
+                        <h2>帮助中心</h2>
+                        <p><a rel="nofollow" href="#/cooperation">商家合作</a></p>
+                        <p><a rel="nofollow" href="#/faq">常见问题</a></p>
+                        <p><a rel="nofollow" href="#/agreement">服务条款</a></p>
+                    </div>
+                    <div class="col-links col-links-sm">
+                        <h2>关于我们</h2>
+                        <p><a rel="nofollow" href="#/aboutus">公司简介</a></p>
+                        <p><a rel="nofollow" href="#/disclaimer">免责声明</a></p>
+                        <p><a rel="nofollow" href="#/contctus">联系我们</a></p>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="container">
+                    <p class="pull-left">Copyright © 2015 {info.name}版权所有</p>
+                    <p class="pull-right">
+                        <a href="http://www.miibeian.gov.cn/state/outPortal/loginPortal.action" target="_blank">{info.beian}</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    export default {
+        init() {
+            this.$update({
+                isLogin: isLogin(),
+                userName: getWebUserName()
+            });
+        },
+        data: {
+            isLogin: false,
+            userName: "",
+            info: {
+                qq: webInfo.qq,
+                tel: webInfo.tel,
+                beian: webInfo.beian,
+                shangBan: webInfo.shangBan,
+                name: webInfo.name
+            }
+        },
+        outLogin() {
+            removeUserNameAndUKey();
+            this.$update({
+                isLogin: false,
+                userName: getWebUserName()
+            });
+        }
+    }
+</script>

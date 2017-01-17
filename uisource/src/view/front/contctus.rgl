@@ -1,0 +1,40 @@
+<template>
+    <frontTemp>
+        <div class="content bgwhite">
+            <div class="content-caption">
+                <div class="container">
+                    <h2 class="text-red">联系我们</h2>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="bgwhite pt50 pb30">
+            <div class="container">
+                <context showIndex="2">
+                    <div r-html={showVal}></div>
+                </context>
+            </div>
+        </div>
+    </frontTemp>
+</template>
+<script>
+    import webInfoService from "../../service/webInfoService.js";
+
+    export default {
+        data: {
+            showVal: ""
+        },
+        init() {
+            var self = this;
+            webInfoService.getContctus((data)=>{
+                self.$update({
+                    showVal: data
+                });
+            });
+        },
+        components: {
+            "frontTemp": require("../../component/frontTemplate/front.rgl"),
+            "context": require("../../component/frontTemplate/content.rgl")
+        }
+    }
+</script>

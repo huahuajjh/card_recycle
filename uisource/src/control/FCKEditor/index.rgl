@@ -1,0 +1,52 @@
+<style>
+  .FCKEditor {
+    width: 100%;
+    height: 100%;
+  }
+</style>
+<template>
+    <div>
+      <div ref="text" r-style="height: height"></div>
+    </div>
+</template>
+<script>
+
+  import "../../lib/wangEditor/css/wangEditor.css";
+
+  module.exports = {
+    events: {
+      $init() {
+        var self = this;
+        require(["../../lib/wangEditor/js/wangEditor.js"], (WangEditor) => {
+          var editor = self.data.__editor = new WangEditor(self.$refs.text);
+          editor.create();
+          if(self.data.value) editor.$txt.html(self.data.value)
+          self.data.value = editor.$txt.html();
+          editor.onchange = function () {
+            self.$update({
+              value: this.$txt.html(),
+              text: this.$txt.text()
+            });
+          };
+
+          self.$watch("value", (newVal)=>{
+            if(newVal != this.data.__editor.$txt.html()) {
+              this.data.__editor.$txt.html(newVal)
+            }
+          });
+        });
+      },
+      $destory () {
+        this.data.__editor.destroy();
+      }
+    },
+    data: {
+      // ----------公共属性
+      height: "300px",
+      value: "",
+      text: "",
+      // ----------私有属性
+      __editor: null
+    }
+  }
+</script>

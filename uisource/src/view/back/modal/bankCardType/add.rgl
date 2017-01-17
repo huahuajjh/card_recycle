@@ -1,0 +1,45 @@
+<template>
+    <modal ref="modal" title="添加卡行">
+        <form class="pt20 pb10" onsubmit="return false;">
+            <div class="form-group">
+                <div class="col-xs-4 text-right">
+                    <label class="control-label pt5 pr10">卡行名称：</label>
+                </div>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" maxlength="20" r-model="name">
+                </div>
+                <div class="text-red col-xs-offset-4 col-xs-5" r-hide={$validation.name.isPass}>{$validation.name.msg}</div>
+                <div class="clear"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-5 col-xs-offset-4">
+                    <input type="submit" class="btn btn-primary btn-block" value="提交">
+                </div>
+                <div class="clear"></div>
+            </div>
+        </form>
+    </modal>
+</template>
+<script>
+    export default {
+        data: {
+            name: ""
+        },
+        components: {
+            modal: require("../../../../control/modal/index.rgl")
+        },
+        show(){
+            this.$refs.modal.show();
+        },
+        hidden() {
+            this.$refs.modal.hidden();
+        },
+        validation: {
+            model: {
+                name: {
+                    required: true
+                }
+            }
+        }
+    }
+</script>

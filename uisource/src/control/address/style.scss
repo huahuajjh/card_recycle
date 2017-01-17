@@ -1,0 +1,168 @@
+.city-picker {
+    position: relative;
+
+    .city-picker-input {
+        display: none;
+    }
+
+    .city-picker-span {
+        cursor: pointer;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        outline: 0;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        position: relative;
+
+        &.open {
+            border-color: #46A4FF;
+        }
+
+        > .placeholder {
+            color: #aaa;
+            padding: 8px;
+            display: block;
+        }
+
+        > .arrow {
+            position: absolute;
+            top: 50%;
+            right: 8px;
+            width: 10px;
+            margin-top: -3px;
+            height: 5px;
+            background: url("./images/drop-arrow.png") -10px -25px no-repeat;
+        }
+
+        > .title {
+            padding: 0 3px;
+
+            &:after {
+                content: "";
+                display: block;
+                clear: both;
+            }
+            > span {
+                float: left;
+                color: #333;
+                padding: 8px 8px 8px 0;
+                &:first-child:before {
+                    content: "";
+                }
+                &:before {
+                    content: "/";
+                    padding-right: 8px;
+                    color: #ccc;
+                }
+            }
+        }
+
+        &.open > .arrow {
+            background-position: -10px -10px;
+        }
+    }
+
+    .city-picker-dropdown {
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        margin-top: 1px;
+
+        .city-picker-dropdown-area {
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+            border: 1px solid #ccc;
+        }
+
+        .city-select-tab {
+            border-bottom: 1px solid #ccc;
+            background: #f0f0f0;
+            font-size: 13px;
+
+            &:after {
+                content: "";
+                display: block;
+                clear: both;
+            }
+
+            > a {
+                float: left;
+                padding: 8px 22px;
+                border-left: 1px solid #ccc;
+                border-bottom: 1px solid transparent;
+                color: #4D4D4D;
+                text-align: center;
+                outline: 0;
+                text-decoration: none;
+                cursor: pointer;
+                font-size: 14px;
+                margin-bottom: -1px;
+
+                &:first-child {
+                    border-left: none;
+                }
+                &.active {
+                    background: #fff;
+                    border-bottom: 1px solid #fff;
+                    color: #46A4FF;
+                }
+            }
+        }
+
+        .city-select-content {
+            min-height: 10px;
+            background-color: #fff;
+            padding: 10px 15px;
+
+            .city-msg {
+                text-align: center;
+            }
+
+            .city-select {
+                font-size: 13px;
+
+                dl {
+                    line-height: 2;
+                    clear: both;
+                    padding: 3px 0;
+                    margin: 0;
+
+                    dt {
+                        position: absolute;
+                        width: 1.5em;
+                        font-weight: 500;
+                        text-align: right;
+                        line-height: 2;
+                    }
+
+                    dd {
+                        margin-left: 2.5em;
+                        line-height: 2;
+
+                        a {
+                            display: inline-block;
+                            padding: 0 10px;
+                            outline: 0;
+                            text-decoration: none;
+                            white-space: nowrap;
+                            margin-right: 2px;
+                            text-decoration: none;
+                            color: #333;
+                            cursor: pointer;
+
+                            &:hover, &:focus {
+                                background-color: #f1f8ff;
+                                border-radius: 2px;
+                                color: #46A4FF;
+                            }
+
+                            &.active {
+                                background-color: #46A4FF;
+                                color: #fff;
+                                border-radius: 2px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

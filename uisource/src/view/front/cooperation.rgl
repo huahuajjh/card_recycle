@@ -1,0 +1,40 @@
+<template>
+    <frontTemp>
+        <div class="content bgwhite">
+            <div class="content-caption">
+                <div class="container">
+                    <h2 class="text-red">商家合作</h2>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="bgwhite pt50 pb30">
+            <div class="container">
+                <context showIndex="3">
+                    <div r-html={showVal}></div>
+                </context>
+            </div>
+        </div>
+    </frontTemp>
+</template>
+<script>
+    import webInfoService from "../../service/webInfoService.js";
+
+    export default {
+        data: {
+            showVal: ""
+        },
+        init() {
+            var self = this;
+            webInfoService.getCooperation((data)=>{
+                self.$update({
+                    showVal: data
+                });
+            });
+        },
+        components: {
+            "frontTemp": require("../../component/frontTemplate/front.rgl"),
+            "context": require("../../component/frontTemplate/content.rgl")
+        }
+    }
+</script>

@@ -1,0 +1,88 @@
+<template>
+    <headerTemp>
+        <div class="container-fluid">
+            <div class="view-framework-main">
+                <h3>
+                    新增收款账号
+                    <a class="btn btn-default pull-right ml5" href="#/user/bankCard">返回我的收款账号</a>
+                </h3>
+                <div class="box">
+                    <div class="py50">
+                        <form action="/account/act_password" method="post" id="newpass">
+                            <div class="form-group">
+                                <div class="col-xs-2">
+                                    <label class="control-label" for="oldpsw">收款姓名：</label>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="mr4">Bless</div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-2">
+                                    <label class="control-label pt5">收款银行：</label>
+                                </div>
+                                <div class="col-xs-4">
+                                    <select class="form-control" r-model="state">
+                                        <option value="">请选择收款银行</option>
+                                    </select>
+                                </div>
+                                <div r-hide={$validation.state.isPass} class="col-xs-4 text-red pt5 pl10">{$validation.state.msg}</div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-2">
+                                    <label class="control-label pt5">收款账号：</label>
+                                </div>
+                                <div class="col-xs-4">
+                                    <input class="form-control" type="text" r-model="access">
+                                </div>
+                                <div r-hide={$validation.access.isPass} class="col-xs-4 text-red pt5 pl10">{$validation.access.msg}</div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-4 col-xs-offset-2">
+                                    <input class="btn btn-primary btn-block" type="submit" name="newpass" value="提交" onclick="return regform(this);">
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="box" r-hide={!isSub}>
+                    <div class="nodata">
+                        <i class="iconfont fa fa-check text-success"></i><br>
+                        操作成功<br>
+                        <p class="mt20">
+                            <a class="btn btn-success btn-sm" on-click={this.refreshMoney()}>继续操作</a>
+                            <a class="btn btn-default btn-sm ml10" href="#/user/index">返回首页</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </headerTemp>
+</template>
+<script>
+    export default {
+        data: {
+            state: "",
+            access: ""
+        },
+        components: {
+            "headerTemp": require("../../component/userTemplate/user.rgl")
+        },
+        validation: {
+            model: {
+                state: {
+                    required: true,
+                },
+                access: {
+                    required: true,
+                    alphaDash: true,
+                    minlength: 7
+                }
+            }
+        }
+    }
+</script>

@@ -1,0 +1,21 @@
+.breadcrumb {
+    padding: 4px 12px;
+    margin-bottom: 0;
+    list-style: none;
+    border-radius: 2px;
+    > li {
+        display: inline-block;
+        color: #90a4ae;
+        font-size: 11px;
+
+        + li:before {
+            content: "/\00a0";
+            padding: 0 5px;
+            color: #90a4ae;
+        }
+    }
+
+    > .active {
+      color: #607d8b;
+    }
+}

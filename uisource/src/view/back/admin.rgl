@@ -1,0 +1,30 @@
+<template>
+    <div>
+        <div class="context-title">
+			<h4>校园信息化平台</h4>
+			<ul>
+				<li>
+					<a>
+						<i class="fa fa-user-plus" aria-hidden="true"></i>
+						新增用户
+					</a>
+				</li>
+				<li>
+					<a>
+						<i class="fa fa-user-plus" aria-hidden="true"></i>
+						新增用户
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="context-map">
+			<i class="fa fa-map-marker"></i>
+			<ol class="breadcrumb">
+				<li><a href="#">Home</a></li>
+				<li><a href="#">Library</a></li>
+				<li class="active">Data</li>
+			</ol>
+		</div>
+		12f
+    </div>
+</template>

@@ -1,0 +1,10 @@
+{
+  "ajax": "tool/ajax.js",
+  "apiUrl": "tool/apiUrl.js",
+  "cookie": "tool/cookie.js",
+  "JSON": "tool/JSON.js",
+  "mmPromise": "tool/mmPromise.js",
+  "storeData": "tool/storeData.js",
+  "urlUtil": "tool/urlUtil.js",
+  "pingYin": "tool/pingYin.js"
+}

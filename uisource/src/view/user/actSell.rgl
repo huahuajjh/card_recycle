@@ -1,0 +1,158 @@
+<template>
+    <headerTemp showIndex="1">
+        <div class="container-fluid">
+            <h3 class="clearfix">
+                <a class="btn btn-default btn-small pull-right" href="#/user/actSelldetail">查看我的订单记录</a>
+                我要寄售
+            </h3>
+            <div class="box">
+                <div class="recycle-panel">
+                    <div class="alert">
+                        <p><strong>提示：</strong>为了更有效快捷的交易，请务必填写正确的且未使用的卡号与卡密。如发现恶性提交，我们将实行冻结账号，封号等措施。</p>
+                    </div>
+                    <div class="recycle-form">
+                        <form action="">
+                            <div class="form-group">
+                                <div class="col-xs-1"><label class="control-label">选择卡种：</label></div>
+                                <div class="col-xs-11">
+                                    <ul class="btn-group-card">
+                                        {#list cards as card}
+                                        <li r-class="active: sendData.card == card" on-click={this.selectCard(card)}>
+                                            <a title="{card.title}">
+                                                <img src="{card.img}" alt="{card.title}">
+                                                <span class="title">{card.title}</span>
+                                                <b></b>
+                                            </a>
+                                        </li>
+                                        {/list}
+                                    </ul>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-1"><label class="control-label">选择面值：</label> </div>
+                                <div class="col-xs-11">
+                                    <ul class="btn-group-price" id="card-facevalue">
+                                        {#list moneys as money}
+                                        <li r-class="active: sendData.money == money.v" on-click={sendData.money = money.v}>
+                                            <a class="btn">¥{money.v} <small>/ ¥{money.z}(回收价)</small><b></b></a>
+                                        </li>
+                                        {/list}
+                                    </ul>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <hr>
+                            <div class="form-group">
+                                <div class="col-xs-1 pt5"><label class="control-label">选择数量：</label></div>
+                                <div class="col-xs-11">
+                                    <span class="text-muted">{cardDatas.length}张</span>
+                                    <a class="btn btn-default ml20" on-click={this.addCardData()}>增加</a>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            {#list cardDatas as cardData}
+                            <div class="form-group">
+                                <div class="col-xs-1 pt5"><label class="control-label">输入卡号：</label></div>
+                                <div class="col-xs-3">
+                                    <div class="mr30">
+                                        <input class="form-control" type="text" placeholder="输入卡号" maxlength="15" r-model={cardData.a} on-keydown="">
+                                    </div>
+                                </div>
+                                <div class="col-xs-1 pt5"><label class="control-label">输入密码：</label></div>
+                                <div class="col-xs-3">
+                                    <div class="mr30">
+                                        <input class="form-control" type="password" placeholder="请输入密码" maxlength="15" r-model={cardData.p}>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div>
+                                        <a class="btn btn-default btn-small" on-click={this.removeCardData(cardData)}>删除</a>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            {/list}
+                            <hr>
+                            <div class="form-group">
+                                <div class="col-xs-11 col-xs-offset-1">
+                                    <label class="checkbox">
+                                        <input type="checkbox">
+                                        我已阅读，理解并接受[<a target="_blank" href="#/disclaimer">充值卡转让协议</a>]
+                                    </label>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="col-xs-11 col-xs-offset-1">
+                                <input class="btn btn-green btn-lg pull-left" type="submit" value="确认提交卖卡">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </headerTemp>
+</template>
+<script>
+    import cardService from "../../service/cardService.js";
+
+    export default {
+        data: {
+            cards: [],
+            moneys: [],
+            sendData: {
+                card: "",
+                money: "",
+            },
+            cardDatas: [],
+            isSuccess: false
+        },
+        init() {
+            var self = this;
+            cardService.getAll((datas)=>{
+                self.$update({
+                    cards: datas
+                });
+            });
+        },
+        addCardData() {
+            this.data.cardDatas.push({
+                a: "",
+                z: ""
+            });
+            this.$update();
+        },
+        removeCardData(card) {
+            var cardDatas = [];
+            for(var i = 0, d; d = this.data.cardDatas[i++];) {
+                if(d != card) cardDatas.push(d);
+            }
+            this.$update({
+                cardDatas: cardDatas
+            });
+        },
+        selectCard(card) {
+            this.data.sendData.card = card;
+            this.data.sendData.money = "";
+            var moneys = [];
+            var moneyArr = card.moneys.split(" ");
+            for(var i = 0; i< moneyArr.length; i++) {
+                var m = parseFloat(moneyArr[i]) * (card.gaiLV * 0.01);
+                moneys.push({
+                    v: parseFloat(moneyArr[i]),
+                    z: m
+                });
+            }
+            this.$update({
+                moneys: moneys
+            });
+        },
+        selectMoney(money) {
+            this.data.sendData.money = money;
+            this.$update();
+        },
+        components: {
+            "headerTemp": require("../../component/userTemplate/user.rgl")
+        }
+    }
+</script>

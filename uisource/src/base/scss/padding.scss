@@ -1,0 +1,45 @@
+$ps: (
+    "0": 0px,
+    "5": 5px,
+    "10": 10px,
+    "15": 15px,
+    "20": 20px,
+    "25": 25px,
+    "30": 30px,
+    "35": 35px,
+    "40": 40px,
+    "45": 45px,
+    "50": 50px);
+
+@each $key, $val in $ps {
+    .p#{$key}{
+        padding: $val !important;
+    }
+    .p#{$key}.n{
+        padding: $val * -1 !important;
+    }
+    .pb#{$key} {
+        padding-bottom: $val !important;
+    }
+    .pb#{$key}.n,{
+        padding-bottom: $val * -1 !important;
+    }
+    .pt#{$key} {
+        padding-top: $val !important;
+    }
+    .pt#{$key}.n,{
+        padding-top: $val * -1 !important;
+    }
+    .pl#{$key} {
+        padding-left: $val !important;
+    }
+    .pl#{$key}.n,{
+        padding-left: $val * -1 !important;
+    }
+    .pr#{$key} {
+        padding-right: $val !important;
+    }
+    .pr#{$key}.n,{
+        padding-right: $val * -1 !important;
+    }
+}

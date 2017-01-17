@@ -1,0 +1,79 @@
+<template>
+    <headerTemp showIndex="3">
+        <div class="container-fluid">
+            <div class="box">
+                <ul class="box-list clearfix">
+                    <li class="pb25 fsz16">
+                        如需帮助，请下载API文档查看API相关信息。<span class="sep">|</span>
+                        <a class="gray" href="/setdata/do_out">下载API文档</a>
+                    </li>
+                    <li class="last">
+                        <div class="security-item clearfix">
+                            <div class="pull-left pt5">
+                                <div class="item-name">当前API状态（<span class="text-red">停止</span><span class="text-success">启动</span>）</div>
+                            </div>
+                            <div class="pull-left pl10">
+                                <a class="btn btn-default btn-block" style="width: 30px" onclick="getcode(this,'set','mobile');">停用</a>
+                                <a class="btn btn-success btn-block" style="width: 30px" onclick="getcode(this,'set','mobile');">启动</a>
+                            </div>
+                            <div class="pull-left pt5 pl50">
+                                <div class="item-name">如密钥被泄漏，请立即重置</div>
+                            </div>
+                            <div class="pull-left pl10">
+                                <a class="btn btn-default btn-block" style="width: 30px" onclick="getcode(this,'set','mobile');">重置</a>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="box">
+                <ul class="box-list clearfix">
+                    <li>
+                        <div class="security-item clearfix">
+                            <div class="col-xs-offset-1 col-xs-2">
+                                <div class="item-name pt5">回调地址：</div>
+                            </div>
+                            <div class="col-xs-4">
+                                <input class="form-control" id="newpsw" name="newpsw" type="password" value="" maxlength="20" null="">
+                            </div>
+                            <div class="col-xs-4">
+                                <a class="btn btn-primary btn-block ml10" style="width: 30px" onclick="getcode(this,'set','mobile');">确定</a>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="security-item clearfix">
+                            <div class="col-xs-offset-1 col-xs-2">
+                                <div class="item-name">商户ID：</div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="item-text">5451451</div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                    <li class="last">
+                        <div class="security-item clearfix">
+                            <div class="col-xs-offset-1 col-xs-2">
+                                <div class="item-name pt5">商户密钥：</div>
+                            </div>
+                            <div class="col-xs-6">
+                                <a class="btn btn-primary btn-block" style="width: 80px" onclick="getcode(this,'set','mobile');">点击查看</a>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </headerTemp>
+</template>
+<script>
+    export default {
+        components: {
+            "headerTemp": require("../../component/userTemplate/user.rgl")
+        }
+    }
+</script>

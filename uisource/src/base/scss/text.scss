@@ -1,0 +1,113 @@
+//color
+$muted: #90a4ae;
+$primary: #03a9f4;
+$primary-hover: #0286c2;
+$success: #558b2f;
+$success-hover: #3e6522;
+$info: #00838f;
+$info-hover: #00545c;
+$warning: #f9a825;
+$warning-hover: #e59006;
+$danger: #c41411;
+$danger-hover: #950f0d;
+
+$bg-primary-color: #fff;
+$bg-primary:#03a9f4;
+$bg-primary-hover:#0286c2;
+$bg-success:#f1f8e9;
+$bg-success-hover:#d8ecc2;
+$bg-info: #e0f7fa;
+$bg-info-hover: #b4ecf3;
+$bg-warning: #fffde7;
+$bg-warning-hover: #fff9b4;
+$bg-danger: #fde0dc;
+$bg-danger-hover: #fab5ac;
+
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.text-center {
+  text-align: center;
+}
+.text-justify {
+  text-align: justify;
+}
+.text-nowrap {
+  white-space: nowrap;
+}
+.text-lowercase {
+  text-transform: lowercase;
+}
+.text-uppercase {
+  text-transform: uppercase;
+}
+.text-capitalize {
+  text-transform: capitalize;
+}
+.text-muted {
+  color: $muted;
+}
+.text-primary {
+  color: $primary;
+}
+a.text-primary:hover {
+  color: $primary-hover;
+}
+.text-success {
+  color: $success;
+}
+a.text-success:hover {
+  color: $success-hover;
+}
+.text-info {
+  color: $info;
+}
+a.text-info:hover {
+  color: $info-hover;
+}
+.text-warning {
+  color: $warning;
+}
+a.text-warning:hover {
+  color: $warning-hover;
+}
+.text-danger {
+  color: $danger;
+}
+a.text-danger:hover {
+  color: $danger-hover;
+}
+.bg-primary {
+  color: $bg-primary-color;
+  background-color: $bg-primary;
+}
+a.bg-primary:hover {
+  background-color: $bg-primary-hover;
+}
+.bg-success {
+  background-color: $bg-success;
+}
+a.bg-success:hover {
+  background-color: $bg-success-hover;
+}
+.bg-info {
+  background-color: $bg-info;
+}
+a.bg-info:hover {
+  background-color: $bg-info-hover;
+}
+.bg-warning {
+  background-color: $bg-warning;
+}
+a.bg-warning:hover {
+  background-color: $bg-warning-hover;
+}
+.bg-danger {
+  background-color: $bg-danger;
+}
+a.bg-danger:hover {
+  background-color: $bg-danger-hover;
+}

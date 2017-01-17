@@ -1,0 +1,87 @@
+<template>
+    <headerTemp>
+        <div class="container-fluid">
+            <div class="view-framework-main">
+                <h3>
+                    <a class="btn btn-default pull-right ml5" href="#/user/index">返回个人中心</a>
+                    邮箱设置
+                </h3>
+                <div class="box">
+                    <form id="submitmobile" class="pt50">
+                        <div class="form-group">
+                            <div class="col-xs-2 col-xs-offset-1">
+                                <label class="control-label" for="phoneno">旧邮箱的地址：</label>
+                            </div>
+                            <div class="col-xs-3">
+                                measca@qq.com
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-2 col-xs-offset-1">
+                                <label class="control-label" for="codeno">验证码：</label>
+                            </div>
+                            <div class="col-xs-2">
+                                <div class="mr4">
+                                    <input class="form-control" type="text" maxlength="4" r-model="code">
+                                </div>
+                            </div>
+                            <div class="col-xs-1">
+                                <div class="pl10">
+                                    <a class="btn btn-default">获取验证码</a>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="text-red pt5 pl10" r-hide={$validation.code.isPass}>{$validation.code.msg}</div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <div class="col-xs-2 col-xs-offset-1">
+                                <label class="control-label">新邮箱的地址：</label>
+                            </div>
+                            <div class="col-xs-3">
+                                <input class="form-control" type="text" maxlength="15" r-model="newMail">
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="text-red pt5 pl10" r-hide={$validation.newMail.isPass}>{$validation.newMail.msg}</div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="form-group pb30">
+                            <div class="col-xs-3 col-xs-offset-3">
+                                <a class="btn btn-primary btn-block" onclick="getcode(this,'set','mobile');">提交</a>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </headerTemp>
+</template>
+<script>
+    export default {
+        data: {
+            code: "",
+            newMail: ""
+        },
+        components: {
+            "headerTemp": require("../../component/userTemplate/user.rgl")
+        },
+        validation: {
+            model: {
+                code: {
+                    required: true,
+                    alphaDash: true,
+                    minlength: 4
+                },
+                newMail: {
+                    required: true,
+                    email: true
+                }
+            }
+        }
+    }
+</script>

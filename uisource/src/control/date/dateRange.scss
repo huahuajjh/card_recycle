@@ -1,0 +1,188 @@
+.date-range-body {
+  position: relative;
+
+  .date-range-title {
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    outline: 0;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    position: relative;
+    padding: 8px;
+    font-size: 12px;
+
+    &.open {
+      border-color: #46A4FF;
+    }
+
+    > .placeholder {
+      color: #aaa;
+    }
+
+    > .title {
+      color: #333;
+    }
+  }
+
+  .date-range-wrapper {
+    position: absolute;
+    border: 1px solid #bfbfbf;
+    background-color: #efefef;
+    padding: 5px 12px;
+    font-size: 12px;
+    line-height: 20px;
+    color: #aaa;
+    font-family: Arial;
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+    box-sizing: initial;
+    top:100%;
+    left: 0;
+    width: 434px;
+
+    .date-range-top-bar {
+      line-height: 40px;
+      height: 40px;
+      position: relative;
+
+      .normal-top {
+
+        > :first-child {
+          color: #333;
+        }
+
+        b {
+          color: #666;
+          font-weight: 700;
+        }
+
+      }
+      .apply-btn {
+        position: absolute;
+        right: 0px;
+        top: 6px;
+        padding: 3px 5px;
+        margin: 0;
+        font-size: 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        color: #d9eef7;
+        border: solid 1px #0076a3;
+        background: #0095cd;
+        background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));
+        background: -moz-linear-gradient(top, #00adee, #0078a5);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00adee', endColorstr='#0078a5');
+        color: white;
+        line-height: initial;
+      }
+    }
+
+    .month-wrapper {
+      border: 1px solid #bfbfbf;
+      border-radius: 3px;
+      background-color: #fff;
+      padding: 5px;
+      cursor: default;
+      position: relative;
+
+      > table:first-child {
+        margin-right: 15px;
+      }
+
+      > table {
+        width: 190px;
+        float: left;
+
+        th, td {
+          vertical-align: middle;
+          text-align: center;
+          line-height: 14px;
+          margin: 0px;
+          padding: 0px;
+        }
+
+        .week-name {
+          height: 20px;
+          line-height: 20px;
+          font-weight: 100;
+          text-transform: uppercase;
+        }
+
+        .day {
+          padding: 5px 0;
+          line-height: 1;
+          font-size: 12px;
+          margin-bottom: 1px;
+          color: #999;
+          cursor: default;
+
+          &:hover{background-color:#F6F6F6;}
+
+          &.nothis {
+            color: #999;
+            cursor: pointer;
+          }
+
+          &.valid {
+            color: #333;
+            cursor: pointer;
+          }
+          &.checked {
+            background-color: rgb(156, 219, 247);
+          }
+          &.date-selected {
+            background-color: #49e;
+            color: #fff;
+          }
+          &.void {
+            cursor: default;
+            color: #ccc;
+          }
+        }
+      }
+
+      .caption {
+        height: 40px;
+
+        .month-name {
+          text-transform: uppercase;
+        }
+
+        .btn-size {
+          height: 40px;
+
+          .prev, .next {
+            padding: 0 5px;
+            cursor: pointer;
+
+            &:hover
+            {
+              background-color:#ccc;
+              color:white;
+            }
+          }
+        }
+      }
+    }
+
+    .date-range-footer {
+      font-size: 11px;
+      padding-top: 3px;
+
+      > * {
+        padding-right: 10px;
+      }
+
+      a {
+        color: #46A4FF;
+        margin-left: 5px;
+        cursor: pointer;
+
+        &:hover {
+          color: rgb(156, 219, 247);
+        }
+      }
+    }
+  }
+}
+
+

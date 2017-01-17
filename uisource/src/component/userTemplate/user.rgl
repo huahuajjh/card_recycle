@@ -1,0 +1,77 @@
+<template>
+    <div>
+        <div class="header">
+            <div class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <h1 class="navbar-brand"><a href="/"><img class="png" src="../../resource/front/logo_transparent.png"></a></h1>
+                    <ul class="navbar-nav">
+                        <li class="navbar-item"><a class="navbar-link" href="#/index">首页</a></li>
+                        <li class="navbar-item"><a class="navbar-link" href="#/exchange">兑换比例</a></li>
+                        <li class="navbar-item"><a class="navbar-link" href="#/state">查询卡状态</a></li>
+                        <li class="navbar-item"><a class="navbar-link" href="#/faq">常见问题</a></li>
+                    </ul>
+                    <ul class="navbar-links">
+                        <li class="navbar-item pr10">
+                            <span class="username" style="color:#fff;">{userName}</span>
+                            <span class="sep">|</span>
+                            <a class="out" on-click={this.outLogin()}>退出</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="view-framework">
+            <div class="view-framework-sidebar">
+                <div class="sidebar-inner">
+                    <div class="sidebar-nav">
+                        <div class="sidebar-title"><i class="iconfont fa fa-id-card-o"></i>个人中心</div>
+                        <ul class="sidebar-trans clearfix">
+                            <li r-class="current: showIndex == '0'"><a href="#/user/index">基本信息</a></li>
+                            
+                        </ul>
+                    </div>
+                    <div class="sidebar-nav">
+                        <div class="sidebar-title"><i class="iconfont fa fa-cny"></i>订单管理</div>
+                        <ul class="sidebar-trans clearfix">
+                            <li r-class="current: showIndex == '1'"><a href="#/user/actSell">我要寄售</a></li>
+                            <li r-class="current: showIndex == '2'"><a href="#/user/actSelldetail">订单查询</a></li>
+                        </ul>
+                    </div>
+                    <div class="sidebar-nav">
+                        <div class="sidebar-title"><i class="iconfont fa fa-credit-card"></i>账户管理</div>
+                        <ul class="sidebar-trans clearfix">
+                            <li r-class="current: showIndex == '4'"><a href="#/user/tx">申请提现</a></li>
+                            <li r-class="current: showIndex == '6'"><a href="#/user/actCashrecords">提现记录</a></li>
+                            <li r-class="current: showIndex == '5'"><a href="#/user/bankCard">收款账号</a></li>
+                        </ul>
+                    </div>
+                    <div class="sidebar-nav">
+                        <div class="sidebar-title"><i class="iconfont fa fa-handshake-o"></i>API</div>
+                        <ul class="sidebar-trans clearfix">
+                            <li r-class="current: showIndex == '3'"><a href="#/user/api">接口</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="view-framework-body">
+                {#include this.$body}
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    export default {
+        init() {
+            this.$update({
+                userName: getWebUserName()
+            });
+        },
+        data: {
+            userName: ""
+        },
+        outLogin() {
+            removeUserNameAndUKey();
+            location.href = "#/signin";
+        }
+    }
+</script>

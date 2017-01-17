@@ -1,0 +1,139 @@
+<template>
+    <div class="container-fluid">
+        <div class="view-framework-main">
+            <h3 class="clearfix">
+                <a class="btn btn-primary pull-right ml5" on-click={this.show()}>添加管理员</a>
+                系统用户
+            </h3>
+            <div class="box">
+                <div class="nodata"><i class="iconfont fa fa-search"></i><br>抱歉，没有找到任何相关的数据！</div>
+            </div>
+            <table class="table trade-records">
+                <thead>
+                    <tr>
+                        <th>用户名</th>
+                        <th>账号状态<span class="text-muted">（点击即可改变状态）</span></th>
+                        <th>创建时间</th>
+                        <th style="width: 80px">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>-</td>
+                        <td><a class="text-success" r-tooltip="冻结该账户">正常</a></td>
+                        <td>-</td>
+                        <td>
+                            <a href="javascript:;" class="btn btn-info-alt btn-xs" r-tooltip="重置密码" on-click={this.resetPassword()}><i class="fa fa-refresh"></i></a>
+                            <a href="javascript:;" class="btn btn-default-alt btn-xs ml10" r-tooltip="删除" on-click={this.del()}><i class="fa fa-times-circle"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>-</td>
+                        <td><a class="text-danger" r-tooltip="解冻该账户">冻结</a></td>
+                        <td>-</td>
+                        <td>
+                            <a href="javascript:;" class="btn btn-info-alt btn-xs" r-tooltip="重置密码" on-click={this.resetPassword()}><i class="fa fa-refresh"></i></a>
+                            <a href="javascript:;" class="btn btn-default-alt btn-xs ml10" r-tooltip="删除" on-click={this.del()}><i class="fa fa-times-circle"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="8">
+                            <div class="pull-right">
+                                <page totalItems={200}></page>
+                            </div>
+                            <div class="clear"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <modal title="添加管理员" ref="modal">
+            <form class="pt20 pb10">
+                <div class="form-group">
+                    <div class="col-xs-4 text-right">
+                        <label class="control-label pt5 pr10">用户名：</label>
+                    </div>
+                    <div class="col-xs-5">
+                        <div class="mr4">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-4 text-right">
+                        <label class="control-label pt5 pr10">登录密码：</label>
+                    </div>
+                    <div class="col-xs-5">
+                        <div class="mr4">
+                            <input type="password" class="form-control">
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-4 text-right">
+                        <label class="control-label pt5 pr10" for="oldpsw">重新输入密码：</label>
+                    </div>
+                    <div class="col-xs-5">
+                        <div class="mr4">
+                            <input type="password" class="form-control">
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-5 col-xs-offset-4">
+                        <input type="submit" class="btn btn-primary btn-block" name="newpass" value="提交" onclick="return regform(this);">
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </form>
+        </modal>
+    </div>
+</template>
+<script>
+    import confirm from "../../tool/confirm/index.js";
+
+    export default {
+        data: {
+            modalShowState: false,
+            user: {
+                userName: '',
+                password: "",
+                passwordTwo: ""
+            }
+        },
+        components: {
+            page: require("../../control/page/index.rgl"),
+            modal: require("../../control/modal/index.rgl")
+        },
+        show() {
+            this.$refs.modal.show();
+        },
+        del() {
+            confirm.ajax("确定删除？", ()=>{
+                setTimeout(function() {
+                    confirm.alert("删除成功");
+                }, 3000);
+            });
+        },
+        resetPassword() {
+            confirm.ajax("确定重置该用户的密码为：adcd1234？", ()=>{
+                setTimeout(function() {
+                    confirm.alert("重置成功");
+                }, 3000);
+            });
+        },
+        validation: {
+            baseAtteName: "user",
+            model: {
+                state: {
+                    required: true
+                }
+            }
+        }
+    }
+</script>

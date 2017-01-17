@@ -1,0 +1,39 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "0.1.0",
+    "command": "npm",
+    "isShellCommand": true,
+    "showOutput": "always",
+    "suppressTaskName": true,
+    "tasks": [
+        {
+            "taskName": "start-dev",
+            "isBuildCommand": true,
+            "showOutput": "always",
+            "isWatching": true,
+            "args": ["run","start-dev"]
+        },
+        {
+            "taskName": "build",
+            "isBuildCommand": true,
+            "showOutput": "always",
+            "isWatching": true,
+            "args": ["run","build"]
+        },
+        {
+            "taskName": "start-release",
+            "isBuildCommand": true,
+            "showOutput": "always",
+            "isWatching": true,
+            "args": ["run","start-release"]
+        },
+        {
+            "taskName": "deploy",
+            "isBuildCommand": true,
+            "showOutput": "always",
+            "isWatching": true,
+            "args": ["run","deploy"]
+        }
+    ]
+}

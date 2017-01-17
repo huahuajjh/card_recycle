@@ -1,0 +1,20 @@
+<template>
+    <div class="container-fluid">
+        <div class="view-framework-main">
+            <h3 class="clearfix">
+                公司简介
+                <a class="btn btn-primary pull-right ml5" on-click={modalShowState = true}>保存更改</a>
+            </h3>
+            <div class="box">
+                <FCKEditor></FCKEditor>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    export default {
+        components: {
+            FCKEditor: require("../../control/FCKEditor/index.rgl")
+        }
+    }
+</script>

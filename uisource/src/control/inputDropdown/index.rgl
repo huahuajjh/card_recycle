@@ -1,0 +1,83 @@
+<template>
+  <div class="input-dropdown" r-style="'z-index': zIndex">
+    <div class="input-area" r-class="focus: __InputFocus">
+      <input type="text" placeholder="{placeholder}" on-focus="{__InputFocus = true}" on-blur="{this.__OnInputBlur()}" r-model="value" on-keyup='{this.__OnInputKeyDown($event)}' />
+    </div>
+    <div class="menu-area" r-hide="__ListData.length <= 0 || !__InputFocus">
+      <div class="menu-area-list" on-mouseleave="{__HoverIndex = -1}">
+        {#list __ListData as d}
+          <a r-class="hover: d_index == __HoverIndex" on-mouseenter="{__HoverIndex = d_index}" on-mousedown="{this.__OnItemClick()}">{d}</a>
+        {/list}
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+  import ajax from "ajax";
+  import "./style.scss";
+
+  var CreateListItem = (val, url, successCallback, errorCallback) => {
+    if(val) successCallback(["你母鸡我干嘛?", "母鸡", "确实母鸡", "对了吧"]);
+  }
+
+  module.exports = {
+    data: {
+      // ----------公开变量
+      ajaxUrl: "", // 请求链接
+      placeholder: "请输入内容", // 提示
+      value: "", // 显示内容
+      delayTime: 800, // 延迟发送间隔
+      zIndex: 1,
+      // ----------私有变量
+      __TimeoutObj: -1,
+      __HoverIndex: -1,
+      __InputFocus: false,
+      __ListData: [],
+      __IsChangeVal: false
+    },
+    events: {
+      $init() {
+        this.$watch("value", (newVal) => {
+          this.data.__HoverIndex = -1;
+          if(this.data.__IsChangeVal || !this.data.__InputFocus) { this.data.__IsChangeVal = false; return;}
+          var self = this;
+          self.data.__ListData = [];
+          self.$update();
+          clearTimeout(self.data.__TimeoutObj);
+          self.data.__TimeoutObj = setTimeout(() => {
+            CreateListItem(newVal, self.data.ajaxUrl, (list) => {
+              self.data.__ListData = list;
+              self.$update();
+            });
+          }, self.data.delayTime);
+        });
+      }
+    },
+    // ----------公共方法
+    // ----------私有方法
+    __OnInputKeyDown (e) {
+      if(this.data.__ListData.length <= 0) return;
+      if(e.which === 38) {
+        this.data.__HoverIndex = this.data.__HoverIndex - 1;
+      } else if(e.which === 40) {
+        this.data.__HoverIndex = this.data.__HoverIndex + 1;
+      } else if(e.which === 13 && this.data.__ListData[this.data.__HoverIndex]) {
+        this.__OnItemClick();
+      }
+      if(this.data.__HoverIndex < -1) this.data.__HoverIndex = this.data.__ListData.length - 1;
+      if(this.data.__HoverIndex > this.data.__ListData.length) this.data.__HoverIndex = 0;
+      this.$update();
+    },
+    __OnItemClick () {
+      this.data.__IsChangeVal = true;
+      this.data.value = this.data.__ListData[this.data.__HoverIndex];
+      this.data.__ListData = [];
+      this.$update();
+    },
+    __OnInputBlur () {
+      this.data.__InputFocus = false;
+      this.data.__ListData = [];
+      this.$update();
+    }
+  }
+</script>

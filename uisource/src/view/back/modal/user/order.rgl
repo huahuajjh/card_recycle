@@ -1,0 +1,82 @@
+<template>
+    <div>
+        <modal title="查看用户订单" ref="modal" size="modal-xlg">
+            <table class="table trade-records">
+                <thead>
+                    <tr>
+                        <th>订单号</th>
+                        <th>充值卡类型</th>
+                        <th>卡面值</th>
+                        <th>订单状态</th>
+                        <th>成功金额</th>
+                        <th>充值卡卡号</th>
+                        <th>充值卡密码</th>
+                        <th>加款金额</th>
+                        <th>寄售时间</th>
+                        <th>处理完成时间</th>
+                        <th>寄售比例</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><a on-click={this.__showInputPassword()}>查看</a></td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><a on-click={this.__showInputPassword()}>查看</a></td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="11">
+                            <div class="pull-right">
+                                <page totalItems={200}></page>
+                            </div>
+                            <div class="clear"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </modal>
+        <inputPassword ref="inputPasswordModal"></inputPassword>
+    </div>
+</template>
+<script>
+    export default {
+        data: {
+        },
+        components: {
+            page: require("../../../../control/page/index.rgl"),
+            modal: require("../../../../control/modal/index.rgl"),
+            "inputPassword": require("../inputPassword.rgl")
+        },
+        show() {
+            this.$refs.modal.show();
+        },
+        hidden() {
+            this.$refs.modal.hidden();
+        },
+        __showInputPassword() {
+            this.$refs.inputPasswordModal.show();
+        }
+    }
+</script>

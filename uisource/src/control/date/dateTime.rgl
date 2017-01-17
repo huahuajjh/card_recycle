@@ -1,0 +1,318 @@
+<template>
+  <div class="date-time-body" r-style="'z-index': zIndex">
+    <div class="date-time-title" r-class="open:__IsOpen" on-click='{__IsOpen = !__IsOpen}'>
+			<span class="placeholder" r-hide="value">{placeholder}</span>
+			<span class="title" r-hide="!value">{value}</span>
+		</div>
+    <div class="date-time-box" r-hide="!__IsOpen">
+      <div class="date-time-box-top">
+        <div class="date-time-box-top-y">
+          <a class="date-time-box-chprev" on-click="{this.__OnClickTime(parseInt(__YearVal) - 1, 'setYear')}">
+            <cite></cite>
+          </a>
+          <div class="show-val" on-click="{this.__OnShowTime('year')}">{__YearVal}年</div>
+          <label on-click="{this.__OnShowTime('year')}"></label>
+          <a class="date-time-box-chnext" on-click="{this.__OnClickTime(parseInt(__YearVal) + 1, 'setYear')}">
+            <cite></cite>
+          </a>
+          <div class="date-time-box-top-yms" r-hide="__ShowState != 'year'">
+            <a class="date-time-box-top-chtop" on-click="{this.__UpOrDowmYear(true)}">
+              <cite></cite>
+            </a>
+            <ul>
+              {#list __YearArr as y}
+              <li r-class="'year-click': __YearVal == y" on-click="{this.__OnClickTime(y, 'setYear')}">{y}年</li>
+              {/list}
+            </ul>
+            <a class="date-time-box-top-chdown" on-click="{this.__UpOrDowmYear(false)}">
+              <cite></cite>
+            </a>
+          </div>
+        </div>
+        <div class="date-time-box-top-m">
+          <a class="date-time-box-chprev" on-click="{this.__OnClickTime(parseInt(__MonthVal) - 1 < 1 ? 12 : parseInt(__MonthVal) - 1, 'setMonth')}">
+            <cite></cite>
+          </a>
+          <div class="show-val" on-click="{this.__OnShowTime('month')}">{__MonthVal}月</div>
+          <label on-click="{this.__OnShowTime('month')}"></label>
+          <a class="date-time-box-chnext" on-click="{this.__OnClickTime(parseInt(__MonthVal) + 1 > 12 ? 1 : parseInt(__MonthVal) + 1, 'setMonth')}">
+            <cite></cite>
+          </a>
+          <div class="date-time-box-top-ms" r-hide="__ShowState != 'month'">
+            {#list __MonthArr as m}
+            <span r-class="'mouth-click': m == __MonthVal" on-click="{this.__OnClickTime(m, 'setMonth')}">{m}月</span>
+            {/list}
+          </div>
+        </div>
+        <div style="clear: both;"></div>
+      </div>
+      <table class="date-time-box-tabel">
+        <thead>
+          <tr>
+            <th>日</th>
+            <th>一</th>
+            <th>二</th>
+            <th>三</th>
+            <th>四</th>
+            <th>五</th>
+            <th>六</th>
+          </tr>
+        </thead>
+        <tbody>
+          {#list __DayArr as week}
+          <tr>
+            {#list week as day}
+              <td r-class="'date-time-box-tabel-nothis': day.state == 'nothis', 'date-time-box-tabel-void': day.state == 'void', 'date-time-box-tabel-click': day.state == 'click'" on-click="{this.__OnClickTime(day, 'setDay')}">{day.day}</td>
+            {/list}
+          </tr>
+          {/list}
+        </tbody>
+      </table>
+      <div class="date-time-box-bottom">
+        <ul r-hide="!showTime">
+          <li class="date-time-box-bottom-sj">时间</li>
+          <li><input r-model="__HourVal" readonly on-click="{this.__OnShowTime('hour')}">:</li>
+          <li><input r-model="__MinuteVal" readonly on-click="{this.__OnShowTime('minute')}">:</li>
+          <li><input r-model="__SecondsVal" readonly on-click="{this.__OnShowTime('seconds')}"></li>
+        </ul>
+        <div class="date-time-box-bottom-show date-time-box-bottom-show-time1" r-hide="__ShowState != 'seconds'">
+          <div class="date-time-box-bottom-show-hsmtex">秒</div>
+          <div class="date-time-box-bottom-show-hmsno">
+            {#list __SecondsArrTime as v}
+              <span r-class="'hmsno-click': __SecondsVal == v" on-click="{this.__OnClickTime(v, 'setSeconds')}">{v}</span>
+            {/list}
+          </div>
+        </div>
+        <div class="date-time-box-bottom-show date-time-box-bottom-show-time1" r-hide="__ShowState != 'minute'">
+          <div class="date-time-box-bottom-show-hsmtex">分</div>
+          <div class="date-time-box-bottom-show-hmsno">
+            {#list __MinuteArrTime as v}
+              <span r-class="'hmsno-click': __MinuteVal == v" on-click="{this.__OnClickTime(v, 'setMinute')}">{v}</span>
+            {/list}
+          </div>
+        </div>
+        <div class="date-time-box-bottom-show" r-hide="__ShowState != 'hour'">
+          <div class="date-time-box-bottom-show-hsmtex">时</div>
+          <div class="date-time-box-bottom-show-hmsno">
+            {#list __HourArrTime as v}
+              <span r-class="'hmsno-click': __HourVal == v" on-click="{this.__OnClickTime(v, 'setHour')}">{v}</span>
+            {/list}
+          </div>
+        </div>
+        <div class="date-time-box-bottom-btn">
+          <a on-click="{this.__OnToday()}">今天</a>
+          <a on-click="{value=''}">清空</a>
+        </div>
+        <div style="clear: both;"></div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+  import "./dateTime.scss";
+
+  var formatDat = (data, fmt) => {
+    var o = {
+        "M+": data.getMonth() + 1, //月份
+        "d+": data.getDate(), //日
+        "h+": data.getHours(), //小时
+        "m+": data.getMinutes(), //分
+        "s+": data.getSeconds(), //秒
+        "q+": Math.floor((data.getMonth() + 3) / 3), //季度
+        "S": data.getMilliseconds() //毫秒
+    };
+    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (data.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
+}
+
+  var toDate = (val) => {
+    return new Date(Date.parse(val.replace(/-/g, "/")));
+  }
+
+  var initDay = (valueDatetime, showDatetime, minDateVal, maxDateVal) => {
+    var showMonth = showDatetime.getMonth();
+    var showYear = showDatetime.getFullYear();
+    var minDatetime = toDate(minDateVal);
+    var minMonth = minDatetime.getMonth();
+    var minYear = minDatetime.getFullYear();
+    var maxDatetime = toDate(maxDateVal);
+    var maxMonth = maxDatetime.getMonth();
+    var maxYear = maxDatetime.getFullYear();
+    var months = [31, null , 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    var newDatetimeDay = (() => {
+      var newDatetime = new Date();
+      newDatetime.setFullYear(showDatetime.getFullYear(), showDatetime.getMonth(), 1);
+      return newDatetime.getDay();
+    })();
+    months[1] = (0 === showYear % 4 && 0 !== showYear % 100 || 0 === showYear % 400) ? 29 : 28;
+    var f = {
+      ymd: [showDatetime.getFullYear(), showDatetime.getMonth(), showDatetime.getDate()],
+      FDay: newDatetimeDay,
+      PDay: months[0 === showMonth ? 11 : showMonth - 1] - newDatetimeDay + 1,
+      NDay: 1
+    };
+    var index = 0;
+    var mouthArr = [];
+    for(var i = 0;i < 6; i++) {
+      var weekArr = [];
+      mouthArr.push(weekArr);
+      for(var t = 0; t < 7; t++) {
+        var day = {};
+        weekArr.push(day);
+        var otherYear = f.ymd[0], otherMonth = f.ymd[1] + 1, otherDay;
+        if(index < f.FDay) {
+          otherDay = index + f.PDay;
+          if(1 === otherMonth) otherYear -= 1;
+          otherMonth = 1 === otherMonth ? 12 : otherMonth - 1;
+          day.state = "nothis";
+          var dayNum = (new Date(otherYear, otherMonth - 1, otherDay) / 1000);
+          if((minDatetime / 1000) > dayNum) day.state = "void";
+          else if((maxDatetime / 1000) < dayNum) day.state = "void";
+        } else if(index >= f.FDay && index < f.FDay + months[f.ymd[1]]) {
+          otherDay = index - f.FDay + 1;
+          if(valueDatetime && otherDay === valueDatetime.getDate() && valueDatetime.getMonth() === showMonth && valueDatetime.getFullYear() === showYear) {
+            day.state = "click";
+          }
+          var dayNum = (new Date(showYear, showMonth, otherDay) / 1000);
+          if((minDatetime / 1000) > dayNum) day.state = "void";
+          else if((maxDatetime / 1000) < dayNum) day.state = "void";
+        } else {
+          if(12 === otherMonth) otherYear += 1;
+          otherMonth = 12 === otherMonth ? 1 : otherMonth + 1
+          otherDay = f.NDay++;
+          day.state = "nothis";
+          var dayNum = (new Date(otherYear, otherMonth - 1, otherDay) / 1000);
+          if((minDatetime / 1000) > dayNum) day.state = "void";
+          else if((maxDatetime / 1000) < dayNum) day.state = "void";
+        }
+        day.year = otherYear;
+        day.month = otherMonth;
+        day.day = otherDay;
+        index++;
+      }
+    }
+    return mouthArr;
+  }
+
+  module.exports = {
+    config(data) {
+      for(var i = 0; i < 60; i++) {
+        if(i < 12) data.__MonthArr.push(i + 1);
+        if(i < 24) data.__HourArrTime.push(i);
+        data.__MinuteArrTime.push(i);
+        data.__SecondsArrTime.push(i);
+      }
+      var yearNum = (new Date()).getFullYear();
+      var minYearNum = yearNum - (yearNum % 10);
+      for(var i = minYearNum; i < minYearNum + 10; i++) {
+        data.__YearArr.push(i);
+      }
+    },
+    events: {
+      $init() {
+        if(this.data.value) {
+          this.__OnClickTime(toDate(this.data.value), "setDate");
+        } else {
+          this.__OnClickTime(new Date(), "setDate");
+        }
+        this.$watch("value", (newVal) => {
+          if(!newVal) {
+            this.__OnClickTime();
+            return;
+          }
+          var newDate = toDate(newVal);
+          var val = this.data.showTime ? formatDat(newDate, "yyyy-MM-dd hh:mm:ss") : formatDat(newDate, "yyyy-MM-dd");
+          var thisVal = this.data.showTime ? formatDat(this.data.__Date, "yyyy-MM-dd hh:mm:ss") : formatDat(this.data.__Date, "yyyy-MM-dd");
+          if(newVal && val != thisVal) {
+            this.__OnClickTime(newDate, "setDate");
+          }
+        });
+      }
+    },
+    data: {
+      // ----------公开属性
+      value: "",
+      placeholder: "请选择时间",
+      minDate: "1900-1-1",
+      maxDate: "2099-12-31",
+      showTime: false,
+      zIndex: 1,
+      // ----------私有属性
+      __IsOpen: false,
+      __ShowState: "",
+      __ShowDate: new Date(),
+      __Date: new Date(),
+      __YearVal: "2016",
+      __MonthVal: "11",
+      __HourVal: 0,
+      __MinuteVal: 0,
+      __SecondsVal: 0,
+      __HourArrTime: [],
+      __MinuteArrTime: [],
+      __SecondsArrTime: [],
+      __DayArr: [],
+      __MonthArr: [],
+      __YearArr: []
+    },
+    __OnClickTime(val, actionState) {
+      this.data.__ShowState = '';
+      if(actionState == 'setYear') {
+        this.data.__YearVal = val;
+      } else if(actionState == 'setMonth') {
+        this.data.__MonthVal = val;
+      } else if(actionState == 'setDay') {
+        if(val.state == "void") return;
+        var d = toDate(val.year + "-" + val.month + "-" + val.day + " " + this.data.__HourVal + ":" + this.data.__MinuteVal + ":" + this.data.__SecondsVal);
+        this.data.__ShowDate = d;
+        this.data.__Date = d;
+      } else if(actionState == 'setHour') {
+        this.data.__HourVal = val;
+      } else if(actionState == 'setMinute') {
+        this.data.__MinuteVal = val;
+      } else if(actionState == 'setSeconds') {
+        this.data.__SecondsVal = val;
+      } else if(actionState == 'setDate') {
+        this.data.__ShowDate = val;
+        this.data.__Date = val;
+      }
+      if(actionState == 'setYear' || actionState == 'setMonth') {
+        var d = toDate(this.data.__YearVal + "-" + this.data.__MonthVal + "-1");
+        this.data.__ShowDate = d;
+      } else if(actionState == 'setHour' || actionState == 'setMinute' || actionState == 'setSeconds') {
+        var d = toDate(this.data.__Date.getFullYear() + "-" + (this.data.__Date.getMonth() + 1) + "-" + this.data.__Date.getDate() + " " + this.data.__HourVal + ":" + this.data.__MinuteVal + ":" + this.data.__SecondsVal);
+        this.data.__Date = d;
+      } else if(actionState == 'setDay' || actionState == 'setDate') {
+        this.data.__YearVal = this.data.__Date.getFullYear();
+        this.data.__MonthVal = this.data.__Date.getMonth() + 1;
+        this.data.__HourVal = this.data.__Date.getHours();
+        this.data.__MinuteVal = this.data.__Date.getMinutes();
+        this.data.__SecondsVal = this.data.__Date.getSeconds();
+      }
+      if(actionState && this.data.showTime) {
+        this.data.value = formatDat(this.data.__Date, "yyyy-MM-dd hh:mm:ss");
+      } else if(actionState) {
+        this.data.value = formatDat(this.data.__Date, "yyyy-MM-dd");
+      }
+      this.data.__DayArr = initDay(this.data.value ? this.data.__Date : null, this.data.__ShowDate, this.data.minDate, this.data.maxDate);
+      this.$update();
+    },
+    __OnShowTime(stateVal) {
+      this.data.__ShowState = stateVal == this.data.__ShowState ? '' : stateVal;
+      this.$update();
+    },
+    __UpOrDowmYear(isUp) {
+      var minYearNum =  isUp ? this.data.__YearArr[0] - 10 : this.data.__YearArr[this.data.__YearArr.length - 1] + 1;
+      var yearArr = [];
+      for(var i = minYearNum; i < minYearNum + 10; i++) {
+        yearArr.push(i);
+      }
+      this.data.__YearArr = yearArr;
+      this.$update();
+    },
+    __OnToday() {
+      this.__OnClickTime(new Date(), 'setDate');
+    }
+  }
+</script>

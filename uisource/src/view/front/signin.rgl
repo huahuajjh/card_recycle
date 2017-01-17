@@ -1,0 +1,147 @@
+<template>
+    <frontTemp>
+        <div class="signin-panel">
+            <div class="container">
+                <div r-hide={isSuccess}>
+                    <div class="box signform">
+                        <h2 class="h4 clearfix">
+                            <small class="pt5 pull-right">
+                                <a href="#/signup">免费注册</a>
+                            </small>
+                            登录
+                        </h2>
+                        <form on-submit={this.login()}>
+                            <div class="form-group">
+                                <div class="mr">
+                                    <label class="control-label" for="username">
+                                        <i class="fa fa-user-o"></i>
+                                    </label>
+                                    <input class="form-control" name="username" type="text" placeholder="邮箱/手机号码" maxlength="15" r-model="username | trim" autocomplete="off">
+                                    <div r-hide={$validation.username.isPass} class="text-red pt5">{$validation.username.msg}</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="mr">
+                                    <label class="control-label" for="password">
+                                        <i class="fa fa-unlock-alt"></i>
+                                    </label>
+                                    <input class="form-control" name="password" type="password" placeholder="登录密码" maxlength="15" r-model="password | trim" autocomplete="off">
+                                    <div r-hide={$validation.password.isPass} class="text-red pt5">{$validation.password.msg}</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="mr">
+                                    <label class="control-label" for="verifycode"><i class="fa fa-shield"></i></label>
+                                    <input type="text" class="form-control" name="verifycode" maxlength="4" placeholder="验证码" r-model="verifycode | trim" autocomplete="off">
+                                    <img src="http://www.lipin.com/include/code/getimg.php" class="verifyimg code" onclick="code(this);" tip="点击图片刷新验证码">
+                                    <div r-hide={$validation.verifycode.isPass} class="text-red pt5">{$validation.verifycode.msg}</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input class="btn btn-primary btn-block" type="submit" value="登 录" {#if !$validation.$isPass}disabled{/if}>
+                            </div>
+                            <div class="form-group">
+                                <a class="btn-link pull-right" href="#/forgetpassword">忘记登录密码?</a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="signbanner"><img src="../../resource/front/sign.png"></div>
+                </div>
+                <div class="box getpass" r-hide={!isSuccess}>
+                    <div class="safe-icon-box">
+                        <i class="icon icon-fore1"></i>
+                        <div class="fore">
+                            <h3 class="font1">登录成功</h3>
+                            <p>{timeNum}秒后自动进入个人中心<br>您可以手动 <a href="#/user/index">点击此进入</a> 个人中心页面</p>
+                            <a class="btn btn-default btn-sm mt10" href="#/index">返回首页</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </frontTemp>
+</template>
+<script>
+
+    export default {
+        init() {
+            if(isLogin()) {
+                this.$update({
+                    timeNum: 3,
+                    isSuccess: true
+                });
+                this.goMIndex();
+            } else {
+                this.$update({
+                    timeNum: 3,
+                    isSuccess: false
+                });
+            }
+        },
+        data: {
+            username: "",
+            password: "",
+            verifycode: "",
+            timeNum: 3,
+            timeObj: -1,
+            isSuccess: false // 是否登录成功
+        },
+        components: {
+            "frontTemp": require("../../component/frontTemplate/front.rgl")
+        },
+        goMIndex() {
+            var self = this;
+            var time;
+            self.data.timeObj = time = setInterval(()=>{
+                if(self.data.timeNum == 1) {
+                    location.href = "#/user/index";
+                    clearInterval(time);
+                    return;
+                }
+                self.$update({
+                    timeNum: self.data.timeNum - 1
+                });
+            }, 1000);
+        },
+        login() {
+            setWebUserName(this.data.username);
+            setWebUKey(this.data.username);
+            this.$update({
+                timeNum: 3,
+                isSuccess: true
+            });
+            this.goMIndex();
+            return false;
+        },
+        canLeave(){
+            clearInterval(this.data.timeObj);
+        },
+        validation: {
+            model: {
+                username: {
+                    required: true,
+                    minlength: 6,
+                    or: {
+                        email: true,
+                        phone: true
+                    }
+                },
+                password: {
+                    required: true,
+                    alphaDash: true,
+                    minlength: 7,
+                },
+                verifycode: {
+                    required: true,
+                    alphaDash: true,
+                    minlength: 4,
+                }
+            },
+            message: {
+                username: {
+                    or: "只能输入邮箱或者手机"
+                }
+            }
+        }
+    }
+</script>

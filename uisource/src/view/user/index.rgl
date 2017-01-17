@@ -1,0 +1,224 @@
+<template>
+    <headerTemp showIndex="0">
+        <div class="container-fluid">
+            <div class="box">
+                <ul class="box-list clearfix">
+                    <li class="pb25 fsz16">
+                        您好，{userName}！欢迎登录
+                    </li>
+                    <li class="last">
+                        <div class="account-assets clearfix">
+                            <div class="col-xs-4">
+                                <div class="assets-yue">
+                                    <div class="assets-icon">
+                                        <i class="iconfont fa fa-cny"></i>
+                                    </div>
+                                    <div class="assets-title">总提款金额（元）：</div>
+                                    <div class="assets-money">{countMoney}</div>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="assets-yue">
+                                    <div class="assets-icon">
+                                        <i class="iconfont fa fa-cny"></i>
+                                    </div>
+                                    <div class="assets-title">账户余额（元）：</div>
+                                    <div class="assets-money">{money}</div>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div class="assets-actions pt15">
+                                    <p>
+                                        <a href="#/user/tx" class="btn btn-primary btn-sm mr30">提现</a>
+                                        <a href="#/user/actCashrecords">提现记录</a>
+                                    </p>
+                                    <p class="text-muted pt10">提现处理中，金额：¥{tMoney}</p>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="box">
+                <ul class="box-list clearfix">
+                    <li>
+                        <div class="security-item clearfix">
+                            <div class="col-xs-offset-1 col-xs-2">
+                                <div class="item-name">上次登录时间</div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="item-text">{loginTime}</div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="security-item clearfix">
+                            <div class="col-xs-offset-1 col-xs-2">
+                                <div class="item-name">安全等级</div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="item-progress">
+                                    <div class="progress">
+                                        <div class="progressbar" style="width: {safeLever}%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="security-item clearfix">
+                            <div class="col-xs-1">
+                                <div class="item-icon">
+                                    <i class="iconfont  fa fa-warning" 
+                                    r-class="'icon-close': !isSettingTrueNameVerified, 'fa-warning': !isSettingTrueNameVerified,
+                                        'icon-open': isSettingTrueNameVerified, 'fa-check-circle': isSettingTrueNameVerified"></i>
+                                </div>
+                            </div>
+                            <div class="col-xs-2">
+                                <div class="item-name">实名认证</div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="item-text">
+                                    <span r-class="'text-red': !isSettingTrueNameVerified">
+                                        {isSettingTrueNameVerified ? '你已经通过实名认证' : '你尚未实名认证'}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-xs-2">
+                                <div class="item-action">
+                                    <a href="#/user/trueNameVerified" r-hide={isSettingTrueNameVerified}>实名认证</a>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="security-item clearfix">
+                            <div class="col-xs-1">
+                                <div class="item-icon">
+                                    <i class="iconfont  fa fa-warning" 
+                                    r-class="'icon-close': !isSettingTradingPassword, 'fa-warning': !isSettingTradingPassword,
+                                        'icon-open': isSettingTradingPassword, 'fa-check-circle': isSettingTradingPassword"></i>
+                                </div>
+                            </div>
+                            <div class="col-xs-2"><div class="item-name">交易密码</div></div>
+                            <div class="col-xs-6">
+                                <div class="item-text">
+                                    <span r-class="'text-red': !isSettingTradingPassword">在使用账户提款时，均需通过交易密码进行身份验证，请牢记安全密码</span>
+                                </div>
+                            </div>
+                            <div class="col-xs-2">
+                                <div class="item-action">
+                                    <a href="#/user/actPayPassword">
+                                        {isSettingTradingPassword ? '修改交易密码' : '设置交易密码'}
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="security-item clearfix">
+                            <div class="col-xs-1">
+                                <div class="item-icon">
+                                    <i class="iconfont icon-open fa fa-check-circle"></i>
+                                </div>
+                            </div>
+                            <div class="col-xs-2">
+                                <div class="item-name">登录密码</div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="item-text">
+                                    <span>定期更换密码，确保账号的安全</span>
+                                </div>
+                            </div>
+                            <div class="col-xs-2">
+                                <div class="item-action">
+                                    <a href="#/user/actPassword">修改登录密码</a>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="security-item clearfix">
+                            <div class="col-xs-1">
+                                <div class="item-icon"><i class="iconfont icon-open fa fa-check-circle"></i></div>
+                            </div>
+                            <div class="col-xs-2">
+                                <div class="item-name">绑定手机</div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="item-text">您的邮箱已绑定：{phone}</div>
+                            </div>
+                            <div class="col-xs-2">
+                                <div class="item-action">
+                                    <a href="#/user/actMobile">修改手机</a>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                    <li class="last">
+                        <div class="security-item clearfix">
+                            <div class="col-xs-1">
+                                <div class="item-icon"><i class="iconfont icon-open fa fa-check-circle"></i></div>
+                            </div>
+                            <div class="col-xs-2">
+                                <div class="item-name">设置邮箱</div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="item-text">您的邮箱已绑定：{email}</div>
+                            </div>
+                            <div class="col-xs-2">
+                                <div class="item-action"><a href="#/user/actMail">修改邮箱</a></div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </headerTemp>
+</template>
+<script>
+    import userService from "../../service/userService.js"
+
+    export default {
+        data: {
+            userName: getWebUserName(),
+            countMoney: 0.00,
+            money: 0.00,
+            tMoney: 0,
+            loginTime: "",
+            isSettingTrueNameVerified: false,
+            isSettingTradingPassword: false,
+            email: "",
+            phone: "",
+            safeLever: 0
+        },
+        init() {
+            var self = this;
+            userService.getIndexInfo((data)=>{
+                var safeLever = 60 + (data.isSettingTrueNameVerified? 20:0) + (data.isSettingTradingPassword? 20:0)
+                self.$update({
+                    safeLever: safeLever,
+                    countMoney: data.countMoney,
+                    money: data.money,
+                    tMoney: data.tMoney,
+                    loginTime: data.loginTime,
+                    isSettingTrueNameVerified: data.isSettingTrueNameVerified,
+                    isSettingTradingPassword: data.isSettingTradingPassword,
+                    email: data.email,
+                    phone: data.phone
+                });
+            });
+        },
+        components: {
+            "headerTemp": require("../../component/userTemplate/user.rgl")
+        }
+    }
+</script>

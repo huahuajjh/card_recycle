@@ -1,0 +1,217 @@
+<template>
+  <div class="file-uplate-box">
+    <div class="file-wrapper" r-hide="__EditName.isEdit">
+      <div class="file-caption">
+        <span class="placeholder" r-hide="fileName"><i class="fa fa-info-circle"></i> {placeholder}</span>
+        <span r-hide="!fileName"><i class="fa fa-file"></i> {fileName}（{fileSize | fileSize}） <a class="fa fa-pencil" title="重命名" on-click="{this.__EditFileName()}"></a></span>
+      </div>
+      <div class="group-info">
+        <div class="file-info msg">
+          <span class="info" r-hide="!__File.name || __File.state == 'error'"><i class="fa fa-file"></i> {__File.name} ({ __File.size | fileSize})</span>
+          <span class="warning" r-hide="__File.state != 'warning'"><i class="fa fa-warning"></i> {__File.msg}</span>
+          <span class="error" r-hide="__File.state != 'error'"><i class="fa fa-ban"></i> {__File.msg}</span>
+        </div>
+        <div class="file-info browse" r-hide="__File.state == 'upload'">
+          <i class="fa fa-folder-open"></i> 浏览 <div class="upload-file-action" ref="action">上传文件</div>
+        </div>
+        <div class="file-info upload" r-hide="__File.state != 'not'" on-click="{this.__UploadFile()}">
+          <i class="fa fa-upload"></i> 上传
+        </div>
+        <div class="file-info refresh" r-hide="__File.state != 'error'" on-click="{this.__RetryFile()}">
+          <i class="fa fa-refresh"></i> 重新上传
+        </div>
+        <div class="file-info" r-hide="__File.state != 'upload'">
+          <i class="fa fa-retweet"></i> 正在上传......
+          <div class="bg" r-style="width: __File.progress + '%'"></div>
+        </div>
+      </div>
+    </div>
+    <div class="file-wrapper" r-hide="!__EditName.isEdit">
+      <input type="text" class="file-caption" r-model="__EditName.name" ref="nameTxt" />
+      <div class="group-info">
+        <div class="file-info msg" r-hide="!__EditName.error">
+          <span class="error"><i class="fa fa-ban"></i> 文件名不能空</span>
+        </div>
+        <div class="file-info browse" on-click="{this.__OnEditNameClick()}"><i class="fa fa-pencil"></i> 重命名</div>
+        <div class="file-info upload" on-click="{__EditName.isEdit = false}"><i class="fa fa-mail-reply"></i> 返回</div>
+      </div>
+    </div>
+    <div class="file-msg">
+      <i class="fa fa-question-circle-o"></i>{#if @(__Accept)}只能上传（{__Accept.extensions}）格式的文件，{/if}文件大小不得超出 {maxSize | fileSize}
+    </div>
+  </div>
+</template>
+<script>
+  import "./file.scss";
+
+  import swf from "../../lib/webuploader/Uploader.swf";
+
+  var accepts = {
+    image: {
+      extensions: ["gif", "jpg", "jpeg", "bmp", "png"],
+      mimeTypes: ["image/*"]
+    },
+    excel: {
+      extensions: ["xla", "xlc", "xlm", "xls", "xlt", "xlw"],
+      mimeTypes: ["application/vnd.ms-excel"]
+    }
+  };
+
+  module.exports = {
+    data: {
+      // ----------公开变量
+      placeholder: "请上传文件",
+      url: "",
+      fileName: "",
+      fileSize: 0,
+      sendData: {},
+      maxSize: 5242880,
+      name: "file",
+      accept: null,
+      // ----------私有变量
+      __Uploader: null,
+      __Accept: null,
+      __File: {
+        file: null,
+        name: "",
+        size: 0,
+        progress: 0,
+        state: "",
+        msg: ""
+      },
+      __EditName: {
+        isEdit: false,
+        name: "",
+        ext: "",
+        error: false
+      }
+    },
+    config(data) {
+      if(data.accept) {
+        var strArr = data.accept.split(",");
+        var extensions = [];
+        var mimeTypes = [];
+        for(var i = 0,v; v = strArr[i++];) {
+          var accept = accepts[v];
+          if(accept) {
+            extensions = accept.extensions.concat(extensions);
+            mimeTypes = accept.mimeTypes.concat(mimeTypes);
+          }
+        }
+        data.__Accept = {
+          title: '选择文件',
+          extensions: extensions.join(","),
+          mimeTypes: mimeTypes.join(",")
+        }
+      }
+    },
+    events: {
+      $init() {
+        this.$watch("__EditName.name", (newVal) => {
+          if(newVal) {
+            this.data.__EditName.error = false;
+          } else {
+            this.data.__EditName.error = true;
+          }
+          this.$update();
+        });
+        this.$watch("__File.file", (file, oldFile) => {
+          if(oldFile) this.data.__Uploader.removeFile(oldFile);
+          if(file) {
+            this.data.__File.name = file.name;
+            this.data.__File.size = file.size;
+          } else {
+            this.data.__File.name = "";
+            this.data.__File.size = 0;
+          }
+          this.$update();
+        });
+        var self = this;
+        require(["../../lib/webuploader/webuploader.withoutimage.js"], (Webuploader)=>{
+          var uploader = self.data.__Uploader = Webuploader.create({
+            swf: swf,
+            server: self.data.url,
+            disableGlobalDnd: true,
+            fileSizeLimit: self.data.maxSize,
+            formData: self.data.sendData,
+            fileVal: self.data.name,
+            pick: {
+              id: self.$refs.action,
+              multiple: false
+            },
+            accept: self.data.__Accept
+          });
+          uploader.on('fileQueued', (file) => {
+            self.data.__File.file = file;
+            self.data.__File.state = "not";
+            self.$update();
+          });
+          uploader.on('startUpload', (file) => {
+            self.data.__File.progress = 0;
+            self.data.__File.state = "upload";
+            self.$update();
+          });
+          uploader.on('uploadProgress', (file, percentage) => {
+            self.data.__File.progress = percentage * 100;
+            self.$update();
+          });
+          uploader.on('uploadSuccess', (file, response) => {
+            self.$emit("upload", response);
+            self.data.fileName = file.name;
+            self.data.fileSize = file.size;
+            self.data.__File.file = null;
+            self.data.__File.state = "";
+            self.$update();
+          });
+          uploader.on('uploadError', (file) => {
+            self.data.__File.state = "error";
+            self.data.__File.msg = "服务器错误,上传失败";
+            self.$update();
+          });
+          uploader.on('error', (typeMsg) => {
+            if('F_DUPLICATE' == typeMsg) return;
+            self.data.__File.state = "warning";
+            self.data.__File.file = null;
+            if('Q_EXCEED_SIZE_LIMIT' == typeMsg) {
+              self.data.__File.msg = "文件超出指定大小";
+            } else if('Q_TYPE_DENIED' == typeMsg) {
+              self.data.__File.msg = "文件类型不匹配";
+            } else {
+              self.data.__File.msg = "未知错误";
+            }
+            self.$update();
+          });
+        });
+      }
+    },
+    __UploadFile() {
+      this.data.__Uploader.upload();
+    },
+    __RetryFile() {
+      this.data.__Uploader.retry();
+    },
+    __EditFileName() {
+      this.data.__EditName.isEdit = true;
+      var fileName = this.data.fileName;
+      var dotIndex = fileName.lastIndexOf(".");
+      this.data.__EditName.error = false;
+      if(dotIndex < 0) {
+        this.data.__EditName.name = fileName;
+        this.data.__EditName.ext = "";
+      } else {
+        this.data.__EditName.name = fileName.substring(0, dotIndex);
+        this.data.__EditName.ext = fileName.substring(dotIndex);
+      }
+      this.$update();
+      var nameTxt = this.$refs.nameTxt;
+      setTimeout(()=>{$(nameTxt).focus();},100);
+    },
+    __OnEditNameClick() {
+      if(this.data.__EditName.name) {
+        this.data.__EditName.isEdit = false;
+        this.data.fileName = this.data.__EditName.name + this.data.__EditName.ext;
+      }
+      this.$update();
+    }
+  }
+</script>

@@ -1,0 +1,48 @@
+<template>
+    <frontTemp showIndex="2">
+        <div class="content bgwhite">
+            <div class="content-caption">
+                <div class="container">
+                    <h2 class="text-red">卡状态查询</h2>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="bgwhite pt50 pb30">
+            <div class="container">
+                <ul class="cards-group clearfix">
+                    {#list cards as card}
+                    <li>
+                        <a title="{card.title}">
+                            <img src="{card.img}" title="{card.title}">
+                            <span class="title">{card.title}</span>
+                            <a target="_blank" href="{card.url}" class="go">查询</a>
+                        </a>
+                    </li>
+                    {/list}
+                </ul>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </frontTemp>
+</template>
+<script>
+    import cardService from "../../service/cardService.js";
+
+    export default {
+        data: {
+            cards: []
+        },
+        init() {
+            var self = this;
+            cardService.getAll((datas)=>{
+                self.$update({
+                    cards: datas
+                });
+            });
+        },
+        components: {
+            "frontTemp": require("../../component/frontTemplate/front.rgl")
+        }
+    }
+</script>

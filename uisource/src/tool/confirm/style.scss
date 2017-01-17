@@ -1,0 +1,129 @@
+.confirm-body {
+  overflow: hidden;
+}
+.confirm-box {
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  text-align: center;
+
+  .confirm-box-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #2B2E38;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+  }
+
+  .confirm-box-wrapper {
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    color: #2b2e38;
+    background: #fff;
+    padding: 35px;
+    width: 400px;
+    margin-top: 200px;
+
+    .confirm-box-close {
+      height: 35px;
+      padding: 0;
+      -webkit-transition: color .2s;
+      transition: color .2s;
+      color: #95979c;
+      background: 0 0;
+      display: block;
+      width: 35px;
+      top: 0;
+      right: 0;
+      position: absolute;
+      overflow: visible;
+      margin: 0;
+      cursor: pointer;
+      text-decoration: none;
+      outline: 0;
+      border: 0;
+
+      &:hover {
+        color: #2b2e38
+      }
+    }
+
+    .confirm-box-title {
+      margin: 0;
+      padding: 0 0 10px 0;
+      cursor: default;
+    }
+
+    .confirm-box-context {
+      margin: 0;
+      padding: 20px 0 30px 0;
+      cursor: default;
+    }
+
+    .confirm-box-cancel {
+      color: #fff;
+      background: #e57373;
+      font: inherit;
+      min-width: 110px;
+      padding: 12px 0;
+      -webkit-transition: background .2s;
+      transition: background .2s;
+      text-align: center;
+      display: inline-block;
+      vertical-align: middle;
+      overflow: visible;
+      margin: 0;
+      cursor: pointer;
+      text-decoration: none;
+      outline: 0;
+      border: 0;
+
+      &:hover {
+        background: #ef5350
+      }
+    }
+
+    .confirm-box-confirm {
+      color: #fff;
+      background: #81c784;
+      font: inherit;
+      min-width: 110px;
+      padding: 12px 0;
+      -webkit-transition: background .2s;
+      transition: background .2s;
+      text-align: center;
+      display: inline-block;
+      vertical-align: middle;
+      overflow: visible;
+      margin: 0;
+      cursor: pointer;
+      text-decoration: none;
+      outline: 0;
+      border: 0;
+
+      &:hover {
+        background: #66bb6a
+      }
+    }
+
+    .confirm-box-img {
+      width: 100px;
+      height: 20px;
+      margin: 0 auto;
+      background-image: url("./loading.gif");
+    }
+
+    .confirm-box-time-val {
+      color: #ccc;
+      cursor: default;
+    }
+  }
+}

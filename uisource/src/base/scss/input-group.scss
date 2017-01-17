@@ -1,0 +1,295 @@
+.input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+
+    &[class*="col-"] {
+        float: none;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .form-control {
+        position: relative;
+        z-index: 0;
+        float: left;
+        width: 100%;
+        margin-bottom: 0;
+        height: 32px;
+    }
+
+    > :first-child > .form-control {
+        border-bottom-left-radius: 2px;
+        border-top-left-radius: 2px;
+    }
+}
+
+$inputGroupSize: (
+    lg: (
+        padding: 10px 30px,
+        border-radius: 3px,
+        font-size: 18px,
+        height: 40px,
+        line-height: 1.33,
+        select: (
+            height: 45px,
+            line-height: 45px
+        ),
+        input-group-addon: (
+            padding: 10px 30px,
+            font-size: 18px,
+            border-radius: 3px
+        )
+    ),
+    sm: (
+        font-size: 11px,
+        border-radius: 2px,
+        padding: 3px 6px,
+        height: 24px,
+        line-height: 1.5,
+        select: (
+            height: 26px,
+            line-height: 26px
+        ),
+        input-group-addon: (
+            padding: 4px 12px,
+            font-size: 11px,
+            border-radius: 1px
+        )
+    )
+);
+
+@each $key,$obj in $inputGroupSize {
+
+    $select: map-get($obj, "select");
+    $input-group-addon: map-get($obj, "input-group-addon");
+
+    .input-group-#{$key} > .form-control,
+    .input-group-#{$key} > .input-group-addon,
+    .input-group-#{$key} > .input-group-btn > .btn {
+        height: map-get($obj, "height");
+        padding: map-get($obj, "padding");
+        border-radius: map-get($obj, "border-radius");
+        padding: map-get($obj, "padding");
+        font-size: map-get($obj, "font-size");
+        height: map-get($obj, "height");
+        line-height: map-get($obj, "line-height");
+    }
+    select.input-group-#{$key} > .form-control,
+    select.input-group-#{$key} > .input-group-addon,
+    select.input-group-#{$key} > .input-group-btn > .btn {
+        height: map-get($select, "height");
+        line-height: map-get($select, "line-height");
+    }
+    textarea.input-group-#{$key} > .form-control,
+    textarea.input-group-#{$key} > .input-group-addon,
+    textarea.input-group-#{$key} > .input-group-btn > .btn,
+    select[multiple].input-group-#{$key} > .form-control,
+    select[multiple].input-group-#{$key} > .input-group-addon,
+    select[multiple].input-group-#{$key} > .input-group-btn > .btn {
+        height: auto;
+    }
+
+    .input-group-addon.input-#{$key} {
+        padding: map-get($input-group-addon, "padding");
+        font-size: map-get($input-group-addon, "font-size");
+        border-radius: map-get($input-group-addon, "border-radius");
+    }
+}
+
+.input-group-addon,
+.input-group-btn,
+.input-group .form-control {
+  display: table-cell;
+}
+.input-group-addon:not(:first-child):not(:last-child),
+.input-group-btn:not(:first-child):not(:last-child),
+.input-group .form-control:not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+.input-group-addon,
+.input-group-btn {
+  width: 1%;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.input-group-addon {
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 1;
+    text-align: center;
+    background-color: #f7f7f7;
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    padding: 6px 10px 5px;
+    min-width: 16px;
+    color: #455a64;
+
+    input[type="radio"],
+    input[type="checkbox"] {
+    margin-top: 0;
+    }
+
+    &:first-child {
+        border-right: 0;
+    }
+
+    &:last-child {
+        border-left: 0;
+    }
+}
+.input-group .form-control:first-child,
+.input-group-addon:first-child,
+.input-group-btn:first-child > .btn,
+.input-group-btn:first-child > .btn-group > .btn,
+.input-group-btn:first-child > .dropdown-toggle,
+.input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle),
+.input-group-btn:last-child > .btn-group:not(:last-child) > .btn {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.input-group .form-control:last-child,
+.input-group-addon:last-child,
+.input-group-btn:last-child > .btn,
+.input-group-btn:last-child > .btn-group > .btn,
+.input-group-btn:last-child > .dropdown-toggle,
+.input-group-btn:first-child > .btn:not(:first-child),
+.input-group-btn:first-child > .btn-group:not(:first-child) > .btn {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.input-group-btn {
+    position: relative;
+    font-size: 0;
+    white-space: nowrap;
+    > .btn {
+        position: relative;
+    }
+
+    > .btn + .btn {
+        margin-left: -1px;
+    }
+
+    > .btn:hover,
+    > .btn:focus,
+    > .btn:active {
+        z-index: 2;
+    }
+
+    &:first-child > .btn,
+    &:first-child > .btn-group {
+        margin-right: 0;
+    }
+
+    &:last-child > .btn,
+    &:last-child > .btn-group {
+        margin-left: 0;
+    }
+
+    > .btn + .dropdown-toggle {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    :last-child > .btn + .btn,
+    :last-child > .btn-group + .btn,
+    :last-child > .btn + .btn-group,
+    :last-child > .btn-group + .btn-group {
+        margin-left: -1px;
+    }
+
+    &:first-child > .btn,
+    &:first-child > .btn-group {
+        margin-right: -2px;
+    }
+}
+
+.input-group .form-control:first-child,
+.input-group-addon:first-child,
+.input-group-btn:first-child > .btn,
+.input-group-btn:first-child > .btn-group > .btn,
+.input-group-btn:first-child > .dropdown-toggle,
+.input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle),
+.input-group-btn:last-child > .btn-group:not(:last-child) > .btn {
+  border-bottom-right-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+.input-group .form-control:last-child,
+.input-group-addon:last-child,
+.input-group-btn:last-child > .btn,
+.input-group-btn:last-child > .btn-group > .btn,
+.input-group-btn:last-child > .dropdown-toggle,
+.input-group-btn:first-child > .btn:not(:first-child),
+.input-group-btn:first-child > .btn-group:not(:first-child) > .btn {
+  border-bottom-left-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+}
+
+
+
+.input-search-icon-sm {
+    padding: 16px !important;
+
+    input.form-control {
+        padding-right: 24px ;
+    }
+
+    a {
+        position: absolute;
+        margin-top: -16px;
+        font-size: 11px;
+        right: 0;
+        margin-right: 16px;
+        color: #90a4ae;
+    }
+    > i {
+        margin: 6px;
+    }
+}
+
+.input-icon {
+    position: relative;
+
+    > i,
+    .icon {
+        position: absolute;
+        display: block;
+        margin: 9px 8px;
+        line-height: 14px;
+        color: #90a4ae;
+        z-index: 5;
+    }
+
+    > i:hover,
+    .icon:hover {
+        text-decoration: none;
+    }
+
+    > .form-control {
+        padding-left: 32px;
+        height: 32px;
+    }
+
+    &.right > .form-control {
+        padding: 4px 32px 4px 8px;
+    }
+
+    &.right.input-group > i,
+    &.right.input-group > .icon {
+        right: 0;
+        float: right;
+    }
+
+    &.input-group.left > .form-control {
+    padding-left: 32px;
+    border-bottom-left-radius: 2px;
+    border-top-left-radius: 2px;
+    }
+    &.right > i, &.right .icon {
+        right: 0px;
+        float: right;
+    }
+
+}
+

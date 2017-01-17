@@ -1,0 +1,81 @@
+<template>
+    <frontTemp showIndex="0">
+        <div class="content">
+            <div class="masthead">
+                <div class="container masthead-jumbotron png"></div>
+                <div class="container masthead-feature png">
+                    <ul class="feature-group clearfix">
+                        <li>
+                            <div class="iconimg iconimg-types png"></div>
+                            <h5>卡类多样</h5>
+                            <p>支持电话卡/游戏卡</p>
+                        </li>
+                        <li>
+                            <div class="iconimg iconimg-heart png"></div>
+                            <h5>用心服务</h5>
+                            <p>一对一的用心服务<br>每一笔交易都让您放心</p>
+                        </li>
+                        <li>
+                            <div class="iconimg iconimg-safe png"></div>
+                            <h5>交易安全</h5>
+                            <p>依靠人工处理<br>品牌保证，安全放心</p>
+                        </li>
+                        <li>
+                            <div class="iconimg iconimg-fast png"></div>
+                            <h5>处理快捷</h5>
+                            <p>快捷处理，<br>减少您的等待时间</p>
+                        </li>
+                        <li>
+                            <div class="iconimg iconimg-price png"></div>
+                            <h5>价格公道</h5>
+                            <p>价格公道<br>让您满意</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="cardtype-panel pt50 pb50 bgwhite">
+                <div class="container">
+                    <div class="cards-caption mb30">
+                        <h2>我们所涉及的业务</h2>
+                        <p>没有最多，只有更多</p>
+                    </div>
+                    <ul class="cards-group clearfix">
+                        {#list cards as card}
+                        <li>
+                            <a title="{card.title}">
+                                <img src="{card.img}" title="{card.title}">
+                                <span class="title">{card.title}</span>
+                            </a>
+                        </li>
+                        {/list}
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </frontTemp>
+</template>
+<script>
+    import cardService from "../../service/cardService.js";
+
+    import webConfig from "web.config";
+
+    console.log(webConfig);
+
+    export default {
+        data: {
+            cards: []
+        },
+        init() {
+            var self = this;
+            cardService.getAll((datas)=>{
+                self.$update({
+                    cards: datas
+                });
+            });
+        },
+        components: {
+            "frontTemp": require("../../component/frontTemplate/front.rgl")
+        }
+    }
+</script>

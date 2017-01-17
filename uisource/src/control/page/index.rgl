@@ -1,0 +1,118 @@
+<template>
+  <ul class="page-box">
+    <li r-class="disabled: !__AlwaysShowPrev">
+      <a title="跳转到 上一页" on-click="{this.__PrevPage()}">
+        <i class="fa fa-angle-left"></i>
+      </a>
+    </li>
+    <li r-hide="!__ShowFirstOmit">
+        <a title="跳转到第 1 页" on-click="{this.__GoPage(1)}">1</a>
+    </li>
+    <li class="omission" r-hide="!__ShowFirstOmit">...</li>
+    {#list __Pages as page}
+    <li r-class="active: page == currentPage">
+      <a title="跳转到第 {page} 页" on-click="{this.__GoPage(page)}">{page}</a>
+    </li>
+    {/list}
+    <li class="omission" r-hide="!__ShowLastOmit">...</li>
+    <li r-hide="!__ShowLastOmit">
+      <a title="跳转到第 {__TotalPages} 页" on-click="{this.__GoPage(__TotalPages)}">{__TotalPages}</a>
+    </li>
+    <li r-class="disabled: !__AlwaysShowNext">
+      <a title="跳转到 下一页" on-click="{this.__NextPage()}">
+        <i class="fa fa-angle-right"></i>
+      </a>
+    </li>
+	</ul>
+</template>
+<script>
+  import "./style.scss";
+
+  module.exports = {
+    data: {
+      // ----------公开变量
+      perPages: 10, // 每页包含多少条目
+      showPages: 5, // 中间部分一共要显示多少页(如果两边出现省略号,即它们之间的页数)
+      currentPage: 1, // 当前选中的页面 (按照人们日常习惯,是从1开始)，它会被高亮
+      totalItems: 0, // 总条目数
+      // ----------私有变量
+      __TotalPages: 0, //@config {Number} 总页数,通过Math.ceil(vm.totalItems / vm.perPages)求得
+      __Pages: [], //@config {Array} 要显示的页面组成的数字数组，如[1,2,3,4,5,6,7]
+      __FirstPage: 0, //@config {Number} 当前可显示的最小页码，不能小于1
+      __LastPage: 0, //@config {Number} 当前可显示的最大页码，不能大于totalPages
+      __AlwaysShowNext: false, //@config {Boolean} 总是显示向后按钮
+      __AlwaysShowPrev: false, //@config {Boolean} 总是显示向前按钮
+      __ShowFirstOmit: false, //是否显示前省略号
+      __ShowLastOmit: false, //是否显示后省略号
+      __Pages: []
+    },
+    init() {
+      var isInit = 0;
+      this.__InitPages(this.data.currentPage);
+      this.$watch("currentPage", (newVal)=>{
+        this.__InitPages(newVal);
+        isInit++;
+        if(isInit > 2) this.$emit("change", newVal, this.data.perPages);
+      });
+      this.$watch("perPages", (newVal)=>{
+        this.__InitPages(this.data.currentPage);
+        isInit++;
+        if(isInit > 2) this.$emit("change", newVal, this.data.perPages);
+      });
+      this.$watch("showPages", (newVal)=>{
+        this.__InitPages(this.data.currentPage);
+        isInit++;
+        if(isInit > 2) this.$emit("change", newVal, this.data.perPages);
+      });
+      isInit = false;
+    },
+    events: {
+      change(page, perPages) {}
+    },
+    __InitPages: function (c) {
+      var max = Math.ceil(this.data.totalItems / this.data.perPages), pages = [], s = this.data.showPages;
+      //一共有p页，要显示s个页面
+      this.data.__TotalPages = max;//总页数
+      if(c > max) c = this.data.currentPage = max < 1 ? 1 : max;
+      var left = c, right = c;
+      if (max <= s) {
+        for (var i = 1; i <= max; i++) {
+          pages.push(i)
+        }
+      } else {
+        pages.push(c)
+        while (true) {
+          if (pages.length >= s) {
+              break
+          }
+          if (left > 1) {//在日常生活是以1开始的
+              pages.unshift(--left)
+          }
+          if (pages.length >= s) {
+              break
+          }
+          if (right < max) {
+              pages.push(++right)
+          }
+        }
+      }
+      this.data.__FirstPage = pages[0] || 1
+      this.data.__LastPage = pages[pages.length - 1] || 1
+      this.data.__ShowFirstOmit = this.data.__FirstPage > 2
+      this.data.__ShowLastOmit = this.data.__LastPage < max - 1
+      this.data.__AlwaysShowPrev = this.data.currentPage > 1 && pages.length > 0;
+      this.data.__AlwaysShowNext = this.data.__TotalPages > this.data.currentPage && pages.length > 0;
+      this.$update("__Pages", pages);
+    },
+    __GoPage(page) {
+      if(isNaN(page) || page === this.data.currentPage || page < 1 || page > this.data.__TotalPages) return;
+      this.data.currentPage = Math.floor(page);
+    },
+    __PrevPage(){
+      this.__GoPage(this.data.currentPage - 1);
+    },
+    __NextPage(){
+      this.__GoPage(this.data.currentPage + 1);
+    }
+  }
+</script>

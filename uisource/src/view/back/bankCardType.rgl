@@ -1,0 +1,71 @@
+<template>
+    <div class="container-fluid">
+        <div class="view-framework-main">
+            <h3 class="clearfix">
+                <a class="btn btn-primary pull-right ml5" on-click={this.showAddModal()}>添加卡行</a>
+                卡行管理
+            </h3>
+            <div class="box">
+                <div class="nodata"><i class="iconfont fa fa-search"></i><br>抱歉，没有找到任何相关的数据！</div>
+            </div>
+            <table class="table trade-records">
+                <thead>
+                    <tr>
+                        <th>卡行名称</th>
+                        <th style="width: 80px">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>-</td>
+                        <td>
+                            <a href="javascript:;" class="btn btn-info-alt btn-xs" r-tooltip="编辑" on-click={this.showEdidModal()}><i class="fa fa-pencil"></i></a>
+                            <a href="javascript:;" class="btn btn-default-alt btn-xs ml10" r-tooltip="删除" on-click={this.del()}><i class="fa fa-times-circle"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>-</td>
+                        <td>
+                            <a href="javascript:;" class="btn btn-info-alt btn-xs" r-tooltip="编辑" on-click={this.showEdidModal()}><i class="fa fa-pencil"></i></a>
+                            <a href="javascript:;" class="btn btn-default-alt btn-xs ml10" r-tooltip="删除" on-click={this.del()}><i class="fa fa-times-circle"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>-</td>
+                        <td>
+                            <a href="javascript:;" class="btn btn-info-alt btn-xs" r-tooltip="编辑" on-click={this.showEdidModal()}><i class="fa fa-pencil"></i></a>
+                            <a href="javascript:;" class="btn btn-default-alt btn-xs ml10" r-tooltip="删除" on-click={this.del()}><i class="fa fa-times-circle"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <addModal ref="addModal"></addModal>
+        <edidModal ref="edidModal"></edidModal>
+    </div>
+</template>
+<script>
+    import confirm from "../../tool/confirm/index.js";
+
+    export default {
+        data: {
+        },
+        components: {
+            addModal: require("./modal/bankCardType/add.rgl"),
+            edidModal: require("./modal/bankCardType/edit.rgl")
+        },
+        showAddModal() {
+            this.$refs.addModal.show();
+        },
+        showEdidModal() {
+            this.$refs.edidModal.show();
+        },
+        del() {
+            confirm.ajax("确定删除？", ()=>{
+                setTimeout(function() {
+                    confirm.alert("删除成功");
+                }, 3000);
+            });
+        }
+    }
+</script>

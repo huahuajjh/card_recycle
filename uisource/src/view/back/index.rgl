@@ -1,0 +1,119 @@
+<template>
+	<div class="container-fluid">
+		<div class="box">
+			<ul class="box-list clearfix">
+				<li class="pb25 fsz16">
+					您好，{userName}，欢迎登录
+				</li>
+				<li class="last">
+					<div class="account-assets clearfix">
+						<div class="col-xs-4">
+							<div class="assets-yue">
+								<div class="assets-icon">
+									<i class="iconfont fa fa-cny"></i>
+								</div>
+								<div class="assets-title">待处理的提款（元）：</div>
+								<a class="assets-money" href="#/supervise/tx?query.state=0">0.00</a>
+							</div>
+						</div>
+						<div class="col-xs-4">
+							<div class="assets-yue">
+								<div class="assets-icon">
+									<i class="iconfont fa fa-at"></i>
+								</div>
+								<div class="assets-title">正在处理的订单数量：</div>
+								<a class="assets-money" href="#/supervise/order?query.state=0">0.00</a>
+							</div>
+						</div>
+						<div class="col-xs-4">
+							<div class="assets-yue">
+								<div class="assets-icon">
+									<i class="iconfont fa fa-user-o"></i>
+								</div>
+								<div class="assets-title">商户总数：</div>
+								<a class="assets-money" href="#/supervise/user">0</a>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="box">
+            <ul class="box-list clearfix">
+                <li>
+                    <div class="security-item clearfix">
+                        <div class="col-xs-offset-1 col-xs-2">
+                            <div class="item-name">上次登录时间</div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="item-text">2017-01-04 21:57:16</div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="security-item clearfix">
+                        <div class="col-xs-2 col-xs-offset-1">
+                            <div class="item-name">成功订单总数</div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="item-text text-info">
+                                300
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="item-action">
+                                <a href="#/supervise/order?query.state=1">查看详细</a>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="security-item clearfix">
+                        <div class="col-xs-2 col-xs-offset-1">
+                            <div class="item-name">失败订单总数</div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="item-text text-info">
+                                200
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="item-action">
+                                <a href="#/supervise/order?query.state=2">查看详细</a>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </li>
+                <li class="last">
+                    <div class="security-item clearfix">
+                        <div class="col-xs-2 col-xs-offset-1">
+                            <div class="item-name">总提款（元）</div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="item-text text-info">
+                                100000
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="item-action">
+                                <a href="#/supervise/tx?query.state=1">查看详细</a>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+	</div>
+</template>
+<script>
+    export default {
+        data: {
+            userName: getWebSpUserName(),
+        }
+    }
+</script>
