@@ -7,8 +7,4 @@ public interface IEntity<TPrimaryKey> {
     TPrimaryKey getId();
     void setId(TPrimaryKey id);
 
-    String getTableName();
-    
-
-
 }

@@ -13,7 +13,7 @@
     </insert>
 
     <insert id="insertAndGetId">
-        <selectKey resultType="int" keyProperty="id">
+        <selectKey resultType="int">
             SELECT LAST_INSERT_ID()
         </selectKey>
 
@@ -21,6 +21,10 @@
     </insert>
 
     <update id="update">
+        ${value}
+    </update>
+
+    <update id="updateSpec">
         ${value}
     </update>
 

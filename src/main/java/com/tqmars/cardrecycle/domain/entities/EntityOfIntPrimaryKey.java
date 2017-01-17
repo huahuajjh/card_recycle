@@ -5,7 +5,4 @@ package com.tqmars.cardrecycle.domain.entities;
  */
 public abstract class EntityOfIntPrimaryKey extends Entity<Integer> {
 
-    public EntityOfIntPrimaryKey(String _tableName) {
-        super(_tableName);
-    }
 }

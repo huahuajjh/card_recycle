@@ -14,8 +14,8 @@ import java.util.Map;
 public class MapToEntityTool {
     public static <TEntity extends IEntity> TEntity toEntity(Class<TEntity> entityClass, Map<String, Object> map) {
         TEntity entity = initEntity(entityClass);
-        if (map.size() == 0) {
-                return entity;
+        if (map == null || map.size() == 0) {
+                return null;
         }
         Field[] fields = entityClass.getDeclaredFields();
         for (Map.Entry<String, Object> entry : map.entrySet()) {
@@ -39,7 +39,7 @@ public class MapToEntityTool {
 
     public static <TEntity> List<TEntity> toEntityList(Class<TEntity> entityClass, List<Map<String, Object>> mapList) {
         List<TEntity> list = new ArrayList<>();
-        if (mapList.size() == 0) {
+        if (mapList == null || mapList.size() == 0) {
             //return a empty entity
             list.add(initEntity(entityClass));
             return list;
