@@ -37,3 +37,6 @@ bin
 
 # system ignore
 Thumbs.db
+
+#idea
+target/
