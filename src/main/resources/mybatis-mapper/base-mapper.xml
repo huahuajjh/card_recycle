@@ -12,11 +12,7 @@
         ${value}
     </insert>
 
-    <insert id="insertAndGetId">
-        <selectKey resultType="int">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
-
+    <insert id="insertAndGetId" useGeneratedKeys="true" parameterType="map" keyProperty="id">
         ${value}
     </insert>
 

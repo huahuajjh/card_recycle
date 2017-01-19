@@ -37,8 +37,8 @@ public class BankAppService extends BaseAppService implements IBankAppService{
     }
 
     @Override
-    public void delBank(DelBankInput input) {
-        _bankRepository.deleteById(input.getId());
+    public void delBank(Integer id) {
+        _bankRepository.deleteById(id);
         _bankRepository.commit();
 
     }
@@ -48,6 +48,6 @@ public class BankAppService extends BaseAppService implements IBankAppService{
         int index = input.getIndex()*input.getCount()-1;
         List<Bank> list = _bankRepository.getAllWithCondition("limit "+index+","+input.getCount());
         _bankRepository.commit();
-        return toJsonWithPageFormatter(list,"查询成功", Code.SUCCESS,_bankRepository.count());
+        return toJsonWithPageFormatter(AutoMapper.mapping(BankOutput.class,list),"查询成功", Code.SUCCESS,_bankRepository.count());
     }
 }

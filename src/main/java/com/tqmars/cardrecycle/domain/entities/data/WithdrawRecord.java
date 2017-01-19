@@ -45,6 +45,17 @@ public class WithdrawRecord extends EntityOfIntPrimaryKey {
     @Column(name = "tb_user_id")
     private Integer userId;
 
+    @Column(name = "msg")
+    private String msg;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
     @Override
     public Integer getId() {
         return id;
@@ -149,6 +160,11 @@ public class WithdrawRecord extends EntityOfIntPrimaryKey {
                 ", applyTime=" + applyTime +
                 ", processStatus=" + processStatus +
                 ", userId=" + userId +
+                ", msg='" + msg + '\'' +
                 '}';
+    }
+
+    public void withdraw(){
+        this.processStatus = 1;
     }
 }

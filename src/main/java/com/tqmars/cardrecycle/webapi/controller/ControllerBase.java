@@ -22,11 +22,6 @@ public abstract class ControllerBase {
     public ControllerBase(HttpServletRequest request, HttpServletResponse response) {
         this.request = request;
         this.response = response;
-
-        this.response.setCharacterEncoding("UTF-8");
-        this.response.setHeader("Access-Control-Allow-Origin", "*");
-        this.response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
-        this.response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
     }
 
     protected HttpSession getSession() {

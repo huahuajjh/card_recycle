@@ -7,6 +7,7 @@ import com.tqmars.cardrecycle.domain.entities.data.User;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +56,16 @@ public class TestUtil {
         }
         System.out.println(AutoMapper.mapping(User.class,list));
 
+    }
+
+    @Test
+    public void testDecimal(){
+        BigDecimal a = new BigDecimal(112);
+        BigDecimal b = new BigDecimal(32);
+
+
+
+        System.out.println(a.subtract(b));
     }
 
 }

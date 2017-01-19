@@ -24,38 +24,57 @@ public class CardTypeDomainService implements ICardTypeDomainService{
 
     @Override
     public void addCardType(RechargeableCardType cardType) {
-        _cardTypeRepository.insert(cardType);
-
+        int cardTypeId = _cardTypeRepository.insertAndGetId(cardType);
+//        List<RechargeableCardTypeItem> list = cardType.getItems();
+//        list.forEach(item->item.setId(cardTypeId));
+//        list.forEach(item->_cardTypeItemRepository.insert(item));
         _cardTypeRepository.commit();
     }
 
     @Override
     public void modifyCardType(RechargeableCardType cardType) {
-
+        _cardTypeRepository.update(cardType);
+        _cardTypeRepository.commit();
     }
 
     @Override
-    public void delCardType(RechargeableCardType cardType) {
+    public void delCardType(Integer cardTypeId) {
+        _cardTypeRepository.deleteById(cardTypeId);
+        _cardTypeItemRepository.deleteWithCondition("tb_rechargeable_card_type_id="+cardTypeId);
 
+        _cardTypeItemRepository.commit();
+        _cardTypeRepository.commit();
     }
 
     @Override
     public List<RechargeableCardType> query(String where) {
-        return null;
+        List<RechargeableCardType> list = _cardTypeRepository.getAllWithCondition(where);
+        _cardTypeRepository.commit();
+        return  list;
     }
 
     @Override
     public void modifyCardTypeItem(RechargeableCardTypeItem item) {
-
+        _cardTypeItemRepository.update(item);
+        _cardTypeItemRepository.commit();
     }
 
     @Override
     public void delCardTypeItem(Integer id) {
-
+        _cardTypeItemRepository.deleteById(id);
+        _cardTypeItemRepository.commit();
     }
 
     @Override
     public List<RechargeableCardTypeItem> queryCardTypeItem(Integer cardTypeId) {
-        return null;
+        List<RechargeableCardTypeItem> list = _cardTypeItemRepository.getAllWithCondition("tb_rechargeable_card_type_id="+cardTypeId);
+        _cardTypeItemRepository.commit();
+        return list;
+    }
+
+    @Override
+    public void addCardTypeItem(RechargeableCardTypeItem item) {
+        _cardTypeItemRepository.insert(item);
+        _cardTypeItemRepository.commit();
     }
 }

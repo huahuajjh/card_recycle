@@ -54,20 +54,22 @@ CREATE TABLE IF NOT EXISTS tb_withdraw_record(
     process_time DATETIME NOT NULL DEFAULT NOW() COMMENT 'process time',
     apply_time DATETIME NOT NULL DEFAULT NOW() COMMENT 'apply time',
     process_status INT NOT NULL DEFAULT '0' COMMENT 'process status,0-processing,1-success,2-fail',
-    tb_user_id INT NOT NULL COMMENT 'withdraw user id'
+    tb_user_id INT NOT NULL COMMENT 'withdraw user id',
+    msg VARCHAR(32) NULL COMMENT 'message after deal with withdraw'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='withdraw info';
 
 CREATE TABLE IF NOT EXISTS tb_rechargeable_card_type(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
     name VARCHAR(30) NOT NULL UNIQUE COMMENT 'card name',
-    card_shortcut VARCHAR(10) NOT NULL UNIQUE COMMENT 'card shortcut code'
+    card_shortcut VARCHAR(10) NOT NULL UNIQUE COMMENT 'card shortcut code',
+    sale_ratio FLOAT(4,2) NOT NULL COMMENT 'sale ratio',
+    support_amount VARCHAR(64) NULL COMMENT 'card support amount'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='rechargeable card type info';
 
 CREATE TABLE IF NOT EXISTS tb_rechargeable_card_type_item(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
     tb_rechargeable_card_type_id INT NOT NULL COMMENT 'car type id',
-    support_amount DECIMAL NOT NULL COMMENT 'card support amount',
-    sale_ratio FLOAT(4,2) NOT NULL COMMENT 'sale ratio'
+    support_amount DECIMAL NOT NULL COMMENT 'card support amount'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='rechargeable card type detail info';
 
 CREATE TABLE IF NOT EXISTS tb_rechargeable_card(
@@ -91,3 +93,38 @@ CREATE TABLE IF NOT EXISTS tb_order(
     tb_rechargeable_card_id INT NOT NULL COMMENT 'card id',
     complete_time DATETIME NOT NULL COMMENT 'order completed time'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='order info';
+
+CREATE VIEW v_order AS
+    SELECT
+        o.id,
+        o.order_number,
+        o.order_time,
+        o.order_status,
+        u.name,
+        u.tel,
+        u.id_card_num,
+        cti.support_amount,
+        c.card_number,
+        ct.sale_ratio
+    FROM tb_order o
+    LEFT JOIN tb_user u ON o.tb_user_id = u.id
+    LEFT JOIN tb_rechargeable_card c ON c.id = o.tb_rechargeable_card_id
+    LEFT JOIN tb_rechargeable_card_type ct ON ct.id = o.tb_rechargeable_card_type_id
+    LEFT JOIN tb_rechargeable_card_type_item cti ON cti.id = o.tb_rechargeable_card_type_item_id;
+
+CREATE VIEW v_withdraw_record AS
+    SELECT
+        w.id,
+        u.business_id,
+        u.name,
+        w.withdraw_amount,
+        wl.balance,
+        w.process_status,
+        w.process_time,
+        ba.card_number,
+        u.account
+    FROM tb_withdraw_record w
+    LEFT JOIN tb_user u ON u.id = w.tb_user_id
+    LEFT JOIN tb_bank b ON b.id = w.tb_bank_id
+    LEFT JOIN tb_wallet wl ON wl.tb_user_id = u.id
+    LEFT JOIN tb_bank_account ba ON ba.tb_user_id = u.id

@@ -17,6 +17,7 @@ com.tqmars.cardrecycle.domain.entities.annotation
 com.tqmars.cardrecycle.domain.entities.data
 com.tqmars.cardrecycle.domain.entities.funinterface
 com.tqmars.cardrecycle.domain.repositories
+com.tqmars.cardrecycle.domain.services.card
 com.tqmars.cardrecycle.infrastructure.StringTools
 com.tqmars.cardrecycle.infrastructure.log
 com.tqmars.cardrecycle.infrastructure.message

@@ -47,6 +47,28 @@ public class TestRepositoryBase {
     }
 
     @Test
+    public void testInsertAndGetId(){
+        Admin admin = new Admin();
+        admin.setAccount("huahuajjh1");
+        admin.setPwd("123");
+        admin.setToken("sss");
+        int id = _adminRepository.insertAndGetId(admin);
+        _adminRepository.commit();
+        System.out.println(id);
+    }
+
+    @Test
+    public void testInsertAndReturnEntity(){
+        Admin admin = new Admin();
+        admin.setAccount("huahuajjh2");
+        admin.setPwd("123");
+        admin.setToken("sss2");
+        Admin a = _adminRepository.insert(admin);
+        _adminRepository.commit();
+        System.out.println(a.toString());
+    }
+
+    @Test
     public void testUpdate() {
         User user = _userRepository.get(2);
         user.setToken("asdd");

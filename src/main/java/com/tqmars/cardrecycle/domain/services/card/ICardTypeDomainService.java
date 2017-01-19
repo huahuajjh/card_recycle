@@ -11,10 +11,11 @@ import java.util.List;
 public interface ICardTypeDomainService {
     void addCardType(RechargeableCardType cardType);
     void modifyCardType(RechargeableCardType cardType);
-    void delCardType(RechargeableCardType cardType);
+    void delCardType(Integer cardTypeId);
     List<RechargeableCardType> query(String where);
     void modifyCardTypeItem(RechargeableCardTypeItem item);
     void delCardTypeItem(Integer id);
     List<RechargeableCardTypeItem> queryCardTypeItem(Integer cardTypeId);
+    void addCardTypeItem(RechargeableCardTypeItem item);
 
 }

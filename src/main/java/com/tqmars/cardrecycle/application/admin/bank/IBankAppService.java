@@ -11,7 +11,7 @@ import com.tqmars.cardrecycle.application.admin.bank.dto.QueryBankWithConditionI
 public interface IBankAppService {
     void addBank(AddBankInput input);
     void modifyBank(ModifyBankInput input);
-    void delBank(DelBankInput input);
+    void delBank(Integer id);
     String queryBankWithCondition(QueryBankWithConditionInput input);
 
 }

@@ -74,7 +74,15 @@ public class RepositoryBase<TEntity extends IEntity<TPrimaryKey>, TPrimaryKey> i
 
     @Override
     public TEntity insert(TEntity entity) {
+        TPrimaryKey id = insertAndGetId(entity);
+        entity.setId(id);
+        return entity;
+    }
+
+    @Override
+    public TPrimaryKey insertAndGetId(TEntity entity) {
         StringBuilder sb = new StringBuilder();
+        Map<String,Object> map = new HashMap<>();
         sb.append("insert into ")
                 .append(getTableName())
                 .append("(")
@@ -85,15 +93,11 @@ public class RepositoryBase<TEntity extends IEntity<TPrimaryKey>, TPrimaryKey> i
                 .append(SqlStatementTool.getColumnsAndValues(entity).getVal())
                 .append(")");
         System.out.println(sb.toString());
-        context.getSession().insert(getId4Mapper(INSERT),sb.toString());
+        map.put("id",0);
+        map.put("value",sb.toString());
+        context.getSession().insert(getId4Mapper(INSERT_AND_GET_ID),map);
 
-        return entity;
-    }
-
-    @Override
-    public TPrimaryKey insertAndGetId(TEntity entity) {
-
-        return null;
+        return (TPrimaryKey) map.get("id");
     }
 
     @Override

@@ -54,4 +54,12 @@ public class Wallet extends EntityOfIntPrimaryKey {
                 ", balance=" + balance +
                 '}';
     }
+
+    public void withdraw(BigDecimal amount) throws Exception {
+        if(balance.compareTo(amount) < 0){
+            throw  new Exception("余额不足");
+        }else {
+            balance.subtract(amount);
+        }
+    }
 }

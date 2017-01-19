@@ -20,9 +20,6 @@ public class RechargeableCardTypeItem extends EntityOfIntPrimaryKey {
     @Column(name = "support_amount")
     private BigDecimal supportAmount;
 
-    @Column(name = "sale_ratio")
-    private float saleRatio;
-
     @Override
     public Integer getId() {
         return id;
@@ -49,21 +46,12 @@ public class RechargeableCardTypeItem extends EntityOfIntPrimaryKey {
         this.supportAmount = supportAmount;
     }
 
-    public float getSaleRatio() {
-        return saleRatio;
-    }
-
-    public void setSaleRatio(float saleRatio) {
-        this.saleRatio = saleRatio;
-    }
-
     @Override
     public String toString() {
         return "RechargeableCardTypeItem{" +
                 "id=" + id +
                 ", cardTypeId=" + cardTypeId +
                 ", supportAmount=" + supportAmount +
-                ", saleRatio=" + saleRatio +
                 '}';
     }
 }

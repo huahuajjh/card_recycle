@@ -62,10 +62,11 @@ public class Admin extends EntityOfIntPrimaryKey {
                 "id=" + id +
                 ", account='" + account + '\'' +
                 ", pwd='" + pwd + '\'' +
+                ", token='" + token + '\'' +
                 '}';
     }
 
-    public void changePwd(String oldPwd,String newPwd) throws ApplicationServiceException {
+    public void changePwd(String oldPwd, String newPwd) throws ApplicationServiceException {
         if(this.pwd.equals(oldPwd)){
             this.pwd = newPwd;
         }else {

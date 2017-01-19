@@ -18,6 +18,7 @@ public interface IRepository<TEntity extends IEntity<TPrimaryKey>,TPrimaryKey> {
     TEntity insert(TEntity entity);
     TPrimaryKey insertAndGetId(TEntity entity);
 
+
     //updateAndReturnEntity
     TEntity updateAndReturnEntity(TEntity entity);
     void update(TEntity entity);

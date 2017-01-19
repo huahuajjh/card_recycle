@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by jjh on 1/11/17.
@@ -44,10 +45,13 @@ public class TestDbContext<T> extends HashMap<String, Integer> {
 //        ));
 //        System.out.println(MapToEntityTool.toEntity(Course.class,c).getId());
 
-        String sql = "insert into tb_admin(id,account,pwd) values(0,'a1','a')";
-        int id = session.insert("com.tqmars.cardrecycle.domain.entities.data.insertAndGetId",sql);
+        String sql = "insert into tb_admin(id,account,pwd) values(0,'a11','a1')";
+        Map<String,Object> map = new HashMap<>();
+        map.put("id",0);
+        map.put("value",sql);
+        int id = session.insert("com.tqmars.cardrecycle.domain.entities.data.insertAndGetId",map);
         session.commit();
-        System.out.println(id);
+        System.out.println(map.get("id"));
 
     }
 
