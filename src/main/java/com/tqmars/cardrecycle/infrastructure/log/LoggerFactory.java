@@ -16,7 +16,6 @@ public final class LoggerFactory {
     }
 
     static {
-//        PropertyConfigurator.configure("conf/log4j.properties111");
-        logger = Logger.getLogger(LoggerFactory.class);
+        logger = Logger.getLogger("/conf/log4j.properties");
     }
 }

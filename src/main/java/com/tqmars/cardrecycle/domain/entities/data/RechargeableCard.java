@@ -21,6 +21,28 @@ public class RechargeableCard extends EntityOfIntPrimaryKey {
     @Column(name = "tb_user_id")
     private Integer userId;
 
+    @Column(name = "tb_rechargeable_card_type_id")
+    private Integer cardTypeId;
+
+    @Column(name = "tb_rechargeable_card_type_item_id")
+    private Integer cardItemId;
+
+    public Integer getCardTypeId() {
+        return cardTypeId;
+    }
+
+    public void setCardTypeId(Integer cardTypeId) {
+        this.cardTypeId = cardTypeId;
+    }
+
+    public Integer getCardItemId() {
+        return cardItemId;
+    }
+
+    public void setCardItemId(Integer cardItemId) {
+        this.cardItemId = cardItemId;
+    }
+
     @Override
     public Integer getId() {
         return id;

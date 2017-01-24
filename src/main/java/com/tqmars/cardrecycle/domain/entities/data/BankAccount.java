@@ -18,9 +18,6 @@ public class BankAccount extends EntityOfIntPrimaryKey {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "withdraw_pwd")
-    private String withdrawPwd;
-
     @Column(name = "tb_user_id")
     private Integer userId = 0;
 
@@ -56,14 +53,6 @@ public class BankAccount extends EntityOfIntPrimaryKey {
         this.name = name;
     }
 
-    public String getWithdrawPwd() {
-        return withdrawPwd;
-    }
-
-    public void setWithdrawPwd(String withdrawPwd) {
-        this.withdrawPwd = withdrawPwd;
-    }
-
     public Integer getUserId() {
         return userId;
     }
@@ -94,7 +83,6 @@ public class BankAccount extends EntityOfIntPrimaryKey {
                 "id=" + id +
                 ", cardNum='" + cardNum + '\'' +
                 ", name='" + name + '\'' +
-                ", withdrawPwd='" + withdrawPwd + '\'' +
                 ", userId=" + userId +
                 ", bankName='" + bankName + '\'' +
                 ", bankId=" + bankId +

@@ -18,11 +18,11 @@ public class WithdrawRecord extends EntityOfIntPrimaryKey {
     @Column(name = "withdraw_time")
     private Date withdrawTime;
 
-    @Column(name = "back_name")
-    private String backName;
+    @Column(name = "bank_name")
+    private String bankName;
 
-    @Column(name = "tb_back_id")
-    private Integer backId;
+    @Column(name = "tb_bank_id")
+    private Integer bankId;
 
     @Column(name = "withdraw_amount")
     private BigDecimal withdrawAmount;
@@ -74,20 +74,20 @@ public class WithdrawRecord extends EntityOfIntPrimaryKey {
         this.withdrawTime = withdrawTime;
     }
 
-    public String getBackName() {
-        return backName;
+    public String getBankName() {
+        return bankName;
     }
 
-    public void setBackName(String backName) {
-        this.backName = backName;
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
     }
 
-    public Integer getBackId() {
-        return backId;
+    public Integer getBankId() {
+        return bankId;
     }
 
-    public void setBackId(Integer backId) {
-        this.backId = backId;
+    public void setBankId(Integer bankId) {
+        this.bankId = bankId;
     }
 
     public BigDecimal getWithdrawAmount() {
@@ -151,8 +151,8 @@ public class WithdrawRecord extends EntityOfIntPrimaryKey {
         return "WithdrawRecord{" +
                 "id=" + id +
                 ", withdrawTime=" + withdrawTime +
-                ", backName='" + backName + '\'' +
-                ", backId=" + backId +
+                ", bankName='" + bankName + '\'' +
+                ", bankId=" + bankId +
                 ", withdrawAmount=" + withdrawAmount +
                 ", serviceCharge=" + serviceCharge +
                 ", actualAccountAmount=" + actualAccountAmount +
@@ -166,5 +166,15 @@ public class WithdrawRecord extends EntityOfIntPrimaryKey {
 
     public void withdraw(){
         this.processStatus = 1;
+    }
+
+    public void userWithdraw(String bankName,Integer userId,Integer bankId,BigDecimal amount){
+
+        this.setWithdrawAmount(amount);
+        this.setBankName(bankName);
+        this.setUserId(userId);
+        this.setBankId(bankId);
+        this.setProcessStatus(0);
+        this.setApplyTime(new Date());
     }
 }

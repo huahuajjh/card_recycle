@@ -3,7 +3,6 @@ package com.tqmars.cardrecycle.infrastructure.StringTools;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
 import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -24,6 +23,11 @@ public class Md5 {
     public static String toBase64(String str){
         Base64 encoder = new Base64();
         return encoder.encodeToString(str.getBytes());
+    }
+
+    public static String toBase64(byte[] src){
+        Base64 encoder = new Base64();
+        return encoder.encodeToString(src);
     }
 
     public static String getFromBase64(String str){

@@ -17,6 +17,15 @@ public class QueryOrderListOutput {
     private String idCardNum;
     private BigDecimal cardAmount;
     private float saleRatio;
+    private String cardTypeName;
+
+    public String getCardTypeName() {
+        return cardTypeName;
+    }
+
+    public void setCardTypeName(String cardTypeName) {
+        this.cardTypeName = cardTypeName;
+    }
 
     public Integer getId() {
         return id;

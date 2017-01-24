@@ -38,9 +38,10 @@ CREATE TABLE IF NOT EXISTS tb_bank(
 CREATE TABLE IF NOT EXISTS tb_bank_account(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
     card_number VARCHAR(30) NULL UNIQUE COMMENT 'bank card number',
-    tb_user_id int NOT NULL COMMENT 'card owner id',
+    tb_user_id INT NOT NULL COMMENT 'card owner id',
     bank_name VARCHAR(30) NULL COMMENT 'bank type name',
-    tb_bank_id int NULL COMMENT 'bank id'
+    tb_bank_id INT NULL COMMENT 'bank id',
+    name VARCHAR(20) NOT NULL COMMENT 'bank account name'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='bank card info';
 
 CREATE TABLE IF NOT EXISTS tb_withdraw_record(
@@ -62,8 +63,7 @@ CREATE TABLE IF NOT EXISTS tb_rechargeable_card_type(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
     name VARCHAR(30) NOT NULL UNIQUE COMMENT 'card name',
     card_shortcut VARCHAR(10) NOT NULL UNIQUE COMMENT 'card shortcut code',
-    sale_ratio FLOAT(4,2) NOT NULL COMMENT 'sale ratio',
-    support_amount VARCHAR(64) NULL COMMENT 'card support amount'
+    sale_ratio FLOAT(4,2) NOT NULL COMMENT 'sale ratio'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='rechargeable card type info';
 
 CREATE TABLE IF NOT EXISTS tb_rechargeable_card_type_item(
@@ -76,6 +76,8 @@ CREATE TABLE IF NOT EXISTS tb_rechargeable_card(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
     card_number VARCHAR(30) NOT NULL COMMENT 'card number',
     card_pwd VARCHAR(64) NOT NULL COMMENT 'card password',
+    tb_rechargeable_card_type_id INT NOT NULL COMMENT 'card type id',
+    tb_rechargeable_card_type_item_id INT NOT NULL COMMENT 'card item id',
     tb_user_id INT NOT NULL COMMENT 'user id'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='rechargeable card info';
 
@@ -91,6 +93,7 @@ CREATE TABLE IF NOT EXISTS tb_order(
     rechargeable_card_number VARCHAR(30) NOT NULL COMMENT 'rechargeable card number',
     actual_amount DECIMAL(10,2) NOT NULL COMMENT 'sale amount, amount=(card amount)*(sale ratio)',
     tb_rechargeable_card_id INT NOT NULL COMMENT 'card id',
+    third_order_no VARCHAR(64) NOT NULL UNIQUE COMMENT 'third order number',
     complete_time DATETIME NOT NULL COMMENT 'order completed time'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='order info';
 
@@ -105,7 +108,11 @@ CREATE VIEW v_order AS
         u.id_card_num,
         cti.support_amount,
         c.card_number,
-        ct.sale_ratio
+        ct.sale_ratio,
+        ct.name,
+            o.tb_rechargeable_card_type_id,
+        o.tb_rechargeable_card_type_item_id,
+        o.tb_rechargeable_card_id
     FROM tb_order o
     LEFT JOIN tb_user u ON o.tb_user_id = u.id
     LEFT JOIN tb_rechargeable_card c ON c.id = o.tb_rechargeable_card_id
@@ -122,7 +129,10 @@ CREATE VIEW v_withdraw_record AS
         w.process_status,
         w.process_time,
         ba.card_number,
-        u.account
+        u.account,
+        q.apply_time,
+        w.service_charge,
+        w.actual_account_amount
     FROM tb_withdraw_record w
     LEFT JOIN tb_user u ON u.id = w.tb_user_id
     LEFT JOIN tb_bank b ON b.id = w.tb_bank_id

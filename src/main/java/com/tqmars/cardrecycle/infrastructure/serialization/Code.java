@@ -11,4 +11,5 @@ public final class Code {
     public static int FAIL = 601;
     public static int VCODE_ERR = 602;
     public static int USER_OR_PWD_ERR = 603;
+    public static int AUTH_FAIL = 604;
 }

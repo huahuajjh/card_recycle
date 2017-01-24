@@ -43,6 +43,50 @@ public class OrderDetails extends EntityOfIntPrimaryKey {
     @Column(name = "sale_ratio")
     private float saleRatio;
 
+    @Column(name = "name")
+    private String cardTypeName;
+
+    @Column(name = "tb_rechargeable_card_type_id")
+    private Integer cardTypeId;
+
+    @Column(name = "tb_rechargeable_card_id")
+    private Integer cardId;
+
+    @Column(name = "tb_rechargeable_card_type_item_id")
+    private Integer cardTypeItemId;
+
+    public String getCardTypeName() {
+        return cardTypeName;
+    }
+
+    public void setCardTypeName(String cardTypeName) {
+        this.cardTypeName = cardTypeName;
+    }
+
+    public Integer getCardTypeId() {
+        return cardTypeId;
+    }
+
+    public void setCardTypeId(Integer cardTypeId) {
+        this.cardTypeId = cardTypeId;
+    }
+
+    public Integer getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(Integer cardId) {
+        this.cardId = cardId;
+    }
+
+    public Integer getCardTypeItemId() {
+        return cardTypeItemId;
+    }
+
+    public void setCardTypeItemId(Integer cardTypeItemId) {
+        this.cardTypeItemId = cardTypeItemId;
+    }
+
     @Override
     public Integer getId() {
         return id;

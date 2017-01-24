@@ -18,11 +18,11 @@ import javax.servlet.http.HttpServletResponse;
  * Created by jjh on 1/16/17.
  */
 @RestController
-@RequestMapping(value = "/admin/bank",method = RequestMethod.POST)
-public class BankController extends ControllerBase {
+@RequestMapping(value = "/admin/AdminBankController",method = RequestMethod.POST)
+public class AdminBankController extends ControllerBase {
     private IBankAppService _bankAppService;
 
-    public BankController(HttpServletRequest request, HttpServletResponse response) {
+    public AdminBankController(HttpServletRequest request, HttpServletResponse response) {
         super(request, response);
 
         this._bankAppService = getService("BankAppService",IBankAppService.class);
@@ -31,7 +31,7 @@ public class BankController extends ControllerBase {
 
     /**
      * 查询银行
-     * @param url -- /admin/bank/query
+     * @param url -- /admin/AdminBankController/query
      * @param condition -- QueryBankWithConditionInput -- {index,count}
      * @return BankOutput -- [{id,name}]
      */
@@ -43,7 +43,7 @@ public class BankController extends ControllerBase {
 
     /**
      * 修改银行类型信息
-     * @param url -- /admin/bank/modify
+     * @param url -- /admin/AdminBankController/modify
      * @param input -- {id,name}
      * @return void
      */
@@ -56,7 +56,7 @@ public class BankController extends ControllerBase {
 
     /**
      * 删除指定银行信息
-     * @param url -- /admin/bank/del
+     * @param url -- /admin/AdminBankController/del
      * @param id
      * @return void
      */
@@ -68,7 +68,7 @@ public class BankController extends ControllerBase {
 
     /**
      * 新增银行类型信息
-     * @param url -- /admin/bank/add
+     * @param url -- /admin/AdminBankController/add
      * @param input -- {name}
      * @return void
      */

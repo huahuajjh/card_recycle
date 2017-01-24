@@ -24,7 +24,7 @@ import java.io.IOException;
  * Created by jjh on 1/14/17.
  */
 @RestController
-@RequestMapping(value = "/user",method = RequestMethod.POST)
+@RequestMapping(value = "/user",method = RequestMethod.GET)
 public class UserController extends ControllerBase{
     IUserAppService _userAppService;
 
@@ -33,7 +33,7 @@ public class UserController extends ControllerBase{
         _userAppService = getService("UserAppService", IUserAppService.class);
     }
 
-    @RequestMapping(value = "/register",method = RequestMethod.POST)
+    @RequestMapping(value = "/register")
     public String register(@RequestParam(value = "reg") String reg){
         CreateUserInput input = Serialization.toObject(reg,CreateUserInput.class);
         if(input == null){
@@ -58,7 +58,7 @@ public class UserController extends ControllerBase{
         }
     }
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @RequestMapping(value = "/login")
     public String login(@RequestParam(value = "user") String user) {
         LoginInput input = Serialization.toObject(user,LoginInput.class);
         if(input == null){

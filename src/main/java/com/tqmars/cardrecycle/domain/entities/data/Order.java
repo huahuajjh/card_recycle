@@ -48,6 +48,16 @@ public class Order extends EntityOfIntPrimaryKey {
     @Column(name = "complete_time")
     private Date completeTime;
 
+    @Column(name = "third_order_no")
+    private String thirdOrderNo;
+
+    public String getThirdOrderNo() {
+        return thirdOrderNo;
+    }
+
+    public void setThirdOrderNo(String thirdOrderNo) {
+        this.thirdOrderNo = thirdOrderNo;
+    }
 
     @Override
     public Integer getId() {

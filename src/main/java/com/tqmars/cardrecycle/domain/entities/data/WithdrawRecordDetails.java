@@ -42,6 +42,39 @@ public class WithdrawRecordDetails extends EntityOfIntPrimaryKey {
     @Column(name = "msg")
     private String msg;
 
+    @Column(name = "apply_time")
+    private Date applyTime;
+
+    @Column(name = "service_charge")
+    private BigDecimal serviceCharge;
+
+    @Column(name = "actual_account_amount")
+    private BigDecimal actualAmoung;
+
+    public BigDecimal getServiceCharge() {
+        return serviceCharge;
+    }
+
+    public void setServiceCharge(BigDecimal serviceCharge) {
+        this.serviceCharge = serviceCharge;
+    }
+
+    public BigDecimal getActualAmoung() {
+        return actualAmoung;
+    }
+
+    public void setActualAmoung(BigDecimal actualAmoung) {
+        this.actualAmoung = actualAmoung;
+    }
+
+    public Date getApplyTime() {
+        return applyTime;
+    }
+
+    public void setApplyTime(Date applyTime) {
+        this.applyTime = applyTime;
+    }
+
     public String getMsg() {
         return msg;
     }

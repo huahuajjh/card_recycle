@@ -24,14 +24,4 @@ public class UserSaleController extends ControllerBase {
         return "";
     }
 
-    @RequestMapping(value = "/cardType/query")
-    public String queryCardType(@RequestParam(value = "token") String token){
-        return "";
-    }
-
-    @RequestMapping(value = "/cardTypeItem/query")
-    public String queryCardTypeItem(@RequestParam(value = "input") String input){
-        return "";
-    }
-
 }

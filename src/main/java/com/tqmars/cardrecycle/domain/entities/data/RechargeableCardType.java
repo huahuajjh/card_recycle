@@ -23,17 +23,6 @@ public class RechargeableCardType extends EntityOfIntPrimaryKey {
     @Column(name = "sale_ratio")
     private float saleRatio;
 
-    @Column(name = "support_amount")
-    private String supportAmount;
-
-    public String getSupportAmount() {
-        return supportAmount;
-    }
-
-    public void setSupportAmount(String supportAmount) {
-        this.supportAmount = supportAmount;
-    }
-
     public float getSaleRatio() {
         return saleRatio;
     }
