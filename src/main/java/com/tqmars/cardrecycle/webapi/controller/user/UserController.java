@@ -5,6 +5,7 @@ import com.tqmars.cardrecycle.application.User.dto.CreateUserInput;
 import com.tqmars.cardrecycle.application.User.dto.LoginInput;
 import com.tqmars.cardrecycle.application.User.dto.LogoutInput;
 import com.tqmars.cardrecycle.application.net.Sms;
+import com.tqmars.cardrecycle.infrastructure.StringTools.PropertiesFileTool;
 import com.tqmars.cardrecycle.infrastructure.serialization.Code;
 import com.tqmars.cardrecycle.infrastructure.serialization.Serialization;
 import com.tqmars.cardrecycle.infrastructure.vcode.VCodeGenerator;
@@ -44,6 +45,9 @@ public class UserController extends ControllerBase{
             return toFailMsg("短信验证码错误",Code.EXTERNAL_ERR);
         }
 
+        input.setWithdrawPwd(input.getPwd());
+        input.setBusinessId(PropertiesFileTool.readByKey("businessId"));
+        input.setBusinessPwd(PropertiesFileTool.readByKey("businessPwd"));
         _userAppService.register(input);
         return toSuccessMsg("注册成功",Code.SUCCESS);
     }
