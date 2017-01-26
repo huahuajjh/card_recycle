@@ -80,7 +80,6 @@
 
     <bean id="UserAppService" class="com.tqmars.cardrecycle.application.User.UserAppService">
         <constructor-arg index="0" ref="UserRepository"/>
-        <constructor-arg index="1" ref="BankAccountRepository"/>
     </bean>
 
     <bean id="BankAppService" class="com.tqmars.cardrecycle.application.admin.bank.BankAppService">

@@ -11,9 +11,9 @@ CREATE TABLE IF NOT EXISTS tb_user(
     qq VARCHAR(12) NULL UNIQUE COMMENT 'qq number',
     business_id VARCHAR(64) NOT NULL UNIQUE COMMENT 'business id',
     business_pwd VARCHAR(64) NOT NULL COMMENT 'business password',
-    token VARCHAR(32) NULL UNIQUE DEFAULT NULL COMMENT 'request token',
+    token VARCHAR(32) NULL DEFAULT NULL COMMENT 'request token',
     withdraw_pwd VARCHAR(64) NULL COMMENT 'account withdraw password',
-    id_card_num VARCHAR(20) NULL UNIQUE COMMENT 'id card number',
+    id_card_num VARCHAR(20) NULL COMMENT 'id card number',
     name VARCHAR(10) NULL COMMENT 'bank account name'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='user info';
 
@@ -109,7 +109,7 @@ CREATE VIEW v_order AS
         cti.support_amount,
         c.card_number,
         ct.sale_ratio,
-        ct.name,
+        ct.name as cardTypeName,
             o.tb_rechargeable_card_type_id,
         o.tb_rechargeable_card_type_item_id,
         o.tb_rechargeable_card_id
@@ -130,7 +130,7 @@ CREATE VIEW v_withdraw_record AS
         w.process_time,
         ba.card_number,
         u.account,
-        q.apply_time,
+        w.apply_time,
         w.service_charge,
         w.actual_account_amount
     FROM tb_withdraw_record w

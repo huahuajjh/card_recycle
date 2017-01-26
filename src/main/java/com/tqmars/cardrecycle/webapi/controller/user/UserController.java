@@ -1,9 +1,7 @@
 package com.tqmars.cardrecycle.webapi.controller.user;
 
 import com.tqmars.cardrecycle.application.User.IUserAppService;
-import com.tqmars.cardrecycle.application.User.dto.CreateUserInput;
-import com.tqmars.cardrecycle.application.User.dto.LoginInput;
-import com.tqmars.cardrecycle.application.User.dto.LogoutInput;
+import com.tqmars.cardrecycle.application.User.dto.*;
 import com.tqmars.cardrecycle.application.net.Sms;
 import com.tqmars.cardrecycle.infrastructure.StringTools.PropertiesFileTool;
 import com.tqmars.cardrecycle.infrastructure.serialization.Code;
@@ -25,7 +23,7 @@ import java.io.IOException;
  * Created by jjh on 1/14/17.
  */
 @RestController
-@RequestMapping(value = "/user",method = RequestMethod.GET)
+@RequestMapping(value = "/user",method = {RequestMethod.POST,RequestMethod.GET})
 public class UserController extends ControllerBase{
     IUserAppService _userAppService;
 
@@ -34,6 +32,12 @@ public class UserController extends ControllerBase{
         _userAppService = getService("UserAppService", IUserAppService.class);
     }
 
+    /**
+     * 用户注册
+     * @param url -- /user/register
+     * @param reg -- {account(账户),pwd(密码),qq,tel(电话),smsCode(短信验证码)}
+     * @return void
+     */
     @RequestMapping(value = "/register")
     public String register(@RequestParam(value = "reg") String reg){
         CreateUserInput input = Serialization.toObject(reg,CreateUserInput.class);
@@ -57,6 +61,7 @@ public class UserController extends ControllerBase{
         try {
             String smsCode = Sms.sendMsg(phone);
             request.getSession().setAttribute(Const.SMSCODE,smsCode);
+            System.out.println(smsCode);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -83,7 +88,7 @@ public class UserController extends ControllerBase{
         return toJsonWithFormatter(token,"登录成功",Code.SUCCESS);
     }
 
-    @RequestMapping(value = "/getVCode")
+    @RequestMapping(value = "/getVCode",method = RequestMethod.GET)
     public void getVCode(){
         VCodeGenerator.CodeObj codeObj = VCodeGenerator.getVCode(100,30);
         getSession().setAttribute(Const.VCODE,codeObj.getvCode());
@@ -96,7 +101,18 @@ public class UserController extends ControllerBase{
 
     @RequestMapping(value = "/change")
     public String changePwd(@RequestParam(value = "user") String user){
-        return "";
+        ChangePwdInput input = Serialization.toObject(user, ChangePwdInput.class);
+        if(null == input){
+            return toFailMsg("参数错误");
+        }
+
+        String sms = getSession().getAttribute(Const.SMSCODE).toString();
+
+        if(!input.getSmsCode().equals(sms)){
+            return toFailMsg("短信验证码错误");
+        }
+        _userAppService.changePwd(input);
+        return toSucessMsg();
     }
 
     @RequestMapping(value = "/logout")
@@ -107,5 +123,16 @@ public class UserController extends ControllerBase{
         return toSucessMsg();
     }
 
+    @RequestMapping(value = "/forgetPwd")
+    public String forgetPwd(@RequestParam(value = "forgetPwdInput") String forgetPwdInput){
+        ForgetPwdInput input = Serialization.toObject(forgetPwdInput, ForgetPwdInput.class);
+
+        String sms = getSession().getAttribute(Const.SMSCODE).toString();
+        if(!sms.equals(input.getSmsCode())){
+            return toFailMsg("短信验证码错误");
+        }
+
+        return _userAppService.forgetPwd(input);
+    }
 
 }

@@ -4,7 +4,6 @@ package com.tqmars.cardrecycle.application.User.dto;
  * Created by jjh on 1/14/17.
  */
 public class CreateUserInput {
-    
     private String account;
     private String pwd;
     private String qq;
@@ -78,4 +77,17 @@ public class CreateUserInput {
         this.tel = tel;
     }
 
+    @Override
+    public String toString() {
+        return "CreateUserInput{" +
+                "account='" + account + '\'' +
+                ", pwd='" + pwd + '\'' +
+                ", qq='" + qq + '\'' +
+                ", tel='" + tel + '\'' +
+                ", businessId='" + businessId + '\'' +
+                ", businessPwd='" + businessPwd + '\'' +
+                ", smsCode='" + smsCode + '\'' +
+                ", withdrawPwd='" + withdrawPwd + '\'' +
+                '}';
+    }
 }

@@ -38,7 +38,7 @@ public class User extends EntityOfIntPrimaryKey {
     private String name;
 
     @Column(name = "withdraw_pwd")
-    private String withDrawPwd;
+    private String withdrawPwd;
 
     @Column(name = "id_card_num")
     private String idCardNum;
@@ -51,12 +51,12 @@ public class User extends EntityOfIntPrimaryKey {
         this.name = name;
     }
 
-    public String getWithDrawPwd() {
-        return withDrawPwd;
+    public String getWithdrawPwd() {
+        return withdrawPwd;
     }
 
-    public void setWithDrawPwd(String withDrawPwd) {
-        this.withDrawPwd = withDrawPwd;
+    public void setWithdrawPwd(String withdrawPwd) {
+        this.withdrawPwd = withdrawPwd;
     }
 
     public String getIdCardNum() {
@@ -143,7 +143,7 @@ public class User extends EntityOfIntPrimaryKey {
                 ", businessPwd='" + businessPwd + '\'' +
                 ", token='" + token + '\'' +
                 ", name='" + name + '\'' +
-                ", withDrawPwd='" + withDrawPwd + '\'' +
+                ", withdrawPwd='" + withdrawPwd + '\'' +
                 ", idCardNum='" + idCardNum + '\'' +
                 '}';
     }
@@ -152,7 +152,7 @@ public class User extends EntityOfIntPrimaryKey {
         this.pwd = Md5.md5WithSalt(newPwd);
     }
     public void changWithdrawPwd(String pwd){
-        this.withDrawPwd = pwd;
+        this.withdrawPwd = pwd;
     }
     public void realNameAuth(String name,String idCardNum){
         this.name = name;

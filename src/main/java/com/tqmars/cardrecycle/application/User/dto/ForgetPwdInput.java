@@ -1,10 +1,9 @@
 package com.tqmars.cardrecycle.application.User.dto;
 
 /**
- * Created by jjh on 1/15/17.
+ * Created by jjh on 1/26/17.
  */
-public class ChangePwdInput {
-    private String oldPwd;
+public class ForgetPwdInput {
     private String newPwd;
     private String account;
     private String smsCode;
@@ -15,14 +14,6 @@ public class ChangePwdInput {
 
     public void setSmsCode(String smsCode) {
         this.smsCode = smsCode;
-    }
-
-    public String getOldPwd() {
-        return oldPwd;
-    }
-
-    public void setOldPwd(String oldPwd) {
-        this.oldPwd = oldPwd;
     }
 
     public String getNewPwd() {

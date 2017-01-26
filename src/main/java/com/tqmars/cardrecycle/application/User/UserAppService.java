@@ -1,29 +1,22 @@
 package com.tqmars.cardrecycle.application.User;
 
-import com.tqmars.cardrecycle.application.User.dto.ChangePwdInput;
-import com.tqmars.cardrecycle.application.User.dto.CreateUserInput;
-import com.tqmars.cardrecycle.application.User.dto.LoginInput;
-import com.tqmars.cardrecycle.application.User.dto.LogoutInput;
+import com.tqmars.cardrecycle.application.User.dto.*;
 import com.tqmars.cardrecycle.application.automapper.AutoMapper;
 import com.tqmars.cardrecycle.application.base.BaseAppService;
-import com.tqmars.cardrecycle.domain.entities.data.BankAccount;
 import com.tqmars.cardrecycle.domain.entities.data.User;
-import com.tqmars.cardrecycle.domain.repositories.IBankAccountRepository;
 import com.tqmars.cardrecycle.domain.repositories.IUserRepository;
 import com.tqmars.cardrecycle.infrastructure.StringTools.Md5;
+import com.tqmars.cardrecycle.infrastructure.serialization.Code;
 
 /**
  * Created by jjh on 1/14/17.
  */
 public class UserAppService extends BaseAppService implements IUserAppService{
     private IUserRepository _userRepository;
-    private IBankAccountRepository _bankAccountRepository;
+//    private IBankAccountRepository _bankAccountRepository;
 
-    public UserAppService(IUserRepository repository,IBankAccountRepository bankAccountRepository){
+    public UserAppService(IUserRepository repository){
         this._userRepository = repository;
-        this._bankAccountRepository = bankAccountRepository;
-
-        this._bankAccountRepository.setEntityClass(BankAccount.class);
         this._userRepository.setEntityClass(User.class);
     }
 
@@ -41,6 +34,7 @@ public class UserAppService extends BaseAppService implements IUserAppService{
         input.setBusinessPwd(Md5.md5WithSalt(input.getBusinessPwd()));
         input.setPwd(Md5.md5WithSalt(input.getPwd()));
         input.setWithdrawPwd(input.getPwd());
+        System.out.println(input.toString());
 
         _userRepository.insert(AutoMapper.mapping(User.class,input));
         _userRepository.commit();
@@ -49,7 +43,7 @@ public class UserAppService extends BaseAppService implements IUserAppService{
 
     @Override
     public boolean changePwd(ChangePwdInput input) {
-        User u = _userRepository.single("pwd='"+Md5.md5WithSalt(input.getOldPwd())+"' and token='"+input.getToken()+"'");
+        User u = _userRepository.single("pwd='"+Md5.md5WithSalt(input.getOldPwd())+"' and account='"+input.getAccount()+"'");
         if(u == null){
             return false;
         }
@@ -64,6 +58,17 @@ public class UserAppService extends BaseAppService implements IUserAppService{
     public void logout(LogoutInput input) {
         _userRepository.logout(AutoMapper.mapping(User.class,input));
         _userRepository.commit();
+    }
+
+    @Override
+    public String forgetPwd(ForgetPwdInput input) {
+        User user = _userRepository.single("account='"+input.getAccount()+"'");
+        if (null == user){
+            return toJsonWithFormatter(null,"不存在的用户名", Code.FAIL);
+        }
+        user.setPwd(Md5.md5WithSalt(input.getNewPwd()));
+        _userRepository.update(user);
+        return toJsonWithFormatter(null,"success",Code.SUCCESS);
     }
 
 }

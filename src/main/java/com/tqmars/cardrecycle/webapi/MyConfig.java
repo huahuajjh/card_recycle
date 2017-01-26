@@ -2,6 +2,7 @@ package com.tqmars.cardrecycle.webapi;
 
 import com.tqmars.cardrecycle.webapi.interceptor.TokenInterceptor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -16,7 +17,19 @@ public class MyConfig extends WebMvcConfigurerAdapter {
                 excludePathPatterns("/user/login").
                 excludePathPatterns("/user/register").
                 excludePathPatterns("/user/getVCode").
-                excludePathPatterns("/user/getSms");
+                excludePathPatterns("/user/getSms").
+                excludePathPatterns("/user/forgetPwd");
         super.addInterceptors(registry);
+    }
+
+    /**
+     * 跨域设置
+     * @param registry
+     */
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("GET","POST");
     }
 }

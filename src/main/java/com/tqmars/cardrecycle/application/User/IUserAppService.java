@@ -10,4 +10,5 @@ public interface IUserAppService {
     void register(CreateUserInput input);
     boolean changePwd(ChangePwdInput input);
     void logout(LogoutInput input);
+    String forgetPwd(ForgetPwdInput input);
 }
