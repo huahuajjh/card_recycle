@@ -3,7 +3,6 @@ package com.tqmars.cardrecycle.webapi.controller.admin.bank;
 import com.tqmars.cardrecycle.application.admin.bank.IBankAppService;
 import com.tqmars.cardrecycle.application.admin.bank.dto.AddBankInput;
 import com.tqmars.cardrecycle.application.admin.bank.dto.ModifyBankInput;
-import com.tqmars.cardrecycle.application.admin.bank.dto.QueryBankWithConditionInput;
 import com.tqmars.cardrecycle.infrastructure.serialization.Serialization;
 import com.tqmars.cardrecycle.webapi.controller.ControllerBase;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * Created by jjh on 1/16/17.
  */
 @RestController
-@RequestMapping(value = "/admin/AdminBankController",method = RequestMethod.POST)
+@RequestMapping(value = "/admin/bankType",method = {RequestMethod.POST,RequestMethod.GET})
 public class AdminBankController extends ControllerBase {
     private IBankAppService _bankAppService;
 
@@ -32,13 +31,11 @@ public class AdminBankController extends ControllerBase {
     /**
      * 查询银行
      * @param url -- /admin/AdminBankController/query
-     * @param condition -- QueryBankWithConditionInput -- {index,count}
      * @return BankOutput -- [{id,name}]
      */
-    @RequestMapping(value = "/query")
-    public String query(@RequestParam(value = "condition") String condition){
-        QueryBankWithConditionInput _condition = Serialization.toObject(condition, QueryBankWithConditionInput.class);
-        return  _bankAppService.queryBankWithCondition(_condition);
+    @RequestMapping(value = "/queryAll")
+    public String query(){
+        return  _bankAppService.queryAll();
     }
 
     /**
@@ -61,22 +58,21 @@ public class AdminBankController extends ControllerBase {
      * @return void
      */
     @RequestMapping(value = "/del")
-    public String del(@RequestParam(value = "input") String id){
+    public String del(@RequestParam(value = "id") String id){
         _bankAppService.delBank(Integer.valueOf(id));
         return toSucessMsg();
     }
 
     /**
      * 新增银行类型信息
-     * @param url -- /admin/AdminBankController/add
+     * @param url -- /admin/bankType/add
      * @param input -- {name}
      * @return void
      */
     @RequestMapping(value = "/add")
     public String add(@RequestParam(value = "input") String input){
         AddBankInput _input = Serialization.toObject(input, AddBankInput.class);
-        _bankAppService.addBank(_input);
-        return toSucessMsg();
+        return  _bankAppService.addBank(_input);
     }
 
 }

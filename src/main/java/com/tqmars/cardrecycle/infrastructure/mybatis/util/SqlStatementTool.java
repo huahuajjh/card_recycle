@@ -13,6 +13,10 @@ public class SqlStatementTool {
         StringBuilder sbCol = new StringBuilder();
         StringBuilder sbVal = new StringBuilder();
         for (int i=0;i<fields.length;i++) {
+            if(!fields[i].isAnnotationPresent(Column.class)){
+                continue;
+            }
+
             String columnName = fields[i].getAnnotation(Column.class).name();
             fields[i].setAccessible(true);
             if(i>0)
@@ -37,6 +41,10 @@ public class SqlStatementTool {
         Field[] fields = entity.getClass().getDeclaredFields();
         StringBuilder sb = new StringBuilder();
         for (int i=0;i<fields.length;i++) {
+            if(!fields[i].isAnnotationPresent(Column.class)){
+                continue;
+            }
+
             String columnName = fields[i].getAnnotation(Column.class).name();
             fields[i].setAccessible(true);
             if(i>0)

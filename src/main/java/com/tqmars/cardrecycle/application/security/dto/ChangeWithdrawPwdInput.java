@@ -5,8 +5,16 @@ package com.tqmars.cardrecycle.application.security.dto;
  */
 public class ChangeWithdrawPwdInput {
     private String newPwd;
+    private String oldPwd;
     private String token;
-    private Integer id;
+
+    public String getOldPwd() {
+        return oldPwd;
+    }
+
+    public void setOldPwd(String oldPwd) {
+        this.oldPwd = oldPwd;
+    }
 
     public String getNewPwd() {
         return newPwd;
@@ -22,13 +30,5 @@ public class ChangeWithdrawPwdInput {
 
     public void setToken(String token) {
         this.token = token;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 }

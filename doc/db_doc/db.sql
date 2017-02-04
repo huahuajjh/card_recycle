@@ -21,8 +21,10 @@ CREATE TABLE IF NOT EXISTS tb_admin(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
     account VARCHAR(30) NOT NULL UNIQUE COMMENT 'account',
     pwd VARCHAR(64) NOT NULL DEFAULT 'abcd123' COMMENT 'admin password',
-    token VARCHAR(32) NULL UNIQUE DEFAULT NULL COMMENT 'request token'
+    token VARCHAR(32) NULL DEFAULT NULL COMMENT 'request token'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='admin account info';
+
+INSERT INTO tb_admin(account,pwd) VALUES('admin','abcd123');
 
 CREATE TABLE IF NOT EXISTS tb_wallet(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
@@ -46,7 +48,7 @@ CREATE TABLE IF NOT EXISTS tb_bank_account(
 
 CREATE TABLE IF NOT EXISTS tb_withdraw_record(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
-    withdraw_time DATETIME NOT NULL COMMENT 'withdraw time',
+    withdraw_time DATETIME NOT NULL DEFAULT '1990-01-01' COMMENT 'withdraw time',
     bank_name VARCHAR(30) NOT NULL COMMENT 'bank name',
     tb_bank_id int NOT NULL COMMENT 'bank id',
     withdraw_amount DECIMAL(10,2) NOT NULL COMMENT 'withdraw amount',

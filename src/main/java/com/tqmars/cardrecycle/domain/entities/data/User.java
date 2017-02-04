@@ -152,7 +152,7 @@ public class User extends EntityOfIntPrimaryKey {
         this.pwd = Md5.md5WithSalt(newPwd);
     }
     public void changWithdrawPwd(String pwd){
-        this.withdrawPwd = pwd;
+        this.withdrawPwd = Md5.md5WithSalt(pwd);
     }
     public void realNameAuth(String name,String idCardNum){
         this.name = name;

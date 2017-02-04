@@ -24,7 +24,7 @@ public class BusinessAppService extends BaseAppService implements IBusinessAppSe
 
     @Override
     public String queryBusinessList(QueryBusinessListInput input) {
-        String condition = "account='"+input.getAccount()+"'";
+        String condition = "account like '%"+input.getAccount()+"%' limit "+(input.getIndex()-1)*input.getCount()+","+input.getCount();
         List<User> list = _userRepository.getAllWithCondition(condition);
         List<QueryBusinessListOutput> businessList = AutoMapper.mapping(QueryBusinessListOutput.class, list);
 

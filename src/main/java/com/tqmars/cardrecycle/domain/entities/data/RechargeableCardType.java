@@ -23,6 +23,8 @@ public class RechargeableCardType extends EntityOfIntPrimaryKey {
     @Column(name = "sale_ratio")
     private float saleRatio;
 
+    private List<RechargeableCardTypeItem> items;
+
     public float getSaleRatio() {
         return saleRatio;
     }
@@ -30,8 +32,6 @@ public class RechargeableCardType extends EntityOfIntPrimaryKey {
     public void setSaleRatio(float saleRatio) {
         this.saleRatio = saleRatio;
     }
-
-    private List<RechargeableCardTypeItem> items;
 
     public List<RechargeableCardTypeItem> getItems() {
         return items;
@@ -73,6 +73,7 @@ public class RechargeableCardType extends EntityOfIntPrimaryKey {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", cardCode='" + cardCode + '\'' +
+                ", saleRatio=" + saleRatio +
                 '}';
     }
 }

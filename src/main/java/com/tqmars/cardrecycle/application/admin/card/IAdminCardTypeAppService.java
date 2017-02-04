@@ -11,7 +11,7 @@ public interface IAdminCardTypeAppService {
     void addCardType(AddCardTypeInput input);
     void modifyCardType(ModifyCardTypeInput input);
     void delCardType(int id);
-    List<QueryCardTypeOutput> queryCardType(QueryCardTypeInput input);
+    List<QueryCardTypeOutput> queryCardType();
     void modifyCardTypeItem(ModifyCardTypeItemInput input);
     void delCardTypeItem(Integer id);
     List<QueryCardTypeItemOutput> queryCardTypeItem(Integer input);

@@ -51,4 +51,15 @@ public class QueryCardTypeOutput {
 //    public void setItems(List<QueryCardTypeItemOutput> items) {
 //        this.items = items;
 //    }
+
+
+    @Override
+    public String toString() {
+        return "QueryCardTypeOutput{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", cardCode='" + cardCode + '\'' +
+                ", saleRatio=" + saleRatio +
+                '}';
+    }
 }

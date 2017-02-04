@@ -30,7 +30,6 @@ public class CardTypeAppService extends BaseAppService implements ICardTypeAppSe
     public List<QueryCardTypeOutput> queryCardTypeList() {
         List<RechargeableCardType> list = _cardTypeRepository.getAll();
         return AutoMapper.mapping(QueryCardTypeOutput.class, list);
-
     }
 
     @Override

@@ -12,7 +12,7 @@ public interface ICardTypeDomainService {
     void addCardType(RechargeableCardType cardType);
     void modifyCardType(RechargeableCardType cardType);
     void delCardType(Integer cardTypeId);
-    List<RechargeableCardType> query(String where);
+    List<RechargeableCardType> query();
     void modifyCardTypeItem(RechargeableCardTypeItem item);
     void delCardTypeItem(Integer id);
     List<RechargeableCardTypeItem> queryCardTypeItem(Integer cardTypeId);

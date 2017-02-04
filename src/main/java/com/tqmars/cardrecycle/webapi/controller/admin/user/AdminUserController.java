@@ -19,7 +19,7 @@ import java.util.List;
  * Created by jjh on 1/16/17.
  */
 @RestController
-@RequestMapping(value = "/admin/user",method = RequestMethod.POST)
+@RequestMapping(value = "/admin/user",method = {RequestMethod.POST,RequestMethod.GET})
 public class AdminUserController extends ControllerBase {
     private IAdminUserAppService _adminUserAppService;
 
@@ -40,6 +40,9 @@ public class AdminUserController extends ControllerBase {
         LoginInput loginInput = Serialization.toObject(input, LoginInput.class);
         String token = _adminUserAppService.login(loginInput);
         getSession().setAttribute(Const.ADMIN_TOKEN,token);
+        if(null == token || token.equals("")){
+            return toJsonWithFormatter(null,"用户名或者密码错误", Code.USER_OR_PWD_ERR);
+        }
         return toJsonWithFormatter(token,"success", Code.SUCCESS);
     }
 
@@ -66,9 +69,8 @@ public class AdminUserController extends ControllerBase {
      * @return List<QueryUserListOutput> -- [{id,account,pwd}]
      */
     @RequestMapping(value = "/query")
-    public String query(@RequestParam(value = "condition") String condition){
-        QueryUserListInput input = Serialization.toObject(condition, QueryUserListInput.class);
-        List<QueryUserListOutput> list = _adminUserAppService.queryUserList(input);
+    public String query(){
+        List<QueryUserListOutput> list = _adminUserAppService.queryUserList();
         return toJsonWithFormatter(list,"success",Code.SUCCESS);
     }
 
@@ -92,8 +94,8 @@ public class AdminUserController extends ControllerBase {
      * @return void
      */
     @RequestMapping(value = "/del")
-    public String del(@RequestParam(value = "input") String input){
-        _adminUserAppService.delUser(Integer.valueOf(input));
+    public String del(@RequestParam(value = "id") String id){
+        _adminUserAppService.delUser(Integer.valueOf(id));
         return toSucessMsg();
     }
 
@@ -106,8 +108,18 @@ public class AdminUserController extends ControllerBase {
     @RequestMapping(value = "/add")
     public String add(@RequestParam(value = "input") String input){
         CreateUserInput user = Serialization.toObject(input, CreateUserInput.class);
-        _adminUserAppService.createUser(user);
-        return toSucessMsg();
+        return _adminUserAppService.createUser(user);
     }
+
+    @RequestMapping(value = "/changePwd")
+    public String changePwd(@RequestParam(value = "input") String input){
+        ChangePwdInput _in = Serialization.toObject(input, ChangePwdInput.class);
+        boolean r = _adminUserAppService.changePwd(_in);
+        if(r){
+            return toSuccessMsg("修改密码成功",Code.SUCCESS);
+        }
+        return toFailMsg("旧密码错误");
+    }
+
 
 }

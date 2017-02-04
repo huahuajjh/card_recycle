@@ -35,9 +35,8 @@ public class CardTypeController extends ControllerBase {
      * @return QueryCardTypeOutput -- {id,name(卡类型名称),cardCode(卡代码),saleRatio(卡寄售比例),supportAmount(支持面值-10,11,12)}
      */
     @RequestMapping(value = "/query")
-    public String query(@RequestParam(value = "condition") String condition){
-        QueryCardTypeInput input = Serialization.toObject(condition, QueryCardTypeInput.class);
-        List<QueryCardTypeOutput> list = _adminCardTypeAppService.queryCardType(input);
+    public String query(){
+        List<QueryCardTypeOutput> list = _adminCardTypeAppService.queryCardType();
         return toJsonWithFormatter(list,"success", Code.SUCCESS);
     }
 

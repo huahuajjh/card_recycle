@@ -34,6 +34,9 @@ public class AutoMapper {
     }
 
     public static <TInput,TOutput> List<TOutput> mapping(Class<TOutput> outputClass, List<TInput> inputList){
+        if(null == inputList || inputList.size() == 0){
+            return null;
+        }
         List<TOutput> outputList = new ArrayList<>();
         inputList.forEach(in->outputList.add(mapping(outputClass,in)));
         return outputList;

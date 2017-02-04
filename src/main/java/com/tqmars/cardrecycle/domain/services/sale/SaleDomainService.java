@@ -8,7 +8,7 @@ import com.tqmars.cardrecycle.domain.entities.data.RechargeableCardTypeItem;
 import com.tqmars.cardrecycle.domain.repositories.ICardRepository;
 import com.tqmars.cardrecycle.domain.repositories.ICardTypeItemRepository;
 import com.tqmars.cardrecycle.domain.repositories.ICardTypeRepository;
-import com.tqmars.cardrecycle.domain.repositories.IOrderReposiroty;
+import com.tqmars.cardrecycle.domain.repositories.IOrderRepository;
 import com.tqmars.cardrecycle.domain.services.sale.thirdapi.ApiResult;
 import com.tqmars.cardrecycle.domain.services.sale.thirdapi.SaleCardApi;
 import com.tqmars.cardrecycle.infrastructure.StringTools.OrderNumGenerator;
@@ -20,12 +20,12 @@ import java.util.Date;
  * Created by jjh on 1/23/17.
  */
 public class SaleDomainService implements ISaleDomainService {
-    private IOrderReposiroty _orderRepository;
+    private IOrderRepository _orderRepository;
     private ICardTypeItemRepository _cardItemRepository;
     private ICardTypeRepository _cardTypeRepository;
     private ICardRepository _cardRepository;
 
-    public SaleDomainService(IOrderReposiroty _orderRepository,
+    public SaleDomainService(IOrderRepository _orderRepository,
                              ICardTypeItemRepository _cardItemRepository,
                              ICardTypeRepository _cardTypeRepository,
                              ICardRepository _cardRepository) {

@@ -21,11 +21,19 @@ public class UserAppService extends BaseAppService implements IUserAppService{
     }
 
     @Override
-    public String login(LoginInput input) {
+    public LoginOutput login(LoginInput input) {
         input.setPwd(Md5.md5WithSalt(input.getPwd()));
         String token = _userRepository.login(AutoMapper.mapping(User.class,input));
+        User user = _userRepository.single("account='"+input.getAccount()+"'");
+        if(null == token || token.equals("") || null == user){
+            _userRepository.commit();
+            return null;
+        }
+
+        user.setToken(token);
+
         _userRepository.commit();
-        return token;
+        return AutoMapper.mapping(LoginOutput.class,user);
     }
 
     @Override
@@ -62,12 +70,13 @@ public class UserAppService extends BaseAppService implements IUserAppService{
 
     @Override
     public String forgetPwd(ForgetPwdInput input) {
-        User user = _userRepository.single("account='"+input.getAccount()+"'");
+        User user = _userRepository.single("account='"+input.getAccount()+"' and tel='"+input.getTel()+"'");
         if (null == user){
-            return toJsonWithFormatter(null,"不存在的用户名", Code.FAIL);
+            return toJsonWithFormatter(null,"不存在的用户名或者手机号", Code.NOT_EXISTS_ACCOUNT);
         }
         user.setPwd(Md5.md5WithSalt(input.getNewPwd()));
         _userRepository.update(user);
+        _userRepository.commit();
         return toJsonWithFormatter(null,"success",Code.SUCCESS);
     }
 

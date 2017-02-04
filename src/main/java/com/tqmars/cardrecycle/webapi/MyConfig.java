@@ -18,7 +18,8 @@ public class MyConfig extends WebMvcConfigurerAdapter {
                 excludePathPatterns("/user/register").
                 excludePathPatterns("/user/getVCode").
                 excludePathPatterns("/user/getSms").
-                excludePathPatterns("/user/forgetPwd");
+                excludePathPatterns("/user/forgetPwd").
+                excludePathPatterns("/admin/user/login");
         super.addInterceptors(registry);
     }
 

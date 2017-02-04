@@ -10,11 +10,10 @@ import java.util.List;
  */
 public interface IAdminUserAppService {
     String login(LoginInput input);
-    boolean changePwd(ChangePwdInput input) throws ApplicationServiceException;
+    boolean changePwd(ChangePwdInput input);
     void logout(LogoutInput input);
-    void createUser(CreateUserInput input);
+    String createUser(CreateUserInput input);
     void delUser(Integer id);
     void modifyUser(ModifyUserInput input);
-    List<QueryUserListOutput> queryUserList(QueryUserListInput input);
-
+    List<QueryUserListOutput> queryUserList();
 }

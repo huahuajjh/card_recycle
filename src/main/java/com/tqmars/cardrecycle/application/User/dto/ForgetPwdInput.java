@@ -7,6 +7,15 @@ public class ForgetPwdInput {
     private String newPwd;
     private String account;
     private String smsCode;
+    private String tel;
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
 
     public String getSmsCode() {
         return smsCode;

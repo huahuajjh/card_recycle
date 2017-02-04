@@ -14,5 +14,6 @@ public interface IBankAppservice {
     void delBankAccount(Integer id);
     void modifyBankAccount(ModifyBankAccountInput input);
     void addBankAccount(AddBankAccountInput input);
-    QueryBankAccountOutput queryBankAccountById(Integer id);
+    List<QueryBankAccountOutput> queryBankAccountById(Integer id);
+    String queryAllBank();
 }

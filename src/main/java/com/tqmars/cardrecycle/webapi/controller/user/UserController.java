@@ -78,14 +78,14 @@ public class UserController extends ControllerBase{
             return toFailMsg("验证码错误",Code.VCODE_ERR);
         }
 
-        String token = _userAppService.login(input);
-        if(token == null || token.equals("")){
+        LoginOutput r = _userAppService.login(input);
+        if(r == null){
             return toFailMsg("用户名或者密码错误",Code.USER_OR_PWD_ERR);
         }
 
-        getSession().setAttribute(Const.TOKEN,token);
+        getSession().setAttribute(Const.TOKEN,r.getToken());
 
-        return toJsonWithFormatter(token,"登录成功",Code.SUCCESS);
+        return toJsonWithFormatter(r,"success",Code.SUCCESS);
     }
 
     @RequestMapping(value = "/getVCode",method = RequestMethod.GET)
@@ -111,8 +111,13 @@ public class UserController extends ControllerBase{
         if(!input.getSmsCode().equals(sms)){
             return toFailMsg("短信验证码错误");
         }
-        _userAppService.changePwd(input);
-        return toSucessMsg();
+        boolean r = _userAppService.changePwd(input);
+        if(r){
+            return toSucessMsg();
+        } else {
+            return toFailMsg("旧密码错误");
+        }
+
     }
 
     @RequestMapping(value = "/logout")
@@ -133,6 +138,11 @@ public class UserController extends ControllerBase{
         }
 
         return _userAppService.forgetPwd(input);
+    }
+
+    @RequestMapping(value = "/e")
+    public String e() throws Exception {
+        throw new Exception("aaa");
     }
 
 }

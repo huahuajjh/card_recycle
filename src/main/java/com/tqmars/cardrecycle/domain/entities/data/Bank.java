@@ -7,7 +7,7 @@ import com.tqmars.cardrecycle.domain.entities.annotation.Table;
 /**
  * Created by jjh on 1/14/17.
  */
-@Table(name = "tb_back")
+@Table(name = "tb_bank")
 public class Bank extends EntityOfIntPrimaryKey {
     @Column(name = "id")
     private Integer id = 0;

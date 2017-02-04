@@ -5,5 +5,5 @@ import com.tqmars.cardrecycle.domain.entities.data.Order;
 /**
  * Created by jjh on 1/23/17.
  */
-public interface IOrderReposiroty extends IRepositoryOfIntPrimaryKey<Order> {
+public interface IOrderRepository extends IRepositoryOfIntPrimaryKey<Order> {
 }

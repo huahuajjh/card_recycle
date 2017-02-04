@@ -3,9 +3,10 @@ package com.tqmars.cardrecycle.domain.entities.data;
 import com.tqmars.cardrecycle.domain.entities.EntityOfIntPrimaryKey;
 import com.tqmars.cardrecycle.domain.entities.annotation.Column;
 import com.tqmars.cardrecycle.domain.entities.annotation.Table;
+import com.tqmars.cardrecycle.infrastructure.StringTools.DateTool;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * Created by jjh on 1/14/17.
@@ -169,12 +170,16 @@ public class WithdrawRecord extends EntityOfIntPrimaryKey {
     }
 
     public void userWithdraw(String bankName,Integer userId,Integer bankId,BigDecimal amount){
-
+        this.setWithdrawTime(Date.valueOf(DateTool.getInstance().getNowTime("yyyy-MM-dd")));
         this.setWithdrawAmount(amount);
         this.setBankName(bankName);
         this.setUserId(userId);
         this.setBankId(bankId);
         this.setProcessStatus(0);
-        this.setApplyTime(new Date());
+        this.setMsg("处理中");
+        this.setActualAccountAmount(new BigDecimal("0.00"));
+        this.setServiceCharge(new BigDecimal("0.00"));
+        this.setProcessTime(Date.valueOf(DateTool.getInstance().getNowTime("yyyy-MM-dd")));
+        this.setApplyTime(Date.valueOf(DateTool.getInstance().getNowTime("yyyy-MM-dd")));
     }
 }

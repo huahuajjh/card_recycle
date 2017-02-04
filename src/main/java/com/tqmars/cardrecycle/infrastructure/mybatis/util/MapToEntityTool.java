@@ -20,6 +20,9 @@ public class MapToEntityTool {
         Field[] fields = entityClass.getDeclaredFields();
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             for (Field field : fields) {
+                if(!field.isAnnotationPresent(Column.class)){
+                    continue;
+                }
                 //get column name
                 field.setAccessible(true);
                 String colName = field.getAnnotation(Column.class).name();
@@ -41,8 +44,9 @@ public class MapToEntityTool {
         List<TEntity> list = new ArrayList<>();
         if (mapList == null || mapList.size() == 0) {
             //return a empty entity
-            list.add(initEntity(entityClass));
-            return list;
+//            list.add(initEntity(entityClass));
+            return null;
+//            return list;
         }
 
         mapList.forEach(map -> list.add(setEntity(entityClass, map)));
@@ -61,6 +65,10 @@ public class MapToEntityTool {
 
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             for (Field field : fields) {
+                if(!field.isAnnotationPresent(Column.class)){
+                    continue;
+                }
+
                 //get column name
                 field.setAccessible(true);
                 String colName = field.getAnnotation(Column.class).name();

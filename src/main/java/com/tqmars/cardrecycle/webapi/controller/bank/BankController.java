@@ -88,8 +88,14 @@ public class BankController extends ControllerBase {
      */
     @RequestMapping(value = "/queryBankAccount/id")
     public String queryBankAccountById(@RequestParam(value = "id") String id){
-        QueryBankAccountOutput r = _bankAppService.queryBankAccountById(Integer.valueOf(id));
-        return toJsonWithFormatter(r,"success",Code.SUCCESS);
+        List<QueryBankAccountOutput> list = _bankAppService.queryBankAccountById(Integer.valueOf(id));
+        return toJsonWithFormatter(list,"success",Code.SUCCESS);
     }
+
+    @RequestMapping(value = "/bank/query")
+    public String queryBank(){
+        return _bankAppService.queryAllBank();
+    }
+
 
 }

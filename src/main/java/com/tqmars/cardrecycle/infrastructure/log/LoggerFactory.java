@@ -1,7 +1,11 @@
 package com.tqmars.cardrecycle.infrastructure.log;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+
+import java.io.InputStream;
 
 /**
  * Created by jjh on 1/10/17.
@@ -16,6 +20,8 @@ public final class LoggerFactory {
     }
 
     static {
-        logger = Logger.getLogger("/conf/log4j.properties");
+        InputStream is = LogFactory.class.getResourceAsStream("/conf/log4j.properties");
+        PropertyConfigurator.configure(is);
+        logger = Logger.getLogger(LoggerFactory.class);
     }
 }

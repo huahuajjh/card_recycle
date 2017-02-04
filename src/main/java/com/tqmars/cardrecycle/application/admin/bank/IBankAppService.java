@@ -9,9 +9,10 @@ import com.tqmars.cardrecycle.application.admin.bank.dto.QueryBankWithConditionI
  * Created by jjh on 1/16/17.
  */
 public interface IBankAppService {
-    void addBank(AddBankInput input);
+    String addBank(AddBankInput input);
     void modifyBank(ModifyBankInput input);
     void delBank(Integer id);
     String queryBankWithCondition(QueryBankWithConditionInput input);
+    String queryAll();
 
 }

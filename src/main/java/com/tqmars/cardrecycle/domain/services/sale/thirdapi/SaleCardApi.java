@@ -22,9 +22,7 @@ public class SaleCardApi {
         String par = _par;
         String merchOrderNo = OrderNumGenerator.generateOrderNum();
         String notifyUrl = "https://www.baidu.com";
-        String sign = "";
-
-        sign = Md5.md5(merchId+merchOrderNo+cardCode+par+cardNo+cardKey+notifyUrl+merchSecret);
+        String sign = Md5.md5(merchId+merchOrderNo+cardCode+par+cardNo+cardKey+notifyUrl+merchSecret);
 
         String url = "http://api.139card.com/card/sell";
 

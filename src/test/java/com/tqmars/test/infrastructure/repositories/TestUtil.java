@@ -1,9 +1,12 @@
 package com.tqmars.test.infrastructure.repositories;
 
 import com.tqmars.cardrecycle.domain.entities.data.OrderDetails;
+import com.tqmars.cardrecycle.infrastructure.StringTools.DateTool;
+import com.tqmars.cardrecycle.infrastructure.StringTools.Md5;
 import com.tqmars.cardrecycle.infrastructure.StringTools.OrderNumGenerator;
 import org.junit.Test;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +16,7 @@ import java.util.List;
 public class TestUtil {
     @Test
     public void testToEntity(){
-
+        System.out.println(Md5.md5WithSalt("abcd123"));
     }
 
     @Test
@@ -60,6 +63,12 @@ public class TestUtil {
     public void testOrderNumGenerator(){
 //        System.out.println(OrderNumGenerator.generateOrderNum().replace("-",""));
         System.out.println(OrderDetails.OrderStatus.FAIL);
+    }
+
+    @Test
+    public void testDate(){
+//        System.out.println(DateTool.getInstance().getNowTime("yyyy-MM-dd HH:mm:ss"));
+        System.out.println(Date.valueOf("2014-01-01"));
     }
 
 }

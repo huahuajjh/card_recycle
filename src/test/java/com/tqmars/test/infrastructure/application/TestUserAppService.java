@@ -25,8 +25,8 @@ public class TestUserAppService {
         LoginInput input = new LoginInput();
         input.setAccount("huahuajjh");
         input.setPwd("1234");
-        String token = _userAppServicve.login(input);
-        System.out.println(token);
+//        String token = _userAppServicve.login(input);
+//        System.out.println(token);
     }
 
     @Test
@@ -39,7 +39,7 @@ public class TestUserAppService {
     @Test
     public void testChangePwd(){
         ChangePwdInput input = new ChangePwdInput();
-        input.setToken("1c320a1eb680643fca0b4d254ebb7e26");
+//        input.setToken("1c320a1eb680643fca0b4d254ebb7e26");
         input.setNewPwd("1234");
         input.setOldPwd("12345");
 

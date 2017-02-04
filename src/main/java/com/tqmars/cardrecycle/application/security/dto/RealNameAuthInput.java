@@ -7,14 +7,13 @@ public class RealNameAuthInput {
     private String idNum;
     private String name;
     private String token;
-    private Integer id;
 
-    public Integer getId() {
-        return id;
+    public String getToken() {
+        return token;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getIdNum() {
@@ -31,13 +30,5 @@ public class RealNameAuthInput {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 }

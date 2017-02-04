@@ -8,8 +8,7 @@ import org.junit.Test;
  */
 public class TestLog {
     @Test
-    public void testLog()
-    {
+    public void testLog() throws Exception {
         LoggerFactory.getLogger().error("log done");
     }
     

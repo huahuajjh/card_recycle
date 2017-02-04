@@ -21,8 +21,8 @@ public class AdminCardTypeAppService extends BaseAppService implements IAdminCar
 
     @Override
     public void addCardType(AddCardTypeInput input) {
+        System.out.println(AutoMapper.mapping(RechargeableCardType.class, input).toString());
         _cardTypeDomainService.addCardType(AutoMapper.mapping(RechargeableCardType.class, input));
-
     }
 
     @Override
@@ -36,9 +36,8 @@ public class AdminCardTypeAppService extends BaseAppService implements IAdminCar
     }
 
     @Override
-    public List<QueryCardTypeOutput> queryCardType(QueryCardTypeInput input) {
-        int index = input.getIndex()*input.getCount()-1;
-        List<RechargeableCardType> list = _cardTypeDomainService.query("limit "+index+","+input.getCount());
+    public List<QueryCardTypeOutput> queryCardType() {
+        List<RechargeableCardType> list = _cardTypeDomainService.query();
         return AutoMapper.mapping(QueryCardTypeOutput.class, list);
     }
 

@@ -1,0 +1,129 @@
+[2017-02-04 22:23][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:23][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:24][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:24][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:24][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:24][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:24][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:24][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:24][com.tqmars.cardrecycle.webapi.GlobalExceptionHandler-defaultExceptionHandler] -Required String parameter 'info' is not present
+[2017-02-04 22:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:26][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:26][com.tqmars.cardrecycle.webapi.GlobalExceptionHandler-defaultExceptionHandler] -
+### Error updating database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'withdraw_time' in 'field list'
+### The error may involve com.tqmars.cardrecycle.domain.entities.data.insertAndGetId-Inline
+### The error occurred while setting parameters
+### SQL: insert into tb_bank_account(id,withdraw_time,bank_name,tb_bank_id,withdraw_amount,service_charge,actual_account_amount,process_time,apply_time,process_status,tb_user_id,msg) values('0','null','招商银行','10','10','null','null','null','Sat Feb 04 22:26:01 CST 2017','0','1','处理中')
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'withdraw_time' in 'field list'
+[2017-02-04 22:28][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:28][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:28][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:28][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:28][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:28][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:28][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:28][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:28][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:28][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:28][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:28][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:28][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:28][com.tqmars.cardrecycle.webapi.GlobalExceptionHandler-defaultExceptionHandler] -
+### Error updating database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'withdraw_time' in 'field list'
+### The error may involve com.tqmars.cardrecycle.domain.entities.data.insertAndGetId-Inline
+### The error occurred while setting parameters
+### SQL: insert into tb_bank_account(id,withdraw_time,bank_name,tb_bank_id,withdraw_amount,service_charge,actual_account_amount,process_time,apply_time,process_status,tb_user_id,msg) values('0','null','招商银行','10','100','null','null','null','Sat Feb 04 22:28:43 CST 2017','0','1','处理中')
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'withdraw_time' in 'field list'
+[2017-02-04 22:36][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:36][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:36][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:36][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:36][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:36][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:36][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:36][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:36][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:36][com.tqmars.cardrecycle.webapi.GlobalExceptionHandler-defaultExceptionHandler] -
+### Error updating database.  Cause: com.mysql.jdbc.MysqlDataTruncation: Data truncation: Incorrect datetime value: 'null' for column 'withdraw_time' at row 1
+### The error may involve com.tqmars.cardrecycle.domain.entities.data.insertAndGetId-Inline
+### The error occurred while setting parameters
+### SQL: insert into tb_withdraw_record(id,withdraw_time,bank_name,tb_bank_id,withdraw_amount,service_charge,actual_account_amount,process_time,apply_time,process_status,tb_user_id,msg) values('0','null','招商银行','10','100','null','null','null','Sat Feb 04 22:36:41 CST 2017','0','1','处理中')
+### Cause: com.mysql.jdbc.MysqlDataTruncation: Data truncation: Incorrect datetime value: 'null' for column 'withdraw_time' at row 1
+[2017-02-04 22:48][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:48][com.tqmars.cardrecycle.webapi.GlobalExceptionHandler-defaultExceptionHandler] -
+### Error updating database.  Cause: com.mysql.jdbc.MysqlDataTruncation: Data truncation: Incorrect datetime value: 'null' for column 'withdraw_time' at row 1
+### The error may involve com.tqmars.cardrecycle.domain.entities.data.insertAndGetId-Inline
+### The error occurred while setting parameters
+### SQL: insert into tb_withdraw_record(id,withdraw_time,bank_name,tb_bank_id,withdraw_amount,service_charge,actual_account_amount,process_time,apply_time,process_status,tb_user_id,msg) values('0','null','招商银行','10','100','null','null','null','Sat Feb 04 22:48:02 CST 2017','0','1','处理中')
+### Cause: com.mysql.jdbc.MysqlDataTruncation: Data truncation: Incorrect datetime value: 'null' for column 'withdraw_time' at row 1
+[2017-02-04 22:49][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:49][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:49][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:49][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:49][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:49][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:49][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:49][com.tqmars.cardrecycle.webapi.GlobalExceptionHandler-defaultExceptionHandler] -
+### Error updating database.  Cause: com.mysql.jdbc.MysqlDataTruncation: Data truncation: Incorrect datetime value: 'Sat Feb 04 22:49:35 CST 2017' for column 'withdraw_time' at row 1
+### The error may involve com.tqmars.cardrecycle.domain.entities.data.insertAndGetId-Inline
+### The error occurred while setting parameters
+### SQL: insert into tb_withdraw_record(id,withdraw_time,bank_name,tb_bank_id,withdraw_amount,service_charge,actual_account_amount,process_time,apply_time,process_status,tb_user_id,msg) values('0','Sat Feb 04 22:49:35 CST 2017','招商银行','10','100','null','null','null','Sat Feb 04 22:49:35 CST 2017','0','1','处理中')
+### Cause: com.mysql.jdbc.MysqlDataTruncation: Data truncation: Incorrect datetime value: 'Sat Feb 04 22:49:35 CST 2017' for column 'withdraw_time' at row 1
+[2017-02-04 22:55][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:55][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:55][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:55][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:55][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:55][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:55][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:55][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:55][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:55][com.tqmars.cardrecycle.webapi.GlobalExceptionHandler-defaultExceptionHandler] -
+### Error updating database.  Cause: java.sql.SQLException: Incorrect decimal value: 'null' for column 'service_charge' at row 1
+### The error may involve com.tqmars.cardrecycle.domain.entities.data.insertAndGetId-Inline
+### The error occurred while setting parameters
+### SQL: insert into tb_withdraw_record(id,withdraw_time,bank_name,tb_bank_id,withdraw_amount,service_charge,actual_account_amount,process_time,apply_time,process_status,tb_user_id,msg) values('0','2017-02-04','招商银行','10','100','null','null','null','2017-02-04','0','1','处理中')
+### Cause: java.sql.SQLException: Incorrect decimal value: 'null' for column 'service_charge' at row 1
+[2017-02-04 22:58][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:58][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:58][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:58][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:58][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:58][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:58][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:58][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:58][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:58][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 22:58][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 22:58][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 23:08][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 23:11][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 23:20][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 23:21][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 23:22][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 23:23][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 23:24][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 23:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 23:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 23:26][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 23:26][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 23:26][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 23:29][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 23:29][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 23:29][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 23:29][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 23:29][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 23:29][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 23:30][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 23:30][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 23:30][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 23:30][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-04 23:30][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 23:30][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-04 23:30][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession

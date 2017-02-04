@@ -41,4 +41,14 @@ public class AddCardTypeInput {
 //    public void setItems(List<AddCardTypeItemInput> items) {
 //        this.items = items;
 //    }
+
+
+    @Override
+    public String toString() {
+        return "AddCardTypeInput{" +
+                "name='" + name + '\'' +
+                ", cardCode='" + cardCode + '\'' +
+                ", saleRatio=" + saleRatio +
+                '}';
+    }
 }

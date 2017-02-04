@@ -7,11 +7,11 @@ import com.tqmars.cardrecycle.infrastructure.serialization.Serialization;
  * Created by jjh on 1/15/17.
  */
 public abstract class BaseAppService {
-    protected String toSucessMsg(){
-        return toSucessMsg("操作成功");
+    protected String toSuccessMsg(){
+        return toSuccessMsg("操作成功");
     }
 
-    protected String toSucessMsg(String msg){
+    protected String toSuccessMsg(String msg){
         return Serialization.toJsonWithFormatter(null,msg, Code.SUCCESS);
     }
 

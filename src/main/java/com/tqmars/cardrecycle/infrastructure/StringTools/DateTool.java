@@ -21,4 +21,10 @@ public class DateTool {
         return s.format(now);
     }
 
+    public String getNowTime(String format){
+        Date now = new Date();
+        SimpleDateFormat s = new SimpleDateFormat(format);
+        return s.format(now);
+    }
+
 }

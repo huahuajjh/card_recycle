@@ -58,4 +58,16 @@ public class QueryBankAccountOutput {
     public void setBankId(Integer bankId) {
         this.bankId = bankId;
     }
+
+    @Override
+    public String toString() {
+        return "QueryBankAccountOutput{" +
+                "id=" + id +
+                ", cardNum='" + cardNum + '\'' +
+                ", name='" + name + '\'' +
+                ", userId=" + userId +
+                ", bankName='" + bankName + '\'' +
+                ", bankId=" + bankId +
+                '}';
+    }
 }

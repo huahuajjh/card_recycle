@@ -25,9 +25,6 @@ public class CardTypeDomainService implements ICardTypeDomainService{
     @Override
     public void addCardType(RechargeableCardType cardType) {
         int cardTypeId = _cardTypeRepository.insertAndGetId(cardType);
-//        List<RechargeableCardTypeItem> list = cardType.getItems();
-//        list.forEach(item->item.setId(cardTypeId));
-//        list.forEach(item->_cardTypeItemRepository.insert(item));
         _cardTypeRepository.commit();
     }
 
@@ -47,15 +44,22 @@ public class CardTypeDomainService implements ICardTypeDomainService{
     }
 
     @Override
-    public List<RechargeableCardType> query(String where) {
-        List<RechargeableCardType> list = _cardTypeRepository.getAllWithCondition(where);
+    public List<RechargeableCardType> query() {
+        List<RechargeableCardType> list = _cardTypeRepository.getAll();
         _cardTypeRepository.commit();
-        return  list;
+        return list;
     }
 
     @Override
     public void modifyCardTypeItem(RechargeableCardTypeItem item) {
-        _cardTypeItemRepository.update(item);
+        RechargeableCardTypeItem i = _cardTypeItemRepository.get(item.getId());
+        if(null == i){
+            _cardTypeItemRepository.commit();
+            return;
+        }
+
+        i.setSupportAmount(item.getSupportAmount());
+        _cardTypeItemRepository.update(i);
         _cardTypeItemRepository.commit();
     }
 

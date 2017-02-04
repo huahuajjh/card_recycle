@@ -116,6 +116,6 @@ public class TestUtil {
 //        System.out.println(Des.decode(Des.toDes3("123")));
 //        System.out.println(URLEncoder.encode("I39XTT61/SU="));
 //        System.out.println(new BigDecimal(12).toString());
-        System.out.println(BigDecimal.valueOf(12.88).multiply(BigDecimal.valueOf(0.5)));
+//        System.out.println(BigDecimal.valueOf(12.88).multiply(BigDecimal.valueOf(0.5)));
     }
 }

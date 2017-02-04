@@ -15,11 +15,30 @@ import javax.servlet.http.HttpServletResponse;
 public class TokenInterceptor  implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
+
+        httpServletResponse.setHeader("Access-Control-Allow-Credentials","true");
+        httpServletResponse.setHeader("Access-Control-Allow-Origin","http://192.168.1.4:8080");
+        httpServletResponse.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        httpServletResponse.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+        httpServletResponse.setContentType("application/json; charset=utf-8");
+
+
+        boolean admin = httpServletRequest.getRequestURI().contains("/admin/");
+
+        if(admin){
+            String adminToken = httpServletRequest.getParameter(Const.TOKEN);
+            Object adminSessionToken = httpServletRequest.getSession().getAttribute(Const.ADMIN_TOKEN);
+            if(null == adminToken || null == adminSessionToken || !adminToken.equals(adminSessionToken.toString())){
+                httpServletResponse.getWriter().write(Serialization.toJsonWithFormatter(null,"authentication failed | token失效,请重新获取", Code.BACKGROUND_AUTH_FAIL));
+                return false;
+            }
+            return true;
+        }
+
         String token = httpServletRequest.getParameter(Const.TOKEN);
         Object sessionToken = httpServletRequest.getSession().getAttribute(Const.TOKEN);
-        if(null == token || null == sessionToken || !token.equals(sessionToken.toString())){
-            httpServletResponse.setContentType("application/json; charset=utf-8");
-            httpServletResponse.getWriter().write(Serialization.toJsonWithFormatter(null,"authentication failed", Code.AUTH_FAIL));
+        if (null == token || null == sessionToken || !token.equals(sessionToken.toString())){
+            httpServletResponse.getWriter().write(Serialization.toJsonWithFormatter(null,"authentication failed | token失效,请重新获取", Code.AUTH_FAIL));
             return false;
         }
         return true;

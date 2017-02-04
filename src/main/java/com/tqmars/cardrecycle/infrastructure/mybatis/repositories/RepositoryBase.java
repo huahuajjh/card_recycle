@@ -153,7 +153,7 @@ public class RepositoryBase<TEntity extends IEntity<TPrimaryKey>, TPrimaryKey> i
 
     @Override
     public boolean isExists(String where) {
-        if(countWithCondition(where)>=0)
+        if(countWithCondition(where) > 0)
         {
             return true;
         }else {
