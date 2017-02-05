@@ -37,6 +37,10 @@
         <constructor-arg index="0" ref="DbContext"/>
     </bean>
 
+    <bean id="WithdrawRecordDetailsRepository" class="com.tqmars.cardrecycle.infrastructure.mybatis.repositories.WithdrawRecordDetailsRepository">
+        <constructor-arg index="0" ref="DbContext"/>
+    </bean>
+
     <bean id="CardTypeItemRepository" class="com.tqmars.cardrecycle.infrastructure.mybatis.repositories.CardTypeItemRepository">
         <constructor-arg index="0" ref="DbContext"/>
     </bean>
@@ -64,7 +68,7 @@
 
     <bean id="WithdrawDomainService" class="com.tqmars.cardrecycle.domain.services.withdraw.WithdrawDomainService">
         <constructor-arg index="0" ref="WalletRepository"/>
-        <constructor-arg index="1" ref="RepositoryBase"/>
+        <constructor-arg index="1" ref="WithdrawRecordRepository"/>
     </bean>
 
     <bean id="SaleDomainService" class="com.tqmars.cardrecycle.domain.services.sale.SaleDomainService">
@@ -107,7 +111,7 @@
     </bean>
 
     <bean id="AdminWithdrawAppService" class="com.tqmars.cardrecycle.application.admin.withdraw.AdminWithdrawAppService">
-        <constructor-arg index="0" ref="RepositoryBase"/>
+        <constructor-arg index="0" ref="WithdrawRecordDetailsRepository"/>
         <constructor-arg index="1" ref="WithdrawDomainService"/>
         <constructor-arg index="2" ref="WithdrawRecordRepository"/>
     </bean>

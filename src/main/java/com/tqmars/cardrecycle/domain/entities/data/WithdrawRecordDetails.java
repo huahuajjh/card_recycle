@@ -27,6 +27,9 @@ public class WithdrawRecordDetails extends EntityOfIntPrimaryKey {
     @Column(name = "balance")
     private BigDecimal balance;
 
+    @Column(name = "bank_name")
+    private String bankName;
+
     @Column(name = "process_status")
     private int processStatus;
 
@@ -49,7 +52,15 @@ public class WithdrawRecordDetails extends EntityOfIntPrimaryKey {
     private BigDecimal serviceCharge;
 
     @Column(name = "actual_account_amount")
-    private BigDecimal actualAmoung;
+    private BigDecimal actualAmount;
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
 
     public BigDecimal getServiceCharge() {
         return serviceCharge;
@@ -59,12 +70,12 @@ public class WithdrawRecordDetails extends EntityOfIntPrimaryKey {
         this.serviceCharge = serviceCharge;
     }
 
-    public BigDecimal getActualAmoung() {
-        return actualAmoung;
+    public BigDecimal getActualAmount() {
+        return actualAmount;
     }
 
-    public void setActualAmoung(BigDecimal actualAmoung) {
-        this.actualAmoung = actualAmoung;
+    public void setActualAmount(BigDecimal actualAmount) {
+        this.actualAmount = actualAmount;
     }
 
     public Date getApplyTime() {
@@ -153,5 +164,24 @@ public class WithdrawRecordDetails extends EntityOfIntPrimaryKey {
 
     public void setAccount(String account) {
         this.account = account;
+    }
+
+    @Override
+    public String toString() {
+        return "WithdrawRecordDetails{" +
+                "id=" + id +
+                ", businessId='" + businessId + '\'' +
+                ", name='" + name + '\'' +
+                ", withdrawAmount=" + withdrawAmount +
+                ", balance=" + balance +
+                ", processStatus=" + processStatus +
+                ", processTime=" + processTime +
+                ", cardNum='" + cardNum + '\'' +
+                ", account='" + account + '\'' +
+                ", msg='" + msg + '\'' +
+                ", applyTime=" + applyTime +
+                ", serviceCharge=" + serviceCharge +
+                ", actualAmount=" + actualAmount +
+                '}';
     }
 }

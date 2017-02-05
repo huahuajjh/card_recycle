@@ -1,5 +1,6 @@
 package com.tqmars.cardrecycle.application.admin.withdraw;
 
+import com.tqmars.cardrecycle.application.admin.withdraw.dto.DealwithWithdrawApplyInput;
 import com.tqmars.cardrecycle.application.admin.withdraw.dto.QueryWithdrawRecordInput;
 
 /**
@@ -7,6 +8,6 @@ import com.tqmars.cardrecycle.application.admin.withdraw.dto.QueryWithdrawRecord
  */
 public interface IAdminWithdrawAppService {
     String queryWithdrawRecord(QueryWithdrawRecordInput input);
-    String dealwithWithdrawApply(Integer id);
+    String dealwithWithdrawApply(DealwithWithdrawApplyInput input);
 
 }

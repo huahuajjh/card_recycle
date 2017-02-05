@@ -43,10 +43,11 @@ public class HttpClientTool {
         StringBuilder sb = new StringBuilder();
         if(null != parameters && parameters.size() > 0){
             parameters.entrySet().forEach(p->{
-                        if(sb.length() != 0){
-                            sb.append(p.getKey()).append(p.getValue());
+                        if(sb.length() == 0){
+                            sb.append(p.getKey()).append("=").append(p.getValue());
+                        }else {
+                            sb.append("&").append(p.getKey()).append("=").append(p.getValue());
                         }
-                sb.append("&").append(p.getKey()).append("=").append(p.getValue());
                     }
             );
         }

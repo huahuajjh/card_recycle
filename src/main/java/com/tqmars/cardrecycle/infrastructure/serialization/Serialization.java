@@ -12,10 +12,10 @@ import java.util.List;
 public final class Serialization {
     private static GsonBuilder builder = new GsonBuilder();
 
-    private static Gson gson = builder.create();
-
+    private static Gson gson;
     static {
-        builder.setDateFormat("yyyy/MM/dd");
+        builder.setDateFormat("yyyy-MM-dd");
+        gson = builder.create();
     }
 
     public static String toJson(Object obj) {

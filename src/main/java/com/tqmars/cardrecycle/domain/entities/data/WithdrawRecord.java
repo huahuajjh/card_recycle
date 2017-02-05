@@ -49,6 +49,28 @@ public class WithdrawRecord extends EntityOfIntPrimaryKey {
     @Column(name = "msg")
     private String msg;
 
+    @Column(name = "process_msg")
+    private String processMsg;
+
+    @Column(name = "bank_card_num")
+    private String cardNum;
+
+    public String getCardNum() {
+        return cardNum;
+    }
+
+    public void setCardNum(String cardNum) {
+        this.cardNum = cardNum;
+    }
+
+    public String getProcessMsg() {
+        return processMsg;
+    }
+
+    public void setProcessMsg(String processMsg) {
+        this.processMsg = processMsg;
+    }
+
     public String getMsg() {
         return msg;
     }
@@ -169,7 +191,9 @@ public class WithdrawRecord extends EntityOfIntPrimaryKey {
         this.processStatus = 1;
     }
 
-    public void userWithdraw(String bankName,Integer userId,Integer bankId,BigDecimal amount){
+    public void userWithdraw(String bankName,Integer userId,Integer bankId,BigDecimal amount,String bankAccount){
+
+        this.setCardNum(bankAccount);
         this.setWithdrawTime(Date.valueOf(DateTool.getInstance().getNowTime("yyyy-MM-dd")));
         this.setWithdrawAmount(amount);
         this.setBankName(bankName);
@@ -177,9 +201,16 @@ public class WithdrawRecord extends EntityOfIntPrimaryKey {
         this.setBankId(bankId);
         this.setProcessStatus(0);
         this.setMsg("处理中");
-        this.setActualAccountAmount(new BigDecimal("0.00"));
-        this.setServiceCharge(new BigDecimal("0.00"));
         this.setProcessTime(Date.valueOf(DateTool.getInstance().getNowTime("yyyy-MM-dd")));
         this.setApplyTime(Date.valueOf(DateTool.getInstance().getNowTime("yyyy-MM-dd")));
+
+        if(amount.compareTo(new BigDecimal("500")) < 0){
+            this.setServiceCharge(new BigDecimal("1.00"));
+            this.setActualAccountAmount(this.getWithdrawAmount());
+        }else {
+            this.setServiceCharge(new BigDecimal("0.00"));
+            this.setActualAccountAmount(this.getWithdrawAmount());
+        }
+
     }
 }

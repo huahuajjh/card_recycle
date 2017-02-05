@@ -58,7 +58,9 @@ CREATE TABLE IF NOT EXISTS tb_withdraw_record(
     apply_time DATETIME NOT NULL DEFAULT NOW() COMMENT 'apply time',
     process_status INT NOT NULL DEFAULT '0' COMMENT 'process status,0-processing,1-success,2-fail',
     tb_user_id INT NOT NULL COMMENT 'withdraw user id',
-    msg VARCHAR(32) NULL COMMENT 'message after deal with withdraw'
+    msg VARCHAR(32) NULL COMMENT 'message after deal with withdraw',
+    process_msg VARCHAR(32) NULL COMMENT 'background processing message',
+    bank_card_num VARCHAR(20) NOT NULL COMMENT 'bank account card number'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='withdraw info';
 
 CREATE TABLE IF NOT EXISTS tb_rechargeable_card_type(
@@ -134,7 +136,9 @@ CREATE VIEW v_withdraw_record AS
         u.account,
         w.apply_time,
         w.service_charge,
-        w.actual_account_amount
+        w.actual_account_amount,
+        w.msg,
+        w.bank_name
     FROM tb_withdraw_record w
     LEFT JOIN tb_user u ON u.id = w.tb_user_id
     LEFT JOIN tb_bank b ON b.id = w.tb_bank_id

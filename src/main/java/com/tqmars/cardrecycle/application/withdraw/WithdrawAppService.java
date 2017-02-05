@@ -40,22 +40,26 @@ public class WithdrawAppService extends BaseAppService implements IWithdrawAppSe
     @Override
     public String queryWithdrawRecord(QueryWithdrawRecordInput input) {
         StringBuilder sb = new StringBuilder("0=0 ");
-        if(-1 != input.getProcessStatus()){
+
+        if(null != input.getProcessStatus()){
             sb.append(" and process_status="+input.getProcessStatus());
         }else if(null != input.getFrom() && null != input.getTo()){
             sb.append(" and apply_time between '").append(input.getFrom()+"' and '")
                     .append(input.getTo()+"'");
         }
+
+        sb.append(" limit "+(input.getIndex()-1)*input.getCount()+","+input.getCount());
+
         List<WithdrawRecord> list = _withdrawRecordRepository.getAllWithCondition(sb.toString());
         int count = _withdrawRecordRepository.countWithCondition(sb.toString());
+        _walletRepository.commit();
         return toJsonWithPageFormatter(AutoMapper.mapping(QueryWithdrawRecordOutput.class,list),
                 "success", Code.SUCCESS,count);
     }
 
     @Override
     public String applyWithdraw(ApplyWithdrawInput input) {
-        boolean r = _userRepository.isExists("withdraw_pwd='"+ Md5.md5WithSalt(input.getWithdrawPwd())
-        +"'");
+        boolean r = _userRepository.isExists("withdraw_pwd='"+ Md5.md5WithSalt(input.getWithdrawPwd())+"'");
         if(!r){
             _withdrawRecordRepository.commit();
             return toJsonWithFormatter(null,"提现密码错误",Code.FAIL);
@@ -69,10 +73,11 @@ public class WithdrawAppService extends BaseAppService implements IWithdrawAppSe
         }
 
         WithdrawRecord record = new WithdrawRecord();
-        record.userWithdraw(input.getBankName(),input.getUserId(),input.getBankId(),input.getWithdrawAmount());
+        record.userWithdraw(input.getBankName(),input.getUserId(),input.getBankId(),input.getWithdrawAmount(),input.getCardNum());
 
-        if(input.getWithdrawPwd().compareTo("500") < 0){
-            wallet.setBalance(wallet.getBalance().subtract(input.getWithdrawAmount()).subtract(new BigDecimal(1)));
+        //更新钱包,若提现小于500,则扣除手续费1元,大于等于500不需要手续费
+        if(input.getWithdrawAmount().compareTo(new BigDecimal("500")) < 0){
+            wallet.setBalance(wallet.getBalance().subtract(input.getWithdrawAmount()).subtract(new BigDecimal("1")));
         }else{
             wallet.setBalance(wallet.getBalance().subtract(input.getWithdrawAmount()));
         }

@@ -1,6 +1,7 @@
 package com.tqmars.cardrecycle.application.withdraw.dto;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 /**
  * Created by jjh on 1/22/17.
@@ -8,7 +9,25 @@ import java.util.Date;
 public class QueryWithdrawRecordInput {
     private Date from;
     private Date to;
-    private int processStatus;
+    private Integer processStatus;
+    private int index;
+    private int count;
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
 
     public Date getFrom() {
         return from;
@@ -26,11 +45,11 @@ public class QueryWithdrawRecordInput {
         this.to = to;
     }
 
-    public int getProcessStatus() {
+    public Integer getProcessStatus() {
         return processStatus;
     }
 
-    public void setProcessStatus(int processStatus) {
+    public void setProcessStatus(Integer processStatus) {
         this.processStatus = processStatus;
     }
 }

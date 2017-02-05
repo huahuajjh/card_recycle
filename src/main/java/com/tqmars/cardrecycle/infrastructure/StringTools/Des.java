@@ -1,14 +1,12 @@
 package com.tqmars.cardrecycle.infrastructure.StringTools;
 
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+import sun.misc.BASE64Encoder;
 
 import javax.crypto.Cipher;
-import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.DESedeKeySpec;
 import javax.crypto.spec.IvParameterSpec;
-import java.net.URLEncoder;
 import java.security.Key;
 
 /**
@@ -21,28 +19,28 @@ public class Des {
 
     public static String toDes3(String data) throws Exception {
         Key deskey = null;
-        DESedeKeySpec spec = new DESedeKeySpec(secretKey .getBytes());
-        SecretKeyFactory keyfactory = SecretKeyFactory.getInstance( "DESede");
-        deskey = keyfactory.generateSecret( spec);
+        DESedeKeySpec spec = new DESedeKeySpec(secretKey.getBytes());
+        SecretKeyFactory keyfactory = SecretKeyFactory.getInstance("DESede");
+        deskey = keyfactory.generateSecret(spec);
 
-        Cipher cipher = Cipher.getInstance( "DESede/CFB/PKCS5Padding");
-        IvParameterSpec ips = new IvParameterSpec( vector.getBytes());
-        cipher.init(Cipher. ENCRYPT_MODE, deskey,ips);
-        byte[] encryptData = cipher.doFinal( data.getBytes( encoding));
-        return URLEncoder.encode(Md5.toBase64(encryptData));
+        Cipher cipher = Cipher.getInstance("DESede/CFB/PKCS5Padding");
+        IvParameterSpec ips = new IvParameterSpec(vector.getBytes());
+        cipher.init(Cipher.ENCRYPT_MODE, deskey,ips);
+        byte[] encryptData = cipher.doFinal(data.getBytes(encoding));
+        return new BASE64Encoder().encode(encryptData);
     }
 
     public static String decode(String encryptText) throws Exception {
         Key deskey = null;
         DESedeKeySpec spec = new DESedeKeySpec( secretKey.getBytes());
-        SecretKeyFactory keyfactory = SecretKeyFactory.getInstance( "DESede");
-        deskey = keyfactory. generateSecret( spec);
-        Cipher cipher = Cipher.getInstance( "DESede/CFB/PKCS5Padding" );
+        SecretKeyFactory keyfactory = SecretKeyFactory.getInstance("DESede");
+        deskey = keyfactory. generateSecret(spec);
+        Cipher cipher = Cipher.getInstance("DESede/CFB/PKCS5Padding");
         IvParameterSpec ips = new IvParameterSpec( vector.getBytes());
-        cipher. init(Cipher. DECRYPT_MODE, deskey, ips);
+        cipher. init(Cipher.DECRYPT_MODE,deskey,ips);
 
-        byte[] decryptData = cipher. doFinal(Base64. decode(encryptText ));
+        byte[] decryptData = cipher.doFinal(Base64.decode(encryptText));
 
-        return new String( decryptData, encoding);
+        return new String(decryptData,encoding);
     }
 }

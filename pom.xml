@@ -73,13 +73,6 @@
             </exclusions>
         </dependency>
 
-        <!-- spring热部署-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>springloaded</artifactId>-->
-            <!--<version>1.2.6.RELEASE</version>-->
-        <!--</dependency>-->
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
@@ -179,6 +172,20 @@
                     <server>tomcat7</server>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <dependencies>
+                    <!-- spring热部署-->
+                    <dependency>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>springloaded</artifactId>
+                        <version>1.2.6.RELEASE</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
         </plugins>
 
         <!--默认情况下,idea不会将java源代码文件夹下面的非java文件编译,因此类似于mybatis的xml映射文件如果放在

@@ -11,6 +11,15 @@ public class ApplyWithdrawInput {
     private String bankName;
     private Integer userId;
     private Integer bankId;
+    private String cardNum;
+
+    public String getCardNum() {
+        return cardNum;
+    }
+
+    public void setCardNum(String cardNum) {
+        this.cardNum = cardNum;
+    }
 
     public String getBankName() {
         return bankName;

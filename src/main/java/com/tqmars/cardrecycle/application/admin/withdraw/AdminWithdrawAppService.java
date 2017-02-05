@@ -1,12 +1,13 @@
 package com.tqmars.cardrecycle.application.admin.withdraw;
 
+import com.tqmars.cardrecycle.application.admin.withdraw.dto.DealwithWithdrawApplyInput;
 import com.tqmars.cardrecycle.application.admin.withdraw.dto.QueryWithdrawRecordInput;
 import com.tqmars.cardrecycle.application.admin.withdraw.dto.QueryWithdrawRecordOutput;
 import com.tqmars.cardrecycle.application.automapper.AutoMapper;
 import com.tqmars.cardrecycle.application.base.BaseAppService;
 import com.tqmars.cardrecycle.domain.entities.data.WithdrawRecord;
 import com.tqmars.cardrecycle.domain.entities.data.WithdrawRecordDetails;
-import com.tqmars.cardrecycle.domain.repositories.IRepository;
+import com.tqmars.cardrecycle.domain.repositories.IWithdrawRecordDetailsRepository;
 import com.tqmars.cardrecycle.domain.repositories.IWithdrawRecordRepository;
 import com.tqmars.cardrecycle.domain.services.withdraw.IWithdrawDomainService;
 import com.tqmars.cardrecycle.infrastructure.serialization.Code;
@@ -17,11 +18,11 @@ import java.util.List;
  * Created by jjh on 1/19/17.
  */
 public class AdminWithdrawAppService extends BaseAppService implements IAdminWithdrawAppService{
-    private IRepository<WithdrawRecordDetails,Integer> _withdrawRecordDetailsRepository;
+    private IWithdrawRecordDetailsRepository _withdrawRecordDetailsRepository;
     private IWithdrawDomainService _withdrawDomainService;
     private IWithdrawRecordRepository _withdrawRecordRepository;
 
-    public AdminWithdrawAppService(IRepository<WithdrawRecordDetails, Integer> _withdrawRecordDetailsRepository,
+    public AdminWithdrawAppService(IWithdrawRecordDetailsRepository _withdrawRecordDetailsRepository,
                                    IWithdrawDomainService _withdrawDomainService,
                                    IWithdrawRecordRepository _withdrawRecordRepository) {
         this._withdrawRecordDetailsRepository = _withdrawRecordDetailsRepository;
@@ -34,21 +35,30 @@ public class AdminWithdrawAppService extends BaseAppService implements IAdminWit
 
     @Override
     public String queryWithdrawRecord(QueryWithdrawRecordInput input) {
+        StringBuilder sb = new StringBuilder("0=0 ");
         if(null != input.getAccount()){
-            WithdrawRecordDetails record = _withdrawRecordDetailsRepository.single("account='"+input.getAccount()+"'");
-            _withdrawRecordDetailsRepository.commit();
-            return toJsonWithFormatter(AutoMapper.mapping(QueryWithdrawRecordOutput.class,record),"success", Code.SUCCESS);
+            sb.append("and account='"+input.getAccount()+"'");
         }
 
-        List<WithdrawRecordDetails> list = _withdrawRecordDetailsRepository.getAllWithCondition("process_status="+input.getStatus());
-        int count = _withdrawRecordDetailsRepository.countWithCondition("process_status="+input.getStatus());
+        if(null != input.getStatus()){
+            sb.append(" and process_status="+input.getStatus());
+        }
+
+        sb.append(" limit "+(input.getIndex()-1)*input.getCount()).append(",").append(input.getCount());
+        List<WithdrawRecordDetails> list = _withdrawRecordDetailsRepository.getAllWithCondition(sb.toString());
+        int count = _withdrawRecordDetailsRepository.countWithCondition(sb.toString());
         _withdrawRecordDetailsRepository.commit();
         return toJsonWithPageFormatter(AutoMapper.mapping(QueryWithdrawRecordOutput.class,list),"success",Code.SUCCESS,count);
+
+
     }
 
     @Override
-    public String dealwithWithdrawApply(Integer id) {
-        WithdrawRecord record = _withdrawRecordRepository.get(id);
-        return _withdrawDomainService.dealwithWithdraw(record);
+    public String dealwithWithdrawApply(DealwithWithdrawApplyInput input) {
+        WithdrawRecord record = _withdrawRecordRepository.get(input.getWithdrawRecordId());
+        record.setProcessMsg(input.getProcessMsg());
+        record.setProcessStatus(input.getStatus());
+        _withdrawDomainService.dealwithWithdraw(record);
+        return toJsonWithFormatter(null,"success",Code.SUCCESS);
     }
 }

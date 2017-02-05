@@ -106,8 +106,8 @@ public class TestUtil {
 
     @Test
     public void testThirdApi(){
-        ApiResult r = SaleCardApi.sale1Card("SZX","12.00","123131231","12312313");
-        System.out.println(r.getResultCode());
+//        ApiResult r = SaleCardApi.sale1Card("SZX","12.00","123131231","12312313");
+//        System.out.println(r.getResultCode());
     }
 
     @Test

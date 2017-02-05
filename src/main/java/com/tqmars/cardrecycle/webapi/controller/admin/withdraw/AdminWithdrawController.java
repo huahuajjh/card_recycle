@@ -1,6 +1,7 @@
 package com.tqmars.cardrecycle.webapi.controller.admin.withdraw;
 
 import com.tqmars.cardrecycle.application.admin.withdraw.IAdminWithdrawAppService;
+import com.tqmars.cardrecycle.application.admin.withdraw.dto.DealwithWithdrawApplyInput;
 import com.tqmars.cardrecycle.application.admin.withdraw.dto.QueryWithdrawRecordInput;
 import com.tqmars.cardrecycle.infrastructure.serialization.Serialization;
 import com.tqmars.cardrecycle.webapi.controller.ControllerBase;
@@ -29,7 +30,7 @@ public class AdminWithdrawController extends ControllerBase{
     /**
      * 条件查询提现申请记录
      * @param url -- /admin/withdraw/query
-     * @param condition -- QueryWithdrawRecordInput -- {status,account}
+     * @param condition -- QueryWithdrawRecordInput -- {status,account,index,count}
      * @return QueryWithdrawRecordOutput -- [{id,businessId(商户id),name,withdrawAmount(提现金额),balance(余额),processStatus(处理状态,0处理中,1成功,2失败),processTime(处理日期),
      * cardNum(充值卡卡号),msg(处理消息),account}]
      */
@@ -47,8 +48,8 @@ public class AdminWithdrawController extends ControllerBase{
      */
     @RequestMapping(value = "/deal")
     public String deal(@RequestParam(value = "input") String input){
-        _adminWithdrawAppService.dealwithWithdrawApply(Integer.valueOf(input));
-        return toSucessMsg();
+        DealwithWithdrawApplyInput in = Serialization.toObject(input,DealwithWithdrawApplyInput.class);
+        return _adminWithdrawAppService.dealwithWithdrawApply(in);
     }
 
 }

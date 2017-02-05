@@ -67,10 +67,13 @@ public class SaleDomainService implements ISaleDomainService {
         order.setProcessTime(new Date());
         order.setUesrId(input.getUserId());
 
-        ApiResult result = SaleCardApi.sale1Card(cardType.getCardCode(),
+        //调用第三方售卡接口
+        ApiResult result = SaleCardApi.sale1Card(
+                cardType.getCardCode(),
                 item.getSupportAmount().toString(),
                 input.getCardNum(),
-                input.getCardPwd());
+                input.getCardPwd(),
+                orderNo);
         if(result.getResultCode().equals("2")){
             order.setThirdOrderNo(result.getOrderNo());
         }

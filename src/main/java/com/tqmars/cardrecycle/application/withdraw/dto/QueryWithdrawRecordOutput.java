@@ -8,15 +8,23 @@ import java.util.Date;
  */
 public class QueryWithdrawRecordOutput {
     private Integer id;
-    private String name;
     private BigDecimal withdrawAmount;
     private int processStatus;
     private Date processTime;
     private String cardNum;
     private Date applyTime;
     private BigDecimal serviceCharge;
-    private BigDecimal actualAmoung;
+    private BigDecimal actualAccountAmount;
     private String bankName;
+    private String msg;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
     public Integer getId() {
         return id;
@@ -24,14 +32,6 @@ public class QueryWithdrawRecordOutput {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public BigDecimal getWithdrawAmount() {
@@ -82,12 +82,12 @@ public class QueryWithdrawRecordOutput {
         this.serviceCharge = serviceCharge;
     }
 
-    public BigDecimal getActualAmoung() {
-        return actualAmoung;
+    public BigDecimal getActualAccountAmount() {
+        return actualAccountAmount;
     }
 
-    public void setActualAmoung(BigDecimal actualAmoung) {
-        this.actualAmoung = actualAmoung;
+    public void setActualAccountAmount(BigDecimal actualAccountAmount) {
+        this.actualAccountAmount = actualAccountAmount;
     }
 
     public String getBankName() {
@@ -96,5 +96,21 @@ public class QueryWithdrawRecordOutput {
 
     public void setBankName(String bankName) {
         this.bankName = bankName;
+    }
+
+    @Override
+    public String toString() {
+        return "QueryWithdrawRecordOutput{" +
+                "id=" + id +
+                ", withdrawAmount=" + withdrawAmount +
+                ", processStatus=" + processStatus +
+                ", processTime=" + processTime +
+                ", cardNum='" + cardNum + '\'' +
+                ", applyTime=" + applyTime +
+                ", serviceCharge=" + serviceCharge +
+                ", actualAccountAmount=" + actualAccountAmount +
+                ", bankName='" + bankName + '\'' +
+                ", msg='" + msg + '\'' +
+                '}';
     }
 }

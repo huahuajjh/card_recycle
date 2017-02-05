@@ -1,11 +1,14 @@
 package com.tqmars.test.infrastructure.repositories;
 
+import com.tqmars.cardrecycle.application.withdraw.dto.QueryWithdrawRecordInput;
 import com.tqmars.cardrecycle.domain.entities.data.OrderDetails;
 import com.tqmars.cardrecycle.infrastructure.StringTools.DateTool;
 import com.tqmars.cardrecycle.infrastructure.StringTools.Md5;
 import com.tqmars.cardrecycle.infrastructure.StringTools.OrderNumGenerator;
+import com.tqmars.cardrecycle.infrastructure.serialization.Serialization;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +71,13 @@ public class TestUtil {
     @Test
     public void testDate(){
 //        System.out.println(DateTool.getInstance().getNowTime("yyyy-MM-dd HH:mm:ss"));
-        System.out.println(Date.valueOf("2014-01-01"));
+//        System.out.println(Date.valueOf("2014-01-01"));
+//        System.out.println(Serialization.toObject("{\"index\":1,\"count\":15,\"from\":\"1990-01-01\",\"to\":\"2990-01-01\"}", QueryWithdrawRecordInput.class).getFrom());
+//        System.out.println(Serialization.toObject("{\"index\":1,\"count\":15}", QueryWithdrawRecordInput.class).getCount());
+
+
+//        System.out.println(new BigDecimal("50").compareTo(new BigDecimal("500")));
+
     }
 
 }
