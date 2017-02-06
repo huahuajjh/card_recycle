@@ -22,7 +22,7 @@ public class DbContext {
         return ourInstance;
     }
 
-    public DbContext() {
+    private DbContext() {
     }
 
     static {

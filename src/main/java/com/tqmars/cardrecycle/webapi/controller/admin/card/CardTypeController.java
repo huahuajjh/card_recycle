@@ -49,8 +49,13 @@ public class CardTypeController extends ControllerBase {
     @RequestMapping(value = "/add")
     public String add(@RequestParam(value = "input") String input){
         AddCardTypeInput card = Serialization.toObject(input, AddCardTypeInput.class);
-        _adminCardTypeAppService.addCardType(card);
-        return toSucessMsg();
+        try {
+            _adminCardTypeAppService.addCardType(card);
+            return toSucessMsg();
+        }catch (RuntimeException e){
+            return toFailMsg(e.getMessage());
+        }
+
     }
 
     /**
@@ -62,8 +67,12 @@ public class CardTypeController extends ControllerBase {
     @RequestMapping(value = "/modify")
     public String modify(@RequestParam(value = "input") String input){
         ModifyCardTypeInput card = Serialization.toObject(input, ModifyCardTypeInput.class);
-        _adminCardTypeAppService.modifyCardType(card);
-        return toSucessMsg();
+        try {
+            _adminCardTypeAppService.modifyCardType(card);
+            return toSucessMsg();
+        }catch (RuntimeException e){
+            return toFailMsg(e.getMessage());
+        }
     }
 
     /**

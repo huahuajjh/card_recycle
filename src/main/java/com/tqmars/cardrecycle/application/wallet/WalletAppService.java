@@ -20,6 +20,10 @@ public class WalletAppService extends BaseAppService implements IWalletAppServic
     @Override
     public String getBalance(Integer userId) {
         Wallet wallet = _walletRepository.single("tb_user_id="+userId);
+        if(null == wallet){
+            _walletRepository.commit();
+            return toJsonWithFormatter("0","success", Code.SUCCESS);
+        }
         _walletRepository.commit();
         return toJsonWithFormatter(wallet.getBalance(),"success", Code.SUCCESS);
     }

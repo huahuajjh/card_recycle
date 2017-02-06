@@ -1,14 +1,14 @@
 package com.tqmars.cardrecycle.application.admin.order.dto;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by jjh on 1/18/17.
  */
 public class QueryOrderListOutput {
     private Integer id;
-    private Date orderTime;
+    private Timestamp orderTime;
     private String orderNum;
     private int orderStatus;
     private String name;
@@ -18,6 +18,33 @@ public class QueryOrderListOutput {
     private BigDecimal cardAmount;
     private float saleRatio;
     private String cardTypeName;
+    private Timestamp processTime;
+    private String account;
+    private BigDecimal actualAmount;
+
+    public BigDecimal getActualAmount() {
+        return actualAmount;
+    }
+
+    public void setActualAmount(BigDecimal actualAmount) {
+        this.actualAmount = actualAmount;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public Timestamp getProcessTime() {
+        return processTime;
+    }
+
+    public void setProcessTime(Timestamp processTime) {
+        this.processTime = processTime;
+    }
 
     public String getCardTypeName() {
         return cardTypeName;
@@ -35,11 +62,11 @@ public class QueryOrderListOutput {
         this.id = id;
     }
 
-    public Date getOrderTime() {
+    public Timestamp getOrderTime() {
         return orderTime;
     }
 
-    public void setOrderTime(Date orderTime) {
+    public void setOrderTime(Timestamp orderTime) {
         this.orderTime = orderTime;
     }
 

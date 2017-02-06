@@ -21,7 +21,6 @@ public class AdminCardTypeAppService extends BaseAppService implements IAdminCar
 
     @Override
     public void addCardType(AddCardTypeInput input) {
-        System.out.println(AutoMapper.mapping(RechargeableCardType.class, input).toString());
         _cardTypeDomainService.addCardType(AutoMapper.mapping(RechargeableCardType.class, input));
     }
 

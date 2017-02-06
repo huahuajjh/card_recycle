@@ -9,8 +9,26 @@ public class QueryOrderListInput {
     private String orderNum;
     private String cardNum;
     private int orderStatus;
-    private Date createFrom;
-    private Date createTo;
+    private Date from;
+    private Date to;
+    private int index;
+    private int count;
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
 
     public String getOrderNum() {
         return orderNum;
@@ -36,19 +54,19 @@ public class QueryOrderListInput {
         this.orderStatus = orderStatus;
     }
 
-    public Date getCreateFrom() {
-        return createFrom;
+    public Date getFrom() {
+        return from;
     }
 
-    public void setCreateFrom(Date createFrom) {
-        this.createFrom = createFrom;
+    public void setFrom(Date from) {
+        this.from = from;
     }
 
-    public Date getCreateTo() {
-        return createTo;
+    public Date getTo() {
+        return to;
     }
 
-    public void setCreateTo(Date createTo) {
-        this.createTo = createTo;
+    public void setTo(Date to) {
+        this.to = to;
     }
 }

@@ -5,7 +5,7 @@ import com.tqmars.cardrecycle.domain.entities.annotation.Column;
 import com.tqmars.cardrecycle.domain.entities.annotation.Table;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by jjh on 1/14/17.
@@ -25,7 +25,7 @@ public class Order extends EntityOfIntPrimaryKey {
     private Integer cardTypeItemId;
 
     @Column(name = "order_time")
-    private Date orderTime;
+    private Timestamp orderTime;
 
     @Column(name = "order_number")
     private String orderNum;
@@ -34,7 +34,7 @@ public class Order extends EntityOfIntPrimaryKey {
     private int orderStatus;
 
     @Column(name = "process_time")
-    private Date processTime;
+    private Timestamp processTime;
 
     @Column(name = "rechargeable_card_number")
     private String cardNum;
@@ -46,10 +46,21 @@ public class Order extends EntityOfIntPrimaryKey {
     private Integer cardId;
 
     @Column(name = "complete_time")
-    private Date completeTime;
+    private Timestamp completeTime;
 
     @Column(name = "third_order_no")
     private String thirdOrderNo;
+
+    @Column(name = "third_msg")
+    private String thirdMsg;
+
+    public String getThirdMsg() {
+        return thirdMsg;
+    }
+
+    public void setThirdMsg(String thirdMsg) {
+        this.thirdMsg = thirdMsg;
+    }
 
     public String getThirdOrderNo() {
         return thirdOrderNo;
@@ -93,11 +104,11 @@ public class Order extends EntityOfIntPrimaryKey {
         this.cardTypeItemId = cardTypeItemId;
     }
 
-    public Date getOrderTime() {
+    public Timestamp getOrderTime() {
         return orderTime;
     }
 
-    public void setOrderTime(Date orderTime) {
+    public void setOrderTime(Timestamp orderTime) {
         this.orderTime = orderTime;
     }
 
@@ -117,11 +128,11 @@ public class Order extends EntityOfIntPrimaryKey {
         this.orderStatus = orderStatus;
     }
 
-    public Date getProcessTime() {
+    public Timestamp getProcessTime() {
         return processTime;
     }
 
-    public void setProcessTime(Date processTime) {
+    public void setProcessTime(Timestamp processTime) {
         this.processTime = processTime;
     }
 
@@ -149,11 +160,11 @@ public class Order extends EntityOfIntPrimaryKey {
         this.cardId = cardId;
     }
 
-    public Date getCompleteTime() {
+    public Timestamp getCompleteTime() {
         return completeTime;
     }
 
-    public void setCompleteTime(Date completeTime) {
+    public void setCompleteTime(Timestamp completeTime) {
         this.completeTime = completeTime;
     }
 

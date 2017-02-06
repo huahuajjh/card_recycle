@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS tb_rechargeable_card_type(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
     name VARCHAR(30) NOT NULL UNIQUE COMMENT 'card name',
     card_shortcut VARCHAR(10) NOT NULL UNIQUE COMMENT 'card shortcut code',
-    sale_ratio FLOAT(4,2) NOT NULL COMMENT 'sale ratio'
+    sale_ratio FLOAT(4,3) NOT NULL COMMENT 'sale ratio'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='rechargeable card type info';
 
 CREATE TABLE IF NOT EXISTS tb_rechargeable_card_type_item(
@@ -82,7 +82,9 @@ CREATE TABLE IF NOT EXISTS tb_rechargeable_card(
     card_pwd VARCHAR(64) NOT NULL COMMENT 'card password',
     tb_rechargeable_card_type_id INT NOT NULL COMMENT 'card type id',
     tb_rechargeable_card_type_item_id INT NOT NULL COMMENT 'card item id',
-    tb_user_id INT NOT NULL COMMENT 'user id'
+    tb_user_id INT NOT NULL COMMENT 'user id',
+    sale_ratio FLOAT(4,3) NOT NULL COMMENT 'sale ratio',
+    support_amount DECIMAL NOT NULL COMMENT 'card support amount'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='rechargeable card info';
 
 CREATE TABLE IF NOT EXISTS tb_order(
@@ -90,15 +92,16 @@ CREATE TABLE IF NOT EXISTS tb_order(
     tb_user_id INT NOT NULL COMMENT 'user id',
     tb_rechargeable_card_type_id INT NOT NULL COMMENT 'card type id',
     tb_rechargeable_card_type_item_id INT NOT NULL COMMENT 'card item id',
-    order_time DATETIME NOT NULL DEFAULT NOW() COMMENT 'place a order time',
+    order_time DATE NOT NULL DEFAULT NOW() COMMENT 'place a order time',
     order_number VARCHAR(64) NOT NULL UNIQUE COMMENT 'order number',
     order_status INT NOT NULL DEFAULT '0' COMMENT '0-processing,1-success,2-fail',
     process_time DATETIME NOT NULL COMMENT 'process order time',
     rechargeable_card_number VARCHAR(30) NOT NULL COMMENT 'rechargeable card number',
     actual_amount DECIMAL(10,2) NOT NULL COMMENT 'sale amount, amount=(card amount)*(sale ratio)',
     tb_rechargeable_card_id INT NOT NULL COMMENT 'card id',
-    third_order_no VARCHAR(64) NOT NULL UNIQUE COMMENT 'third order number',
-    complete_time DATETIME NOT NULL COMMENT 'order completed time'
+    third_order_no VARCHAR(64) NULL COMMENT 'third order number',
+    complete_time DATETIME NOT NULL COMMENT 'order completed time',
+    third_msg VARCHAR(32) NULL COMMENT 'third api return message'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='order info';
 
 CREATE VIEW v_order AS
@@ -107,14 +110,18 @@ CREATE VIEW v_order AS
         o.order_number,
         o.order_time,
         o.order_status,
+        o.process_time,
+        u.account,
+        o.actual_amount,
         u.name,
         u.tel,
+        u.id as tb_user_id,
         u.id_card_num,
         cti.support_amount,
         c.card_number,
         ct.sale_ratio,
         ct.name as cardTypeName,
-            o.tb_rechargeable_card_type_id,
+        o.tb_rechargeable_card_type_id,
         o.tb_rechargeable_card_type_item_id,
         o.tb_rechargeable_card_id
     FROM tb_order o

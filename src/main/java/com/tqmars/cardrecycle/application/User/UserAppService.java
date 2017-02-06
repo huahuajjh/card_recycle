@@ -4,20 +4,28 @@ import com.tqmars.cardrecycle.application.User.dto.*;
 import com.tqmars.cardrecycle.application.automapper.AutoMapper;
 import com.tqmars.cardrecycle.application.base.BaseAppService;
 import com.tqmars.cardrecycle.domain.entities.data.User;
+import com.tqmars.cardrecycle.domain.entities.data.Wallet;
 import com.tqmars.cardrecycle.domain.repositories.IUserRepository;
+import com.tqmars.cardrecycle.domain.repositories.IWalletRepository;
 import com.tqmars.cardrecycle.infrastructure.StringTools.Md5;
 import com.tqmars.cardrecycle.infrastructure.serialization.Code;
+
+import java.math.BigDecimal;
 
 /**
  * Created by jjh on 1/14/17.
  */
 public class UserAppService extends BaseAppService implements IUserAppService{
     private IUserRepository _userRepository;
+    private IWalletRepository walletRepository;
 //    private IBankAccountRepository _bankAccountRepository;
 
-    public UserAppService(IUserRepository repository){
+    public UserAppService(IUserRepository repository,IWalletRepository walletRepository){
         this._userRepository = repository;
+        this.walletRepository = walletRepository;
+
         this._userRepository.setEntityClass(User.class);
+        this.walletRepository.setEntityClass(Wallet.class);
     }
 
     @Override
@@ -42,9 +50,14 @@ public class UserAppService extends BaseAppService implements IUserAppService{
         input.setBusinessPwd(Md5.md5WithSalt(input.getBusinessPwd()));
         input.setPwd(Md5.md5WithSalt(input.getPwd()));
         input.setWithdrawPwd(input.getPwd());
-        System.out.println(input.toString());
 
-        _userRepository.insert(AutoMapper.mapping(User.class,input));
+        Integer userId = _userRepository.insertAndGetId(AutoMapper.mapping(User.class,input));
+
+        Wallet wallet = new Wallet();
+        wallet.setBalance(new BigDecimal("0.00"));
+        wallet.setUserId(userId);
+
+        walletRepository.insert(wallet);
         _userRepository.commit();
 
     }

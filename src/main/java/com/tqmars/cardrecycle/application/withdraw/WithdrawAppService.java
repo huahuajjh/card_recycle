@@ -39,7 +39,7 @@ public class WithdrawAppService extends BaseAppService implements IWithdrawAppSe
 
     @Override
     public String queryWithdrawRecord(QueryWithdrawRecordInput input) {
-        StringBuilder sb = new StringBuilder("0=0 ");
+        StringBuilder sb = new StringBuilder("tb_user_id="+input.getUserId());
 
         if(null != input.getProcessStatus()){
             sb.append(" and process_status="+input.getProcessStatus());

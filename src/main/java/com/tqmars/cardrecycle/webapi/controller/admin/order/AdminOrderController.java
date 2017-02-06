@@ -2,6 +2,7 @@ package com.tqmars.cardrecycle.webapi.controller.admin.order;
 
 import com.tqmars.cardrecycle.application.admin.order.IAdminOrderAppService;
 import com.tqmars.cardrecycle.application.admin.order.dto.QueryOrderListInput;
+import com.tqmars.cardrecycle.application.admin.order.dto.QueryOrderListOutput;
 import com.tqmars.cardrecycle.infrastructure.serialization.Serialization;
 import com.tqmars.cardrecycle.webapi.controller.ControllerBase;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +35,8 @@ public class AdminOrderController extends ControllerBase {
     @RequestMapping(value = "/query")
     public String query(@RequestParam(value = "condition") String condition){
         QueryOrderListInput input = Serialization.toObject(condition, QueryOrderListInput.class);
-        return  _adminOrderAppService.queryOrderList(input);
+        String r = _adminOrderAppService.queryOrderList(input);
+        return r;
     }
 
 }

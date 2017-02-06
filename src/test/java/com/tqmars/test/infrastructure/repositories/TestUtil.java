@@ -1,5 +1,6 @@
 package com.tqmars.test.infrastructure.repositories;
 
+import com.google.gson.reflect.TypeToken;
 import com.tqmars.cardrecycle.application.withdraw.dto.QueryWithdrawRecordInput;
 import com.tqmars.cardrecycle.domain.entities.data.OrderDetails;
 import com.tqmars.cardrecycle.infrastructure.StringTools.DateTool;
@@ -8,8 +9,10 @@ import com.tqmars.cardrecycle.infrastructure.StringTools.OrderNumGenerator;
 import com.tqmars.cardrecycle.infrastructure.serialization.Serialization;
 import org.junit.Test;
 
+import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,7 +80,41 @@ public class TestUtil {
 
 
 //        System.out.println(new BigDecimal("50").compareTo(new BigDecimal("500")));
+//        String s = "[{\"name\":\"zs\",\"age\":\"12\"},{\"name\":\"zs\",\"age\":\"11\"},{\"name\":\"zs\",\"age\":\"13\"}]";
+//        System.out.println(((P)(Serialization.toList(s).get(2))).getAge());
+//        Type t = new TypeToken<List<P>>(){}.getType();
+//        System.out.println(((P)Serialization.toList(s,t).get(0)).getName());
+        System.out.println(DateTool.getInstance().getNowSqlTime());
 
+    }
+
+    public class P{
+        private String name;
+        private int age;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
+
+        @Override
+        public String toString() {
+            return "P{" +
+                    "name='" + name + '\'' +
+                    ", age=" + age +
+                    '}';
+        }
     }
 
 }

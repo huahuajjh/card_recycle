@@ -18,13 +18,17 @@ public class Des {
     private final static String encoding = "utf-8";
 
     public static String toDes3(String data) throws Exception {
-        Key deskey = null;
-        DESedeKeySpec spec = new DESedeKeySpec(secretKey.getBytes());
-        SecretKeyFactory keyfactory = SecretKeyFactory.getInstance("DESede");
-        deskey = keyfactory.generateSecret(spec);
+        return toDes3(data,vector,secretKey);
+    }
 
-        Cipher cipher = Cipher.getInstance("DESede/CFB/PKCS5Padding");
-        IvParameterSpec ips = new IvParameterSpec(vector.getBytes());
+    public static String toDes3(String data,String iv,String secret) throws Exception {
+        DESedeKeySpec spec = new DESedeKeySpec(secret.getBytes(encoding));
+        SecretKeyFactory keyfactory = SecretKeyFactory.getInstance("DESede");
+        Key deskey = keyfactory.generateSecret(spec);
+
+        Cipher cipher = Cipher.getInstance("DESede/CFB8/PKCS5Padding");
+
+        IvParameterSpec ips = new IvParameterSpec(iv.getBytes(encoding));
         cipher.init(Cipher.ENCRYPT_MODE, deskey,ips);
         byte[] encryptData = cipher.doFinal(data.getBytes(encoding));
         return new BASE64Encoder().encode(encryptData);

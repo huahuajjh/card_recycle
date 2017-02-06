@@ -4,6 +4,8 @@ import com.tqmars.cardrecycle.domain.entities.EntityOfIntPrimaryKey;
 import com.tqmars.cardrecycle.domain.entities.annotation.Column;
 import com.tqmars.cardrecycle.domain.entities.annotation.Table;
 
+import java.math.BigDecimal;
+
 /**
  * Created by jjh on 1/14/17.
  */
@@ -26,6 +28,28 @@ public class RechargeableCard extends EntityOfIntPrimaryKey {
 
     @Column(name = "tb_rechargeable_card_type_item_id")
     private Integer cardItemId;
+
+    @Column(name = "sale_ratio")
+    private float saleRatio;
+
+    @Column(name = "support_amount")
+    private BigDecimal supportAmount;
+
+    public float getSaleRatio() {
+        return saleRatio;
+    }
+
+    public void setSaleRatio(float saleRatio) {
+        this.saleRatio = saleRatio;
+    }
+
+    public BigDecimal getSupportAmount() {
+        return supportAmount;
+    }
+
+    public void setSupportAmount(BigDecimal supportAmount) {
+        this.supportAmount = supportAmount;
+    }
 
     public Integer getCardTypeId() {
         return cardTypeId;

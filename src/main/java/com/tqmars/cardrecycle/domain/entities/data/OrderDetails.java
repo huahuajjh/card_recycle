@@ -5,7 +5,8 @@ import com.tqmars.cardrecycle.domain.entities.annotation.Column;
 import com.tqmars.cardrecycle.domain.entities.annotation.Table;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by jjh on 1/18/17.
@@ -16,11 +17,20 @@ public class OrderDetails extends EntityOfIntPrimaryKey {
     @Column(name = "id")
     private Integer id;
 
+    @Column(name = "account")
+    private String account;
+
+    @Column(name = "tb_user_id")
+    private Integer userId;
+
     @Column(name = "order_time")
-    private Date orderTime;
+    private Timestamp orderTime;
 
     @Column(name = "order_number")
     private String orderNum;
+
+    @Column(name = "actual_amount")
+    private BigDecimal actualAmount;
 
     @Column(name = "order_status")
     private int orderStatus;
@@ -43,7 +53,7 @@ public class OrderDetails extends EntityOfIntPrimaryKey {
     @Column(name = "sale_ratio")
     private float saleRatio;
 
-    @Column(name = "name")
+    @Column(name = "cardTypeName")
     private String cardTypeName;
 
     @Column(name = "tb_rechargeable_card_type_id")
@@ -54,6 +64,41 @@ public class OrderDetails extends EntityOfIntPrimaryKey {
 
     @Column(name = "tb_rechargeable_card_type_item_id")
     private Integer cardTypeItemId;
+
+    @Column(name = "process_time")
+    private Timestamp processTime;
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public BigDecimal getActualAmount() {
+        return actualAmount;
+    }
+
+    public void setActualAmount(BigDecimal actualAmount) {
+        this.actualAmount = actualAmount;
+    }
+
+    public Timestamp getProcessTime() {
+        return processTime;
+    }
+
+    public void setProcessTime(Timestamp processTime) {
+        this.processTime = processTime;
+    }
 
     public String getCardTypeName() {
         return cardTypeName;
@@ -97,11 +142,11 @@ public class OrderDetails extends EntityOfIntPrimaryKey {
         this.id = id;
     }
 
-    public Date getOrderTime() {
+    public Timestamp getOrderTime() {
         return orderTime;
     }
 
-    public void setOrderTime(Date orderTime) {
+    public void setOrderTime(Timestamp orderTime) {
         this.orderTime = orderTime;
     }
 

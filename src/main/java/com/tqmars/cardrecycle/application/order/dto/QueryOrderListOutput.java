@@ -1,7 +1,7 @@
 package com.tqmars.cardrecycle.application.order.dto;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by jjh on 1/21/17.
@@ -10,15 +10,33 @@ public class QueryOrderListOutput {
     private Integer id = 0;
     private Integer cardTypeId;
     private Integer cardTypeItemId;
-    private Date orderTime;
+    private Timestamp orderTime;
     private String orderNum;
     private int orderStatus;
-    private Date processTime;
+    private Timestamp processTime;
     private String cardNum;
     private BigDecimal actualAmount;
-    private Date completeTime;
+    private Timestamp completeTime;
     private Integer cardId;
     private String cardTypeName;
+    private BigDecimal cardAmount;
+    private float saleRatio;
+
+    public float getSaleRatio() {
+        return saleRatio;
+    }
+
+    public void setSaleRatio(float saleRatio) {
+        this.saleRatio = saleRatio;
+    }
+
+    public BigDecimal getCardAmount() {
+        return cardAmount;
+    }
+
+    public void setCardAmount(BigDecimal cardAmount) {
+        this.cardAmount = cardAmount;
+    }
 
     public String getCardTypeName() {
         return cardTypeName;
@@ -52,11 +70,11 @@ public class QueryOrderListOutput {
         this.cardTypeItemId = cardTypeItemId;
     }
 
-    public Date getOrderTime() {
+    public Timestamp getOrderTime() {
         return orderTime;
     }
 
-    public void setOrderTime(Date orderTime) {
+    public void setOrderTime(Timestamp orderTime) {
         this.orderTime = orderTime;
     }
 
@@ -76,11 +94,11 @@ public class QueryOrderListOutput {
         this.orderStatus = orderStatus;
     }
 
-    public Date getProcessTime() {
+    public Timestamp getProcessTime() {
         return processTime;
     }
 
-    public void setProcessTime(Date processTime) {
+    public void setProcessTime(Timestamp processTime) {
         this.processTime = processTime;
     }
 
@@ -108,11 +126,11 @@ public class QueryOrderListOutput {
         this.cardId = cardId;
     }
 
-    public Date getCompleteTime() {
+    public Timestamp getCompleteTime() {
         return completeTime;
     }
 
-    public void setCompleteTime(Date completeTime) {
+    public void setCompleteTime(Timestamp completeTime) {
         this.completeTime = completeTime;
     }
 }

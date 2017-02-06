@@ -15,4 +15,6 @@ public final class Code {
     public static int NOT_EXISTS_ACCOUNT = 605;
     public static int ACCOUNT_EXISTS_ERR = 606;
     public static int BACKGROUND_AUTH_FAIL = 606;
+
+    public static int ARGUMENT_ERR = 700;
 }

@@ -23,7 +23,7 @@
                 <!--测试链接的sql语句-->
                 <property name="poolPingQuery" value="select version()" />
                 <!--每次都检测链接-->
-                <property name="poolPingConnectionsNotUsedFor" value="0"/>
+                <property name="poolPingConnectionsNotUsedFor" value="60"/>
             </dataSource>
         </environment>
     </environments>
