@@ -1,18 +1,17 @@
 package com.tqmars.test.infrastructure.repositories;
 
-import com.google.gson.reflect.TypeToken;
-import com.tqmars.cardrecycle.application.withdraw.dto.QueryWithdrawRecordInput;
+import com.tqmars.cardrecycle.application.admin.order.IAdminOrderAppService;
+import com.tqmars.cardrecycle.application.admin.order.dto.QueryOrderListInput;
+import com.tqmars.cardrecycle.domain.entities.data.Admin;
 import com.tqmars.cardrecycle.domain.entities.data.OrderDetails;
+import com.tqmars.cardrecycle.domain.entities.data.User;
+import com.tqmars.cardrecycle.domain.repositories.IRepository;
 import com.tqmars.cardrecycle.infrastructure.StringTools.DateTool;
 import com.tqmars.cardrecycle.infrastructure.StringTools.Md5;
-import com.tqmars.cardrecycle.infrastructure.StringTools.OrderNumGenerator;
-import com.tqmars.cardrecycle.infrastructure.serialization.Serialization;
+import com.tqmars.cardrecycle.infrastructure.servicelocator.ServiceLocator;
 import org.junit.Test;
+import org.springframework.scheduling.annotation.Async;
 
-import java.lang.reflect.Type;
-import java.math.BigDecimal;
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,33 +87,55 @@ public class TestUtil {
 
     }
 
-    public class P{
-        private String name;
-        private int age;
+    @Test
+    public void test(){
+        s();
+        s1();
+    }
 
-        public String getName() {
-            return name;
+    @Async
+    public void s(){
+        System.out.println("task1 start");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+        System.out.println("task1 done");
+    }
 
-        public void setName(String name) {
-            this.name = name;
+    @Async
+    public void s1(){
+        System.out.println("task2 start");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+        System.out.println("task2 done");
+    }
 
-        public int getAge() {
-            return age;
-        }
+    @Test
+    public void testSingleton(){
+//        IRepository<User,Integer> r1 = (IRepository<User,Integer>)ServiceLocator.getInstance().getService("RepositoryBase",IRepository.class);
+//
+//        r1.setEntityClass(User.class);
+//        System.out.println(r1.countWithCondition("id>0 limit 1,2"));
 
-        public void setAge(int age) {
-            this.age = age;
-        }
+//        IRepository<Admin,Integer> r2 = (IRepository<Admin,Integer>)ServiceLocator.getInstance().getService("RepositoryBase",IRepository.class);
+//        r2.setEntityClass(Admin.class);
 
-        @Override
-        public String toString() {
-            return "P{" +
-                    "name='" + name + '\'' +
-                    ", age=" + age +
-                    '}';
-        }
+//        System.out.println(r1.hashCode());
+//        System.out.println(r2.hashCode());
+//        System.out.println(r1.get(1).getName());
+
+//        IAdminOrderAppService service = ServiceLocator.getInstance().getService("AdminOrderAppService",IAdminOrderAppService.class);
+//        QueryOrderListInput input = new QueryOrderListInput();
+//        input.setIndex(1);
+//        input.setCount(15);
+//        System.out.println(service.queryOrderList(input));
+
+
     }
 
 }

@@ -3,6 +3,8 @@ package com.tqmars.cardrecycle.domain.entities.data;
 import com.tqmars.cardrecycle.domain.entities.EntityOfIntPrimaryKey;
 import com.tqmars.cardrecycle.domain.entities.annotation.Column;
 import com.tqmars.cardrecycle.domain.entities.annotation.Table;
+import com.tqmars.cardrecycle.infrastructure.StringTools.DateTool;
+import com.tqmars.cardrecycle.infrastructure.StringTools.OrderNumGenerator;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -166,6 +168,31 @@ public class Order extends EntityOfIntPrimaryKey {
 
     public void setCompleteTime(Timestamp completeTime) {
         this.completeTime = completeTime;
+    }
+
+    public static Order generateOrder(String cardNum,
+                                      Integer cardId,
+                                      Integer cardTypeId,
+                                      Integer cardTypeItemId,
+                                      Integer userId){
+        //初始化订单
+        Order order = new Order();
+        order.setCardNum(cardNum);
+
+        //卡面值*寄售比例
+        order.setActualAmount(new BigDecimal("0.00"));
+        order.setCardId(cardId);
+        order.setCardTypeId(cardTypeId);
+        order.setCardTypeItemId(cardTypeItemId);
+        //产生订单号
+        order.setOrderNum(OrderNumGenerator.generateOrderNum());
+        order.setOrderTime(DateTool.getInstance().getNowSqlTime());
+        order.setOrderStatus(0);
+        order.setProcessTime(DateTool.getInstance().getNowSqlTime());
+        order.setUesrId(userId);
+        order.setCompleteTime(DateTool.getInstance().getNowSqlTime());
+
+        return order;
     }
 
     @Override

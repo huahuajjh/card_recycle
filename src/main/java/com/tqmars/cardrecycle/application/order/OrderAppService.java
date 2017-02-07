@@ -52,7 +52,7 @@ public class OrderAppService extends BaseAppService implements IOrderAppService 
         sb.append(" limit ").append((input.getIndex()-1) * input.getCount()).append(",").append(input.getCount());
 
         List<OrderDetails> list = _orderDetailsRepository.getAllWithCondition(sb.toString());
-        int count = _orderDetailsRepository.countWithCondition(sb.toString());
+        int count = _orderDetailsRepository.countWithCondition("tb_user_id="+input.getUserId());
         _orderDetailsRepository.commit();
         return toJsonWithPageFormatter(AutoMapper.mapping(QueryOrderListOutput.class,list),"success",Code.SUCCESS,count);
     }

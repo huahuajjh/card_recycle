@@ -28,8 +28,8 @@ public class TestSale1Card {
         input.setCardPwd("123456789454545874");
         input.setUserId(1);
         input.setCardTypeId(8);
-        ApiResult r = saleAppService.sale1Card(input);
-        p(r);
+//        ApiResult r = saleAppService.sale1Card(input);
+//        p(r);
 
     }
 

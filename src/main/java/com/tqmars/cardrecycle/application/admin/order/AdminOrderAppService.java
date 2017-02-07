@@ -26,7 +26,7 @@ public class AdminOrderAppService extends BaseAppService implements IAdminOrderA
         StringBuilder sb = new StringBuilder(" 0=0 ");
 
         if(null != input.getOrderNum()){
-            sb.append(" and ").append(" order_number=").append(input.getOrderNum());
+            sb.append(" and ").append(" order_number='").append(input.getOrderNum()+"'");
         }
 
         if(null != input.getCardNum()){
@@ -51,7 +51,7 @@ public class AdminOrderAppService extends BaseAppService implements IAdminOrderA
 
         List<OrderDetails> list = _orderDetailRepository.getAllWithCondition(sb.toString());
 
-        int count = _orderDetailRepository.countWithCondition(sb.toString());
+        int count = _orderDetailRepository.count();
         _orderDetailRepository.commit();
         return toJsonWithPageFormatter(AutoMapper.mapping(QueryOrderListOutput.class,list),"success",Code.SUCCESS,count);
     }

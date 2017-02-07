@@ -101,6 +101,20 @@ public class RechargeableCard extends EntityOfIntPrimaryKey {
         this.userId = userId;
     }
 
+    public static RechargeableCard createCard(String cardNo,Integer userId,Integer cardItemId,String cardPwd,Integer cardTypeId,BigDecimal amount,float saleRatio){
+        RechargeableCard card = new RechargeableCard();
+
+        card.setCardNum(cardNo);
+        card.setUserId(userId);
+        card.setCardItemId(cardItemId);
+        card.setCardPwd(cardPwd);
+        card.setCardTypeId(cardTypeId);
+        card.setSupportAmount(amount);
+        card.setSaleRatio(saleRatio);
+
+        return card;
+    }
+
     @Override
     public String toString() {
         return "RechargeableCard{" +

@@ -21,6 +21,15 @@ public class QueryOrderListOutput {
     private String cardTypeName;
     private BigDecimal cardAmount;
     private float saleRatio;
+    private String thirdMsg;
+
+    public String getThirdMsg() {
+        return thirdMsg;
+    }
+
+    public void setThirdMsg(String thirdMsg) {
+        this.thirdMsg = thirdMsg;
+    }
 
     public float getSaleRatio() {
         return saleRatio;

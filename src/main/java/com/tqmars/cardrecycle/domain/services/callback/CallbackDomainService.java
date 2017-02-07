@@ -83,7 +83,5 @@ public class CallbackDomainService implements ICallbackDomainService {
             orderRepository.commit();
         }
 
-
-
     }
 }

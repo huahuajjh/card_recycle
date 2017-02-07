@@ -9,6 +9,7 @@ import com.tqmars.cardrecycle.infrastructure.mybatis.repositories.exceptions.App
 import com.tqmars.cardrecycle.infrastructure.mybatis.util.MapToEntityTool;
 import com.tqmars.cardrecycle.infrastructure.mybatis.util.SqlStatementTool;
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,8 @@ import java.util.Map;
  */
 public class RepositoryBase<TEntity extends IEntity<TPrimaryKey>, TPrimaryKey> implements IRepository<TEntity, TPrimaryKey> {
     private Class<TEntity> entityClass;
+
+    @Autowired
     private DbContext context;
 
     private static String SELECT_LAST_ID = "select_last_id";
@@ -98,7 +101,6 @@ public class RepositoryBase<TEntity extends IEntity<TPrimaryKey>, TPrimaryKey> i
                 .append("values(")
                 .append(SqlStatementTool.getColumnsAndValues(entity).getVal())
                 .append(")");
-        System.out.println(sb.toString());
         map.put("id",0);
         map.put("value",sb.toString());
         context.getSession().insert(getId4Mapper(INSERT_AND_GET_ID),map);

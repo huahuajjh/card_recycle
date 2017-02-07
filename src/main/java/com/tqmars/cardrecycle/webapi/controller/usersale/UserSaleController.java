@@ -3,7 +3,6 @@ package com.tqmars.cardrecycle.webapi.controller.usersale;
 import com.google.gson.reflect.TypeToken;
 import com.tqmars.cardrecycle.application.sale.ISaleAppService;
 import com.tqmars.cardrecycle.application.sale.dto.Sale1CardInput;
-import com.tqmars.cardrecycle.domain.services.sale.thirdapi.ApiResult;
 import com.tqmars.cardrecycle.infrastructure.serialization.Code;
 import com.tqmars.cardrecycle.infrastructure.serialization.Serialization;
 import com.tqmars.cardrecycle.webapi.controller.ControllerBase;
@@ -32,14 +31,13 @@ public class UserSaleController extends ControllerBase {
 
     @RequestMapping(value = "/sale")
     public String sale(@RequestParam(value = "saleInfo") String saleInfo){
-        Sale1CardInput input = Serialization.toObject(saleInfo, Sale1CardInput.class);
-        System.out.println(input);
-        if(null == input){
+        List<Sale1CardInput> list = Serialization.toList(saleInfo, new TypeToken<List<Sale1CardInput>>(){}.getType());
+        if(null == list || list.size() == 0){
             return toJsonWithFormatter(null,"参数错误",Code.ARGUMENT_ERR);
         }
-//        List<Sale1CardInput> inputs = Serialization.toList(saleInfo, new TypeToken<List<Sale1CardInput>>(){}.getType());
-        ApiResult r = service.sale1Card(input);
-        return toJsonWithFormatter(null,r.getMessage(), Code.SUCCESS);
+
+        service.saleListCard(list);
+        return toJsonWithFormatter(null,"success", Code.SUCCESS);
     }
 
 }

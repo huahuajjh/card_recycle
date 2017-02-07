@@ -68,6 +68,17 @@ public class OrderDetails extends EntityOfIntPrimaryKey {
     @Column(name = "process_time")
     private Timestamp processTime;
 
+    @Column(name = "third_msg")
+    private String thirdMsg;
+
+    public String getThirdMsg() {
+        return thirdMsg;
+    }
+
+    public void setThirdMsg(String thirdMsg) {
+        this.thirdMsg = thirdMsg;
+    }
+
     public Integer getUserId() {
         return userId;
     }

@@ -70,6 +70,20 @@ CREATE TABLE IF NOT EXISTS tb_rechargeable_card_type(
     sale_ratio FLOAT(4,3) NOT NULL COMMENT 'sale ratio'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='rechargeable card type info';
 
+INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio) VALUES('神州行充值卡','SZX','0.800');
+INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio) VALUES('联通充值卡','LT','0.800');
+INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio) VALUES('电信充值卡','DX','0.800');
+INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio) VALUES('盛大一卡通','SD','0.800');
+INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio) VALUES('骏网一卡通','JW','0.800');
+INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio) VALUES('搜狐一卡通','SH','0.800');
+INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio) VALUES('网易一卡通','WY','0.800');
+INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio) VALUES('完美一卡通','WM','0.800');
+INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio) VALUES('盛付通','SFT','0.800');
+INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio) VALUES('征途一卡通','ZT','0.800');
+INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio) VALUES('久游一卡通','JY','0.800');
+INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio) VALUES('Q币一卡通','QQ','0.800');
+INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio) VALUES('纵游一卡通','ZY','0.800');
+
 CREATE TABLE IF NOT EXISTS tb_rechargeable_card_type_item(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
     tb_rechargeable_card_type_id INT NOT NULL COMMENT 'car type id',
@@ -101,7 +115,7 @@ CREATE TABLE IF NOT EXISTS tb_order(
     tb_rechargeable_card_id INT NOT NULL COMMENT 'card id',
     third_order_no VARCHAR(64) NULL COMMENT 'third order number',
     complete_time DATETIME NOT NULL COMMENT 'order completed time',
-    third_msg VARCHAR(32) NULL COMMENT 'third api return message'
+    third_msg VARCHAR(255) NULL COMMENT 'third api return message'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='order info';
 
 CREATE VIEW v_order AS
@@ -113,6 +127,7 @@ CREATE VIEW v_order AS
         o.process_time,
         u.account,
         o.actual_amount,
+        o.third_msg,
         u.name,
         u.tel,
         u.id as tb_user_id,

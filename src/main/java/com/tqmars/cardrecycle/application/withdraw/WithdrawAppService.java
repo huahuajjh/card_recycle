@@ -51,7 +51,7 @@ public class WithdrawAppService extends BaseAppService implements IWithdrawAppSe
         sb.append(" limit "+(input.getIndex()-1)*input.getCount()+","+input.getCount());
 
         List<WithdrawRecord> list = _withdrawRecordRepository.getAllWithCondition(sb.toString());
-        int count = _withdrawRecordRepository.countWithCondition(sb.toString());
+        int count = _withdrawRecordRepository.countWithCondition("tb_user_id="+input.getUserId());
         _walletRepository.commit();
         return toJsonWithPageFormatter(AutoMapper.mapping(QueryWithdrawRecordOutput.class,list),
                 "success", Code.SUCCESS,count);
@@ -59,6 +59,17 @@ public class WithdrawAppService extends BaseAppService implements IWithdrawAppSe
 
     @Override
     public String applyWithdraw(ApplyWithdrawInput input) {
+        User user = _userRepository.get(input.getUserId());
+        if(null == user){
+            _userRepository.commit();
+            return toJsonWithFormatter(null,"未查询到用户",Code.FAIL);
+        }
+
+        if(null == user.getIdCardNum() || null == user.getName()){
+            _userRepository.commit();
+            return toJsonWithFormatter(null,"未实名认证",Code.FAIL);
+        }
+
         boolean r = _userRepository.isExists("withdraw_pwd='"+ Md5.md5WithSalt(input.getWithdrawPwd())+"'");
         if(!r){
             _withdrawRecordRepository.commit();

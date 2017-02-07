@@ -21,6 +21,15 @@ public class QueryOrderListOutput {
     private Timestamp processTime;
     private String account;
     private BigDecimal actualAmount;
+    private String thirdMsg;
+
+    public String getThirdMsg() {
+        return thirdMsg;
+    }
+
+    public void setThirdMsg(String thirdMsg) {
+        this.thirdMsg = thirdMsg;
+    }
 
     public BigDecimal getActualAmount() {
         return actualAmount;
