@@ -9,7 +9,7 @@
 
     <!-- scan files（inject application layer automatically） -->
     <bean id="DbContext" class="com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext"/>
-    <bean id="RepositoryBase" class="com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase">
+    <bean id="RepositoryBase" scope="prototype" class="com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase">
         <constructor-arg index="0" ref="DbContext"/>
     </bean>
 
@@ -22,6 +22,10 @@
     </bean>
 
     <bean id="UserRepository" class="com.tqmars.cardrecycle.infrastructure.mybatis.repositories.UserRepository">
+        <constructor-arg index="0" ref="DbContext"/>
+    </bean>
+
+    <bean id="OrderDetailsRepository" class="com.tqmars.cardrecycle.infrastructure.mybatis.repositories.OrderDetailsRepository">
         <constructor-arg index="0" ref="DbContext"/>
     </bean>
 
@@ -76,6 +80,21 @@
         <constructor-arg index="1" ref="CardTypeItemRepository"/>
         <constructor-arg index="2" ref="CardTypeRepository"/>
         <constructor-arg index="3" ref="CardRepository"/>
+        <constructor-arg index="4" ref="UserRepository"/>
+    </bean>
+
+    <bean id="CallbackDomainService" class="com.tqmars.cardrecycle.domain.services.callback.CallbackDomainService">
+        <constructor-arg index="0" ref="OrderRepository"/>
+        <constructor-arg index="1" ref="WalletRepository"/>
+        <constructor-arg index="2" ref="CardRepository"/>
+    </bean>
+
+    <bean id="CallbackAppService" class="com.tqmars.cardrecycle.application.callback.CallbackAppService">
+        <constructor-arg index="0" ref="CallbackDomainService"/>
+    </bean>
+
+    <bean id="ApiAppService" class="com.tqmars.cardrecycle.application.api.ApiAppService">
+        <constructor-arg index="0" ref="SaleDomainService"/>
     </bean>
 
     <bean id="SaleAppService" class="com.tqmars.cardrecycle.application.sale.SaleAppService">
@@ -84,6 +103,7 @@
 
     <bean id="UserAppService" class="com.tqmars.cardrecycle.application.User.UserAppService">
         <constructor-arg index="0" ref="UserRepository"/>
+        <constructor-arg index="1" ref="WalletRepository"/>
     </bean>
 
     <bean id="BankAppService" class="com.tqmars.cardrecycle.application.admin.bank.BankAppService">
@@ -107,7 +127,11 @@
     </bean>
 
     <bean id="AdminOrderAppService" class="com.tqmars.cardrecycle.application.admin.order.AdminOrderAppService">
-        <constructor-arg index="0" ref="RepositoryBase"/>
+        <constructor-arg index="0" ref="OrderDetailsRepository"/>
+    </bean>
+
+    <bean id="OrderAppService" class="com.tqmars.cardrecycle.application.order.OrderAppService">
+        <constructor-arg index="0" ref="OrderDetailsRepository"/>
     </bean>
 
     <bean id="AdminWithdrawAppService" class="com.tqmars.cardrecycle.application.admin.withdraw.AdminWithdrawAppService">

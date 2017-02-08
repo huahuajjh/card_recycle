@@ -24,12 +24,19 @@ public class CardTypeDomainService implements ICardTypeDomainService{
 
     @Override
     public void addCardType(RechargeableCardType cardType) {
+        if(cardType.getSaleRatio() > 1 || cardType.getSaleRatio() <= 0){
+            throw new RuntimeException("错误的寄售比列");
+        }
+
         int cardTypeId = _cardTypeRepository.insertAndGetId(cardType);
         _cardTypeRepository.commit();
     }
 
     @Override
     public void modifyCardType(RechargeableCardType cardType) {
+        if(cardType.getSaleRatio() > 1 || cardType.getSaleRatio() <= 0){
+            throw new RuntimeException("错误的寄售比列");
+        }
         _cardTypeRepository.update(cardType);
         _cardTypeRepository.commit();
     }
@@ -39,7 +46,6 @@ public class CardTypeDomainService implements ICardTypeDomainService{
         _cardTypeRepository.deleteById(cardTypeId);
         _cardTypeItemRepository.deleteWithCondition("tb_rechargeable_card_type_id="+cardTypeId);
 
-        _cardTypeItemRepository.commit();
         _cardTypeRepository.commit();
     }
 

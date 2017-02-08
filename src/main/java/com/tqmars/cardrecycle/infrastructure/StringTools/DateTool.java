@@ -1,5 +1,6 @@
 package com.tqmars.cardrecycle.infrastructure.StringTools;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -26,5 +27,18 @@ public class DateTool {
         SimpleDateFormat s = new SimpleDateFormat(format);
         return s.format(now);
     }
+
+    public Timestamp getNowSqlTime(){
+        return Timestamp.valueOf(getNowTime("yyyy-MM-dd HH:mm:ss"));
+    }
+
+    public java.sql.Date getSqlNowDate(){
+        return java.sql.Date.valueOf(getNowTime("yyyy-MM-dd"));
+    }
+
+    public java.sql.Date getSqlNowDate(String format){
+        return java.sql.Date.valueOf(getNowTime(format));
+    }
+
 
 }

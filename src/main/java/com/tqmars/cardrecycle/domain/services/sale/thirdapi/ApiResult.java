@@ -49,4 +49,22 @@ public class ApiResult {
     public void setSign(String sign) {
         this.sign = sign;
     }
+
+    @Override
+    public String toString() {
+        return "ApiResult{" +
+                "resultCode='" + resultCode + '\'' +
+                ", orderNo='" + orderNo + '\'' +
+                ", merchOrderNo='" + merchOrderNo + '\'' +
+                ", message='" + message + '\'' +
+                ", sign='" + sign + '\'' +
+                '}';
+    }
+
+    public static class ResultCode{
+        public static String NOT_EXISTS_CARD_TYPE = "-1";
+        public static String NOT_EXISTS_CARD_ITEM_AMOUNT = "-2";
+        public static String NOT_EXISTS_BUSINESS = "-3";
+    }
+
 }

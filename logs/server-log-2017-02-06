@@ -1,0 +1,191 @@
+[2017-02-06 22:18][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 22:18][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_order where order_number=123 limit 0,1
+[2017-02-06 22:20][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 22:20][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_order where order_number=123 limit 0,1
+[2017-02-06 22:20][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 22:20][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_order where order_number=486378453277-1218693562 limit 0,1
+[2017-02-06 22:21][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 22:21][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_order where order_number='486378453277-1218693562' limit 0,1
+[2017-02-06 22:21][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 22:21][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_order where order_number='486378453277-1218693562' limit 0,1
+[2017-02-06 22:23][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 22:23][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_order where order_number='1486378453277-1218693562' limit 0,1
+[2017-02-06 22:32][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 22:32][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_order where order_number='1486378453277-1218693562' limit 0,1
+[2017-02-06 22:32][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_wallet where tb_user_id=1 limit 0,1
+[2017-02-06 22:32][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_rechargeable_card where id=15
+[2017-02-06 22:33][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 22:34][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_order where order_number='1486378453277-1218693562' limit 0,1
+[2017-02-06 22:34][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_wallet where tb_user_id=1 limit 0,1
+[2017-02-06 22:34][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_rechargeable_card where id=15
+[2017-02-06 22:34][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 22:34][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_order where order_number='1486378453277-1218693562' limit 0,1
+[2017-02-06 22:34][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_wallet where tb_user_id=1 limit 0,1
+[2017-02-06 22:34][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_rechargeable_card where id=15
+[2017-02-06 22:35][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 22:35][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 22:35][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_order where order_number='1486378453277-1218693562' limit 0,1
+[2017-02-06 22:35][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_wallet where tb_user_id=1 limit 0,1
+[2017-02-06 22:35][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_rechargeable_card where id=15
+[2017-02-06 22:50][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 22:51][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_user where account='measca@qq.com' and pwd='d0856511900ed004a86ff5417f30e2e9' limit 0,1
+[2017-02-06 22:51][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_user where account='measca@qq.com' limit 0,1
+[2017-02-06 22:51][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 22:51][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 22:51][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_user where account='measca@qq.com' and pwd='dad6c2fe8a742b3d7c9616cdd0e4db02' limit 0,1
+[2017-02-06 22:51][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:update tb_user set id='1',account='measca@qq.com',pwd='dad6c2fe8a742b3d7c9616cdd0e4db02',tel='17088170684',qq='',business_id='9e0f30842d06478a41cf7440bc5e8931',business_pwd='f34923649a04ef22740c24b17245da1a',token='82f4acbf173969624bae0defc4778834',name='贾建华',withdraw_pwd='dad6c2fe8a742b3d7c9616cdd0e4db02',id_card_num='511527198909130638' where id=1
+[2017-02-06 22:51][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_user where account='measca@qq.com' limit 0,1
+[2017-02-06 22:51][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 22:51][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 22:51][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_rechargeable_card_type
+[2017-02-06 22:51][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 22:51][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 22:51][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_rechargeable_card_type_item where tb_rechargeable_card_type_id=19
+[2017-02-06 22:51][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 22:51][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_rechargeable_card_type_item where id=38
+[2017-02-06 22:51][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 22:51][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_rechargeable_card_type where id=19
+[2017-02-06 22:51][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:insert into tb_rechargeable_card(id,card_number,card_pwd,tb_user_id,tb_rechargeable_card_type_id,tb_rechargeable_card_type_item_id,sale_ratio,support_amount) values('0','99999999999999999','999999999999999998','1','19','38','0.98','50')
+[2017-02-06 22:51][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:insert into tb_order(id,tb_user_id,tb_rechargeable_card_type_id,tb_rechargeable_card_type_item_id,order_time,order_number,order_status,process_time,rechargeable_card_number,actual_amount,tb_rechargeable_card_id,complete_time,third_order_no,third_msg) values('0','1','19','38','2017-02-06 22:51:34.0','14863926947881473607100','0','2017-02-06 22:51:34.0','99999999999999999','49.0000009536743150','17','2017-02-06 22:51:34.0','null','null')
+[2017-02-06 22:51][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 22:51][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 22:51][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from v_order where 1=1  limit 0,15
+[2017-02-06 22:51][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select count(1) from v_order where 1=1  limit 0,15
+[2017-02-06 22:51][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 22:54][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 22:54][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_admin where account='admin' and pwd='68da471822e791a174ec5958dc1eae2a' limit 0,1
+[2017-02-06 22:54][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 22:54][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 22:54][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_admin where account='admin' and pwd='d0856511900ed004a86ff5417f30e2e9' limit 0,1
+[2017-02-06 22:54][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:update tb_admin set id='1',account='admin',pwd='d0856511900ed004a86ff5417f30e2e9',token='21a69534c9429d02aeae8febe648f23c' where id=1
+[2017-02-06 22:54][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 22:54][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 22:54][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from v_order where  0=0  limit 0,15
+[2017-02-06 22:54][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select count(1) from v_order where  0=0  limit 0,15
+[2017-02-06 22:54][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 22:54][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 22:54][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from v_order where  0=0  and  order_number=14863926947881473607100 limit 0,15
+[2017-02-06 22:54][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select count(1) from v_order where  0=0  and  order_number=14863926947881473607100 limit 0,15
+[2017-02-06 22:54][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 22:54][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 22:54][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_order where order_number='14863926947881473607100' limit 0,1
+[2017-02-06 22:54][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_wallet where tb_user_id=1 limit 0,1
+[2017-02-06 22:54][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_rechargeable_card where id=17
+[2017-02-06 22:54][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:update tb_wallet set id='1',tb_user_id='1',balance='49.00000095367431640625000' where id=1
+[2017-02-06 22:54][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:update tb_order set id='14',tb_user_id='1',tb_rechargeable_card_type_id='19',tb_rechargeable_card_type_item_id='38',order_time='2017-02-06 22:51:34.0',order_number='14863926947881473607100',order_status='1',process_time='2017-02-06 22:51:34.0',rechargeable_card_number='99999999999999999',actual_amount='49.00',tb_rechargeable_card_id='17',complete_time='2017-02-06 22:54:35.0',third_order_no='null',third_msg='done' where id=14
+[2017-02-06 22:54][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 22:54][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 22:54][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from v_order where  0=0  and  order_number=14863926947881473607100 limit 0,15
+[2017-02-06 22:54][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select count(1) from v_order where  0=0  and  order_number=14863926947881473607100 limit 0,15
+[2017-02-06 22:54][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 23:02][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 23:02][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_rechargeable_card_type
+[2017-02-06 23:02][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 23:04][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_rechargeable_card_type_item where id=38
+[2017-02-06 23:04][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 23:04][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_rechargeable_card_type where id=19
+[2017-02-06 23:04][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:insert into tb_rechargeable_card(id,card_number,card_pwd,tb_user_id,tb_rechargeable_card_type_id,tb_rechargeable_card_type_item_id,sale_ratio,support_amount) values('0','99999999999999999','999999999999999998','1','19','38','0.98','50')
+[2017-02-06 23:04][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:insert into tb_order(id,tb_user_id,tb_rechargeable_card_type_id,tb_rechargeable_card_type_item_id,order_time,order_number,order_status,process_time,rechargeable_card_number,actual_amount,tb_rechargeable_card_id,complete_time,third_order_no,third_msg) values('0','1','19','38','2017-02-06 23:04:00.0','1486393440886672224211','0','2017-02-06 23:04:00.0','99999999999999999','49.0000009536743150','18','2017-02-06 23:04:00.0','null','null')
+[2017-02-06 23:04][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 23:04][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 23:04][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from v_order where 1=1  limit 0,15
+[2017-02-06 23:04][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select count(1) from v_order where 1=1  limit 0,15
+[2017-02-06 23:04][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 23:05][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 23:05][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_order where order_number='1486393440886672224211' limit 0,1
+[2017-02-06 23:05][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_wallet where tb_user_id=1 limit 0,1
+[2017-02-06 23:05][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_rechargeable_card where id=18
+[2017-02-06 23:05][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:update tb_wallet set id='1',tb_user_id='1',balance='49.00' where id=1
+[2017-02-06 23:05][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:update tb_order set id='15',tb_user_id='1',tb_rechargeable_card_type_id='19',tb_rechargeable_card_type_item_id='38',order_time='2017-02-06 23:04:00.0',order_number='1486393440886672224211',order_status='2',process_time='2017-02-06 23:04:00.0',rechargeable_card_number='99999999999999999',actual_amount='49.00',tb_rechargeable_card_id='18',complete_time='2017-02-06 23:05:44.0',third_order_no='null',third_msg='done' where id=15
+[2017-02-06 23:05][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 23:05][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 23:05][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from v_order where 1=1  limit 0,15
+[2017-02-06 23:05][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select count(1) from v_order where 1=1  limit 0,15
+[2017-02-06 23:05][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_rechargeable_card_type
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_bank_account where tb_user_id=1
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_wallet where tb_user_id=1 limit 0,1
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_order where order_number='1486393440886672224211' limit 0,1
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_wallet where tb_user_id=1 limit 0,1
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_rechargeable_card where id=18
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:update tb_wallet set id='1',tb_user_id='1',balance='49.00000095367431640625000' where id=1
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:update tb_order set id='15',tb_user_id='1',tb_rechargeable_card_type_id='19',tb_rechargeable_card_type_item_id='38',order_time='2017-02-06 23:04:00.0',order_number='1486393440886672224211',order_status='1',process_time='2017-02-06 23:04:00.0',rechargeable_card_number='99999999999999999',actual_amount='49.00',tb_rechargeable_card_id='18',complete_time='2017-02-06 23:06:41.0',third_order_no='null',third_msg='done' where id=15
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from v_order where 1=1  limit 0,15
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select count(1) from v_order where 1=1  limit 0,15
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_bank_account where tb_user_id=1
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_wallet where tb_user_id=1 limit 0,1
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_bank_account where tb_user_id=1
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_wallet where tb_user_id=1 limit 0,1
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 23:06][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 23:07][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 23:07][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from v_order where 1=1  limit 0,15
+[2017-02-06 23:07][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select count(1) from v_order where 1=1  limit 0,15
+[2017-02-06 23:07][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 23:07][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 23:07][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from v_order where 1=1  limit 0,15
+[2017-02-06 23:07][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select count(1) from v_order where 1=1  limit 0,15
+[2017-02-06 23:07][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 23:07][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 23:07][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from v_order where 1=1  and order_status=1 limit 0,15
+[2017-02-06 23:07][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select count(1) from v_order where 1=1  and order_status=1 limit 0,15
+[2017-02-06 23:07][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 23:10][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 23:10][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_order where order_number='1486393440886672224211' limit 0,1
+[2017-02-06 23:10][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_wallet where tb_user_id=1 limit 0,1
+[2017-02-06 23:10][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_rechargeable_card where id=18
+[2017-02-06 23:10][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:update tb_wallet set id='1',tb_user_id='1',balance='49.00000095367431640625000' where id=1
+[2017-02-06 23:10][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:update tb_order set id='15',tb_user_id='1',tb_rechargeable_card_type_id='19',tb_rechargeable_card_type_item_id='38',order_time='2017-02-06 23:04:00.0',order_number='1486393440886672224211',order_status='1',process_time='2017-02-06 23:04:00.0',rechargeable_card_number='99999999999999999',actual_amount='49.00',tb_rechargeable_card_id='18',complete_time='2017-02-06 23:10:34.0',third_order_no='null',third_msg='done' where id=15
+[2017-02-06 23:10][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 23:12][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 23:12][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_order where order_number='1486393440886672224211' limit 0,1
+[2017-02-06 23:12][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_wallet where tb_user_id=1 limit 0,1
+[2017-02-06 23:12][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_rechargeable_card where id=18
+[2017-02-06 23:12][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:update tb_wallet set id='1',tb_user_id='1',balance='49.00000095367431640625000' where id=1
+[2017-02-06 23:12][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:update tb_order set id='15',tb_user_id='1',tb_rechargeable_card_type_id='19',tb_rechargeable_card_type_item_id='38',order_time='2017-02-06 23:04:00.0',order_number='1486393440886672224211',order_status='1',process_time='2017-02-06 23:04:00.0',rechargeable_card_number='99999999999999999',actual_amount='49.00',tb_rechargeable_card_id='18',complete_time='2017-02-06 23:12:59.0',third_order_no='null',third_msg='done' where id=15
+[2017-02-06 23:12][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 23:13][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 23:14][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_order where order_number='1486393440886672224211' limit 0,1
+[2017-02-06 23:14][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_wallet where tb_user_id=1 limit 0,1
+[2017-02-06 23:14][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_rechargeable_card where id=18
+[2017-02-06 23:24][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:update tb_wallet set id='1',tb_user_id='1',balance='49.00000095367431640625000' where id=1
+[2017-02-06 23:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 23:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_order where order_number='1486393440886672224211' limit 0,1
+[2017-02-06 23:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_wallet where tb_user_id=1 limit 0,1
+[2017-02-06 23:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_rechargeable_card where id=18
+[2017-02-06 23:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:update tb_wallet set id='1',tb_user_id='1',balance='98.00000095367431640625000' where id=1
+[2017-02-06 23:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:update tb_order set id='15',tb_user_id='1',tb_rechargeable_card_type_id='19',tb_rechargeable_card_type_item_id='38',order_time='2017-02-06 23:04:00.0',order_number='1486393440886672224211',order_status='1',process_time='2017-02-06 23:04:00.0',rechargeable_card_number='99999999999999999',actual_amount='49.00',tb_rechargeable_card_id='18',complete_time='2017-02-06 23:25:03.0',third_order_no='null',third_msg='done' where id=15
+[2017-02-06 23:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 23:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 23:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from v_order where 1=1  and order_status=1 limit 0,15
+[2017-02-06 23:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select count(1) from v_order where 1=1  and order_status=1 limit 0,15
+[2017-02-06 23:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 23:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 23:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_rechargeable_card_type
+[2017-02-06 23:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 23:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 23:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 23:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_bank_account where tb_user_id=1
+[2017-02-06 23:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from tb_wallet where tb_user_id=1 limit 0,1
+[2017-02-06 23:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 23:25][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed
+[2017-02-06 23:31][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-getSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-init SqlSession
+[2017-02-06 23:31][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select * from v_order where 1=1  limit 0,15
+[2017-02-06 23:31][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.RepositoryBase-showSql] -sql:select count(1) from v_order where 1=1  limit 0,15
+[2017-02-06 23:31][com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-commitSession] -com.tqmars.cardrecycle.infrastructure.mybatis.repositories.DbContext-session closed

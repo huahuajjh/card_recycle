@@ -58,4 +58,16 @@ public class Sale1CardInput {
     public void setCardItemId(Integer cardItemId) {
         this.cardItemId = cardItemId;
     }
+
+    @Override
+    public String toString() {
+        return "Sale1CardInput{" +
+                "cardNum='" + cardNum + '\'' +
+                ", cardPwd='" + cardPwd + '\'' +
+                ", cardCode='" + cardCode + '\'' +
+                ", userId=" + userId +
+                ", cardTypeId=" + cardTypeId +
+                ", cardItemId=" + cardItemId +
+                '}';
+    }
 }

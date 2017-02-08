@@ -1,9 +1,11 @@
 package com.tqmars.cardrecycle.webapi.controller.sale;
 
+import com.google.gson.reflect.TypeToken;
 import com.tqmars.cardrecycle.application.sale.ISaleAppService;
 import com.tqmars.cardrecycle.application.sale.dto.Sale1CardInput;
 import com.tqmars.cardrecycle.infrastructure.serialization.Serialization;
 import com.tqmars.cardrecycle.webapi.controller.ControllerBase;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * Created by jjh on 1/24/17.
@@ -34,8 +37,11 @@ public class SaleController extends ControllerBase {
      */
     @RequestMapping(value = "/sale1card")
     public String sale1card(@RequestParam(value = "input") String input){
-        Sale1CardInput result = Serialization.toObject(input, Sale1CardInput.class);
-        _saleAppService.sale1Card(result);
+        List<Sale1CardInput> list = Serialization.toList(input,new TypeToken<List<Sale1CardInput>>(){}.getType());
+        if(null == list || list.size() == 0){
+            return toFailMsg("参数错误");
+        }
+
         return toSucessMsg();
     }
 }

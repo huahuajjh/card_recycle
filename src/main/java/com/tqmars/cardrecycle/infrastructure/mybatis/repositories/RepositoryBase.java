@@ -3,11 +3,13 @@ package com.tqmars.cardrecycle.infrastructure.mybatis.repositories;
 import com.tqmars.cardrecycle.domain.entities.IEntity;
 import com.tqmars.cardrecycle.domain.entities.annotation.Table;
 import com.tqmars.cardrecycle.domain.repositories.IRepository;
+import com.tqmars.cardrecycle.infrastructure.StringTools.PropertiesFileTool;
 import com.tqmars.cardrecycle.infrastructure.log.LoggerFactory;
 import com.tqmars.cardrecycle.infrastructure.mybatis.repositories.exceptions.ApplicationException;
 import com.tqmars.cardrecycle.infrastructure.mybatis.util.MapToEntityTool;
 import com.tqmars.cardrecycle.infrastructure.mybatis.util.SqlStatementTool;
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +20,8 @@ import java.util.Map;
  */
 public class RepositoryBase<TEntity extends IEntity<TPrimaryKey>, TPrimaryKey> implements IRepository<TEntity, TPrimaryKey> {
     private Class<TEntity> entityClass;
+
+    @Autowired
     private DbContext context;
 
     private static String SELECT_LAST_ID = "select_last_id";
@@ -34,6 +38,7 @@ public class RepositoryBase<TEntity extends IEntity<TPrimaryKey>, TPrimaryKey> i
     private static String COUNT = "count";
     private static String COUNT_WITH_CONDITION = "countWithCondition";
     private static String UPDATE = "update";
+    private static String showSql = PropertiesFileTool.readByKey("showSql");
 
 
     public RepositoryBase(DbContext _context) {
@@ -47,6 +52,7 @@ public class RepositoryBase<TEntity extends IEntity<TPrimaryKey>, TPrimaryKey> i
     @Override
     public TEntity get(TPrimaryKey id) {
         String sql = "select * from " + getTableName() + " where id=" + id.toString();
+        showSql(sql);
         Map<String, Object> map = context.getSession().selectOne(getId4Mapper(GET), sql);
         return MapToEntityTool.toEntity(entityClass, map);
     }
@@ -55,6 +61,7 @@ public class RepositoryBase<TEntity extends IEntity<TPrimaryKey>, TPrimaryKey> i
     public TEntity single(String where) {
         String sql = "select * from " + getTableName() + " where " + where + " limit 0,1";
         Map<String, Object> map = context.getSession().selectOne(getId4Mapper(SINGLE), sql);
+        showSql(sql);
         return MapToEntityTool.toEntity(entityClass, map);
     }
 
@@ -62,6 +69,7 @@ public class RepositoryBase<TEntity extends IEntity<TPrimaryKey>, TPrimaryKey> i
     public List<TEntity> getAll() {
         String sql = "select * from " + getTableName();
         List<Map<String, Object>> mapList = context.getSession().selectList(getId4Mapper(GET_ALL), sql);
+        showSql(sql);
         return MapToEntityTool.toEntityList(entityClass, mapList);
     }
 
@@ -69,6 +77,7 @@ public class RepositoryBase<TEntity extends IEntity<TPrimaryKey>, TPrimaryKey> i
     public List<TEntity> getAllWithCondition(String where) {
         String sql = "select * from " + getTableName() + " where " + where;
         List<Map<String, Object>> mapList = context.getSession().selectList(getId4Mapper(GET_ALL_WITH_CONDITION), sql);
+        showSql(sql);
         return MapToEntityTool.toEntityList(entityClass, mapList);
     }
 
@@ -92,11 +101,10 @@ public class RepositoryBase<TEntity extends IEntity<TPrimaryKey>, TPrimaryKey> i
                 .append("values(")
                 .append(SqlStatementTool.getColumnsAndValues(entity).getVal())
                 .append(")");
-        System.out.println(sb.toString());
         map.put("id",0);
         map.put("value",sb.toString());
         context.getSession().insert(getId4Mapper(INSERT_AND_GET_ID),map);
-
+        showSql(sb.toString());
         return (TPrimaryKey) map.get("id");
     }
 
@@ -116,7 +124,7 @@ public class RepositoryBase<TEntity extends IEntity<TPrimaryKey>, TPrimaryKey> i
                 .append("where").append(" ")
                 .append("id=").append(entity.getId());
 
-        System.out.println(sb.toString());
+        showSql(sb.toString());
         context.getSession().insert(getId4Mapper(UPDATE),sb.toString());
 
     }
@@ -129,18 +137,22 @@ public class RepositoryBase<TEntity extends IEntity<TPrimaryKey>, TPrimaryKey> i
     @Override
     public void deleteById(TPrimaryKey id) {
         String sql = "delete from "+getTableName()+" where id="+id;
+        showSql(sql);
         context.getSession().delete(getId4Mapper(DELETE),sql);
     }
 
     @Override
     public void deleteWithCondition(String where) {
-
+        String sql = "delete from "+getTableName()+" where "+where;
+        showSql(sql);
+        context.getSession().delete(getId4Mapper(DELETE_WITH_CONDITION),sql);
     }
 
     @Override
     public int count() {
         String sql = "select count(1) from "+getTableName();
         int c = context.getSession().selectOne(getId4Mapper(COUNT),sql);
+        showSql(sql);
         return c;
     }
 
@@ -148,6 +160,7 @@ public class RepositoryBase<TEntity extends IEntity<TPrimaryKey>, TPrimaryKey> i
     public int countWithCondition(String where) {
         String sql = "select count(1) from "+getTableName()+" where "+where;
         int c = context.getSession().selectOne(getId4Mapper(COUNT),sql);
+        showSql(sql);
         return c;
     }
 
@@ -194,6 +207,14 @@ public class RepositoryBase<TEntity extends IEntity<TPrimaryKey>, TPrimaryKey> i
 
     private String getId4Mapper(String prefix) {
         return getEntityClass().getPackage().getName() + "." + prefix;
+    }
+
+    private static void showSql(String sql){
+        if(null != showSql && showSql.equals("1")){
+            LoggerFactory.getLogger().info("sql:"+sql);
+            System.out.println(sql);
+        }
+
     }
 
 }

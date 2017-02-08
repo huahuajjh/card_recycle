@@ -236,7 +236,7 @@ public&nbsp;java.lang.String&nbsp;query(@RequestParam(value="condition")
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>url</code> - -- /admin/order/query</dd>
-<dd><code>condition</code> - -- QueryOrderListInput -- {orderNum(订单号),cardNum(充值卡号),orderStatus(订单状态,0处理中,1成功,2失败),createFrom(下单初始时间),createTo(下单截至时间)}</dd>
+<dd><code>condition</code> - -- QueryOrderListInput -- {orderNum(订单号),cardNum(充值卡号),orderStatus(订单状态,0处理中,1成功,2失败),from(下单初始时间),to(下单截至时间)}</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>QueryOrderListOutput -- [{id,orderTime(下单时间),orderNum(订单号),orderStatus(订单状态),name,tel,cardNum(充值卡号),idCardNum(身份证),cardAmount(充值卡面值),saleRatio(比例)}]</dd>
 </dl>

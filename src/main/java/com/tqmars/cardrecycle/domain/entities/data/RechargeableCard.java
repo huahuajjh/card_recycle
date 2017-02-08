@@ -4,6 +4,8 @@ import com.tqmars.cardrecycle.domain.entities.EntityOfIntPrimaryKey;
 import com.tqmars.cardrecycle.domain.entities.annotation.Column;
 import com.tqmars.cardrecycle.domain.entities.annotation.Table;
 
+import java.math.BigDecimal;
+
 /**
  * Created by jjh on 1/14/17.
  */
@@ -26,6 +28,28 @@ public class RechargeableCard extends EntityOfIntPrimaryKey {
 
     @Column(name = "tb_rechargeable_card_type_item_id")
     private Integer cardItemId;
+
+    @Column(name = "sale_ratio")
+    private float saleRatio;
+
+    @Column(name = "support_amount")
+    private BigDecimal supportAmount;
+
+    public float getSaleRatio() {
+        return saleRatio;
+    }
+
+    public void setSaleRatio(float saleRatio) {
+        this.saleRatio = saleRatio;
+    }
+
+    public BigDecimal getSupportAmount() {
+        return supportAmount;
+    }
+
+    public void setSupportAmount(BigDecimal supportAmount) {
+        this.supportAmount = supportAmount;
+    }
 
     public Integer getCardTypeId() {
         return cardTypeId;
@@ -75,6 +99,20 @@ public class RechargeableCard extends EntityOfIntPrimaryKey {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public static RechargeableCard createCard(String cardNo,Integer userId,Integer cardItemId,String cardPwd,Integer cardTypeId,BigDecimal amount,float saleRatio){
+        RechargeableCard card = new RechargeableCard();
+
+        card.setCardNum(cardNo);
+        card.setUserId(userId);
+        card.setCardItemId(cardItemId);
+        card.setCardPwd(cardPwd);
+        card.setCardTypeId(cardTypeId);
+        card.setSupportAmount(amount);
+        card.setSaleRatio(saleRatio);
+
+        return card;
     }
 
     @Override

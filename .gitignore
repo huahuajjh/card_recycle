@@ -39,3 +39,7 @@ bin
 Thumbs.db
 target/
 *.out
+
+# log file
+/log
+/logs

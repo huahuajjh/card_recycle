@@ -7,7 +7,7 @@ import java.util.UUID;
  */
 public class OrderNumGenerator {
     public static String generateOrderNum(){
-        return System.currentTimeMillis()+String.valueOf(UUID.randomUUID().toString().hashCode());
-
+        String tmp = System.currentTimeMillis()+String.valueOf(UUID.randomUUID().toString().hashCode());
+        return tmp.replace("-","");
     }
 }

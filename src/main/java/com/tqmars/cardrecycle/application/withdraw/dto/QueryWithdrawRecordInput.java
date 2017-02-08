@@ -12,6 +12,15 @@ public class QueryWithdrawRecordInput {
     private Integer processStatus;
     private int index;
     private int count;
+    private Integer userId;
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public int getIndex() {
         return index;

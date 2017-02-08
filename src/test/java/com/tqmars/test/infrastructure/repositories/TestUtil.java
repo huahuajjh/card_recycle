@@ -1,15 +1,17 @@
 package com.tqmars.test.infrastructure.repositories;
 
-import com.tqmars.cardrecycle.application.withdraw.dto.QueryWithdrawRecordInput;
+import com.tqmars.cardrecycle.application.admin.order.IAdminOrderAppService;
+import com.tqmars.cardrecycle.application.admin.order.dto.QueryOrderListInput;
+import com.tqmars.cardrecycle.domain.entities.data.Admin;
 import com.tqmars.cardrecycle.domain.entities.data.OrderDetails;
+import com.tqmars.cardrecycle.domain.entities.data.User;
+import com.tqmars.cardrecycle.domain.repositories.IRepository;
 import com.tqmars.cardrecycle.infrastructure.StringTools.DateTool;
 import com.tqmars.cardrecycle.infrastructure.StringTools.Md5;
-import com.tqmars.cardrecycle.infrastructure.StringTools.OrderNumGenerator;
-import com.tqmars.cardrecycle.infrastructure.serialization.Serialization;
+import com.tqmars.cardrecycle.infrastructure.servicelocator.ServiceLocator;
 import org.junit.Test;
+import org.springframework.scheduling.annotation.Async;
 
-import java.math.BigDecimal;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,6 +79,62 @@ public class TestUtil {
 
 
 //        System.out.println(new BigDecimal("50").compareTo(new BigDecimal("500")));
+//        String s = "[{\"name\":\"zs\",\"age\":\"12\"},{\"name\":\"zs\",\"age\":\"11\"},{\"name\":\"zs\",\"age\":\"13\"}]";
+//        System.out.println(((P)(Serialization.toList(s).get(2))).getAge());
+//        Type t = new TypeToken<List<P>>(){}.getType();
+//        System.out.println(((P)Serialization.toList(s,t).get(0)).getName());
+        System.out.println(DateTool.getInstance().getNowSqlTime());
+
+    }
+
+    @Test
+    public void test(){
+        s();
+        s1();
+    }
+
+    @Async
+    public void s(){
+        System.out.println("task1 start");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("task1 done");
+    }
+
+    @Async
+    public void s1(){
+        System.out.println("task2 start");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("task2 done");
+    }
+
+    @Test
+    public void testSingleton(){
+//        IRepository<User,Integer> r1 = (IRepository<User,Integer>)ServiceLocator.getInstance().getService("RepositoryBase",IRepository.class);
+//
+//        r1.setEntityClass(User.class);
+//        System.out.println(r1.countWithCondition("id>0 limit 1,2"));
+
+//        IRepository<Admin,Integer> r2 = (IRepository<Admin,Integer>)ServiceLocator.getInstance().getService("RepositoryBase",IRepository.class);
+//        r2.setEntityClass(Admin.class);
+
+//        System.out.println(r1.hashCode());
+//        System.out.println(r2.hashCode());
+//        System.out.println(r1.get(1).getName());
+
+//        IAdminOrderAppService service = ServiceLocator.getInstance().getService("AdminOrderAppService",IAdminOrderAppService.class);
+//        QueryOrderListInput input = new QueryOrderListInput();
+//        input.setIndex(1);
+//        input.setCount(15);
+//        System.out.println(service.queryOrderList(input));
+
 
     }
 

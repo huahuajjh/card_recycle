@@ -2,6 +2,7 @@ package com.tqmars.cardrecycle.infrastructure.serialization;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -28,6 +29,11 @@ public final class Serialization {
 
     public static <T> List<T> toList(String jsonString, Type type) {
         return gson.fromJson(jsonString, type);
+    }
+
+    public static <T> List<T> toList(String jsonString) {
+        Type t = new TypeToken<List<T>>(){}.getType();
+        return gson.fromJson(jsonString, t);
     }
 
     public static String toJsonWithFormatter(Object data,String msg,int code){

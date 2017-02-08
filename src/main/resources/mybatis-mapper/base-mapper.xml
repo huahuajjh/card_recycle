@@ -48,4 +48,8 @@
         ${value}
     </delete>
 
+    <delete id="deleteWithCondition">
+        ${value}
+    </delete>
+
 </mapper>
