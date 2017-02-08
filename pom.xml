@@ -167,7 +167,7 @@
                 <version>2.1</version>
                 <configuration>
                     <port>8888</port>
-                    <path>/user</path>
+                    <path>/</path>
                     <uriEncoding>UTF-8</uriEncoding>
                     <server>tomcat7</server>
                 </configuration>
