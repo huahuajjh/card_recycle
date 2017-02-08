@@ -14,14 +14,16 @@ CREATE TABLE IF NOT EXISTS tb_user(
     token VARCHAR(32) NULL DEFAULT NULL COMMENT 'request token',
     withdraw_pwd VARCHAR(64) NULL COMMENT 'account withdraw password',
     id_card_num VARCHAR(20) NULL COMMENT 'id card number',
-    name VARCHAR(10) NULL COMMENT 'bank account name'
+    name VARCHAR(10) NULL COMMENT 'bank account name',
+    last_login_time NULL DATETIME DEFAULT NOW() COMMENT 'last login time'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='user info';
 
 CREATE TABLE IF NOT EXISTS tb_admin(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
     account VARCHAR(30) NOT NULL UNIQUE COMMENT 'account',
     pwd VARCHAR(64) NOT NULL DEFAULT 'abcd123' COMMENT 'admin password',
-    token VARCHAR(32) NULL DEFAULT NULL COMMENT 'request token'
+    token VARCHAR(32) NULL DEFAULT NULL COMMENT 'request token',
+    last_login_time NULL DATETIME DEFAULT NOW() COMMENT 'last login time'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='admin account info';
 
 INSERT INTO tb_admin(account,pwd) VALUES('admin','abcd123');
@@ -165,4 +167,22 @@ CREATE VIEW v_withdraw_record AS
     LEFT JOIN tb_user u ON u.id = w.tb_user_id
     LEFT JOIN tb_bank b ON b.id = w.tb_bank_id
     LEFT JOIN tb_wallet wl ON wl.tb_user_id = u.id
-    LEFT JOIN tb_bank_account ba ON ba.tb_user_id = u.id
+    LEFT JOIN tb_bank_account ba ON ba.tb_user_id = u.id;
+
+CREATE VIEW v_card_type_and_items AS
+    SELECT
+        t.name,
+        t.sale_ratio,
+        group_concat(i.support_amount) AS amounts,
+        t.card_shortcut
+    FROM tb_rechargeable_card_type t
+    LEFT JOIN tb_rechargeable_card_type_item i ON i.tb_rechargeable_card_type_id = t.id;
+
+CREATE VIEW v_admin_overview AS
+    SELECT
+        (SELECT COUNT(1) FROM tb_order o ) AS totalOrder,
+        (SELECT COUNT(1) FROM tb_order o WHERE o.order_status=1) AS successCount,
+        (SELECT COUNT(1) FROM tb_order o WHERE o.order_status=2) AS failCount,
+        (SELECT COUNT(1) FROM tb_order o WHERE o.order_status=0) AS processingCount,
+        (SELECT COUNT(1) FROM tb_user u) AS totalUser,
+        (SELECT COUNT(1) FROM tb_withdraw_record wr) AS withdrawCount;

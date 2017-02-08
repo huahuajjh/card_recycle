@@ -6,6 +6,8 @@ import com.tqmars.cardrecycle.domain.entities.annotation.Column;
 import com.tqmars.cardrecycle.domain.entities.annotation.Table;
 import com.tqmars.cardrecycle.infrastructure.StringTools.Md5;
 
+import java.sql.Timestamp;
+
 /**
  * Created by jjh on 1/14/17.
  */
@@ -22,6 +24,17 @@ public class Admin extends EntityOfIntPrimaryKey {
 
     @Column(name = "token")
     private String token;
+
+    @Column(name = "last_login_time")
+    private Timestamp lastLoginTime;
+
+    public Timestamp getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Timestamp lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
 
     public String getToken() {
         return token;

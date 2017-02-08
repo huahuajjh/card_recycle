@@ -13,6 +13,8 @@ import java.util.Map;
  * Created by jjh on 1/21/17.
  */
 public class SaleCardApi {
+    private static String notifyUrl = PropertiesFileTool.readByKey("backUrl");
+
     public static ApiResult sale1Card(String _cardCode,String _par,String _cardNo,String _cardPwd,String orderNo) {
         String merchId = PropertiesFileTool.readByKey("businessId");
         String merchSecret = PropertiesFileTool.readByKey("businessPwd");
@@ -26,7 +28,6 @@ public class SaleCardApi {
         }
         String par = _par;
         String merchOrderNo = orderNo;
-        String notifyUrl = "https://www.baidu.com";
         String sign = Md5.md5(merchId+merchOrderNo+cardCode+par+cardNo+cardKey+notifyUrl+merchSecret);
 
         String url = "http://api.139card.com/card/sell";

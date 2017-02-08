@@ -19,7 +19,9 @@ public class MyConfig extends WebMvcConfigurerAdapter {
                 excludePathPatterns("/user/getVCode").
                 excludePathPatterns("/user/getSms").
                 excludePathPatterns("/user/forgetPwd").
-                excludePathPatterns("/callback/order/done").
+                excludePathPatterns("/content/query").
+                excludePathPatterns("/callback/order/callback").
+                excludePathPatterns("/card/typeAndItems/query").
                 excludePathPatterns("/admin/user/login");
         super.addInterceptors(registry);
     }

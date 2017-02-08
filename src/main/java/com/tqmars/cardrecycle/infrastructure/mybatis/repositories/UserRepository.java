@@ -2,6 +2,7 @@ package com.tqmars.cardrecycle.infrastructure.mybatis.repositories;
 
 import com.tqmars.cardrecycle.domain.entities.data.User;
 import com.tqmars.cardrecycle.domain.repositories.IUserRepository;
+import com.tqmars.cardrecycle.infrastructure.StringTools.DateTool;
 import com.tqmars.cardrecycle.infrastructure.StringTools.Md5;
 
 import java.util.Random;
@@ -23,6 +24,7 @@ public class UserRepository extends RepositoryBase<User,Integer> implements IUse
 
         String token = Md5.md5WithSalt(_u.getAccount()+_u.getPwd()+new Random().nextInt(1000));
 
+        _u.setLastLoginTime(DateTool.getInstance().getNowSqlTime());
         _u.setToken(token);
         update(_u);
         return token;

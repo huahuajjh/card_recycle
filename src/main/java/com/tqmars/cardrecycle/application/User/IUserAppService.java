@@ -11,4 +11,5 @@ public interface IUserAppService {
     boolean changePwd(ChangePwdInput input);
     void logout(LogoutInput input);
     String forgetPwd(ForgetPwdInput input);
+    void changeTel(ChangeTelInput input);
 }

@@ -1,13 +1,12 @@
 package com.tqmars.test.infrastructure.repositories;
 
-import com.tqmars.cardrecycle.application.admin.order.IAdminOrderAppService;
-import com.tqmars.cardrecycle.application.admin.order.dto.QueryOrderListInput;
-import com.tqmars.cardrecycle.domain.entities.data.Admin;
+import com.tqmars.cardrecycle.application.User.IUserAppService;
+import com.tqmars.cardrecycle.application.User.dto.LoginInput;
+import com.tqmars.cardrecycle.application.admin.overview.IOverviewAppService;
 import com.tqmars.cardrecycle.domain.entities.data.OrderDetails;
-import com.tqmars.cardrecycle.domain.entities.data.User;
-import com.tqmars.cardrecycle.domain.repositories.IRepository;
 import com.tqmars.cardrecycle.infrastructure.StringTools.DateTool;
 import com.tqmars.cardrecycle.infrastructure.StringTools.Md5;
+import com.tqmars.cardrecycle.infrastructure.serialization.Serialization;
 import com.tqmars.cardrecycle.infrastructure.servicelocator.ServiceLocator;
 import org.junit.Test;
 import org.springframework.scheduling.annotation.Async;
@@ -136,6 +135,36 @@ public class TestUtil {
 //        System.out.println(service.queryOrderList(input));
 
 
+    }
+
+    @Test
+    public void testDateTime(){
+//        System.out.println(DateTool.getInstance().getNowTime("yyyy-MM-dd HH:mm:ss"));
+        System.out.println(DateTool.getInstance().getNowSqlTime());
+    }
+
+    @Test
+    public void testOverview(){
+        IOverviewAppService service = ServiceLocator.getInstance().getService("AdminOverviewAppService",IOverviewAppService.class);
+
+//        System.out.println(service.queryAdminOverview());
+    }
+
+    @Test
+    public void testOverview1(){
+//        IOverviewAppService service = ServiceLocator.getInstance().getService("AdminOverviewAppService",IOverviewAppService.class);
+
+//        IRepository<AdminOverview,Integer> repository = (IRepository<AdminOverview,Integer>)ServiceLocator.getInstance().getService("RepositoryBase",IRepository.class);
+//        repository.setEntityClass(AdminOverview.class);
+
+//        System.out.println(service.queryAdminOverview("86b4917d1f9d4cdb1c91e2a8e779f688"));
+//        System.out.println(repository.getAll());
+        IUserAppService service = ServiceLocator.getInstance().getService("UserAppService",IUserAppService.class);
+        LoginInput input = new LoginInput();
+        input.setAccount("test@qq.com");
+        input.setPwd("huahuajjh3");
+        input.setVcode("");
+        System.out.println(Serialization.toJson(service.login(input)));
     }
 
 }

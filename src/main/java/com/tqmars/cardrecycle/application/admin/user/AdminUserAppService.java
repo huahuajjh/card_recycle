@@ -6,6 +6,7 @@ import com.tqmars.cardrecycle.application.base.BaseAppService;
 import com.tqmars.cardrecycle.application.exception.ApplicationServiceException;
 import com.tqmars.cardrecycle.domain.entities.data.Admin;
 import com.tqmars.cardrecycle.domain.repositories.IAdminRepository;
+import com.tqmars.cardrecycle.domain.repositories.IUserRepository;
 import com.tqmars.cardrecycle.infrastructure.StringTools.Md5;
 import com.tqmars.cardrecycle.infrastructure.serialization.Code;
 

@@ -2,6 +2,7 @@ package com.tqmars.cardrecycle.application.card;
 
 import com.tqmars.cardrecycle.application.admin.card.dto.QueryCardTypeOutput;
 import com.tqmars.cardrecycle.application.card.dto.QueryCardItemOutput;
+import com.tqmars.cardrecycle.application.card.dto.QueryCardTypeAndItemOutput;
 
 import java.util.List;
 
@@ -11,4 +12,5 @@ import java.util.List;
 public interface ICardTypeAppService {
     List<QueryCardTypeOutput> queryCardTypeList();
     List<QueryCardItemOutput> queryCardItem(Integer cardTypeId);
+    List<QueryCardTypeAndItemOutput> queryCardTypeAndItem();
 }

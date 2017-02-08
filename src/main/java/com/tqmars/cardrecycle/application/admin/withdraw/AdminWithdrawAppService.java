@@ -44,9 +44,9 @@ public class AdminWithdrawAppService extends BaseAppService implements IAdminWit
             sb.append(" and process_status="+input.getStatus());
         }
 
+        int count = _withdrawRecordDetailsRepository.countWithCondition(sb.toString());
         sb.append(" limit "+(input.getIndex()-1)*input.getCount()).append(",").append(input.getCount());
         List<WithdrawRecordDetails> list = _withdrawRecordDetailsRepository.getAllWithCondition(sb.toString());
-        int count = _withdrawRecordDetailsRepository.countWithCondition(sb.toString());
         _withdrawRecordDetailsRepository.commit();
         return toJsonWithPageFormatter(AutoMapper.mapping(QueryWithdrawRecordOutput.class,list),"success",Code.SUCCESS,count);
 

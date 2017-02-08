@@ -2,6 +2,7 @@ package com.tqmars.cardrecycle.infrastructure.mybatis.repositories;
 
 import com.tqmars.cardrecycle.domain.entities.data.Admin;
 import com.tqmars.cardrecycle.domain.repositories.IAdminRepository;
+import com.tqmars.cardrecycle.infrastructure.StringTools.DateTool;
 import com.tqmars.cardrecycle.infrastructure.StringTools.Md5;
 
 import java.util.Random;
@@ -22,7 +23,7 @@ public class AdminRepository extends RepositoryBase<Admin,Integer> implements IA
         }
 
         String token = Md5.md5WithSalt(_a.getAccount()+_a.getPwd()+new Random().nextInt(1000));
-
+        _a.setLastLoginTime(DateTool.getInstance().getNowSqlTime());
         _a.setToken(token);
         update(_a);
         return token;

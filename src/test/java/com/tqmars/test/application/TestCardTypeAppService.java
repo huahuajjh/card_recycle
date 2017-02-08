@@ -20,4 +20,9 @@ public class TestCardTypeAppService {
     public void testQueryCardTypeList(){
         service.queryCardTypeList().forEach(a->System.out.println(a.toString()));
     }
+
+    @Test
+    public void testQueryCardTypeAndItemsList(){
+        service.queryCardTypeAndItem().forEach(o->System.out.println(o));
+    }
 }
