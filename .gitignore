@@ -39,6 +39,7 @@ bin
 Thumbs.db
 target/
 *.out
+*.ini
 
 # log file
 /log
