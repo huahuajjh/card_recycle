@@ -32,7 +32,7 @@ public class CardTypeController extends ControllerBase {
      * @param url -- /admin/card/query?condition=xxx
      * @param condition -- 查询条件,json,
      *     condition={index(页码),count(叶容量)}
-     * @return QueryCardTypeOutput -- {id,name(卡类型名称),cardCode(卡代码),saleRatio(卡寄售比例),supportAmount(支持面值-10,11,12)}
+     * @return QueryCardTypeAndItemOutput -- {id,name(卡类型名称),cardCode(卡代码),saleRatio(卡寄售比例),supportAmount(支持面值-10,11,12)}
      */
     @RequestMapping(value = "/query")
     public String query(){

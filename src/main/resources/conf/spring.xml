@@ -147,6 +147,7 @@
     <bean id="CardTypeAppService" class="com.tqmars.cardrecycle.application.card.CardTypeAppService">
         <constructor-arg index="0" ref="CardTypeRepository"/>
         <constructor-arg index="1" ref="CardTypeItemRepository"/>
+        <constructor-arg index="2" ref="RepositoryBase"/>
     </bean>
 
     <bean id="WithDrawAppService" class="com.tqmars.cardrecycle.application.withdraw.WithdrawAppService">
@@ -158,6 +159,11 @@
     <bean id="BankAccountAppService" class="com.tqmars.cardrecycle.application.bank.BankAppService">
         <constructor-arg index="0" ref="RepositoryBase"/>
         <constructor-arg index="1" ref="BankRepository"/>
+    </bean>
+
+    <bean id="AdminOverviewAppService" class="com.tqmars.cardrecycle.application.admin.overview.OverviewAppService">
+        <constructor-arg index="0" ref="RepositoryBase"/>
+        <constructor-arg index="1" ref="AdminRepository"/>
     </bean>
 
 </beans>

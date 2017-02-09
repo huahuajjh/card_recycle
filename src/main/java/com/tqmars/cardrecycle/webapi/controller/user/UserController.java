@@ -140,9 +140,16 @@ public class UserController extends ControllerBase{
         return _userAppService.forgetPwd(input);
     }
 
-    @RequestMapping(value = "/e")
-    public String e() throws Exception {
-        throw new Exception("aaa");
+    @RequestMapping(value = "/tel/change")
+    public String changeTel(@RequestParam(value = "changeTelInfo") String changeTelInfo) {
+        String sms = getSession().getAttribute(Const.SMSCODE).toString();
+
+        ChangeTelInput input = Serialization.toObject(changeTelInfo, ChangeTelInput.class);
+        if(!sms.equals(input.getSms())){
+            return toJsonWithFormatter(null,"短信验证码错误",Code.FAIL);
+        }
+        _userAppService.changeTel(input);
+        return toJsonWithFormatter(null,"修改成功",Code.SUCCESS);
     }
 
 }

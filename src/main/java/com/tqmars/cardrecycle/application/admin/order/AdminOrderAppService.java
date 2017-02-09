@@ -47,11 +47,14 @@ public class AdminOrderAppService extends BaseAppService implements IAdminOrderA
                     .append("'");
         }
 
+        sb.append(" and order_status="+input.getOrderStatus());
+
+        int count = _orderDetailRepository.countWithCondition(sb.toString());
+
         sb.append(" limit ").append((input.getIndex()-1) * input.getCount()).append(",").append(input.getCount());
 
         List<OrderDetails> list = _orderDetailRepository.getAllWithCondition(sb.toString());
 
-        int count = _orderDetailRepository.count();
         _orderDetailRepository.commit();
         return toJsonWithPageFormatter(AutoMapper.mapping(QueryOrderListOutput.class,list),"success",Code.SUCCESS,count);
     }

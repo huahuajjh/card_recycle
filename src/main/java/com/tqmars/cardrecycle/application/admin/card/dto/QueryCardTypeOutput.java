@@ -55,7 +55,7 @@ public class QueryCardTypeOutput {
 
     @Override
     public String toString() {
-        return "QueryCardTypeOutput{" +
+        return "QueryCardTypeAndItemOutput{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", cardCode='" + cardCode + '\'' +

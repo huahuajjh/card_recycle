@@ -3,7 +3,9 @@ package com.tqmars.cardrecycle.webapi.controller.card;
 import com.tqmars.cardrecycle.application.admin.card.dto.QueryCardTypeOutput;
 import com.tqmars.cardrecycle.application.card.ICardTypeAppService;
 import com.tqmars.cardrecycle.application.card.dto.QueryCardItemOutput;
+import com.tqmars.cardrecycle.application.card.dto.QueryCardTypeAndItemOutput;
 import com.tqmars.cardrecycle.infrastructure.serialization.Code;
+import com.tqmars.cardrecycle.infrastructure.serialization.Serialization;
 import com.tqmars.cardrecycle.webapi.controller.ControllerBase;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,7 +21,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping(value = "/card",method = RequestMethod.POST)
+@RequestMapping(value = "/card",method = {RequestMethod.POST,RequestMethod.GET})
 public class CardController extends ControllerBase {
     private ICardTypeAppService _cardTypeAppService;
 
@@ -31,7 +33,7 @@ public class CardController extends ControllerBase {
     /**
      * 查询充值卡类型集合
      * @param url -- /card/query
-     * @return QueryCardTypeOutput -- [{id(卡id),name(卡名称),cardCode(卡代码),saleRatio(卡寄售比例)}]
+     * @return QueryCardTypeAndItemOutput -- [{id(卡id),name(卡名称),cardCode(卡代码),saleRatio(卡寄售比例)}]
      */
     @RequestMapping(value = "/query")
     public String query(){
@@ -48,6 +50,12 @@ public class CardController extends ControllerBase {
     @RequestMapping(value = "/item/query")
     public String queryItem(@RequestParam(value = "cardId") String cardId){
         List<QueryCardItemOutput> list = _cardTypeAppService.queryCardItem(Integer.valueOf(cardId));
+        return toJsonWithFormatter(list,"success",Code.SUCCESS);
+    }
+
+    @RequestMapping(value = "/typeAndItems/query")
+    public String queryTypeAndItems(){
+        List<QueryCardTypeAndItemOutput> list = _cardTypeAppService.queryCardTypeAndItem();
         return toJsonWithFormatter(list,"success",Code.SUCCESS);
     }
 

@@ -1,5 +1,7 @@
 package com.tqmars.cardrecycle.application.User.dto;
 
+import java.sql.Timestamp;
+
 /**
  * Created by jjh on 2/4/17.
  */
@@ -11,6 +13,15 @@ public class LoginOutput {
     private String tel;
     private String qq;
     private String businessId;
+    private Timestamp lastLoginTime;
+
+    public Timestamp getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Timestamp lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
 
     public Integer getId() {
         return id;
@@ -66,5 +77,19 @@ public class LoginOutput {
 
     public void setBusinessId(String businessId) {
         this.businessId = businessId;
+    }
+
+    @Override
+    public String toString() {
+        return "LoginOutput{" +
+                "id=" + id +
+                ", token='" + token + '\'' +
+                ", name='" + name + '\'' +
+                ", account='" + account + '\'' +
+                ", tel='" + tel + '\'' +
+                ", qq='" + qq + '\'' +
+                ", businessId='" + businessId + '\'' +
+                ", lastLoginTime=" + lastLoginTime +
+                '}';
     }
 }

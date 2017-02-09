@@ -41,7 +41,8 @@ public class UserAppService extends BaseAppService implements IUserAppService{
         user.setToken(token);
 
         _userRepository.commit();
-        return AutoMapper.mapping(LoginOutput.class,user);
+        LoginOutput output = AutoMapper.mapping(LoginOutput.class,user);
+        return output;
     }
 
     @Override
@@ -91,6 +92,14 @@ public class UserAppService extends BaseAppService implements IUserAppService{
         _userRepository.update(user);
         _userRepository.commit();
         return toJsonWithFormatter(null,"success",Code.SUCCESS);
+    }
+
+    @Override
+    public void changeTel(ChangeTelInput input) {
+        User user = _userRepository.get(input.getUserId());
+        user.setTel(input.getNewTel());
+        _userRepository.update(user);
+        _userRepository.commit();
     }
 
 }

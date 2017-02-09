@@ -31,25 +31,29 @@ public class CallbackDomainService implements ICallbackDomainService {
 
     @Override
     public void dealOrderCallback(OrderCallbackInput input) {
-        Order order = orderRepository.single("order_number='"+input.getMerchOrderNo()+"'");
+        if(null == input){
+            throw new RuntimeException("输入参数有误");
+        }
 
-        if(null == order){
+        Order order = orderRepository.single("order_number='" + input.getMerchOrderNo() + "'");
+
+        if (null == order) {
             throw new RuntimeException("订单回调接口异常,未查询到订单数据");
         }
 
-        Wallet wallet = walletRepository.single("tb_user_id="+order.getUesrId());
+        Wallet wallet = walletRepository.single("tb_user_id=" + order.getUesrId());
 
-        if(null == wallet){
+        if (null == wallet) {
             throw new RuntimeException("订单回调接口异常,未查询到钱包数据");
         }
 
         RechargeableCard card = cardRepository.get(order.getCardId());
 
-        if(null == card){
+        if (null == card) {
             throw new RuntimeException("订单回调接口异常,未查询到充值卡数据");
         }
 
-        switch (input.getResultCode()){
+        switch (input.getResultCode()) {
             case "1":
                 order.setOrderStatus(1);
                 order.setThirdMsg(input.getMessage());
@@ -61,11 +65,6 @@ public class CallbackDomainService implements ICallbackDomainService {
                 break;
 
             case "2":
-                order.setOrderStatus(2);
-                order.setThirdMsg(input.getMessage());
-                order.setCompleteTime(DateTool.getInstance().getNowSqlTime());
-                break;
-
             case "-1":
                 order.setOrderStatus(2);
                 order.setThirdMsg(input.getMessage());
@@ -73,15 +72,9 @@ public class CallbackDomainService implements ICallbackDomainService {
                 break;
         }
 
-        try {
-            walletRepository.update(wallet);
-            orderRepository.update(order);
-            orderRepository.commit();
-        }catch (Exception e){
-            orderRepository.commit();
-        }finally {
-            orderRepository.commit();
-        }
+        walletRepository.update(wallet);
+        orderRepository.update(order);
+        orderRepository.commit();
 
     }
 }
