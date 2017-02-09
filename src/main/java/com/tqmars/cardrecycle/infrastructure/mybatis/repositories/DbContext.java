@@ -50,13 +50,12 @@ public class DbContext {
         return FACTORY;
     }
 
-    public SqlSession getSession()
-    {
+    public SqlSession getSession(){
         if(sessionHolder.get() == null)
         {
+            System.out.println("open session");
             LoggerFactory.getLogger().info(DbContext.class.getName()+"-init SqlSession");
             sessionHolder.set(FACTORY.openSession());
-            sessionHolder.get();
         }
         return sessionHolder.get();
     }
@@ -70,6 +69,7 @@ public class DbContext {
         sessionHolder.get().commit();
         sessionHolder.get().close();
         sessionHolder.set(null);
+        System.out.println("close session");
         LoggerFactory.getLogger().info(DbContext.class.getName()+"-session closed");
     }
 
@@ -83,8 +83,7 @@ public class DbContext {
         LoggerFactory.getLogger().info(DbContext.class.getName()+"-session rollback and closed");
     }
 
-    void closeSession()
-    {
+    void closeSession(){
         if (sessionHolder.get() == null) {
             return;
         }

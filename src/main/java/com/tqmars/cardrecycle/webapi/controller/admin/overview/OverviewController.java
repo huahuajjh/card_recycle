@@ -8,6 +8,7 @@ import com.tqmars.cardrecycle.webapi.controller.ControllerBase;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Created by jjh on 2/9/17.
  */
-@RequestMapping(value = "/admin/overview",method = RequestMethod.POST)
+@RestController
+@RequestMapping(value = "/admin/overview",method = {RequestMethod.POST,RequestMethod.GET})
 public class OverviewController extends ControllerBase {
     IOverviewAppService service;
 

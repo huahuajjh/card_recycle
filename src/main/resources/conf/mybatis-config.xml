@@ -14,7 +14,7 @@
             <!-- 数据源-连接池方式 -->
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://192.168.1.9:3306/card_recycle?characterEncoding=UTF-8"/>
+                <property name="url" value="jdbc:mysql://192.168.1.9:3306/card_recycle?autoReconnect=true"/>
                 <property name="username" value="root"/>
                 <property name="password" value="123"/>
                 <property name="driver.encoding" value="UTF-8"/>
@@ -23,7 +23,11 @@
                 <!--测试链接的sql语句-->
                 <property name="poolPingQuery" value="select 1" />
                 <!--每次都检测链接-->
-                <property name="poolPingConnectionsNotUsedFor" value="0"/>
+                <property name="poolPingConnectionsNotUsedFor" value="60000"/>
+                <!--使用的连接最大数量-->
+                <property name="poolMaximumActiveConnections" value="200"/>
+                <!--可存在的空闲数量-->
+                <property name="poolMaximumIdleConnections" value="5"/>
             </dataSource>
         </environment>
     </environments>

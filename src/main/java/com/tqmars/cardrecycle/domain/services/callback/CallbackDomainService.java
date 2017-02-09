@@ -32,25 +32,32 @@ public class CallbackDomainService implements ICallbackDomainService {
     @Override
     public void dealOrderCallback(OrderCallbackInput input) {
         if(null == input){
-            throw new RuntimeException("输入参数有误");
+            orderRepository.commit();
+            return;
         }
 
         Order order = orderRepository.single("order_number='" + input.getMerchOrderNo() + "'");
 
         if (null == order) {
-            throw new RuntimeException("订单回调接口异常,未查询到订单数据");
+            System.out.print("order null");
+            orderRepository.commit();
+            return;
         }
 
         Wallet wallet = walletRepository.single("tb_user_id=" + order.getUesrId());
 
         if (null == wallet) {
-            throw new RuntimeException("订单回调接口异常,未查询到钱包数据");
+            System.out.print("wallet null");
+            orderRepository.commit();
+            return;
         }
 
         RechargeableCard card = cardRepository.get(order.getCardId());
 
         if (null == card) {
-            throw new RuntimeException("订单回调接口异常,未查询到充值卡数据");
+            System.out.print("card null");
+            orderRepository.commit();
+            return;
         }
 
         switch (input.getResultCode()) {

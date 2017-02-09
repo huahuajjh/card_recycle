@@ -43,6 +43,7 @@ public class UserAppService extends BaseAppService implements IUserAppService{
         _userRepository.commit();
         LoginOutput output = AutoMapper.mapping(LoginOutput.class,user);
         return output;
+
     }
 
     @Override

@@ -1,1 +1,1 @@
-<h3 class="clearfix" style="line-height: 1.25; margin-top: 0px; margin-bottom: 0px; padding-bottom: 10px; background-color: rgb(249, 249, 249);">公司简介公司简介</h3><p><br></p>
+<p>免责声明</p>
