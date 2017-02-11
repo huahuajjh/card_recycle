@@ -7,6 +7,7 @@ import com.tqmars.cardrecycle.domain.entities.data.User;
 import com.tqmars.cardrecycle.domain.entities.data.Wallet;
 import com.tqmars.cardrecycle.domain.repositories.IUserRepository;
 import com.tqmars.cardrecycle.domain.repositories.IWalletRepository;
+import com.tqmars.cardrecycle.infrastructure.StringTools.DateTool;
 import com.tqmars.cardrecycle.infrastructure.StringTools.Md5;
 import com.tqmars.cardrecycle.infrastructure.serialization.Code;
 
@@ -53,7 +54,9 @@ public class UserAppService extends BaseAppService implements IUserAppService{
         input.setPwd(Md5.md5WithSalt(input.getPwd()));
         input.setWithdrawPwd(input.getPwd());
 
-        Integer userId = _userRepository.insertAndGetId(AutoMapper.mapping(User.class,input));
+        User u = AutoMapper.mapping(User.class,input);
+        u.setLastLoginTime(DateTool.getInstance().getNowSqlTime());
+        Integer userId = _userRepository.insertAndGetId(u);
 
         Wallet wallet = new Wallet();
         wallet.setBalance(new BigDecimal("0.00"));

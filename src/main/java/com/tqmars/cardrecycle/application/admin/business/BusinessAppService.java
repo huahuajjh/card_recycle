@@ -29,7 +29,7 @@ public class BusinessAppService extends BaseAppService implements IBusinessAppSe
         List<QueryBusinessListOutput> businessList = AutoMapper.mapping(QueryBusinessListOutput.class, list);
 
         int count = _userRepository.countWithCondition(condition);
-
+        _userRepository.commit();
         return toJsonWithPageFormatter(businessList, "success", Code.SUCCESS,count);
     }
 }

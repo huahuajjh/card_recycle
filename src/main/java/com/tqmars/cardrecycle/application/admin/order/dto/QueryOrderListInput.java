@@ -8,7 +8,7 @@ import java.util.Date;
 public class QueryOrderListInput {
     private String orderNum;
     private String cardNum;
-    private int orderStatus;
+    private Integer orderStatus;
     private Date from;
     private Date to;
     private int index;
@@ -46,11 +46,11 @@ public class QueryOrderListInput {
         this.cardNum = cardNum;
     }
 
-    public int getOrderStatus() {
+    public Integer getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(int orderStatus) {
+    public void setOrderStatus(Integer orderStatus) {
         this.orderStatus = orderStatus;
     }
 

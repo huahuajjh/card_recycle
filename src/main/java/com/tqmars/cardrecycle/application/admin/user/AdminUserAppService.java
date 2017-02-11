@@ -7,6 +7,7 @@ import com.tqmars.cardrecycle.application.exception.ApplicationServiceException;
 import com.tqmars.cardrecycle.domain.entities.data.Admin;
 import com.tqmars.cardrecycle.domain.repositories.IAdminRepository;
 import com.tqmars.cardrecycle.domain.repositories.IUserRepository;
+import com.tqmars.cardrecycle.infrastructure.StringTools.DateTool;
 import com.tqmars.cardrecycle.infrastructure.StringTools.Md5;
 import com.tqmars.cardrecycle.infrastructure.serialization.Code;
 
@@ -67,6 +68,7 @@ public class AdminUserAppService extends BaseAppService implements IAdminUserApp
         }
 
         Admin admin = AutoMapper.mapping(Admin.class, input);
+        admin.setLastLoginTime(DateTool.getInstance().getNowSqlTime());
         if(null != admin){
             admin.setPwd(Md5.md5WithSalt(input.getPwd()));
         }else

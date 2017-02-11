@@ -15,18 +15,21 @@ CREATE TABLE IF NOT EXISTS tb_user(
     withdraw_pwd VARCHAR(64) NULL COMMENT 'account withdraw password',
     id_card_num VARCHAR(20) NULL COMMENT 'id card number',
     name VARCHAR(10) NULL COMMENT 'bank account name',
-    last_login_time NULL DATETIME DEFAULT NOW() COMMENT 'last login time'
+    last_login_time DATETIME NULL COMMENT 'last login time'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='user info';
+
+INSERT INTO tb_user(account,pwd,tel,qq,business_id,business_pwd,token,withdraw_pwd,id_card_num,name,last_login_time)
+    VALUES('test@test.com','58334dcc9c656c9e8b56910466fe5614','15928981624','703825021','58334dcc9c656c9e8b56910466fe5614','58334dcc9c656c9e8b56910466fe5614',NULL,'58334dcc9c656c9e8b56910466fe5614','511527198909130638','贾松','2017-01-01 12:12:12');
 
 CREATE TABLE IF NOT EXISTS tb_admin(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
     account VARCHAR(30) NOT NULL UNIQUE COMMENT 'account',
     pwd VARCHAR(64) NOT NULL DEFAULT 'abcd123' COMMENT 'admin password',
     token VARCHAR(32) NULL DEFAULT NULL COMMENT 'request token',
-    last_login_time NULL DATETIME DEFAULT NOW() COMMENT 'last login time'
+    last_login_time DATETIME NULL COMMENT 'last login time'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='admin account info';
 
-INSERT INTO tb_admin(account,pwd) VALUES('admin','abcd123');
+INSERT INTO tb_admin(account,pwd,last_login_time) VALUES('admin','58334dcc9c656c9e8b56910466fe5614','2017-01-01 12:12:12');
 
 CREATE TABLE IF NOT EXISTS tb_wallet(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
@@ -38,6 +41,8 @@ CREATE TABLE IF NOT EXISTS tb_bank(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
     name VARCHAR(30) NOT NULL UNIQUE COMMENT 'bank name'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='bank type info';
+
+INSERT INTO tb_bank(name) VALUES('招商银行'),('中国农业银行'),('中国建设银行'),('中国工商银行'),('中国银行'),('广发银行'),('中国交通银行');
 
 CREATE TABLE IF NOT EXISTS tb_bank_account(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
@@ -92,6 +97,21 @@ CREATE TABLE IF NOT EXISTS tb_rechargeable_card_type_item(
     support_amount DECIMAL NOT NULL COMMENT 'card support amount'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='rechargeable card type detail info';
 
+INSERT INTO tb_rechargeable_card_type_item(tb_rechargeable_card_type_id,support_amount)
+    VALUES(1,'10.00'),(1,'30.00'),(1,'50.00'),(1,'100.00'),(1,'500.00'),
+          (2,'10.00'),(2,'30.00'),(2,'50.00'),(2,'100.00'),(2,'500.00'),
+          (3,'10.00'),(3,'30.00'),(3,'50.00'),(3,'100.00'),(3,'500.00'),
+          (4,'10.00'),(4,'30.00'),(4,'50.00'),(4,'100.00'),(4,'500.00'),
+          (5,'10.00'),(5,'30.00'),(5,'50.00'),(5,'100.00'),(5,'500.00'),
+          (6,'10.00'),(6,'30.00'),(6,'50.00'),(6,'100.00'),(6,'500.00'),
+          (7,'10.00'),(7,'30.00'),(7,'50.00'),(7,'100.00'),(7,'500.00'),
+          (8,'10.00'),(8,'30.00'),(8,'50.00'),(8,'100.00'),(8,'500.00'),
+          (9,'10.00'),(9,'30.00'),(9,'50.00'),(9,'100.00'),(9,'500.00'),
+          (10,'10.00'),(10,'30.00'),(10,'50.00'),(10,'100.00'),(10,'500.00'),
+          (11,'10.00'),(11,'30.00'),(11,'50.00'),(11,'100.00'),(11,'500.00'),
+          (12,'10.00'),(12,'30.00'),(12,'50.00'),(12,'100.00'),(12,'500.00'),
+          (13,'10.00'),(13,'30.00'),(13,'50.00'),(13,'100.00'),(13,'500.00');
+
 CREATE TABLE IF NOT EXISTS tb_rechargeable_card(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
     card_number VARCHAR(30) NOT NULL COMMENT 'card number',
@@ -108,7 +128,7 @@ CREATE TABLE IF NOT EXISTS tb_order(
     tb_user_id INT NOT NULL COMMENT 'user id',
     tb_rechargeable_card_type_id INT NOT NULL COMMENT 'card type id',
     tb_rechargeable_card_type_item_id INT NOT NULL COMMENT 'card item id',
-    order_time DATE NOT NULL DEFAULT NOW() COMMENT 'place a order time',
+    order_time DATETIME NOT NULL COMMENT 'place a order time',
     order_number VARCHAR(64) NOT NULL UNIQUE COMMENT 'order number',
     order_status INT NOT NULL DEFAULT '0' COMMENT '0-processing,1-success,2-fail',
     process_time DATETIME NOT NULL COMMENT 'process order time',
@@ -173,10 +193,9 @@ CREATE VIEW v_card_type_and_items AS
     SELECT
         t.name,
         t.sale_ratio,
-        group_concat(i.support_amount) AS amounts,
+        (SELECT group_concat(i.support_amount) FROM tb_rechargeable_card_type_item i WHERE i.tb_rechargeable_card_type_id = t.id) as amounts,
         t.card_shortcut
-    FROM tb_rechargeable_card_type t
-    LEFT JOIN tb_rechargeable_card_type_item i ON i.tb_rechargeable_card_type_id = t.id;
+    FROM tb_rechargeable_card_type t;
 
 CREATE VIEW v_admin_overview AS
     SELECT

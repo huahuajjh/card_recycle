@@ -5,5 +5,5 @@ package com.tqmars.cardrecycle.application.content;
  */
 public interface IFileUtil {
     String readFileContent(String path,String filename);
-    void writeceFileContent(String path,String filename,String content);
+    void writeFileContent(String path, String filename, String content);
 }

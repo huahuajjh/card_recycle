@@ -145,8 +145,8 @@ public class TestUtil {
 
     @Test
     public void testOverview(){
-        IOverviewAppService service = ServiceLocator.getInstance().getService("AdminOverviewAppService",IOverviewAppService.class);
-
+//        IOverviewAppService service = ServiceLocator.getInstance().getService("AdminOverviewAppService",IOverviewAppService.class);
+        System.out.println(Md5.md5WithSalt("abcd123"));
 //        System.out.println(service.queryAdminOverview());
     }
 

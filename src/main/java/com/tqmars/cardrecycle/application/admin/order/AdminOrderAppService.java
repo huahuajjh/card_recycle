@@ -47,7 +47,9 @@ public class AdminOrderAppService extends BaseAppService implements IAdminOrderA
                     .append("'");
         }
 
-        sb.append(" and order_status="+input.getOrderStatus());
+        if(null != input.getOrderStatus()){
+            sb.append(" and order_status="+input.getOrderStatus());
+        }
 
         int count = _orderDetailRepository.countWithCondition(sb.toString());
 
