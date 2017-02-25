@@ -1,6 +1,7 @@
 DROP DATABASE IF EXISTS card_recycle;
 
 CREATE DATABASE IF NOT EXISTS card_recycle DEFAULT CHARACTER SET = utf8;
+
 USE card_recycle;
 
 CREATE TABLE IF NOT EXISTS tb_user(
@@ -15,7 +16,7 @@ CREATE TABLE IF NOT EXISTS tb_user(
     withdraw_pwd VARCHAR(64) NULL COMMENT 'account withdraw password',
     id_card_num VARCHAR(20) NULL COMMENT 'id card number',
     name VARCHAR(10) NULL COMMENT 'bank account name',
-    last_login_time NULL DATETIME DEFAULT NOW() COMMENT 'last login time'
+    last_login_time DATETIME NULL DEFAULT NOW() COMMENT 'last login time'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='user info';
 
 CREATE TABLE IF NOT EXISTS tb_admin(
@@ -23,7 +24,7 @@ CREATE TABLE IF NOT EXISTS tb_admin(
     account VARCHAR(30) NOT NULL UNIQUE COMMENT 'account',
     pwd VARCHAR(64) NOT NULL DEFAULT 'abcd123' COMMENT 'admin password',
     token VARCHAR(32) NULL DEFAULT NULL COMMENT 'request token',
-    last_login_time NULL DATETIME DEFAULT NOW() COMMENT 'last login time'
+    last_login_time DATETIME NULL DEFAULT NOW() COMMENT 'last login time'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='admin account info';
 
 INSERT INTO tb_admin(account,pwd) VALUES('admin','abcd123');
@@ -108,7 +109,7 @@ CREATE TABLE IF NOT EXISTS tb_order(
     tb_user_id INT NOT NULL COMMENT 'user id',
     tb_rechargeable_card_type_id INT NOT NULL COMMENT 'card type id',
     tb_rechargeable_card_type_item_id INT NOT NULL COMMENT 'card item id',
-    order_time DATE NOT NULL DEFAULT NOW() COMMENT 'place a order time',
+    order_time DATETIME NOT NULL DEFAULT NOW() COMMENT 'place a order time',
     order_number VARCHAR(64) NOT NULL UNIQUE COMMENT 'order number',
     order_status INT NOT NULL DEFAULT '0' COMMENT '0-processing,1-success,2-fail',
     process_time DATETIME NOT NULL COMMENT 'process order time',
