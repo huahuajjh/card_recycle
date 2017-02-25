@@ -56,6 +56,9 @@ public class CardController extends ControllerBase {
     @RequestMapping(value = "/typeAndItems/query")
     public String queryTypeAndItems(){
         List<QueryCardTypeAndItemOutput> list = _cardTypeAppService.queryCardTypeAndItem();
+        if(null == list || list.size() == 0){
+            return toJsonWithFormatter(null,"未查询到数据",Code.FAIL);
+        }
         return toJsonWithFormatter(list,"success",Code.SUCCESS);
     }
 

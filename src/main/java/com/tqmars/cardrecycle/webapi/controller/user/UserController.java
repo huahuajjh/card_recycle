@@ -4,6 +4,7 @@ import com.tqmars.cardrecycle.application.User.IUserAppService;
 import com.tqmars.cardrecycle.application.User.dto.*;
 import com.tqmars.cardrecycle.application.net.Sms;
 import com.tqmars.cardrecycle.infrastructure.StringTools.PropertiesFileTool;
+import com.tqmars.cardrecycle.infrastructure.log.LoggerFactory;
 import com.tqmars.cardrecycle.infrastructure.serialization.Code;
 import com.tqmars.cardrecycle.infrastructure.serialization.Serialization;
 import com.tqmars.cardrecycle.infrastructure.vcode.VCodeGenerator;
@@ -57,13 +58,15 @@ public class UserController extends ControllerBase{
     }
 
     @RequestMapping(value = "/getSms")
-    public void getSms(@RequestParam(value = "phone") String phone){
+    public String getSms(@RequestParam(value = "phone") String phone){
         try {
             String smsCode = Sms.sendMsg(phone);
             request.getSession().setAttribute(Const.SMSCODE,smsCode);
             System.out.println(smsCode);
+            return toJsonWithFormatter(null,"success",Code.SUCCESS);
         } catch (IOException e) {
             e.printStackTrace();
+            return toJsonWithFormatter(null,"success",Code.FAIL);
         }
     }
 

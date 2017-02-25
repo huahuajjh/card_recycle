@@ -2,7 +2,10 @@ package com.tqmars.cardrecycle.application.content;
 
 import org.apache.commons.io.IOUtils;
 
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -13,20 +16,14 @@ public class FileUtil implements IFileUtil {
     private static String LINE_SEPARATOR = System.getProperty("line.separator");
     private static String FILE_SEPARATOR = System.getProperty("file.separator");
 
-    private FileUtil(){}
-
-    public static FileUtil getInstance(){
-        if(null == INSTANCE){
-            return new FileUtil();
-        }else {
-            return INSTANCE;
-        }
+    private FileUtil() {
     }
 
-    static {
-        File p = new File("./content");
-        if(!(p.isDirectory() || p.exists())){
-            p.mkdir();
+    public static FileUtil getInstance() {
+        if (null == INSTANCE) {
+            return new FileUtil();
+        } else {
+            return INSTANCE;
         }
     }
 
@@ -34,48 +31,45 @@ public class FileUtil implements IFileUtil {
     public String readFileContent(String path, String filename) {
         FileReader fr = null;
         try {
-            fr = new FileReader(path+FILE_SEPARATOR+filename);
+            String file = FileUtil.class.getResource(FILE_SEPARATOR + path + FILE_SEPARATOR + filename).getFile();
+            fr = new FileReader(file);
+            List<String> list = IOUtils.readLines(fr);
+            StringBuilder content = new StringBuilder();
+            list.forEach(l -> {
+                if (content.length() == 0) {
+                    content.append(l);
+                } else {
+                    content.append(LINE_SEPARATOR).append(l);
+                }
+            });
+            return content.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
             try {
-                List<String> list = IOUtils.readLines(fr);
-                StringBuilder content = new StringBuilder();
-                list.forEach(l->{
-                    if(content.length() == 0){
-                        content.append(l);
-                    }else {
-                        content.append(LINE_SEPARATOR).append(l);
-                    }
-                });
-                return content.toString();
+                if(null != fr){
+                    fr.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }finally {
-            if(null != fr){
-                try {
-                    fr.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
         }
         return null;
     }
 
     @Override
-    public void writeceFileContent(String path, String filename, String content) {
+    public void writeFileContent(String path, String filename, String content) {
         FileWriter fw = null;
         try {
-            fw = new FileWriter(path+FILE_SEPARATOR+filename);
-            IOUtils.write(content,fw);
+            String file = FileUtil.class.getResource(FILE_SEPARATOR+path + FILE_SEPARATOR + filename).getFile();
+            fw = new FileWriter(file);
+            IOUtils.write(content, fw);
             fw.flush();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
-                if(null != fw){
+                if (null != fw) {
                     fw.close();
                 }
             } catch (IOException e) {

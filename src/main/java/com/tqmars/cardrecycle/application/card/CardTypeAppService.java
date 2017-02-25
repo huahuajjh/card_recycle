@@ -50,6 +50,7 @@ public class CardTypeAppService extends BaseAppService implements ICardTypeAppSe
     @Override
     public List<QueryCardTypeAndItemOutput> queryCardTypeAndItem() {
         List<CardAndItems> list = _cardAndItemsRepository.getAll();
+        _cardAndItemsRepository.commit();
         return AutoMapper.mapping(QueryCardTypeAndItemOutput.class, list);
     }
 }

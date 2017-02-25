@@ -31,7 +31,7 @@ public class AdminContentController extends ControllerBase{
             return toJsonWithFormatter(null,"参数错误", Code.FAIL);
         }
 
-        FileUtil.getInstance().writeceFileContent(path,type+".txt",data);
+        FileUtil.getInstance().writeFileContent(path,type+".txt",data);
         return toJsonWithFormatter(null,"success", Code.SUCCESS);
     }
 }

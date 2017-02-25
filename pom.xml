@@ -199,14 +199,14 @@
 
         <!--默认情况下,idea不会将java源代码文件夹下面的非java文件编译,因此类似于mybatis的xml映射文件如果放在
         这些路径下面编译后就不会出现在java的项目中,该节点的配置表示将所有xml的文件编译到一起(实际上是将xml文件复制到bin或者target中)-->
-        <!--<resources>-->
+        <resources>
             <!--<resource>-->
-                <!--<directory>src/main/java</directory>-->
+                <!--<directory>logs</directory>-->
                 <!--<includes>-->
-                    <!--<include>**/*.xml</include>-->
+                    <!--<include>**/*.*</include>-->
                 <!--</includes>-->
             <!--</resource>-->
-        <!--</resources>-->
+        </resources>
 
     </build>
 

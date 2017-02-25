@@ -1,0 +1,1 @@
+scp -r target/cardrecycle-1.0.0 jjh@192.168.1.31:/usr/local/tomcat9/webapps
