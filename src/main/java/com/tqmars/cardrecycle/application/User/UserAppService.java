@@ -106,4 +106,11 @@ public class UserAppService extends BaseAppService implements IUserAppService{
         _userRepository.commit();
     }
 
+    @Override
+    public boolean auth(String token) {
+        boolean r = _userRepository.auth(token);
+        _userRepository.commit();
+        return r;
+    }
+
 }

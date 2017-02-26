@@ -41,4 +41,13 @@ public class UserRepository extends RepositoryBase<User,Integer> implements IUse
         update(_u);
     }
 
+    @Override
+    public boolean auth(String token) {
+        User u = single("token='"+token+"'");
+        if(null == u || null == u.getToken() || u.getToken().equals("")){
+            return false;
+        }
+        return true;
+    }
+
 }

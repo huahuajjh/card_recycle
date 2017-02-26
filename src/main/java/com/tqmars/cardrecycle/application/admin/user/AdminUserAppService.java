@@ -106,6 +106,8 @@ public class AdminUserAppService extends BaseAppService implements IAdminUserApp
 
     @Override
     public boolean auth(String token){
-        return _adminRepository.auth(token);
+        boolean r = _adminRepository.auth(token);
+        _adminRepository.commit();
+        return r;
     }
 }

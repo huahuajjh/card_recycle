@@ -72,7 +72,6 @@ public class UserController extends ControllerBase{
 
     @RequestMapping(value = "/login")
     public String login(@RequestParam(value = "user") String user) {
-        response.setHeader("P3P","CP='IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT'");
         LoginInput input = Serialization.toObject(user,LoginInput.class);
         if(input == null){
             return toFailMsg("登录信息有误",Code.EXTERNAL_ERR);
@@ -86,8 +85,6 @@ public class UserController extends ControllerBase{
         if(r == null){
             return toFailMsg("用户名或者密码错误",Code.USER_OR_PWD_ERR);
         }
-
-        getSession().setAttribute(Const.TOKEN,r.getToken());
 
         return toJsonWithFormatter(r,"success",Code.SUCCESS);
     }

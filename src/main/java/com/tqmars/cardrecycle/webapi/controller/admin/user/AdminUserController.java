@@ -37,10 +37,8 @@ public class AdminUserController extends ControllerBase {
      */
     @RequestMapping(value = "/login")
     public String login(@RequestParam(value = "input") String input){
-        response.setHeader("P3P","CP='IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT'");
         LoginInput loginInput = Serialization.toObject(input, LoginInput.class);
         String token = _adminUserAppService.login(loginInput);
-        getSession().setAttribute(Const.ADMIN_TOKEN,token);
         if(null == token || token.equals("")){
             return toJsonWithFormatter(null,"用户名或者密码错误", Code.USER_OR_PWD_ERR);
         }
