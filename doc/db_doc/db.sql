@@ -1,6 +1,7 @@
 DROP DATABASE IF EXISTS card_recycle;
 
 CREATE DATABASE IF NOT EXISTS card_recycle DEFAULT CHARACTER SET = utf8;
+
 USE card_recycle;
 
 CREATE TABLE IF NOT EXISTS tb_user(
