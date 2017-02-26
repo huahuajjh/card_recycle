@@ -29,7 +29,7 @@ public class OrderController extends ControllerBase {
     @RequestMapping(value = "/queryList")
     public String queryList(@RequestParam(value = "condition") String condition){
         QueryOrderListInput input = Serialization.toObject(condition, QueryOrderListInput.class);
-        return service.queryOrderList(input);
+        return toJsonp(service.queryOrderList(input));
     }
 
 }

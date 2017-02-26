@@ -72,6 +72,7 @@ public class UserController extends ControllerBase{
 
     @RequestMapping(value = "/login")
     public String login(@RequestParam(value = "user") String user) {
+        response.setHeader("P3P","CP='IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT'");
         LoginInput input = Serialization.toObject(user,LoginInput.class);
         if(input == null){
             return toFailMsg("登录信息有误",Code.EXTERNAL_ERR);
@@ -92,9 +93,10 @@ public class UserController extends ControllerBase{
     }
 
     @RequestMapping(value = "/getVCode",method = RequestMethod.GET)
-    public void getVCode(){
+    public void getVCode(){        
         VCodeGenerator.CodeObj codeObj = VCodeGenerator.getVCode(100,30);
-        getSession().setAttribute(Const.VCODE,codeObj.getvCode());
+        getSession().setAttribute(Const.VCODE,codeObj.getvCode());        
+        response.setHeader("P3P","CP='IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT'");
         try {
             ImageIO.write(codeObj.getImg(),"jpeg",response.getOutputStream());
         } catch (IOException e) {
@@ -140,7 +142,7 @@ public class UserController extends ControllerBase{
             return toFailMsg("短信验证码错误");
         }
 
-        return _userAppService.forgetPwd(input);
+        return toJsonp(_userAppService.forgetPwd(input));
     }
 
     @RequestMapping(value = "/tel/change")

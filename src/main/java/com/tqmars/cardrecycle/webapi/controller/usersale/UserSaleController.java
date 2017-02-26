@@ -19,7 +19,7 @@ import java.util.List;
  * Created by jjh on 1/16/17.
  */
 @RestController
-@RequestMapping(value = "/sale",method = RequestMethod.POST)
+@RequestMapping(value = "/sale",method = {RequestMethod.POST,RequestMethod.GET})
 public class UserSaleController extends ControllerBase {
     private ISaleAppService service;
 

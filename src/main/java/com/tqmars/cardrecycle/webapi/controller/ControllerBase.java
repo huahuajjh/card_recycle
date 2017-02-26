@@ -34,19 +34,27 @@ public abstract class ControllerBase {
     }
 
     protected String toSucessMsg(String msg) {
-        return Serialization.toJsonWithFormatter(null, msg, Code.SUCCESS);
+        String callback = this.request.getParameter("callback");
+        String script = callback+"("+Serialization.toJsonWithFormatter(null, msg, Code.SUCCESS)+")";
+        return script;
     }
 
     protected String toSuccessMsg(String msg, int code) {
-        return Serialization.toJsonWithFormatter(null, msg, code);
+        String callback = this.request.getParameter("callback");
+        String script = callback+"("+Serialization.toJsonWithFormatter(null, msg, code)+")";
+        return script;
     }
 
     protected String toJsonWithFormatter(Object data, String msg, int code) {
-        return Serialization.toJsonWithFormatter(data, msg, code);
+        String callback = this.request.getParameter("callback");
+        String script = callback+"("+Serialization.toJsonWithFormatter(data, msg, code)+")";
+        return script;
     }
 
     protected String toJsonWithPageFormatter(Object data, String msg, int code, int count) {
-        return Serialization.toJsonWithPageFormatter(data, msg, code, count);
+        String callback = this.request.getParameter("callback");
+        String script = callback+"("+Serialization.toJsonWithPageFormatter(data, msg, code, count)+")";
+        return script;
     }
 
     protected String toFailMsg(String msg, int code) {
@@ -55,6 +63,18 @@ public abstract class ControllerBase {
 
     protected String toFailMsg(String msg) {
         return toFailMsg(msg, Code.FAIL);
+    }
+
+    private String getCallback(){
+        return this.request.getParameter("callback");
+    }
+
+    protected String toJsonp(String data){
+        String callback = getCallback();
+        if(null == callback){
+            return data;
+        }
+        return callback+"("+data+")";
     }
 
 }

@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  * Created by jjh on 2/8/17.
  */
 @RestController
-@RequestMapping(value = "/admin/content",method = {RequestMethod.POST})
+@RequestMapping(value = "/admin/content",method = {RequestMethod.POST,RequestMethod.GET})
 public class AdminContentController extends ControllerBase{
     private String path = "./content";
 

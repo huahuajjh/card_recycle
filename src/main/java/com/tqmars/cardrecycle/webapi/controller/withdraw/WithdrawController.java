@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * Created by jjh on 1/16/17.
  */
 @RestController
-@RequestMapping(value = "/withdraw",method = RequestMethod.POST)
+@RequestMapping(value = "/withdraw",method = {RequestMethod.POST,RequestMethod.GET})
 public class WithdrawController extends ControllerBase{
     private IWithdrawAppService _withdrawAppService;
 
@@ -36,7 +36,7 @@ public class WithdrawController extends ControllerBase{
     @RequestMapping(value = "/query")
     public String query(@RequestParam(value = "condition") String condition){
         QueryWithdrawRecordInput input = Serialization.toObject(condition, QueryWithdrawRecordInput.class);
-        return _withdrawAppService.queryWithdrawRecord(input);
+        return toJsonp(_withdrawAppService.queryWithdrawRecord(input));
     }
 
     /**
@@ -48,7 +48,7 @@ public class WithdrawController extends ControllerBase{
     @RequestMapping(value = "/applyWithdraw")
     public String applyWithdraw(@RequestParam(value = "info") String info){
         ApplyWithdrawInput input = Serialization.toObject(info, ApplyWithdrawInput.class);
-        return _withdrawAppService.applyWithdraw(input);
+        return toJsonp(_withdrawAppService.applyWithdraw(input));
 
     }
 

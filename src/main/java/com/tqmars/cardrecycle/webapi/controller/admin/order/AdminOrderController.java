@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * Created by jjh on 1/16/17.
  */
 @RestController
-@RequestMapping(value = "/admin/order",method = RequestMethod.POST)
+@RequestMapping(value = "/admin/order",method = {RequestMethod.POST,RequestMethod.GET})
 public class AdminOrderController extends ControllerBase {
     private IAdminOrderAppService _adminOrderAppService;
 
@@ -36,7 +36,7 @@ public class AdminOrderController extends ControllerBase {
     public String query(@RequestParam(value = "condition") String condition){
         QueryOrderListInput input = Serialization.toObject(condition, QueryOrderListInput.class);
         String r = _adminOrderAppService.queryOrderList(input);
-        return r;
+        return toJsonp(r);
     }
 
 }

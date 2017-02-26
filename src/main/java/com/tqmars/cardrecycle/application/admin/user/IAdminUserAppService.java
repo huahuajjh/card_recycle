@@ -16,4 +16,5 @@ public interface IAdminUserAppService {
     void delUser(Integer id);
     void modifyUser(ModifyUserInput input);
     List<QueryUserListOutput> queryUserList();
+    boolean auth(String token);
 }

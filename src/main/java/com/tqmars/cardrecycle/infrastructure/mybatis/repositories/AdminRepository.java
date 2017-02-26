@@ -40,4 +40,18 @@ public class AdminRepository extends RepositoryBase<Admin,Integer> implements IA
         update(_a);
 
     }
+
+    @Override
+    public boolean auth(String token){
+        Admin _a = single("token='"+token+"''");
+        if(null == _a.getToken() || _a.getToken().equals("")){
+            return false;
+        }
+        else if(_a.getToken().equals(token)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

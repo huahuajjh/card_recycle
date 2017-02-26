@@ -37,6 +37,7 @@ public class AdminUserController extends ControllerBase {
      */
     @RequestMapping(value = "/login")
     public String login(@RequestParam(value = "input") String input){
+        response.setHeader("P3P","CP='IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT'");
         LoginInput loginInput = Serialization.toObject(input, LoginInput.class);
         String token = _adminUserAppService.login(loginInput);
         getSession().setAttribute(Const.ADMIN_TOKEN,token);
@@ -108,7 +109,7 @@ public class AdminUserController extends ControllerBase {
     @RequestMapping(value = "/add")
     public String add(@RequestParam(value = "input") String input){
         CreateUserInput user = Serialization.toObject(input, CreateUserInput.class);
-        return _adminUserAppService.createUser(user);
+        return toJsonp(_adminUserAppService.createUser(user));
     }
 
     @RequestMapping(value = "/changePwd")

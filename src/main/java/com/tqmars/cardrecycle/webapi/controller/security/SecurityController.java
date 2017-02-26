@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * Created by jjh on 1/16/17.
  */
 @RestController
-@RequestMapping(value = "/security",method = RequestMethod.POST)
+@RequestMapping(value = "/security",method = {RequestMethod.POST,RequestMethod.GET})
 public class SecurityController extends ControllerBase {
     private ISecurityAppService _securityAppService;
 

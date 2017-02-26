@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  * Created by jjh on 1/16/17.
  */
 @RestController
-@RequestMapping(value = "/admin/business",method = RequestMethod.POST)
+@RequestMapping(value = "/admin/business",method = {RequestMethod.POST,RequestMethod.GET})
 public class BusinessController extends ControllerBase {
     private IBusinessAppService _businessAppService;
 
@@ -34,7 +34,7 @@ public class BusinessController extends ControllerBase {
     @RequestMapping(value = "/query")
     public String query(@RequestParam(value = "condition") String condition){
         QueryBusinessListInput input = Serialization.toObject(condition, QueryBusinessListInput.class);
-        return _businessAppService.queryBusinessList(input);
+        return toJsonp(_businessAppService.queryBusinessList(input));
     }
 
 

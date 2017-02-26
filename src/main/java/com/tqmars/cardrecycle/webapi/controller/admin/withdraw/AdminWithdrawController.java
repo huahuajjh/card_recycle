@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * Created by jjh on 1/16/17.
  */
 @RestController
-@RequestMapping(value = "/admin/withdraw",method = RequestMethod.POST)
+@RequestMapping(value = "/admin/withdraw",method = {RequestMethod.POST,RequestMethod.GET})
 public class AdminWithdrawController extends ControllerBase{
     private IAdminWithdrawAppService _adminWithdrawAppService;
 
@@ -37,7 +37,7 @@ public class AdminWithdrawController extends ControllerBase{
     @RequestMapping(value = "/query")
     public String query(@RequestParam(value = "condition") String condition){
         QueryWithdrawRecordInput _input = Serialization.toObject(condition, QueryWithdrawRecordInput.class);
-        return  _adminWithdrawAppService.queryWithdrawRecord(_input);
+        return  toJsonp(_adminWithdrawAppService.queryWithdrawRecord(_input));
     }
 
     /**
@@ -49,7 +49,7 @@ public class AdminWithdrawController extends ControllerBase{
     @RequestMapping(value = "/deal")
     public String deal(@RequestParam(value = "input") String input){
         DealwithWithdrawApplyInput in = Serialization.toObject(input,DealwithWithdrawApplyInput.class);
-        return _adminWithdrawAppService.dealwithWithdrawApply(in);
+        return toJsonp(_adminWithdrawAppService.dealwithWithdrawApply(in));
     }
 
 }

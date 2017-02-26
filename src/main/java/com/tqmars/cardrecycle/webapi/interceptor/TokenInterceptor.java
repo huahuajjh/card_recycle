@@ -2,7 +2,10 @@ package com.tqmars.cardrecycle.webapi.interceptor;
 
 import com.tqmars.cardrecycle.infrastructure.serialization.Code;
 import com.tqmars.cardrecycle.infrastructure.serialization.Serialization;
+import com.tqmars.cardrecycle.infrastructure.StringTools.PropertiesFileTool;
+import com.tqmars.cardrecycle.application.admin.user.AdminUserAppService;
 import com.tqmars.cardrecycle.webapi.Const;
+import com.tqmars.cardrecycle.infrastructure.servicelocator.ServiceLocator;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,19 +20,23 @@ public class TokenInterceptor  implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
 
         httpServletResponse.setHeader("Access-Control-Allow-Credentials","true");
-        httpServletResponse.setHeader("Access-Control-Allow-Origin","http://192.168.1.4:8080");
+        httpServletResponse.setHeader("Access-Control-Allow-Origin",PropertiesFileTool.readByKey("crossAllow"));
         httpServletResponse.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
         httpServletResponse.setHeader("Access-Control-Allow-Headers", "x-requested-with");
         httpServletResponse.setContentType("application/json; charset=utf-8");
+        httpServletResponse.setHeader("P3P","CP='IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT'");
 
 
         boolean admin = httpServletRequest.getRequestURI().contains("/admin/");
+        String callback = httpServletRequest.getParameter("callback");
 
         if(admin){
-            String adminToken = httpServletRequest.getParameter(Const.TOKEN);
+            String adminToken = httpServletRequest.getParameter(Const.TOKEN);                        
             Object adminSessionToken = httpServletRequest.getSession().getAttribute(Const.ADMIN_TOKEN);
+
             if(null == adminToken || null == adminSessionToken || !adminToken.equals(adminSessionToken.toString())){
-                httpServletResponse.getWriter().write(Serialization.toJsonWithFormatter(null,"authentication failed | token失效,请重新获取", Code.BACKGROUND_AUTH_FAIL));
+
+                httpServletResponse.getWriter().write(callback+"("+Serialization.toJsonWithFormatter(null,"authentication failed | token失效,请重新获取", Code.BACKGROUND_AUTH_FAIL)+")");
                 return false;
             }
             return true;
@@ -38,7 +45,7 @@ public class TokenInterceptor  implements HandlerInterceptor {
         String token = httpServletRequest.getParameter(Const.TOKEN);
         Object sessionToken = httpServletRequest.getSession().getAttribute(Const.TOKEN);
         if (null == token || null == sessionToken || !token.equals(sessionToken.toString())){
-            httpServletResponse.getWriter().write(Serialization.toJsonWithFormatter(null,"authentication failed | token失效,请重新获取", Code.AUTH_FAIL));
+            httpServletResponse.getWriter().write(callback+"("+Serialization.toJsonWithFormatter(null,"authentication failed | token失效,请重新获取", Code.AUTH_FAIL)+")");
             return false;
         }
         return true;

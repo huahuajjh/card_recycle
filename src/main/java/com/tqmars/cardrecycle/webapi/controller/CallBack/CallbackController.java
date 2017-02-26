@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  * Created by jjh on 2/6/17.
  */
 @RestController
-@RequestMapping(value = "/callback",method = RequestMethod.GET)
+@RequestMapping(value = "/callback",method = {RequestMethod.POST,RequestMethod.GET})
 public class CallbackController extends ControllerBase{
 
     ICallbackAppService service;

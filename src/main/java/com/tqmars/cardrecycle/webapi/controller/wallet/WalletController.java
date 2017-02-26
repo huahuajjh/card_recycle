@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  * Created by jjh on 2/4/17.
  */
 @RestController
-@RequestMapping(value = "/wallet",method = RequestMethod.POST)
+@RequestMapping(value = "/wallet",method = {RequestMethod.POST,RequestMethod.GET})
 public class WalletController extends ControllerBase{
     IWalletAppService service;
 
@@ -27,7 +27,7 @@ public class WalletController extends ControllerBase{
 
     @RequestMapping(value = "/balance")
     public String sale(@RequestParam(value = "userId") String userId){
-        return service.getBalance(Integer.valueOf(userId));
+        return toJsonp(service.getBalance(Integer.valueOf(userId)));
     }
 
 }

@@ -20,7 +20,7 @@ import java.util.List;
  * Created by jjh on 1/22/17.
  */
 @RestController
-@RequestMapping(value = "/bankAccount",method = RequestMethod.POST)
+@RequestMapping(value = "/bankAccount",method = {RequestMethod.POST,RequestMethod.GET})
 public class BankController extends ControllerBase {
     private IBankAppservice _bankAppService;
 
@@ -94,7 +94,7 @@ public class BankController extends ControllerBase {
 
     @RequestMapping(value = "/bank/query")
     public String queryBank(){
-        return _bankAppService.queryAllBank();
+        return toJsonp(_bankAppService.queryAllBank());
     }
 
 
