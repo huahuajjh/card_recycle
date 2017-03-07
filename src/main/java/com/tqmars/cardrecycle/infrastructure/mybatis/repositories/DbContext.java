@@ -66,11 +66,19 @@ public class DbContext {
             return;
         }
 
-        sessionHolder.get().commit();
-        sessionHolder.get().close();
-        sessionHolder.set(null);
-        System.out.println("close session");
-        LoggerFactory.getLogger().info(DbContext.class.getName()+"-session closed");
+        try{
+            sessionHolder.get().commit();
+        }catch (Exception ex){
+            System.out.println("commit exception");
+            LoggerFactory.getLogger().info(DbContext.class.getName()+"-session closed");
+        }finally {
+            sessionHolder.get().close();
+            sessionHolder.get().clearCache();
+            sessionHolder.set(null);
+            System.out.println("close session");
+            LoggerFactory.getLogger().info(DbContext.class.getName()+"-session closed");
+        }
+
     }
 
     void rollbackSession() {
