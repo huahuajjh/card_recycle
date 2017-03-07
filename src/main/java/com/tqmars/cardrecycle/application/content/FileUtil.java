@@ -14,7 +14,7 @@ import java.util.List;
 public class FileUtil implements IFileUtil {
     private static FileUtil INSTANCE = new FileUtil();
     private static String LINE_SEPARATOR = System.getProperty("line.separator");
-    private static String FILE_SEPARATOR = "/";//System.getProperty("file.separator");
+    private static String FILE_SEPARATOR = System.getProperty("file.separator");
 
     private FileUtil() {
     }
@@ -31,9 +31,7 @@ public class FileUtil implements IFileUtil {
     public String readFileContent(String path, String filename) {
         FileReader fr = null;
         try {
-            System.out.println(FILE_SEPARATOR + path + FILE_SEPARATOR + filename);
             String file = FileUtil.class.getResource(FILE_SEPARATOR + path + FILE_SEPARATOR + filename).getFile();
-            System.out.println(file);
             fr = new FileReader(file);
             List<String> list = IOUtils.readLines(fr);
             StringBuilder content = new StringBuilder();
