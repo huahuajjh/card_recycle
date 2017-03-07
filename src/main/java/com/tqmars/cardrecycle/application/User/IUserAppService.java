@@ -12,4 +12,5 @@ public interface IUserAppService {
     void logout(LogoutInput input);
     String forgetPwd(ForgetPwdInput input);
     void changeTel(ChangeTelInput input);
+    boolean auth(String token);
 }

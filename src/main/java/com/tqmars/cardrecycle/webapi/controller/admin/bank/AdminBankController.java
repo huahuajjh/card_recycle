@@ -35,7 +35,7 @@ public class AdminBankController extends ControllerBase {
      */
     @RequestMapping(value = "/queryAll")
     public String query(){
-        return  _bankAppService.queryAll();
+        return  toJsonp(_bankAppService.queryAll());
     }
 
     /**
@@ -72,7 +72,7 @@ public class AdminBankController extends ControllerBase {
     @RequestMapping(value = "/add")
     public String add(@RequestParam(value = "input") String input){
         AddBankInput _input = Serialization.toObject(input, AddBankInput.class);
-        return  _bankAppService.addBank(_input);
+        return  toJsonp(_bankAppService.addBank(_input));
     }
 
 }

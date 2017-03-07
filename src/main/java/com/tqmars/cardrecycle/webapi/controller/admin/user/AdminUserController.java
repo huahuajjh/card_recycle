@@ -39,7 +39,6 @@ public class AdminUserController extends ControllerBase {
     public String login(@RequestParam(value = "input") String input){
         LoginInput loginInput = Serialization.toObject(input, LoginInput.class);
         String token = _adminUserAppService.login(loginInput);
-        getSession().setAttribute(Const.ADMIN_TOKEN,token);
         if(null == token || token.equals("")){
             return toJsonWithFormatter(null,"用户名或者密码错误", Code.USER_OR_PWD_ERR);
         }
@@ -108,7 +107,7 @@ public class AdminUserController extends ControllerBase {
     @RequestMapping(value = "/add")
     public String add(@RequestParam(value = "input") String input){
         CreateUserInput user = Serialization.toObject(input, CreateUserInput.class);
-        return _adminUserAppService.createUser(user);
+        return toJsonp(_adminUserAppService.createUser(user));
     }
 
     @RequestMapping(value = "/changePwd")

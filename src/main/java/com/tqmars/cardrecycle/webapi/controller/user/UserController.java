@@ -86,15 +86,14 @@ public class UserController extends ControllerBase{
             return toFailMsg("用户名或者密码错误",Code.USER_OR_PWD_ERR);
         }
 
-        getSession().setAttribute(Const.TOKEN,r.getToken());
-
         return toJsonWithFormatter(r,"success",Code.SUCCESS);
     }
 
     @RequestMapping(value = "/getVCode",method = RequestMethod.GET)
-    public void getVCode(){
+    public void getVCode(){        
         VCodeGenerator.CodeObj codeObj = VCodeGenerator.getVCode(100,30);
-        getSession().setAttribute(Const.VCODE,codeObj.getvCode());
+        getSession().setAttribute(Const.VCODE,codeObj.getvCode());        
+        response.setHeader("P3P","CP='IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT'");
         try {
             ImageIO.write(codeObj.getImg(),"jpeg",response.getOutputStream());
         } catch (IOException e) {
@@ -140,7 +139,7 @@ public class UserController extends ControllerBase{
             return toFailMsg("短信验证码错误");
         }
 
-        return _userAppService.forgetPwd(input);
+        return toJsonp(_userAppService.forgetPwd(input));
     }
 
     @RequestMapping(value = "/tel/change")

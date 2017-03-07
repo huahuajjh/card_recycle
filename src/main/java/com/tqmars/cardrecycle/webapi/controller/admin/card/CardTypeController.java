@@ -18,7 +18,7 @@ import java.util.List;
  * Created by jjh on 1/16/17.
  */
 @RestController
-@RequestMapping(value = "/admin/card",method = RequestMethod.POST)
+@RequestMapping(value = "/admin/card",method = {RequestMethod.POST,RequestMethod.GET})
 public class CardTypeController extends ControllerBase {
     private IAdminCardTypeAppService _adminCardTypeAppService;
 

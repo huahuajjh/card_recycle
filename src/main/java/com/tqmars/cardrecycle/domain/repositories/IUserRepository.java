@@ -10,4 +10,6 @@ public interface IUserRepository extends IRepositoryOfIntPrimaryKey<User> {
 
     void logout(User user);
 
+    boolean auth(String token);
+
 }

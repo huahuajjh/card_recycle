@@ -8,5 +8,5 @@ import com.tqmars.cardrecycle.domain.entities.data.Admin;
 public interface IAdminRepository extends IRepositoryOfIntPrimaryKey<Admin> {
     String login(Admin admin);
     void logout(Admin admin);
-
+    boolean auth(String token);
 }

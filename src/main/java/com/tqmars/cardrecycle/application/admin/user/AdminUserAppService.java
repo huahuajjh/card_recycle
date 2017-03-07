@@ -25,7 +25,7 @@ public class AdminUserAppService extends BaseAppService implements IAdminUserApp
     }
 
     @Override
-    public String login(LoginInput input) {
+    public String login(LoginInput input) {        
         input.setPwd(Md5.md5WithSalt(input.getPwd()));
         String token = _adminRepository.login(AutoMapper.mapping(Admin.class,input));
         _adminRepository.commit();
@@ -102,5 +102,12 @@ public class AdminUserAppService extends BaseAppService implements IAdminUserApp
         List<Admin> list = _adminRepository.getAll();
         _adminRepository.commit();
         return AutoMapper.mapping(QueryUserListOutput.class,list);
+    }
+
+    @Override
+    public boolean auth(String token){
+        boolean r = _adminRepository.auth(token);
+        _adminRepository.commit();
+        return r;
     }
 }
