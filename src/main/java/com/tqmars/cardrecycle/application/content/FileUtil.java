@@ -1,11 +1,9 @@
 package com.tqmars.cardrecycle.application.content;
 
+import com.tqmars.cardrecycle.infrastructure.log.LoggerFactory;
 import org.apache.commons.io.IOUtils;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 /**
@@ -29,11 +27,16 @@ public class FileUtil implements IFileUtil {
 
     @Override
     public String readFileContent(String path, String filename) {
-        FileReader fr = null;
+        InputStream in = null;
         try {
-            String file = FileUtil.class.getResource(FILE_SEPARATOR + path + FILE_SEPARATOR + filename).getFile();
-            fr = new FileReader(file);
-            List<String> list = IOUtils.readLines(fr);
+            String file = path+FILE_SEPARATOR+filename;
+            if(file.indexOf("\\") == 0){
+                file.subSequence(1,file.length()-1);
+            }
+
+            in = new FileInputStream(file);
+
+            List<String> list = IOUtils.readLines(in,"utf-8");
             StringBuilder content = new StringBuilder();
             list.forEach(l -> {
                 if (content.length() == 0) {
@@ -47,8 +50,8 @@ public class FileUtil implements IFileUtil {
             e.printStackTrace();
         }finally {
             try {
-                if(null != fr){
-                    fr.close();
+                if(null != in){
+                    in.close();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -59,18 +62,22 @@ public class FileUtil implements IFileUtil {
 
     @Override
     public void writeFileContent(String path, String filename, String content) {
-        FileWriter fw = null;
+        OutputStream out = null;
         try {
-            String file = FileUtil.class.getResource(FILE_SEPARATOR+path + FILE_SEPARATOR + filename).getFile();
-            fw = new FileWriter(file);
-            IOUtils.write(content, fw);
-            fw.flush();
+            String file = path+FILE_SEPARATOR+filename;
+            if(file.indexOf("\\") == 0){
+                file.subSequence(1,file.length()-1);
+            }
+
+            out = new FileOutputStream(file);
+            IOUtils.write(content, out,"utf-8");
+            out.flush();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
-                if (null != fw) {
-                    fw.close();
+                if (null != out) {
+                    out.close();
                 }
             } catch (IOException e) {
                 e.printStackTrace();

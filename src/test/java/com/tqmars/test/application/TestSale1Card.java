@@ -10,6 +10,8 @@ import com.tqmars.cardrecycle.infrastructure.servicelocator.ServiceLocator;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by jjh on 2/5/17.
@@ -22,15 +24,16 @@ public class TestSale1Card {
 
         ISaleAppService saleAppService = ServiceLocator.getInstance().getService("SaleAppService",ISaleAppService.class);
         Sale1CardInput input = new Sale1CardInput();
-        input.setCardNum("11111111111111118");
+        input.setCardNum("333333333333333");
         input.setCardCode("SZX");
         input.setCardItemId(23);
         input.setCardPwd("123456789454545874");
         input.setUserId(1);
         input.setCardTypeId(8);
-//        ApiResult r = saleAppService.sale1Card(input);
-//        p(r);
 
+        List<Sale1CardInput> list = new ArrayList<>();
+        list.add(input);
+        saleAppService.saleListCard(list);
     }
 
     @Test

@@ -4,7 +4,9 @@ import com.tqmars.cardrecycle.application.net.HttpClientTool;
 import com.tqmars.cardrecycle.infrastructure.StringTools.Des;
 import com.tqmars.cardrecycle.infrastructure.StringTools.Md5;
 import com.tqmars.cardrecycle.infrastructure.StringTools.PropertiesFileTool;
+import com.tqmars.cardrecycle.infrastructure.log.LoggerFactory;
 import com.tqmars.cardrecycle.infrastructure.serialization.Serialization;
+import org.apache.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,21 +35,36 @@ public class SaleCardApi {
         String url = "http://api.139card.com/card/sell";
 
         Map<String,String> map = new HashMap<>();
-        map.put("NotifyUrl",notifyUrl);
         map.put("MerchId",merchId);
         map.put("CardCode",cardCode);
-        map.put("Par",par);
         map.put("CardNo",cardNo);
         map.put("CardKey",cardKey);
+        map.put("Par",par);
         map.put("MerchOrderNo",merchOrderNo);
+        map.put("NotifyUrl",notifyUrl);
         map.put("Sign",sign);
 
         String result = HttpClientTool.get(url,map);
-
-        ApiResult apiResult = Serialization.toObject(result,ApiResult.class);
-
-        return apiResult;
-
+        ApiResult apiResult = new ApiResult();
+        try {
+            apiResult = Serialization.toObject(result,ApiResult.class);
+            if(null == apiResult || null == apiResult.getResultCode() || apiResult.getResultCode().equals(""))
+            {
+                apiResult.setResultCode("-9");
+                apiResult.setMessage("第三方接口错误");
+                return apiResult;
+            }
+            return apiResult;
+        }catch (Exception ex){
+            if(result.contains("<html>")){
+                apiResult.setResultCode("-1");
+                apiResult.setMessage("第三方接口异常");
+                LoggerFactory.getLogger().error("error when request third card api,cannot deserialization the result,404 error:"+ex.getMessage());
+                return apiResult;
+            }
+            LoggerFactory.getLogger().error("error when request third card api,cannot deserialization the result:"+ex.getMessage());
+            return apiResult;
+        }
     }
 
 }

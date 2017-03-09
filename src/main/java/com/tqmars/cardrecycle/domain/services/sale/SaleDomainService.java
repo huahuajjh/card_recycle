@@ -6,6 +6,7 @@ import com.tqmars.cardrecycle.domain.entities.data.*;
 import com.tqmars.cardrecycle.domain.repositories.*;
 import com.tqmars.cardrecycle.domain.services.sale.thirdapi.ApiResult;
 import com.tqmars.cardrecycle.domain.services.sale.thirdapi.SaleCardApi;
+import com.tqmars.cardrecycle.infrastructure.log.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public class SaleDomainService implements ISaleDomainService {
         this._userRepository.setEntityClass(User.class);
     }
 
-    @Async
+//    @Async
     @Override
     public ApiResult sell1Card(Sale1CardInput input) {
         ApiResult result = sell(input);
@@ -47,11 +48,17 @@ public class SaleDomainService implements ISaleDomainService {
         return result;
     }
 
-    @Async
+//    @Async
     @Override
     public void sellListCard(List<Sale1CardInput> list) {
-        list.forEach(l-> sell(l));
-        _orderRepository.commit();
+        try {
+            list.forEach(l-> sell(l));
+            _orderRepository.commit();
+        }catch (Exception ex){
+            LoggerFactory.getLogger().error("exception occur in sale card list:"+ex.getMessage(),ex);
+        }finally {
+            _orderRepository.closeSession();
+        }
     }
 
     @Override
@@ -109,6 +116,10 @@ public class SaleDomainService implements ISaleDomainService {
     }
 
     private void dealResult(Order order, String msg, String resCode, String orderNo) {
+        if(null == resCode){
+            throw new RuntimeException("第三方接口错误,订单生成失败");
+        }
+
         switch (resCode) {
             case "1":
                 order.setThirdOrderNo(orderNo);
@@ -146,6 +157,12 @@ public class SaleDomainService implements ISaleDomainService {
                 order.setThirdOrderNo(orderNo);
                 order.setOrderStatus(2);
                 order.setThirdMsg("订单生成失败:" + msg);
+                break;
+
+            case "-9":
+                order.setThirdOrderNo(orderNo);
+                order.setOrderStatus(2);
+                order.setThirdMsg("订单生成失败,第三方接口错误:" + msg);
                 break;
         }
 
