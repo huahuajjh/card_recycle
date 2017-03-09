@@ -1,6 +1,7 @@
 package com.tqmars.cardrecycle.webapi.controller.admin.content;
 
 import com.tqmars.cardrecycle.application.content.FileUtil;
+import com.tqmars.cardrecycle.infrastructure.StringTools.PropertiesFileTool;
 import com.tqmars.cardrecycle.infrastructure.serialization.Code;
 import com.tqmars.cardrecycle.webapi.controller.ControllerBase;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping(value = "/admin/content",method = {RequestMethod.POST,RequestMethod.GET})
 public class AdminContentController extends ControllerBase{
-    private String path = "./content";
+    private String path = PropertiesFileTool.readByKey("contentPath");
 
     public AdminContentController(HttpServletRequest request, HttpServletResponse response) {
         super(request, response);

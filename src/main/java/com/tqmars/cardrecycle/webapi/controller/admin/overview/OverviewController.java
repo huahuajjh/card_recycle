@@ -28,8 +28,8 @@ public class OverviewController extends ControllerBase {
     }
 
     @RequestMapping(value = "query")
-    public String query(){
-        QueryAdminOverviewOutput o = service.queryAdminOverview(getSession().getAttribute(Const.ADMIN_TOKEN).toString());
+    public String query(@RequestParam(value = "token") String token){
+        QueryAdminOverviewOutput o = service.queryAdminOverview(token);
         return toJsonWithFormatter(o,"success", Code.SUCCESS);
     }
 }

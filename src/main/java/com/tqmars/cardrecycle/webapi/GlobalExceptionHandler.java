@@ -18,7 +18,7 @@ public class GlobalExceptionHandler {
     public void defaultExceptionHandler(HttpServletRequest req, Exception e) {
         e.printStackTrace();
         Logger logger = LoggerFactory.getLogger();
-        logger.error("error message:"+e.getMessage());
+        logger.error("global error message:"+e.getMessage());
         logger.error(e.getMessage(),e);
 
     }

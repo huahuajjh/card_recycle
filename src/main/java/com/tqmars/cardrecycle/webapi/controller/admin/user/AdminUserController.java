@@ -56,8 +56,6 @@ public class AdminUserController extends ControllerBase {
         LogoutInput in = new LogoutInput();
         in.setToken(token);
         _adminUserAppService.logout(in);
-
-        getSession().invalidate();
         return toSucessMsg();
     }
 

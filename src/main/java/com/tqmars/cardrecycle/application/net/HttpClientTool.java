@@ -58,7 +58,7 @@ public class HttpClientTool {
             HttpResponse response = new DefaultHttpClient().execute(get);
             HttpEntity entity = response.getEntity();
             return EntityUtils.toString(entity);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             LoggerFactory.getLogger().error(e.getMessage());
             return null;

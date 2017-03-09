@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,7 +38,13 @@ public class SaleController extends ControllerBase {
      */
     @RequestMapping(value = "/sale1card")
     public String sale1card(@RequestParam(value = "input") String input){
-        List<Sale1CardInput> list = Serialization.toList(input,new TypeToken<List<Sale1CardInput>>(){}.getType());
+        List<Sale1CardInput> list = new ArrayList<>();
+        try {
+            list = Serialization.toList(input,new TypeToken<List<Sale1CardInput>>(){}.getType());
+        }catch (Exception ex){
+            return toFailMsg("序列化失败,参数错误");
+        }
+
         if(null == list || list.size() == 0){
             return toFailMsg("参数错误");
         }

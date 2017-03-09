@@ -4,6 +4,7 @@ import com.tqmars.cardrecycle.application.base.BaseAppService;
 import com.tqmars.cardrecycle.application.sale.dto.Sale1CardInput;
 import com.tqmars.cardrecycle.domain.services.sale.ISaleDomainService;
 import com.tqmars.cardrecycle.domain.services.sale.thirdapi.ApiResult;
+import org.springframework.scheduling.annotation.Async;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class SaleAppService extends BaseAppService implements ISaleAppService {
 //        return result;
     }
 
+    @Async
     @Override
     public void saleListCard(List<Sale1CardInput> list) {
         _saleDomainService.sellListCard(list);

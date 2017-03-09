@@ -108,14 +108,24 @@ public class TestUtil {
     public void testThirdApi(){
 //        ApiResult r = SaleCardApi.sale1Card("SZX","12.00","123131231","12312313");
 //        System.out.println(r.getResultCode());
+//        System.out.println(HttpClientTool.get("https://www.baidu.com",null));
     }
 
     @Test
     public void testDes() throws Exception {
-//        System.out.println(Des.toDes3("123"));
+        System.out.println(Des.toDes3("123"));
 //        System.out.println(Des.decode(Des.toDes3("123")));
 //        System.out.println(URLEncoder.encode("I39XTT61/SU="));
 //        System.out.println(new BigDecimal(12).toString());
 //        System.out.println(BigDecimal.valueOf(12.88).multiply(BigDecimal.valueOf(0.5)));
+    }
+
+    @Test
+    public void testHttp(){
+//        String r = HttpClientTool.get("http://api.139card.com/card/sell",null);
+//        System.out.println(r);
+
+//        System.out.println("/asd/as".indexOf("s"));
+            System.out.println(PropertiesFileTool.readByKey("contentPath"));
     }
 }

@@ -39,7 +39,7 @@ public class CallbackDomainService implements ICallbackDomainService {
         Order order = orderRepository.single("order_number='" + input.getMerchOrderNo() + "'");
 
         if (null == order) {
-            System.out.print("order null");
+//            System.out.print("order null");
             orderRepository.commit();
             return;
         }
@@ -47,7 +47,7 @@ public class CallbackDomainService implements ICallbackDomainService {
         Wallet wallet = walletRepository.single("tb_user_id=" + order.getUesrId());
 
         if (null == wallet) {
-            System.out.print("wallet null");
+//            System.out.print("wallet null");
             orderRepository.commit();
             return;
         }
@@ -55,7 +55,7 @@ public class CallbackDomainService implements ICallbackDomainService {
         RechargeableCard card = cardRepository.get(order.getCardId());
 
         if (null == card) {
-            System.out.print("card null");
+//            System.out.print("card null");
             orderRepository.commit();
             return;
         }
