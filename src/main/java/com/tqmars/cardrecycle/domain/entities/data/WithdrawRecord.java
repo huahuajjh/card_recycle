@@ -7,6 +7,7 @@ import com.tqmars.cardrecycle.infrastructure.StringTools.DateTool;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by jjh on 1/14/17.
@@ -17,7 +18,7 @@ public class WithdrawRecord extends EntityOfIntPrimaryKey {
     private Integer id = 0;
 
     @Column(name = "withdraw_time")
-    private Date withdrawTime;
+    private Timestamp withdrawTime;
 
     @Column(name = "bank_name")
     private String bankName;
@@ -35,10 +36,10 @@ public class WithdrawRecord extends EntityOfIntPrimaryKey {
     private BigDecimal actualAccountAmount;
 
     @Column(name = "process_time")
-    private Date processTime;
+    private Timestamp processTime;
 
     @Column(name = "apply_time")
-    private Date applyTime;
+    private Timestamp applyTime;
 
     @Column(name = "process_status")
     private int processStatus;
@@ -89,11 +90,11 @@ public class WithdrawRecord extends EntityOfIntPrimaryKey {
         this.id = id;
     }
 
-    public Date getWithdrawTime() {
+    public Timestamp getWithdrawTime() {
         return withdrawTime;
     }
 
-    public void setWithdrawTime(Date withdrawTime) {
+    public void setWithdrawTime(Timestamp withdrawTime) {
         this.withdrawTime = withdrawTime;
     }
 
@@ -137,19 +138,19 @@ public class WithdrawRecord extends EntityOfIntPrimaryKey {
         this.actualAccountAmount = actualAccountAmount;
     }
 
-    public Date getProcessTime() {
+    public Timestamp getProcessTime() {
         return processTime;
     }
 
-    public void setProcessTime(Date processTime) {
+    public void setProcessTime(Timestamp processTime) {
         this.processTime = processTime;
     }
 
-    public Date getApplyTime() {
+    public Timestamp getApplyTime() {
         return applyTime;
     }
 
-    public void setApplyTime(Date applyTime) {
+    public void setApplyTime(Timestamp applyTime) {
         this.applyTime = applyTime;
     }
 
@@ -194,15 +195,15 @@ public class WithdrawRecord extends EntityOfIntPrimaryKey {
     public void userWithdraw(String bankName,Integer userId,Integer bankId,BigDecimal amount,String bankAccount){
 
         this.setCardNum(bankAccount);
-        this.setWithdrawTime(Date.valueOf(DateTool.getInstance().getNowTime("yyyy-MM-dd")));
+        this.setWithdrawTime(DateTool.getInstance().getNowSqlTime());
         this.setWithdrawAmount(amount);
         this.setBankName(bankName);
         this.setUserId(userId);
         this.setBankId(bankId);
         this.setProcessStatus(0);
         this.setMsg("处理中");
-        this.setProcessTime(Date.valueOf(DateTool.getInstance().getNowTime("yyyy-MM-dd")));
-        this.setApplyTime(Date.valueOf(DateTool.getInstance().getNowTime("yyyy-MM-dd")));
+        this.setProcessTime(DateTool.getInstance().getNowSqlTime());
+        this.setApplyTime(DateTool.getInstance().getNowSqlTime());
 
         if(amount.compareTo(new BigDecimal("500")) < 0){
             this.setServiceCharge(new BigDecimal("1.00"));

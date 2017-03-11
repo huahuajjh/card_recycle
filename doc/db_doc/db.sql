@@ -1,10 +1,6 @@
 DROP DATABASE IF EXISTS sq_tgdzkj;
 
-<<<<<<< HEAD
-CREATE DATABASE IF NOT EXISTS sq_tgdzkj DEFAULT CHARACTER set utf8;
-=======
 CREATE DATABASE IF NOT EXISTS card_recycle DEFAULT CHARACTER utf8 COLLATE utf8_general_ci;
->>>>>>> 792642cd6508f7f6a3dddd225d7c9d4e85e38d91
 
 USE sq_tgdzkj;
 

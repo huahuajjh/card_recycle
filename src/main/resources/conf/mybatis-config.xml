@@ -15,7 +15,7 @@
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
                 <property name="url" value="jdbc:mysql://117.25.130.79:3306/card_recycle?characterEncoding=utf-8"/>
-                <property name="username" value="root"/>
+                <property name="username" value="cardrecycle"/>
                 <property name="password" value="huahuajjh3"/>
                 <property name="driver.encoding" value="UTF-8"/>
                 <!--启用断开链接检测-->
