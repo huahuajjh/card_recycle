@@ -138,7 +138,7 @@ public class SaleDomainService implements ISaleDomainService {
             case "-4":
                 order.setThirdOrderNo(orderNo);
                 order.setOrderStatus(2);
-                order.setThirdMsg("错误,参数不正确,请检查卡号和密码是否正确,请勿重复提交:" + msg);
+                order.setThirdMsg("错误,参数不正确,请检查卡号和密码是否正确:" + msg);
                 break;
 
             case "-2":

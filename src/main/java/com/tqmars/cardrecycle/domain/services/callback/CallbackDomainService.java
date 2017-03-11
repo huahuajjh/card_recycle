@@ -63,7 +63,11 @@ public class CallbackDomainService implements ICallbackDomainService {
         switch (input.getResultCode()) {
             case "1":
                 order.setOrderStatus(1);
+<<<<<<< HEAD
                 order.setThirdMsg("售卖成功-"+input.getMessage());
+=======
+                order.setThirdMsg("寄售成功-"+input.getMessage());
+>>>>>>> 792642cd6508f7f6a3dddd225d7c9d4e85e38d91
                 order.setCompleteTime(DateTool.getInstance().getNowSqlTime());
 
                 wallet.setBalance(wallet.getBalance().add(
@@ -72,14 +76,28 @@ public class CallbackDomainService implements ICallbackDomainService {
                 break;
 
             case "2":
+<<<<<<< HEAD
                 order.setOrderStatus(2);
                 order.setThirdMsg("面值错误-"+input.getMessage());
                 order.setCompleteTime(DateTool.getInstance().getNowSqlTime());
+=======
+                order.setOrderStatus(1);
+                order.setThirdMsg("订单成功,面值有误-"+input.getMessage());
+                order.setCompleteTime(DateTool.getInstance().getNowSqlTime());
+
+                wallet.setBalance(wallet.getBalance().add(
+                        card.getSupportAmount().multiply(new BigDecimal(input.getPar()))
+                ));
+>>>>>>> 792642cd6508f7f6a3dddd225d7c9d4e85e38d91
                 break;
 
             case "-1":
                 order.setOrderStatus(-1);
+<<<<<<< HEAD
                 order.setThirdMsg("订单失败-"+input.getMessage());
+=======
+                order.setThirdMsg("生成订单失败-"+input.getMessage());
+>>>>>>> 792642cd6508f7f6a3dddd225d7c9d4e85e38d91
                 order.setCompleteTime(DateTool.getInstance().getNowSqlTime());
                 break;
         }
