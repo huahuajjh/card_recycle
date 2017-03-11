@@ -36,6 +36,9 @@
         <tomcat7.version>2.1</tomcat7.version>
         <!--file encoding-->
         <file.encoding>UTF-8</file.encoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <!--mybatis version-->
         <mybatis.version>3.4.1</mybatis.version>
         <!--spring version-->

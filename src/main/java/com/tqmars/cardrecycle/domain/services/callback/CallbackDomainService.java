@@ -63,7 +63,7 @@ public class CallbackDomainService implements ICallbackDomainService {
         switch (input.getResultCode()) {
             case "1":
                 order.setOrderStatus(1);
-                order.setThirdMsg(input.getMessage());
+                order.setThirdMsg("售卖成功-"+input.getMessage());
                 order.setCompleteTime(DateTool.getInstance().getNowSqlTime());
 
                 wallet.setBalance(wallet.getBalance().add(
@@ -72,9 +72,14 @@ public class CallbackDomainService implements ICallbackDomainService {
                 break;
 
             case "2":
-            case "-1":
                 order.setOrderStatus(2);
-                order.setThirdMsg(input.getMessage());
+                order.setThirdMsg("面值错误-"+input.getMessage());
+                order.setCompleteTime(DateTool.getInstance().getNowSqlTime());
+                break;
+
+            case "-1":
+                order.setOrderStatus(-1);
+                order.setThirdMsg("订单失败-"+input.getMessage());
                 order.setCompleteTime(DateTool.getInstance().getNowSqlTime());
                 break;
         }
