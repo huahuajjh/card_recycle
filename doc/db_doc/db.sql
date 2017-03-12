@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS card_recycle;
+DROP DATABASE IF EXISTS sq_tgdzkj;
 
 CREATE DATABASE IF NOT EXISTS card_recycle DEFAULT CHARACTER utf8 COLLATE utf8_general_ci;
 
-USE card_recycle;
+USE sq_tgdzkj;
 
 CREATE TABLE IF NOT EXISTS tb_user(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
@@ -37,6 +37,8 @@ CREATE TABLE IF NOT EXISTS tb_wallet(
     tb_user_id INT NOT NULL UNIQUE COMMENT 'wallet owner',
     balance DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT 'user wallet balance'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='user wallt info';
+
+INSERT INTO tb_wallet(tb_user_id,balance) VALUES(1,'0.00');
 
 CREATE TABLE IF NOT EXISTS tb_bank(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
