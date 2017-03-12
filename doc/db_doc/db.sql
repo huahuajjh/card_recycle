@@ -1,6 +1,6 @@
 DROP DATABASE IF EXISTS card_recycle;
 
-CREATE DATABASE IF NOT EXISTS card_recycle DEFAULT CHARACTER SET = utf8;
+CREATE DATABASE IF NOT EXISTS card_recycle DEFAULT CHARACTER utf8 COLLATE utf8_general_ci;
 
 USE card_recycle;
 
