@@ -30,7 +30,8 @@ public class GlobalExceptionHandler {
         String tmp = t.replace("{remote_address}",req.getRemoteAddr() == null ? "" : req.getRemoteAddr())
         .replace("{path_info}",req.getPathInfo() == null ? "" : req.getPathInfo())
         .replace("{request_uri}",req.getRequestURI() == null ? "" : req.getRemoteAddr())
-        .replace("{remote_host}",req.getRemoteHost() == null ? "" : req.getRemoteAddr());
+        .replace("{remote_host}",req.getRemoteHost() == null ? "" : req.getRemoteAddr())
+        .replace("{msg}",e.getMessage());
 
         String tmp1 = "";
         //stack info
@@ -38,7 +39,6 @@ public class GlobalExceptionHandler {
             if(ste.getClassName().contains("com.tqmars")){
                 tmp1+=ste;
             }
-
         }
 
         TqEmail.sendWithHtml("card recycle project error report",tmp.replace("{details}",tmp1));
