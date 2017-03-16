@@ -21,27 +21,26 @@ public class GlobalExceptionHandler {
     public void defaultExceptionHandler(HttpServletRequest req, Exception e) {
         e.printStackTrace();
         Logger logger = LoggerFactory.getLogger();
-        logger.error("global error message:"+e.getMessage());
-        logger.error(e.getMessage(),e);
+        logger.error("global error message:" + e.getMessage());
+        logger.error(e.getMessage(), e);
 
         //email notify
         String path = PropertiesFileTool.readByKey("emailTemplatePath");
-        String t = FileUtil.getInstance().readFileContent(path,"email-template.html");
-        String tmp = t.replace("{remote_address}",req.getRemoteAddr() == null ? "" : req.getRemoteAddr())
-        .replace("{path_info}",req.getPathInfo() == null ? "" : req.getPathInfo())
-        .replace("{request_uri}",req.getRequestURI() == null ? "" : req.getRemoteAddr())
-        .replace("{remote_host}",req.getRemoteHost() == null ? "" : req.getRemoteAddr())
-        .replace("{msg}",e.getMessage());
+        String t = FileUtil.getInstance().readFileContent(path, "email-template.html");
+        String tmp = t.replace("{remote_address}", req.getRemoteAddr() == null ? "" : req.getRemoteAddr())
+                .replace("{msg}", e.getMessage())
+                .replace("{request_url}", req.getRequestURI());
+
 
         String tmp1 = "";
         //stack info
         for (StackTraceElement ste : e.getStackTrace()) {
-            if(ste.getClassName().contains("com.tqmars")){
-                tmp1+=ste;
+            if (ste.getClassName().contains("com.tqmars")) {
+                tmp1 += ste;
             }
         }
 
-        TqEmail.sendWithHtml("card recycle project error report",tmp.replace("{details}",tmp1));
+        TqEmail.sendWithHtml("card recycle project error report", tmp.replace("{details}", tmp1));
 
     }
 
