@@ -4,7 +4,6 @@ import com.tqmars.cardrecycle.application.User.IUserAppService;
 import com.tqmars.cardrecycle.application.User.dto.*;
 import com.tqmars.cardrecycle.application.net.Sms;
 import com.tqmars.cardrecycle.infrastructure.StringTools.PropertiesFileTool;
-import com.tqmars.cardrecycle.infrastructure.log.LoggerFactory;
 import com.tqmars.cardrecycle.infrastructure.serialization.Code;
 import com.tqmars.cardrecycle.infrastructure.serialization.Serialization;
 import com.tqmars.cardrecycle.infrastructure.vcode.VCodeGenerator;
@@ -35,7 +34,6 @@ public class UserController extends ControllerBase{
 
     /**
      * 用户注册
-     * @param url -- /user/register
      * @param reg -- {account(账户),pwd(密码),qq,tel(电话),smsCode(短信验证码)}
      * @return void
      */
@@ -152,6 +150,28 @@ public class UserController extends ControllerBase{
         }
         _userAppService.changeTel(input);
         return toJsonWithFormatter(null,"修改成功",Code.SUCCESS);
+    }
+
+    @RequestMapping(value = "/lock")
+    public String lock(@RequestParam(value = "id") String id){
+        Integer _id = Integer.parseInt(id);
+        if(null == id){
+            return toFailMsg("parameter id error");
+        }
+
+        _userAppService.lock(_id);
+        return toSucessMsg("success");
+    }
+
+    @RequestMapping(value = "/enable")
+    public String enable(@RequestParam(value = "id") String id){
+        Integer _id = Integer.parseInt(id);
+        if(null == id){
+            return toFailMsg("parameter id error");
+        }
+
+        _userAppService.enable(_id);
+        return toSucessMsg("success");
     }
 
 }

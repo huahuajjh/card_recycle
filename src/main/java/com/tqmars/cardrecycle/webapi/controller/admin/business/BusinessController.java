@@ -4,6 +4,7 @@ import com.tqmars.cardrecycle.application.admin.business.IBusinessAppService;
 import com.tqmars.cardrecycle.application.admin.business.dto.QueryBusinessListInput;
 import com.tqmars.cardrecycle.infrastructure.serialization.Serialization;
 import com.tqmars.cardrecycle.webapi.controller.ControllerBase;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +37,5 @@ public class BusinessController extends ControllerBase {
         QueryBusinessListInput input = Serialization.toObject(condition, QueryBusinessListInput.class);
         return toJsonp(_businessAppService.queryBusinessList(input));
     }
-
 
 }

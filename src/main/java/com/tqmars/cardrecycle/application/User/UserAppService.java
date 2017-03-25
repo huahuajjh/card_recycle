@@ -113,4 +113,26 @@ public class UserAppService extends BaseAppService implements IUserAppService{
         return r;
     }
 
+    @Override
+    public void lock(Integer id) {
+        User u = _userRepository.get(id);
+        if(null == u){
+            _userRepository.commit();
+            return;
+        }
+        u.lock();
+        _userRepository.commit();
+    }
+
+    @Override
+    public void enable(Integer id) {
+        User u = _userRepository.get(id);
+        if(null == u){
+            _userRepository.commit();
+            return;
+        }
+        u.enable();
+        _userRepository.commit();
+    }
+
 }

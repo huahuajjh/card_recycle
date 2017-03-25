@@ -88,4 +88,19 @@ public class QueryOrderListInput {
     public void setOrderStatus(Integer orderStatus) {
         this.orderStatus = orderStatus;
     }
+
+    @Override
+    public String toString() {
+        return "QueryOrderListInput{" +
+                "from=" + from +
+                ", to=" + to +
+                ", cardNo='" + cardNo + '\'' +
+                ", orderNo='" + orderNo + '\'' +
+                ", cardTypeId=" + cardTypeId +
+                ", orderStatus=" + orderStatus +
+                ", userId=" + userId +
+                ", index=" + index +
+                ", count=" + count +
+                '}';
+    }
 }

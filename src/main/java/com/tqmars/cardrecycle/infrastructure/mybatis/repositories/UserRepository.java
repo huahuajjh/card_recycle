@@ -17,7 +17,7 @@ public class UserRepository extends RepositoryBase<User,Integer> implements IUse
 
     @Override
     public String login(User user) {
-        User _u = single("account='"+user.getAccount()+"' and pwd='"+user.getPwd()+"'");
+        User _u = single("status=1 and account='"+user.getAccount()+"' and pwd='"+user.getPwd()+"'");
         if(_u==null){
             return null;
         }

@@ -15,7 +15,7 @@ public final class Serialization {
 
     private static Gson gson;
     static {
-        builder.setDateFormat("yyyy-MM-dd HH:mm:ss");
+        builder.setDateFormat("yyyy-MM-dd");
         gson = builder.create();
     }
 

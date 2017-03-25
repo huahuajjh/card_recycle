@@ -16,11 +16,12 @@ CREATE TABLE IF NOT EXISTS tb_user(
     withdraw_pwd VARCHAR(64) NULL COMMENT 'account withdraw password',
     id_card_num VARCHAR(20) NULL COMMENT 'id card number',
     name VARCHAR(10) NULL COMMENT 'bank account name',
-    last_login_time DATETIME NULL COMMENT 'last login time'
+    last_login_time DATETIME NULL COMMENT 'last login time',
+    status INT NOT NULL DEFAULT 1 COMMENT 'user status,0-lock,1-normal'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='user info';
 
-INSERT INTO tb_user(account,pwd,tel,qq,business_id,business_pwd,token,withdraw_pwd,id_card_num,name,last_login_time)
-    VALUES('test@test.com','58334dcc9c656c9e8b56910466fe5614','15928981624','703825021','58334dcc9c656c9e8b56910466fe5614','58334dcc9c656c9e8b56910466fe5614',NULL,'58334dcc9c656c9e8b56910466fe5614','511527198909130638','贾松','2017-01-01 12:12:12');
+INSERT INTO tb_user(account,pwd,tel,qq,business_id,business_pwd,token,withdraw_pwd,id_card_num,name,last_login_time,status)
+    VALUES('test@test.com','58334dcc9c656c9e8b56910466fe5614','15928981624','703825021','58334dcc9c656c9e8b56910466fe5614','58334dcc9c656c9e8b56910466fe5614',NULL,'58334dcc9c656c9e8b56910466fe5614','511527198909130638','贾松','2017-01-01 12:12:12',1);
 
 CREATE TABLE IF NOT EXISTS tb_admin(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
