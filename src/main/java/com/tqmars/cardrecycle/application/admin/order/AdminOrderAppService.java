@@ -64,15 +64,11 @@ public class AdminOrderAppService extends BaseAppService implements IAdminOrderA
 
     @Override
     public List<QueryOrderListAsListOutput> queryOrderListAsList(QueryOrderListInput input) {
+        if(null == input){
+            return null;
+        }
+
         StringBuilder sb = new StringBuilder(" 0=0 ");
-
-        if(null != input.getOrderNum()){
-            sb.append(" and ").append(" order_number='").append(input.getOrderNum()+"'");
-        }
-
-        if(null != input.getCardNum()){
-            sb.append(" and card_number=").append("'").append(input.getCardNum()).append("'");
-        }
 
         if(null != input.getFrom() && null != input.getTo()){
             sb.append(" and order_time")
@@ -91,8 +87,6 @@ public class AdminOrderAppService extends BaseAppService implements IAdminOrderA
         if(null != input.getOrderStatus()){
             sb.append(" and order_status="+input.getOrderStatus());
         }
-
-        sb.append(" limit ").append((input.getIndex()-1) * input.getCount()).append(",").append(input.getCount());
 
         List<OrderDetails> list = _orderDetailRepository.getAllWithCondition(sb.toString());
 

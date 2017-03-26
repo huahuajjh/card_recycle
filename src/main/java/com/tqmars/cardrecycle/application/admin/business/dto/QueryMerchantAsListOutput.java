@@ -1,33 +1,25 @@
 package com.tqmars.cardrecycle.application.admin.business.dto;
 
+import com.excel.util.annotation.OutputColAnnotation;
+
 /**
- * Created by jjh on 1/17/17.
+ * Created by jjh on 17-3-26.
  */
-public class QueryBusinessListOutput {
-    private Integer id;
+public class QueryMerchantAsListOutput {
+    @OutputColAnnotation(colCoord = 0)
     private String account;
+
+    @OutputColAnnotation(colCoord = 1)
     private String tel;
+
+    @OutputColAnnotation(colCoord = 2)
     private String qq;
-    private String businessId;
-    private String name;
+
+    @OutputColAnnotation(colCoord = 3)
     private String idCardNum;
-    private int status;
 
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    @OutputColAnnotation(colCoord = 4)
+    private String name;
 
     public String getAccount() {
         return account;
@@ -53,14 +45,6 @@ public class QueryBusinessListOutput {
         this.qq = qq;
     }
 
-    public String getBusinessId() {
-        return businessId;
-    }
-
-    public void setBusinessId(String businessId) {
-        this.businessId = businessId;
-    }
-
     public String getName() {
         return name;
     }
@@ -75,5 +59,16 @@ public class QueryBusinessListOutput {
 
     public void setIdCardNum(String idCardNum) {
         this.idCardNum = idCardNum;
+    }
+
+    @Override
+    public String toString() {
+        return "QueryMerchantAsListOutput{" +
+                "account='" + account + '\'' +
+                ", tel='" + tel + '\'' +
+                ", qq='" + qq + '\'' +
+                ", name='" + name + '\'' +
+                ", idCardNum='" + idCardNum + '\'' +
+                '}';
     }
 }

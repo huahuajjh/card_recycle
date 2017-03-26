@@ -22,15 +22,14 @@ public class MyConfig extends WebMvcConfigurerAdapter {
                 .excludePathPatterns("/content/query")
                 .excludePathPatterns("/callback/order/callback")
                 .excludePathPatterns("/card/typeAndItems/query")
-                .excludePathPatterns("/test/test")
                 .excludePathPatterns("/admin/user/login")
-                .excludePathPatterns("/admin/order/export");
+                .excludePathPatterns("/user/isTelExists")
+                .excludePathPatterns("/user/isAccExists");
         super.addInterceptors(registry);
     }
 
     /**
      * 跨域设置
-     *
      * @param registry
      */
     @Override

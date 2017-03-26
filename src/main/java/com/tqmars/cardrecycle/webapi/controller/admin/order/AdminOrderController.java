@@ -42,9 +42,18 @@ public class AdminOrderController extends ControllerBase {
     @RequestMapping(value = "/export")
     public String export(HttpServletResponse res , @RequestParam(value = "condition") String condition){
         QueryOrderListInput input = Serialization.toObject(condition, QueryOrderListInput.class);
+
+        if(null == input){
+            return toFailMsg("parameter error");
+        }
+
         List<QueryOrderListAsListOutput> list = _adminOrderAppService.queryOrderListAsList(input);
 
-        export("/template/order.xlsx",QueryOrderListAsListOutput.class,list,res);
+        if(null == list || list.size() == 0){
+            return toFailMsg("no data");
+        }
+
+        export("/template/order.xlsx",QueryOrderListAsListOutput.class,list,res,"order.xlsx");
 
         return toSucessMsg();
     }

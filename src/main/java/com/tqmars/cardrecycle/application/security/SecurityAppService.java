@@ -41,7 +41,13 @@ public class SecurityAppService extends BaseAppService implements ISecurityAppSe
 
     @Override
     public boolean realNameAuth(RealNameAuthInput input) {
+        boolean r = _userRepository.isExists("id_card_num='"+input.getIdNum()+"'");
+        if(r){
+            return false;
+        }
+
         User user = _userRepository.single("token='"+input.getToken()+"'");
+
         if(null == user){
             _userRepository.commit();
             return false;

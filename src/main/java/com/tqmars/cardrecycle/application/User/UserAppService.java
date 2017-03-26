@@ -49,6 +49,11 @@ public class UserAppService extends BaseAppService implements IUserAppService{
 
     @Override
     public void register(CreateUserInput input) {
+        if(_userRepository.isExists("account = '"+input.getAccount()+"' OR tel = '"+input.getTel()+"'")){
+            _userRepository.commit();
+            return;
+        }
+
         input.setBusinessId(Md5.md5WithSalt(input.getAccount()));
         input.setBusinessPwd(Md5.md5WithSalt(input.getBusinessPwd()));
         input.setPwd(Md5.md5WithSalt(input.getPwd()));
@@ -121,6 +126,7 @@ public class UserAppService extends BaseAppService implements IUserAppService{
             return;
         }
         u.lock();
+        _userRepository.update(u);
         _userRepository.commit();
     }
 
@@ -132,7 +138,18 @@ public class UserAppService extends BaseAppService implements IUserAppService{
             return;
         }
         u.enable();
+        _userRepository.update(u);
         _userRepository.commit();
+    }
+
+    @Override
+    public boolean isTelExists(String tel) {
+        return _userRepository.isExists("tel = '"+tel+"'");
+    }
+
+    @Override
+    public boolean isAccExists(String acc) {
+        return _userRepository.isExists("account = '"+acc+"'");
     }
 
 }

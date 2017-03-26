@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS sq_tgdzkj;
+DROP DATABASE IF EXISTS card_recycle;
 
-CREATE DATABASE IF NOT EXISTS card_recycle DEFAULT CHARACTER utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS card_recycle DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-USE sq_tgdzkj;
+USE card_recycle;
 
 CREATE TABLE IF NOT EXISTS tb_user(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',

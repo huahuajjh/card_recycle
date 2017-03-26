@@ -28,20 +28,13 @@ public class TokenInterceptor  implements HandlerInterceptor {
 //        ie跨域声明
 //        httpServletResponse.setHeader("P3P","CP='IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT'");
 
-
         boolean admin = httpServletRequest.getRequestURI().contains("/admin/");
         String callback = httpServletRequest.getParameter("callback");
         if(admin){
             String adminToken = httpServletRequest.getParameter(Const.TOKEN);
-//            Object adminSessionToken = httpServletRequest.getSession().getAttribute(Const.ADMIN_TOKEN);
 
-//            if(null == adminToken || null == adminSessionToken || !adminToken.equals(adminSessionToken.toString())){
-//
-//                httpServletResponse.getWriter().write(callback+"("+Serialization.toJsonWithFormatter(null,"authentication failed | token失效,请重新获取", Code.BACKGROUND_AUTH_FAIL)+")");
-//                return false;
-//            }
-//            return true;
             IAdminUserAppService a = ServiceLocator.getInstance().getService("AdminUserAppService",IAdminUserAppService.class);
+
             if(a.auth(adminToken)){
                 return true;
             }
@@ -51,12 +44,7 @@ public class TokenInterceptor  implements HandlerInterceptor {
         }
 
         String token = httpServletRequest.getParameter(Const.TOKEN);
-//        Object sessionToken = httpServletRequest.getSession().getAttribute(Const.TOKEN);
-//        if (null == token || null == sessionToken || !token.equals(sessionToken.toString())){
-//            httpServletResponse.getWriter().write(callback+"("+Serialization.toJsonWithFormatter(null,"authentication failed | token失效,请重新获取", Code.AUTH_FAIL)+")");
-//            return false;
-//        }
-//        return true;
+
         IUserAppService u = ServiceLocator.getInstance().getService("UserAppService",IUserAppService.class);
         if(u.auth(token)){
             return true;

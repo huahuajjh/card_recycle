@@ -55,6 +55,24 @@ public class UserController extends ControllerBase{
         return toSuccessMsg("注册成功",Code.SUCCESS);
     }
 
+    @RequestMapping(value = "/isTelExists")
+    public String isTelExists(@RequestParam(value = "tel") String tel){
+        if(_userAppService.isTelExists(tel)){
+            return toFailMsg("已经存在的手机号");
+        }
+
+        return toSucessMsg();
+    }
+
+    @RequestMapping(value = "/isAccExists")
+    public String isAccExists(@RequestParam(value = "acc") String acc){
+        if(_userAppService.isAccExists(acc)){
+            return toFailMsg("已经存在的账户");
+        }
+
+        return toSucessMsg();
+    }
+
     @RequestMapping(value = "/getSms")
     public String getSms(@RequestParam(value = "phone") String phone){
         try {
@@ -84,7 +102,11 @@ public class UserController extends ControllerBase{
             return toFailMsg("用户名或者密码错误",Code.USER_OR_PWD_ERR);
         }
 
-        return toJsonWithFormatter(r,"success",Code.SUCCESS);
+        if(r.isEnabled()){
+            return toJsonWithFormatter(r,"success",Code.SUCCESS);
+        }
+
+        return toFailMsg("您的账户已被冻结");
     }
 
     @RequestMapping(value = "/getVCode",method = RequestMethod.GET)
@@ -152,22 +174,22 @@ public class UserController extends ControllerBase{
         return toJsonWithFormatter(null,"修改成功",Code.SUCCESS);
     }
 
-    @RequestMapping(value = "/lock")
+    @RequestMapping(value = "/admin/lock")
     public String lock(@RequestParam(value = "id") String id){
         Integer _id = Integer.parseInt(id);
         if(null == id){
-            return toFailMsg("parameter id error");
+            return toFailMsg("parameter id is incorrect");
         }
 
         _userAppService.lock(_id);
         return toSucessMsg("success");
     }
 
-    @RequestMapping(value = "/enable")
+    @RequestMapping(value = "/admin/enable")
     public String enable(@RequestParam(value = "id") String id){
         Integer _id = Integer.parseInt(id);
         if(null == id){
-            return toFailMsg("parameter id error");
+            return toFailMsg("parameter id is incorrect");
         }
 
         _userAppService.enable(_id);

@@ -29,7 +29,6 @@ public class SecurityController extends ControllerBase {
 
     /**
      * 实名认证
-     * @param url -- /security/realNameAuth
      * @param uinfo -- {idNum(身份证),name(姓名),token,id(用户id)}
      * @return void
      */
@@ -41,14 +40,13 @@ public class SecurityController extends ControllerBase {
         if(r){
             return toSucessMsg();
         }else {
-            return toFailMsg("认证失败");
+            return toFailMsg("认证失败,已存在的身份证号");
         }
 
     }
 
     /**
      * 修改提现密码
-     * @param url -- /security/changeWithDrawPwd
      * @param uinfo -- {newPwd,token,id}
      * @return void
      */

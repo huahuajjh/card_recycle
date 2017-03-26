@@ -186,6 +186,6 @@ public class User extends EntityOfIntPrimaryKey {
         this.status = 0;
     }
     public void enable(){
-        this.status = 0;
+        this.status = 1;
     }
 }

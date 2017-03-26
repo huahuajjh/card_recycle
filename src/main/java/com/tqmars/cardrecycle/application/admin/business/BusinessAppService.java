@@ -2,6 +2,7 @@ package com.tqmars.cardrecycle.application.admin.business;
 
 import com.tqmars.cardrecycle.application.admin.business.dto.QueryBusinessListInput;
 import com.tqmars.cardrecycle.application.admin.business.dto.QueryBusinessListOutput;
+import com.tqmars.cardrecycle.application.admin.business.dto.QueryMerchantAsListOutput;
 import com.tqmars.cardrecycle.application.automapper.AutoMapper;
 import com.tqmars.cardrecycle.application.base.BaseAppService;
 import com.tqmars.cardrecycle.domain.entities.data.User;
@@ -32,4 +33,14 @@ public class BusinessAppService extends BaseAppService implements IBusinessAppSe
         _userRepository.commit();
         return toJsonWithPageFormatter(businessList, "success", Code.SUCCESS,count);
     }
+
+    @Override
+    public List<QueryMerchantAsListOutput> queryMerchantAsList() {
+        List<User> list = _userRepository.getAll();
+        List<QueryMerchantAsListOutput> businessList = AutoMapper.mapping(QueryMerchantAsListOutput.class, list);
+
+        _userRepository.commit();
+        return businessList;
+    }
+
 }

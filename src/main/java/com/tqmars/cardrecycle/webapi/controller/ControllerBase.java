@@ -107,10 +107,10 @@ public abstract class ControllerBase {
         return r;
     }
 
-    protected <TOutput> void export(String templatePath, Class<TOutput> outputEntity , List<TOutput> list,HttpServletResponse res){
+    protected <TOutput> void export(String templatePath, Class<TOutput> outputEntity , List<TOutput> list,HttpServletResponse res,String filename){
         res.setHeader("content-type", "application/octet-stream");
         res.setContentType("application/octet-stream");
-        res.setHeader("Content-Disposition", "attachment;filename=order.xlsx");
+        res.setHeader("Content-Disposition", "attachment;filename="+filename);
 
         String path = AdminOrderController.class.getResource(templatePath).getFile();
         FileInputStream in = null;
@@ -118,7 +118,7 @@ public abstract class ControllerBase {
         try {
             in = new FileInputStream(path);
 
-            IExcelOutput output = ExcelFactory.getExcelOutput();
+            IExcelOutput output = ExcelFactory.getExcelOutput(in);
             output.writeDatas(outputEntity,list,1);
 
             output.writeStream(res.getOutputStream());

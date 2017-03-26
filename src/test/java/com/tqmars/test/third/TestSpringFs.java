@@ -24,11 +24,11 @@ public class TestSpringFs {
         String path = AdminOrderController.class.getResource("/template/order.xlsx").getFile();
         FileInputStream in = new FileInputStream(path);
 
-        IExcelOutput output = ExcelFactory.getExcelOutput(new FileInputStream("/home/jjh/11.xlsx"));
+        IExcelOutput output = ExcelFactory.getExcelOutput(in);
 
-//        output.writeDatas(QueryOrderListAsListOutput.class,getData(),1);
-//
-//        output.writeStream(new FileOutputStream("/home/jjh/1.xlsx"));
+        output.writeDatas(QueryOrderListAsListOutput.class,getData(),1);
+
+        output.writeStream(new FileOutputStream("/home/jjh/1.xlsx"));
     }
 
     private List<QueryOrderListAsListOutput> getData(){

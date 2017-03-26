@@ -15,4 +15,6 @@ public interface IUserAppService {
     boolean auth(String token);
     void lock(Integer id);
     void enable(Integer id);
+    boolean isTelExists(String tel);
+    boolean isAccExists(String acc);
 }
