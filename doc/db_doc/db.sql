@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS sq_tgdzkj;
+DROP DATABASE IF EXISTS card_recycle;
 
-CREATE DATABASE IF NOT EXISTS card_recycle DEFAULT CHARACTER utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS card_recycle DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-USE sq_tgdzkj;
+USE card_recycle;
 
 CREATE TABLE IF NOT EXISTS tb_user(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
@@ -16,7 +16,8 @@ CREATE TABLE IF NOT EXISTS tb_user(
     withdraw_pwd VARCHAR(64) NULL COMMENT 'account withdraw password',
     id_card_num VARCHAR(20) NULL COMMENT 'id card number',
     name VARCHAR(10) NULL COMMENT 'bank account name',
-    last_login_time DATETIME NULL COMMENT 'last login time'
+    last_login_time DATETIME NULL COMMENT 'last login time',
+    del INT(1) NOT NULL DEFAULT 0 COMMENT 'soft delete flag,0:not delete,1:delete'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='user info';
 
 INSERT INTO tb_user(account,pwd,tel,qq,business_id,business_pwd,token,withdraw_pwd,id_card_num,name,last_login_time)
