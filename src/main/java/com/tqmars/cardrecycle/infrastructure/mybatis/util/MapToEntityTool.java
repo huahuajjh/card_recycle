@@ -14,6 +14,8 @@ import java.util.Map;
 public class MapToEntityTool {
     public static <TEntity extends IEntity> TEntity toEntity(Class<TEntity> entityClass, Map<String, Object> map) {
         TEntity entity = initEntity(entityClass);
+        // entity.setId = map.get("id");
+        
         if (map == null || map.size() == 0) {
                 return null;
         }

@@ -13,4 +13,8 @@ public interface IUserAppService {
     String forgetPwd(ForgetPwdInput input);
     void changeTel(ChangeTelInput input);
     boolean auth(String token);
+    void lock(Integer id);
+    void enable(Integer id);
+    boolean isTelExists(String tel);
+    boolean isAccExists(String acc);
 }

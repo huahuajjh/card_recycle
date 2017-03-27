@@ -1,5 +1,6 @@
 package com.tqmars.cardrecycle.application.admin.order.dto;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -9,8 +10,8 @@ public class QueryOrderListInput {
     private String orderNum;
     private String cardNum;
     private Integer orderStatus;
-    private Date from;
-    private Date to;
+    private Timestamp from;
+    private Timestamp to;
     private int index;
     private int count;
 
@@ -58,15 +59,15 @@ public class QueryOrderListInput {
         return from;
     }
 
-    public void setFrom(Date from) {
+    public void setFrom(Timestamp from) {
         this.from = from;
     }
 
-    public Date getTo() {
+    public Timestamp getTo() {
         return to;
     }
 
-    public void setTo(Date to) {
+    public void setTo(Timestamp to) {
         this.to = to;
     }
 }

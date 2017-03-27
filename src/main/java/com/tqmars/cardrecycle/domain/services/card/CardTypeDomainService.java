@@ -5,6 +5,8 @@ import com.tqmars.cardrecycle.domain.entities.data.RechargeableCardTypeItem;
 import com.tqmars.cardrecycle.domain.repositories.ICardTypeItemRepository;
 import com.tqmars.cardrecycle.domain.repositories.ICardTypeRepository;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.List;
 
 /**

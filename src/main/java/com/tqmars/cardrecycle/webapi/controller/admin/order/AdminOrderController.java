@@ -1,8 +1,8 @@
 package com.tqmars.cardrecycle.webapi.controller.admin.order;
 
 import com.tqmars.cardrecycle.application.admin.order.IAdminOrderAppService;
+import com.tqmars.cardrecycle.application.admin.order.dto.QueryOrderListAsListOutput;
 import com.tqmars.cardrecycle.application.admin.order.dto.QueryOrderListInput;
-import com.tqmars.cardrecycle.application.admin.order.dto.QueryOrderListOutput;
 import com.tqmars.cardrecycle.infrastructure.serialization.Serialization;
 import com.tqmars.cardrecycle.webapi.controller.ControllerBase;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * Created by jjh on 1/16/17.
@@ -28,7 +29,6 @@ public class AdminOrderController extends ControllerBase {
 
     /**
      * 查询订单
-     * @param url -- /admin/order/query
      * @param condition -- QueryOrderListInput -- {orderNum(订单号),cardNum(充值卡号),orderStatus(订单状态,0处理中,1成功,2失败),createFrom(下单初始时间),createTo(下单截至时间)}
      * @return QueryOrderListOutput -- [{id,orderTime(下单时间),orderNum(订单号),orderStatus(订单状态),name,tel,cardNum(充值卡号),idCardNum(身份证),cardAmount(充值卡面值),saleRatio(比例)}]
      */
@@ -37,6 +37,25 @@ public class AdminOrderController extends ControllerBase {
         QueryOrderListInput input = Serialization.toObject(condition, QueryOrderListInput.class);
         String r = _adminOrderAppService.queryOrderList(input);
         return toJsonp(r);
+    }
+
+    @RequestMapping(value = "/export")
+    public String export(HttpServletResponse res , @RequestParam(value = "condition") String condition){
+        QueryOrderListInput input = Serialization.toObject(condition, QueryOrderListInput.class);
+
+        if(null == input){
+            return toFailMsg("parameter error");
+        }
+
+        List<QueryOrderListAsListOutput> list = _adminOrderAppService.queryOrderListAsList(input);
+
+        if(null == list || list.size() == 0){
+            return toFailMsg("no data");
+        }
+
+        export("/template/order.xlsx",QueryOrderListAsListOutput.class,list,res,"order.xlsx");
+
+        return toSucessMsg();
     }
 
 }

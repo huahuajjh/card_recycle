@@ -48,6 +48,9 @@ public class User extends EntityOfIntPrimaryKey {
     @Column(name = "last_login_time")
     private Timestamp lastLoginTime;
 
+    @Column(name = "status")
+    private int status;
+
     public Timestamp getLastLoginTime() {
         return lastLoginTime;
     }
@@ -144,6 +147,14 @@ public class User extends EntityOfIntPrimaryKey {
         this.token = token;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -171,5 +182,10 @@ public class User extends EntityOfIntPrimaryKey {
         this.name = name;
         this.idCardNum = idCardNum;
     }
-
+    public void lock(){
+        this.status = 0;
+    }
+    public void enable(){
+        this.status = 1;
+    }
 }

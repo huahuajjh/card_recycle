@@ -13,16 +13,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class MyConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new TokenInterceptor()).
-                excludePathPatterns("/user/login").
-                excludePathPatterns("/user/register").
-                excludePathPatterns("/user/getVCode").
-                excludePathPatterns("/user/getSms").
-                excludePathPatterns("/user/forgetPwd").
-                excludePathPatterns("/content/query").
-                excludePathPatterns("/callback/order/callback").
-                excludePathPatterns("/card/typeAndItems/query").
-                excludePathPatterns("/admin/user/login");
+        registry.addInterceptor(new TokenInterceptor())
+                .excludePathPatterns("/user/login")
+                .excludePathPatterns("/user/register")
+                .excludePathPatterns("/user/getVCode")
+                .excludePathPatterns("/user/getSms")
+                .excludePathPatterns("/user/forgetPwd")
+                .excludePathPatterns("/content/query")
+                .excludePathPatterns("/callback/order/callback")
+                .excludePathPatterns("/card/typeAndItems/query")
+                .excludePathPatterns("/admin/user/login")
+                .excludePathPatterns("/user/isTelExists")
+                .excludePathPatterns("/user/isAccExists");
         super.addInterceptors(registry);
     }
 
@@ -34,6 +36,6 @@ public class MyConfig extends WebMvcConfigurerAdapter {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("*")
-                .allowedMethods("GET","POST");
+                .allowedMethods("GET", "POST");
     }
 }

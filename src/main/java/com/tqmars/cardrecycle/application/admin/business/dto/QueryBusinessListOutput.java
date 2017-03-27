@@ -11,6 +11,15 @@ public class QueryBusinessListOutput {
     private String businessId;
     private String name;
     private String idCardNum;
+    private int status;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public Integer getId() {
         return id;

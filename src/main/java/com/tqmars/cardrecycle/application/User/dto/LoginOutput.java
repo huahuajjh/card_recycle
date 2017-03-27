@@ -14,6 +14,15 @@ public class LoginOutput {
     private String qq;
     private String businessId;
     private Timestamp lastLoginTime;
+    private int status;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public Timestamp getLastLoginTime() {
         return lastLoginTime;
@@ -91,5 +100,9 @@ public class LoginOutput {
                 ", businessId='" + businessId + '\'' +
                 ", lastLoginTime=" + lastLoginTime +
                 '}';
+    }
+
+    public boolean isEnabled(){
+        return this.status == 1 ? true : false;
     }
 }

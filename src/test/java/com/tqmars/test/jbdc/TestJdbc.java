@@ -5,7 +5,6 @@ import com.tqmars.cardrecycle.domain.repositories.IRepository;
 import com.tqmars.cardrecycle.infrastructure.jdbc.repository.DbContext;
 import com.tqmars.cardrecycle.infrastructure.serialization.Serialization;
 import com.tqmars.cardrecycle.infrastructure.servicelocator.ServiceLocator;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.sql.Connection;
