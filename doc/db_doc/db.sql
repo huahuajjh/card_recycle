@@ -78,22 +78,23 @@ CREATE TABLE IF NOT EXISTS tb_rechargeable_card_type(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
     name VARCHAR(30) NOT NULL UNIQUE COMMENT 'card name',
     card_shortcut VARCHAR(10) NOT NULL UNIQUE COMMENT 'card shortcut code',
-    sale_ratio FLOAT(4,3) NOT NULL COMMENT 'sale ratio'
+    sale_ratio FLOAT(4,3) NOT NULL COMMENT 'sale ratio',
+    description VARCHAR(255) NULL COMMENT 'card type description'
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='rechargeable card type info';
 
-INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio) VALUES('神州行充值卡','SZX','0.800');
-INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio) VALUES('联通充值卡','LT','0.800');
-INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio) VALUES('电信充值卡','DX','0.800');
-INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio) VALUES('盛大一卡通','SD','0.800');
-INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio) VALUES('骏网一卡通','JW','0.800');
-INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio) VALUES('搜狐一卡通','SH','0.800');
-INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio) VALUES('网易一卡通','WY','0.800');
-INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio) VALUES('完美一卡通','WM','0.800');
-INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio) VALUES('盛付通','SFT','0.800');
-INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio) VALUES('征途一卡通','ZT','0.800');
-INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio) VALUES('久游一卡通','JY','0.800');
-INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio) VALUES('Q币一卡通','QQ','0.800');
-INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio) VALUES('纵游一卡通','ZY','0.800');
+INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio,description) VALUES('神州行充值卡','SZX','0.800','(规则：卡号17位，密码18位)');
+INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio,description) VALUES('联通充值卡','LT','0.800','(规则：卡号15位，密码19位)');
+INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio,description) VALUES('电信充值卡','DX','0.800','(规则：卡号19位，密码18位)');
+INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio,description) VALUES('盛大一卡通','SD','0.800','(规则：卡号15位，密码8位)');
+INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio,description) VALUES('骏网一卡通','JW','0.800','(规则：卡号16位，密码16位)');
+INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio,description) VALUES('搜狐一卡通','SH','0.800','(规则：卡号20位，密码12位)');
+INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio,description) VALUES('网易一卡通','WY','0.800','(规则：卡号13位，密码9位)');
+INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio,description) VALUES('完美一卡通','WM','0.800','(规则：卡号10位，密码15位)');
+INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio,description) VALUES('盛付通','SFT','0.800','(规则：卡号16位，密码8位)');
+INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio,description) VALUES('征途一卡通','ZT','0.800','(规则：卡号16位，密码8位)');
+INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio,description) VALUES('久游一卡通','JY','0.800','(规则：卡号13位，密码10位)');
+INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio,description) VALUES('Q币一卡通','QQ','0.800','(规则：卡号9位，密码12位)');
+INSERT INTO tb_rechargeable_card_type(name,card_shortcut,sale_ratio,description) VALUES('纵游一卡通','ZY','0.800','(规则：卡号15位，密码15位)');
 
 CREATE TABLE IF NOT EXISTS tb_rechargeable_card_type_item(
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key,auto increment',
@@ -134,7 +135,7 @@ CREATE TABLE IF NOT EXISTS tb_order(
     tb_rechargeable_card_type_item_id INT NOT NULL COMMENT 'card item id',
     order_time DATETIME NOT NULL COMMENT 'place a order time',
     order_number VARCHAR(64) NOT NULL UNIQUE COMMENT 'order number',
-    order_status INT NOT NULL DEFAULT '0' COMMENT '0-processing,1-success,2-fail',
+    order_status INT NOT NULL DEFAULT '0' COMMENT '0-processing,1-success,2-fail,-1-fail',
     process_time DATETIME NOT NULL COMMENT 'process order time',
     rechargeable_card_number VARCHAR(30) NOT NULL COMMENT 'rechargeable card number',
     actual_amount DECIMAL(10,2) NOT NULL COMMENT 'sale amount, amount=(card amount)*(sale ratio)',

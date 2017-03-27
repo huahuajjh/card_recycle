@@ -82,7 +82,7 @@ public class CallbackDomainService implements ICallbackDomainService {
                 break;
 
             case "-1":
-                order.setOrderStatus(-1);
+                order.setOrderStatus(2);
                 order.setThirdMsg("生成订单失败-"+input.getMessage());
                 order.setCompleteTime(DateTool.getInstance().getNowSqlTime());
                 break;

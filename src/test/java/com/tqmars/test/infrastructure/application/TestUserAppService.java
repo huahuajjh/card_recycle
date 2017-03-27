@@ -23,10 +23,9 @@ public class TestUserAppService {
     @Test
     public void testLogin(){
         LoginInput input = new LoginInput();
-        input.setAccount("huahuajjh");
-        input.setPwd("1234");
-//        String token = _userAppServicve.login(input);
-//        System.out.println(token);
+        input.setAccount("test@test.com");
+        input.setPwd("abcd123");
+        System.out.println(_userAppServicve.login(input));
     }
 
     @Test

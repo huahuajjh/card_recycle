@@ -8,9 +8,18 @@ public class QueryCardTypeOutput {
     private String name;
     private String cardCode;
     private float saleRatio;
+    private String description;
 
 //    private List<QueryCardTypeItemOutput> items;
 
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public float getSaleRatio() {
         return saleRatio;
@@ -55,11 +64,12 @@ public class QueryCardTypeOutput {
 
     @Override
     public String toString() {
-        return "QueryCardTypeAndItemOutput{" +
+        return "QueryCardTypeOutput{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", cardCode='" + cardCode + '\'' +
                 ", saleRatio=" + saleRatio +
+                ", description='" + description + '\'' +
                 '}';
     }
 }
