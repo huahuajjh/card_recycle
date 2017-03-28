@@ -1,6 +1,7 @@
 package com.tqmars.cardrecycle.application.base;
 
 import com.tqmars.cardrecycle.infrastructure.serialization.Code;
+import com.tqmars.cardrecycle.infrastructure.serialization.Json;
 import com.tqmars.cardrecycle.infrastructure.serialization.Serialization;
 
 /**
@@ -24,7 +25,7 @@ public abstract class BaseAppService {
     }
 
     protected String toJsonWithPageFormatter(Object data,String msg,int code,int count){
-        return Serialization.toJsonWithPageFormatter(data,msg,code,count);
+        return Json.getInstance().setDateFormat("yyyy-MM-dd HH:mm:ss").toJsonWithPageFormatter(data,msg,code,count);
     }
 
 }
