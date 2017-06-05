@@ -22,10 +22,10 @@
                 <property name="poolPingEnabled" value="true"/>
                 <!--测试链接的sql语句-->
                 <property name="poolPingQuery" value="select 1" />
-                <!--每次都检测链接-->
-                <property name="poolPingConnectionsNotUsedFor" value="60000"/>
+                <!--检测活动连接，0表示每次连接前进行检测是否被mysql丢弃-->
+                <property name="poolPingConnectionsNotUsedFor" value="0"/>
                 <!--使用的连接最大数量-->
-                <property name="poolMaximumActiveConnections" value="200"/>
+                <property name="poolMaximumActiveConnections" value="20"/>
                 <!--可存在的空闲数量-->
                 <property name="poolMaximumIdleConnections" value="0"/>
             </dataSource>
